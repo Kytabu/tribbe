@@ -44,7 +44,7 @@ export function TransactionHistory({ transactions, selectedCurrency, currencySym
                   </div>
                 </div>
                 <span className={`font-medium ${tx.amount >= 0 ? 'text-[#A9FF22]' : 'text-[#FF6B6B]'}`}>
-                  {tx.amount >= 0 ? '+' : ''}{currencySymbols[selectedCurrency]}{Math.abs(Number(tx.amount)).toFixed(2)}
+                  {tx.amount >= 0 ? '+' : ''}{currencySymbols[selectedCurrency]} {Math.abs(Number(tx.amount)).toFixed(2)}
                 </span>
               </div>
             </div>

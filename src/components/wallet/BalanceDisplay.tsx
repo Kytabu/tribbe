@@ -1,3 +1,4 @@
+
 import { PiggyBank, Gem, Trophy } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, ReferenceDot, ResponsiveContainer } from "recharts";
 import { format } from "date-fns";
@@ -43,7 +44,7 @@ export function BalanceDisplay({
               {selectedCurrency.substring(0, 1)}
             </span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
-              {currencySymbols[selectedCurrency]}{currentBalance.toFixed(2)}
+              {currencySymbols[selectedCurrency]} {currentBalance.toFixed(2)}
             </span>
           </div>
         )}
@@ -97,7 +98,7 @@ export function BalanceDisplay({
               <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
               <span className="text-tribbe-sage">Available Balance:</span>
             </div>
-            <span className="font-medium">{currencySymbols[selectedCurrency]}{availableBalance.toFixed(2)}</span>
+            <span className="font-medium">{currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}</span>
           </div>
         </div>
         <div className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
@@ -106,7 +107,7 @@ export function BalanceDisplay({
               <Gem className="w-5 h-5 text-[#FF6B6B]" />
               <span className="text-tribbe-sage">Amount Lent:</span>
             </div>
-            <span className="font-medium">{currencySymbols[selectedCurrency]}{lendingStats.total_lent.toFixed(2)}</span>
+            <span className="font-medium">{currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}</span>
           </div>
         </div>
         <div className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
@@ -115,7 +116,7 @@ export function BalanceDisplay({
               <Trophy className="w-5 h-5 text-[#4ECDC4]" />
               <span className="text-tribbe-sage">Expected Interest:</span>
             </div>
-            <span className="font-medium text-[#A9FF22]">+{currencySymbols[selectedCurrency]}{lendingStats.total_expected_interest.toFixed(2)}</span>
+            <span className="font-medium text-[#A9FF22]">+{currencySymbols[selectedCurrency]} {lendingStats.total_expected_interest.toFixed(2)}</span>
           </div>
         </div>
       </div>
