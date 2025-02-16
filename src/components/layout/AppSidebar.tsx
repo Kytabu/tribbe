@@ -77,7 +77,9 @@ export function AppSidebar() {
       )}
     >
       <SidebarHeader className="p-4 pt-16">
-        <h1 className="text-2xl font-bold text-tribbe-charcoal">Tribbe</h1>
+        <Link to="/" className="hover:opacity-80 transition-opacity">
+          <h1 className="text-2xl font-bold text-tribbe-charcoal">Tribbe</h1>
+        </Link>
       </SidebarHeader>
       <SidebarContent className="px-2">
         <nav className="space-y-2">
