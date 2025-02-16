@@ -3,17 +3,17 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useSidebarState } from "@/components/ui/sidebar";
+import { useSidebar } from "@/components/ui/sidebar";
 
 interface AppLayoutProps {
   children: React.ReactNode;
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
-  const { isOpen, setIsOpen } = useSidebarState();
+  const { open, setOpen } = useSidebar();
 
   return (
-    <SidebarProvider defaultIsOpen={false}>
+    <SidebarProvider defaultOpen={false}>
       <div className="min-h-screen flex w-full bg-tribbe-sand">
         <AppSidebar />
         <main className="flex-1 p-6 animate-fade-in">
@@ -21,7 +21,7 @@ export function AppLayout({ children }: AppLayoutProps) {
             variant="ghost"
             size="icon"
             className="fixed top-4 left-4 z-50"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setOpen(!open)}
           >
             <MenuIcon className="h-6 w-6" />
           </Button>
