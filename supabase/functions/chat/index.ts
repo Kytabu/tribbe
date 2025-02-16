@@ -19,14 +19,14 @@ serve(async (req) => {
     // Add artificial delay to prevent rapid-fire requests
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${Deno.env.get('OPENAI_API_KEY')}`,
+        'Authorization': `Bearer ${Deno.env.get('MISTRAL_API_KEY')}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'mistral-tiny', // Using Mistral's base model
         messages: [
           {
             role: 'system',
@@ -34,14 +34,12 @@ serve(async (req) => {
           },
           ...messages
         ],
-        temperature: 0.7,
-        max_tokens: 500,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('OpenAI API error:', errorText);
+      console.error('Mistral API error:', errorText);
       
       if (response.status === 429) {
         return new Response(
@@ -55,7 +53,7 @@ serve(async (req) => {
         );
       }
       
-      throw new Error(`OpenAI API error: ${response.statusText}`);
+      throw new Error(`Mistral API error: ${response.statusText}`);
     }
 
     const data = await response.json();
