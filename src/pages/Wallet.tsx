@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,12 +8,13 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-type SupportedCurrency = 'GBP' | 'USD' | 'KES';
+type SupportedCurrency = 'GBP' | 'USD' | 'KES' | 'EUR';
 
 const currencySymbols: Record<SupportedCurrency, string> = {
   GBP: '£',
   USD: '$',
-  KES: 'KSh'
+  KES: 'KSh',
+  EUR: '€'
 };
 
 export default function Wallet() {
@@ -50,7 +52,7 @@ export default function Wallet() {
             <div className="flex justify-between items-start">
               <h2 className="text-2xl font-bold text-tribbe-charcoal">My Wallet</h2>
               <Tabs value={selectedCurrency} onValueChange={(value) => setSelectedCurrency(value as SupportedCurrency)} className="w-full max-w-md">
-                <TabsList className="grid grid-cols-3 w-full">
+                <TabsList className="grid grid-cols-4 w-full">
                   <TabsTrigger value="KES" className="data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
                     <CurrencyIndicator currency="KES" />
                   </TabsTrigger>
@@ -59,6 +61,9 @@ export default function Wallet() {
                   </TabsTrigger>
                   <TabsTrigger value="GBP" className="data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
                     <CurrencyIndicator currency="GBP" />
+                  </TabsTrigger>
+                  <TabsTrigger value="EUR" className="data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                    <CurrencyIndicator currency="EUR" />
                   </TabsTrigger>
                 </TabsList>
               </Tabs>

@@ -44,7 +44,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      supported_currency: "GBP" | "USD" | "KES"
+      supported_currency: "GBP" | "USD" | "KES" | "EUR"
     }
     CompositeTypes: {
       [_ in never]: never
