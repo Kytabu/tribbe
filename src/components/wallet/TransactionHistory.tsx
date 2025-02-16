@@ -8,6 +8,7 @@ interface Transaction {
   amount: number;
   running_balance: number;
   created_at: string;
+  description: string | null;
 }
 
 interface TransactionHistoryProps {
@@ -43,6 +44,9 @@ export function TransactionHistory({ transactions, selectedCurrency, currencySym
                   )}
                   <div>
                     <div className="font-medium">{format(new Date(tx.created_at), 'MMM d, yyyy HH:mm')}</div>
+                    {tx.description && (
+                      <div className="text-sm text-tribbe-sage">{tx.description}</div>
+                    )}
                   </div>
                 </div>
                 <span className={`font-medium ${tx.amount >= 0 ? 'text-[#A9FF22]' : 'text-[#FF6B6B]'}`}>
