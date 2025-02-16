@@ -34,7 +34,7 @@ export function BalanceDisplay({
   }));
 
   return (
-    <div className="space-y-4 animate-fade-in"> {/* Reduced from space-y-6 to space-y-4 */}
+    <div className="space-y-2 animate-fade-in"> {/* Reduced from space-y-4 to space-y-2 */}
       <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
         {isLoading ? (
           <span className="text-tribbe-sage animate-pulse">Loading...</span>
@@ -49,9 +49,9 @@ export function BalanceDisplay({
           </div>
         )}
       </div>
-      <p className="text-tribbe-sage">Total Balance</p>
+      <p className="text-tribbe-sage mb-1">Total Balance</p>
 
-      <div className="h-[100px] relative">
+      <div className="h-[80px] relative mb-2"> {/* Reduced height from 100px to 80px and added mb-2 */}
         {!isLoading && formattedTransactionHistory.length > 0 && (
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={formattedTransactionHistory}>
@@ -91,8 +91,8 @@ export function BalanceDisplay({
         )}
       </div>
 
-      <div className="space-y-4">
-        <div className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+      <div className="space-y-2"> {/* Reduced from space-y-4 to space-y-2 */}
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
@@ -101,7 +101,7 @@ export function BalanceDisplay({
             <span className="font-medium">{currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}</span>
           </div>
         </div>
-        <div className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Gem className="w-5 h-5 text-[#FF6B6B]" />
@@ -110,7 +110,7 @@ export function BalanceDisplay({
             <span className="font-medium">{currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}</span>
           </div>
         </div>
-        <div className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Trophy className="w-5 h-5 text-[#4ECDC4]" />
