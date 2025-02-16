@@ -1,0 +1,113 @@
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+} from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
+import {
+  MessageCircle,
+  Wallet,
+  Users,
+  Circle,
+  ArrowUpRight,
+  ArrowDownRight,
+  User,
+  Settings,
+} from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+
+const navigationItems = [
+  {
+    icon: MessageCircle,
+    label: "Flami",
+    href: "/flami",
+  },
+  {
+    icon: Wallet,
+    label: "Wallet",
+    href: "/wallet",
+  },
+  {
+    icon: Circle,
+    label: "My Circles",
+    href: "/circles",
+  },
+  {
+    icon: Users,
+    label: "My Tribbe",
+    href: "/tribbe",
+  },
+  {
+    icon: ArrowUpRight,
+    label: "Money In",
+    href: "/money-in",
+  },
+  {
+    icon: ArrowDownRight,
+    label: "Money Out",
+    href: "/money-out",
+  },
+];
+
+const footerItems = [
+  {
+    icon: User,
+    label: "Profile",
+    href: "/profile",
+  },
+  {
+    icon: Settings,
+    label: "Setup",
+    href: "/setup",
+  },
+];
+
+export function AppSidebar() {
+  const location = useLocation();
+
+  return (
+    <Sidebar>
+      <SidebarHeader className="p-4">
+        <h1 className="text-2xl font-bold text-tribbe-charcoal">Tribbe</h1>
+      </SidebarHeader>
+      <SidebarContent className="px-2">
+        <nav className="space-y-2">
+          {navigationItems.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-lg text-tribbe-sage hover:bg-tribbe-charcoal/5 transition-colors",
+                location.pathname === item.href &&
+                  "bg-tribbe-charcoal/10 text-tribbe-charcoal font-medium"
+              )}
+            >
+              <item.icon className="w-5 h-5" />
+              <span>{item.label}</span>
+            </Link>
+          ))}
+        </nav>
+      </SidebarContent>
+      <SidebarFooter className="px-2 pb-4">
+        <nav className="space-y-2">
+          {footerItems.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-lg text-tribbe-sage hover:bg-tribbe-charcoal/5 transition-colors",
+                location.pathname === item.href &&
+                  "bg-tribbe-charcoal/10 text-tribbe-charcoal font-medium"
+              )}
+            >
+              <item.icon className="w-5 h-5" />
+              <span>{item.label}</span>
+            </Link>
+          ))}
+        </nav>
+      </SidebarFooter>
+    </Sidebar>
+  );
+}
