@@ -6,6 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { Send } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Message {
   id: string;
@@ -15,6 +17,7 @@ interface Message {
 }
 
 export default function Flami() {
+  const { toast } = useToast();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -42,17 +45,42 @@ export default function Flami() {
     setInput("");
     setIsLoading(true);
 
-    // Temporary response for now (we'll integrate with OpenAI later)
-    setTimeout(() => {
+    try {
+      // Format messages for OpenAI
+      const chatMessages = messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }));
+      chatMessages.push({
+        role: "user",
+        content: input.trim()
+      });
+
+      // Call our edge function
+      const { data, error } = await supabase.functions.invoke('chat', {
+        body: { messages: chatMessages }
+      });
+
+      if (error) throw error;
+
+      // Add AI response to messages
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: "I'm still being configured. I'll be able to help you soon!",
+        content: data.message,
         role: "assistant",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to get response from Flami. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
