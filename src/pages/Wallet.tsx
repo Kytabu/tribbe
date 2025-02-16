@@ -8,6 +8,7 @@ import { BalanceDisplay } from "@/components/wallet/BalanceDisplay";
 import { WalletActions } from "@/components/wallet/WalletActions";
 import { TransactionHistory } from "@/components/wallet/TransactionHistory";
 import { Transaction } from "@/types/wallet";
+import { Toggle } from "@/components/ui/toggle";
 
 export type SupportedCurrency = 'GBP' | 'USD' | 'KES' | 'EUR';
 
@@ -24,6 +25,9 @@ export default function Wallet() {
   const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>('KES');
   const queryClient = useQueryClient();
   const [userId, setUserId] = useState<string | null>(null);
+  const [autoLend, setAutoLend] = useState(false);
+  const [autoBorrow, setAutoBorrow] = useState(false);
+  const [autoRepay, setAutoRepay] = useState(false);
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -163,6 +167,41 @@ export default function Wallet() {
             </div>
           </div>
         </Card>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <Toggle
+            pressed={autoLend}
+            onPressedChange={setAutoLend}
+            className="w-full p-4 data-[state=on]:bg-tribbe-lime data-[state=on]:text-black"
+          >
+            <div className="text-left">
+              <div className="font-medium">Auto Lend</div>
+              <div className="text-sm text-tribbe-sage">{autoLend ? 'On' : 'Off'}</div>
+            </div>
+          </Toggle>
+
+          <Toggle
+            pressed={autoBorrow}
+            onPressedChange={setAutoBorrow}
+            className="w-full p-4 data-[state=on]:bg-tribbe-lime data-[state=on]:text-black"
+          >
+            <div className="text-left">
+              <div className="font-medium">Auto Borrow</div>
+              <div className="text-sm text-tribbe-sage">{autoBorrow ? 'On' : 'Off'}</div>
+            </div>
+          </Toggle>
+
+          <Toggle
+            pressed={autoRepay}
+            onPressedChange={setAutoRepay}
+            className="w-full p-4 data-[state=on]:bg-tribbe-lime data-[state=on]:text-black"
+          >
+            <div className="text-left">
+              <div className="font-medium">Auto Repay</div>
+              <div className="text-sm text-tribbe-sage">{autoRepay ? 'On' : 'Off'}</div>
+            </div>
+          </Toggle>
+        </div>
 
         <WalletActions selectedCurrency={selectedCurrency} />
 
