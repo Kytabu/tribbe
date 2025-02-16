@@ -76,7 +76,7 @@ export function AppSidebar() {
         open ? "translate-x-0" : "-translate-x-full"
       )}
     >
-      <SidebarHeader className="p-4">
+      <SidebarHeader className="p-4 pt-16">
         <h1 className="text-2xl font-bold text-tribbe-charcoal">Tribbe</h1>
       </SidebarHeader>
       <SidebarContent className="px-2">
