@@ -172,10 +172,7 @@ export default function Wallet() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="p-4 rounded-lg border bg-background">
             <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <div className="font-medium">Automate Lending</div>
-                <div className="text-sm text-tribbe-sage">{autoLend ? 'On' : 'Off'}</div>
-              </div>
+              <div className="font-medium">Automate Lending</div>
               <Switch
                 checked={autoLend}
                 onCheckedChange={setAutoLend}
@@ -186,10 +183,7 @@ export default function Wallet() {
 
           <div className="p-4 rounded-lg border bg-background">
             <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <div className="font-medium">Automate Borrowing</div>
-                <div className="text-sm text-tribbe-sage">{autoBorrow ? 'On' : 'Off'}</div>
-              </div>
+              <div className="font-medium">Automate Borrowing</div>
               <Switch
                 checked={autoBorrow}
                 onCheckedChange={setAutoBorrow}
@@ -200,10 +194,7 @@ export default function Wallet() {
 
           <div className="p-4 rounded-lg border bg-background">
             <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <div className="font-medium">Automate Interest</div>
-                <div className="text-sm text-tribbe-sage">{autoInterest ? 'On' : 'Off'}</div>
-              </div>
+              <div className="font-medium">Automate Repayment</div>
               <Switch
                 checked={autoInterest}
                 onCheckedChange={setAutoInterest}
