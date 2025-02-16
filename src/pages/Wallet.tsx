@@ -2,7 +2,7 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, ArrowDownRight, History } from "lucide-react";
+import { ArrowUpRight, ArrowDownRight, History, Gem, PiggyBank, Trophy } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -98,14 +98,14 @@ export default function Wallet() {
   }, [userId, queryClient]);
 
   const chartData = [
-    { name: 'Available', value: availableBalance },
-    { name: 'Lent Out', value: lendingStats.total_lent },
-    { name: 'Expected Interest', value: lendingStats.total_expected_interest }
+    { name: 'Available', value: availableBalance, icon: <PiggyBank className="w-4 h-4" /> },
+    { name: 'Lent Out', value: lendingStats.total_lent, icon: <Gem className="w-4 h-4" /> },
+    { name: 'Expected Interest', value: lendingStats.total_expected_interest, icon: <Trophy className="w-4 h-4" /> }
   ].filter(item => item.value > 0);
 
   const CurrencyIndicator = ({ currency }: { currency: SupportedCurrency }) => (
     <span className="inline-flex items-center gap-1.5 font-medium">
-      <span className="w-6 h-6 rounded-full bg-background flex items-center justify-center text-xs border group-data-[state=active]:text-[#A9FF22]">
+      <span className="w-6 h-6 rounded-full bg-background flex items-center justify-center text-xs border transition-all duration-300 group-data-[state=active]:text-[#A9FF22] group-data-[state=active]:scale-110 group-hover:scale-105">
         {currency.substring(0, 1)}
       </span>
       {currency}
@@ -115,22 +115,22 @@ export default function Wallet() {
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto space-y-6">
-        <Card className="p-6">
+        <Card className="p-6 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="space-y-4">
             <div className="flex justify-between items-start">
-              <h2 className="text-2xl font-bold text-tribbe-charcoal">My Wallet</h2>
+              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">My Wallet</h2>
               <Tabs value={selectedCurrency} onValueChange={(value) => setSelectedCurrency(value as SupportedCurrency)} className="w-full max-w-md">
                 <TabsList className="grid grid-cols-4 w-full">
-                  <TabsTrigger value="KES" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                  <TabsTrigger value="KES" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black transition-all duration-300 hover:scale-105">
                     <CurrencyIndicator currency="KES" />
                   </TabsTrigger>
-                  <TabsTrigger value="USD" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                  <TabsTrigger value="USD" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black transition-all duration-300 hover:scale-105">
                     <CurrencyIndicator currency="USD" />
                   </TabsTrigger>
-                  <TabsTrigger value="GBP" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                  <TabsTrigger value="GBP" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black transition-all duration-300 hover:scale-105">
                     <CurrencyIndicator currency="GBP" />
                   </TabsTrigger>
-                  <TabsTrigger value="EUR" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                  <TabsTrigger value="EUR" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black transition-all duration-300 hover:scale-105">
                     <CurrencyIndicator currency="EUR" />
                   </TabsTrigger>
                 </TabsList>
@@ -138,38 +138,55 @@ export default function Wallet() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <div className="text-4xl font-bold">
+              <div className="space-y-6 animate-fade-in">
+                <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
                   {isLoading ? (
-                    <span className="text-tribbe-sage">Loading...</span>
+                    <span className="text-tribbe-sage animate-pulse">Loading...</span>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <span className="w-8 h-8 rounded-full bg-background flex items-center justify-center text-sm border">
+                      <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm border text-black font-bold">
                         {selectedCurrency.substring(0, 1)}
                       </span>
-                      {currencySymbols[selectedCurrency]}{currentBalance.toFixed(2)}
+                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
+                        {currencySymbols[selectedCurrency]}{currentBalance.toFixed(2)}
+                      </span>
                     </div>
                   )}
                 </div>
                 <p className="text-tribbe-sage">Total Balance</p>
 
-                <div className="mt-4 space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-tribbe-sage">Available Balance:</span>
-                    <span className="font-medium">{currencySymbols[selectedCurrency]}{availableBalance.toFixed(2)}</span>
+                <div className="space-y-4">
+                  <div className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
+                        <span className="text-tribbe-sage">Available Balance:</span>
+                      </div>
+                      <span className="font-medium">{currencySymbols[selectedCurrency]}{availableBalance.toFixed(2)}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-tribbe-sage">Amount Lent:</span>
-                    <span className="font-medium">{currencySymbols[selectedCurrency]}{lendingStats.total_lent.toFixed(2)}</span>
+                  <div className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <Gem className="w-5 h-5 text-[#FF6B6B]" />
+                        <span className="text-tribbe-sage">Amount Lent:</span>
+                      </div>
+                      <span className="font-medium">{currencySymbols[selectedCurrency]}{lendingStats.total_lent.toFixed(2)}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-tribbe-sage">Expected Interest:</span>
-                    <span className="font-medium text-[#A9FF22]">+{currencySymbols[selectedCurrency]}{lendingStats.total_expected_interest.toFixed(2)}</span>
+                  <div className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <Trophy className="w-5 h-5 text-[#4ECDC4]" />
+                        <span className="text-tribbe-sage">Expected Interest:</span>
+                      </div>
+                      <span className="font-medium text-[#A9FF22]">+{currencySymbols[selectedCurrency]}{lendingStats.total_expected_interest.toFixed(2)}</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="h-[300px]">
+              <div className="h-[300px] animate-fade-in">
                 {!isLoadingStats && chartData.length > 0 && (
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -188,8 +205,39 @@ export default function Wallet() {
                       </Pie>
                       <Tooltip 
                         formatter={(value: number) => `${currencySymbols[selectedCurrency]}${value.toFixed(2)}`}
+                        content={({ active, payload }) => {
+                          if (active && payload && payload.length) {
+                            const data = payload[0].payload;
+                            return (
+                              <div className="bg-background p-3 rounded-lg border shadow-lg">
+                                <div className="flex items-center gap-2">
+                                  {data.icon}
+                                  <span className="font-medium">{data.name}</span>
+                                </div>
+                                <div className="text-[#A9FF22] font-bold mt-1">
+                                  {currencySymbols[selectedCurrency]}{data.value.toFixed(2)}
+                                </div>
+                              </div>
+                            );
+                          }
+                          return null;
+                        }}
                       />
-                      <Legend />
+                      <Legend
+                        content={({ payload }) => (
+                          <div className="flex justify-center gap-4 mt-4">
+                            {payload?.map((entry, index) => (
+                              <div key={`legend-${index}`} className="flex items-center gap-2">
+                                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }} />
+                                <div className="flex items-center gap-1">
+                                  {chartData[index].icon}
+                                  <span>{entry.value}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      />
                     </PieChart>
                   </ResponsiveContainer>
                 )}
@@ -202,7 +250,7 @@ export default function Wallet() {
           <Button
             variant="outline"
             size="lg"
-            className="h-auto py-6 hover:bg-tribbe-lime hover:text-black"
+            className="h-auto py-6 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted"
           >
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
@@ -221,7 +269,7 @@ export default function Wallet() {
           <Button
             variant="outline"
             size="lg"
-            className="h-auto py-6 hover:bg-tribbe-lime hover:text-black"
+            className="h-auto py-6 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted"
           >
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
@@ -238,7 +286,7 @@ export default function Wallet() {
           </Button>
         </div>
 
-        <Card className="p-6">
+        <Card className="p-6 bg-gradient-to-br from-background to-muted hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-2 mb-4">
             <History className="h-5 w-5" />
             <h3 className="text-lg font-medium">Recent Transactions</h3>
