@@ -32,7 +32,7 @@ export default function Flami() {
 
   const suggestions = [
     { icon: <Wallet className="h-4 w-4" />, text: "How can I grow my money with my Tribbe?" },
-    { icon: <ArrowUpDown className="h-4 w-4" />, text: "Show me how to move money in and out of my wallet" },
+    { icon: <Users className="h-4 w-4" />, text: "Show me how to add friends to my circle and my tribbe" },
     { icon: <Users className="h-4 w-4" />, text: "What are the smartest ways to use social finance?" },
   ];
 
@@ -224,7 +224,7 @@ export default function Flami() {
                     <Button
                       key={index}
                       variant="outline"
-                      className="text-left h-auto py-3 px-4 hover:bg-muted/50 flex items-center gap-2"
+                      className="text-left h-auto py-3 px-4 hover:bg-tribbe-lime hover:text-black flex items-center gap-2"
                       onClick={() => handleSuggestionClick(suggestion.text)}
                     >
                       {suggestion.icon}
