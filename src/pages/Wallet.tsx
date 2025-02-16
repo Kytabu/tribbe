@@ -9,6 +9,7 @@ import { WalletActions } from "@/components/wallet/WalletActions";
 import { TransactionHistory } from "@/components/wallet/TransactionHistory";
 import { Transaction } from "@/types/wallet";
 import { Toggle } from "@/components/ui/toggle";
+import { Switch } from "@/components/ui/switch";
 
 export type SupportedCurrency = 'GBP' | 'USD' | 'KES' | 'EUR';
 
@@ -27,7 +28,7 @@ export default function Wallet() {
   const [userId, setUserId] = useState<string | null>(null);
   const [autoLend, setAutoLend] = useState(false);
   const [autoBorrow, setAutoBorrow] = useState(false);
-  const [autoRepay, setAutoRepay] = useState(false);
+  const [autoInterest, setAutoInterest] = useState(false);
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -169,38 +170,47 @@ export default function Wallet() {
         </Card>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Toggle
-            pressed={autoLend}
-            onPressedChange={setAutoLend}
-            className="w-full p-4 data-[state=on]:bg-tribbe-lime data-[state=on]:text-black"
-          >
-            <div className="text-left">
-              <div className="font-medium">Auto Lend</div>
-              <div className="text-sm text-tribbe-sage">{autoLend ? 'On' : 'Off'}</div>
+          <div className="p-4 rounded-lg border bg-background">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="font-medium">Automate Lending</div>
+                <div className="text-sm text-tribbe-sage">{autoLend ? 'On' : 'Off'}</div>
+              </div>
+              <Switch
+                checked={autoLend}
+                onCheckedChange={setAutoLend}
+                className="data-[state=checked]:bg-tribbe-lime"
+              />
             </div>
-          </Toggle>
+          </div>
 
-          <Toggle
-            pressed={autoBorrow}
-            onPressedChange={setAutoBorrow}
-            className="w-full p-4 data-[state=on]:bg-tribbe-lime data-[state=on]:text-black"
-          >
-            <div className="text-left">
-              <div className="font-medium">Auto Borrow</div>
-              <div className="text-sm text-tribbe-sage">{autoBorrow ? 'On' : 'Off'}</div>
+          <div className="p-4 rounded-lg border bg-background">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="font-medium">Automate Borrowing</div>
+                <div className="text-sm text-tribbe-sage">{autoBorrow ? 'On' : 'Off'}</div>
+              </div>
+              <Switch
+                checked={autoBorrow}
+                onCheckedChange={setAutoBorrow}
+                className="data-[state=checked]:bg-tribbe-lime"
+              />
             </div>
-          </Toggle>
+          </div>
 
-          <Toggle
-            pressed={autoRepay}
-            onPressedChange={setAutoRepay}
-            className="w-full p-4 data-[state=on]:bg-tribbe-lime data-[state=on]:text-black"
-          >
-            <div className="text-left">
-              <div className="font-medium">Auto Repay</div>
-              <div className="text-sm text-tribbe-sage">{autoRepay ? 'On' : 'Off'}</div>
+          <div className="p-4 rounded-lg border bg-background">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="font-medium">Automate Interest</div>
+                <div className="text-sm text-tribbe-sage">{autoInterest ? 'On' : 'Off'}</div>
+              </div>
+              <Switch
+                checked={autoInterest}
+                onCheckedChange={setAutoInterest}
+                className="data-[state=checked]:bg-tribbe-lime"
+              />
             </div>
-          </Toggle>
+          </div>
         </div>
 
         <WalletActions selectedCurrency={selectedCurrency} />
