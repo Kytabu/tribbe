@@ -9,7 +9,33 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      wallets: {
+        Row: {
+          balance: number
+          created_at: string
+          currency: Database["public"]["Enums"]["supported_currency"]
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          balance?: number
+          created_at?: string
+          currency: Database["public"]["Enums"]["supported_currency"]
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          balance?: number
+          created_at?: string
+          currency?: Database["public"]["Enums"]["supported_currency"]
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +44,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      supported_currency: "GBP" | "USD" | "KES"
     }
     CompositeTypes: {
       [_ in never]: never
