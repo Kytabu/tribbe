@@ -4,7 +4,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { Send } from "lucide-react";
+import { Send, Wallet, ArrowUpDown, Users } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
@@ -31,9 +31,9 @@ export default function Flami() {
   const [lastMessageTime, setLastMessageTime] = useState(0);
 
   const suggestions = [
-    { emoji: "💰", text: "Help me create a budget that works for my lifestyle" },
-    { emoji: "💡", text: "What are some practical ways to start saving money?" },
-    { emoji: "🎯", text: "I want to learn about setting financial goals" },
+    { icon: <Wallet className="h-4 w-4" />, text: "How can I grow my money with my Tribbe?" },
+    { icon: <ArrowUpDown className="h-4 w-4" />, text: "Show me how to move money in and out of my wallet" },
+    { icon: <Users className="h-4 w-4" />, text: "What are the smartest ways to use social finance?" },
   ];
 
   const handleSuggestionClick = async (text: string) => {
@@ -224,10 +224,10 @@ export default function Flami() {
                     <Button
                       key={index}
                       variant="outline"
-                      className="text-left h-auto py-3 px-4 hover:bg-muted/50"
+                      className="text-left h-auto py-3 px-4 hover:bg-muted/50 flex items-center gap-2"
                       onClick={() => handleSuggestionClick(suggestion.text)}
                     >
-                      <span className="mr-2">{suggestion.emoji}</span>
+                      {suggestion.icon}
                       {suggestion.text}
                     </Button>
                   ))}
