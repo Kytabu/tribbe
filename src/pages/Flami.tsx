@@ -36,9 +36,79 @@ export default function Flami() {
     { emoji: "🎯", text: "I want to learn about setting financial goals" },
   ];
 
-  const handleSuggestionClick = (text: string) => {
+  const handleSuggestionClick = async (text: string) => {
     setInput(text);
-    handleSubmit(new Event('submit') as React.FormEvent);
+    // Instead of creating a fake event, we'll directly process the suggestion
+    if (!isLoading) {
+      const now = Date.now();
+      const timeSinceLastMessage = now - lastMessageTime;
+      if (timeSinceLastMessage < 3000) {
+        toast({
+          title: "Please wait",
+          description: "Please wait a moment before sending another message.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const userMessage: Message = {
+        id: Date.now().toString(),
+        content: text.trim(),
+        role: "user",
+        timestamp: new Date(),
+      };
+
+      setMessages((prev) => [...prev, userMessage]);
+      setInput("");
+      setIsLoading(true);
+      setLastMessageTime(now);
+
+      try {
+        const chatMessages = messages.map(msg => ({
+          role: msg.role,
+          content: msg.content
+        }));
+        chatMessages.push({
+          role: "user",
+          content: text.trim()
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const { data, error } = await supabase.functions.invoke('chat', {
+          body: { messages: chatMessages }
+        });
+
+        if (error) {
+          if (error.message.includes('429') || error.message.toLowerCase().includes('too many requests')) {
+            toast({
+              title: "Rate Limit",
+              description: "Please wait a moment before sending another message.",
+              variant: "destructive",
+            });
+            return;
+          }
+          throw error;
+        }
+
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          content: data.message,
+          role: "assistant",
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+      } catch (error) {
+        console.error('Chat error:', error);
+        toast({
+          title: "Error",
+          description: "Failed to get response from Flami. Please try again in a moment.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
