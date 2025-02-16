@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -8,6 +7,7 @@ import { CurrencyTabs } from "@/components/wallet/CurrencyTabs";
 import { BalanceDisplay } from "@/components/wallet/BalanceDisplay";
 import { WalletActions } from "@/components/wallet/WalletActions";
 import { TransactionHistory } from "@/components/wallet/TransactionHistory";
+import { Transaction } from "@/types/wallet";
 
 export type SupportedCurrency = 'GBP' | 'USD' | 'KES' | 'EUR';
 
@@ -78,7 +78,7 @@ export default function Wallet() {
         });
       
       if (error) throw error;
-      return data || [];
+      return (data || []) as Transaction[];
     },
     enabled: !!userId
   });

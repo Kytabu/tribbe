@@ -1,14 +1,8 @@
-
 import { PiggyBank, Gem, Trophy } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, ReferenceDot, ResponsiveContainer } from "recharts";
 import { format } from "date-fns";
 import { SupportedCurrency } from "@/pages/Wallet";
-
-interface Transaction {
-  amount: number;
-  running_balance: number;
-  created_at: string;
-}
+import { Transaction } from "@/types/wallet";
 
 interface BalanceDisplayProps {
   isLoading: boolean;

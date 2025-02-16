@@ -3,13 +3,7 @@ import { Card } from "@/components/ui/card";
 import { History, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { format } from "date-fns";
 import { SupportedCurrency } from "@/pages/Wallet";
-
-interface Transaction {
-  amount: number;
-  running_balance: number;
-  created_at: string;
-  description: string | null;
-}
+import { Transaction } from "@/types/wallet";
 
 interface TransactionHistoryProps {
   transactions: Transaction[];
