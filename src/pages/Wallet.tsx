@@ -4,9 +4,10 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, ArrowDownRight, History } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 
 type SupportedCurrency = 'GBP' | 'USD' | 'KES' | 'EUR';
 
@@ -16,6 +17,8 @@ const currencySymbols: Record<SupportedCurrency, string> = {
   KES: 'KSh',
   EUR: '€'
 };
+
+const COLORS = ['#A9FF22', '#FF6B6B', '#4ECDC4'];
 
 export default function Wallet() {
   const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>('KES');
@@ -33,7 +36,54 @@ export default function Wallet() {
     }
   });
 
-  const currentBalance = wallets.find(w => w.currency === selectedCurrency)?.balance || 0;
+  const { data: lendingStats = { total_lent: 0, total_expected_interest: 0 }, isLoading: isLoadingStats } = useQuery({
+    queryKey: ['lending-stats', selectedCurrency],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .rpc('get_wallet_lending_stats', {
+          wallet_owner_id: (await supabase.auth.getUser()).data.user?.id,
+          wallet_currency: selectedCurrency
+        });
+      
+      if (error) throw error;
+      return data[0] || { total_lent: 0, total_expected_interest: 0 };
+    }
+  });
+
+  const currentWallet = wallets.find(w => w.currency === selectedCurrency);
+  const currentBalance = currentWallet?.balance || 0;
+  const availableBalance = currentBalance - (lendingStats.total_lent || 0);
+
+  // Subscribe to real-time updates for loans
+  useEffect(() => {
+    const channel = supabase
+      .channel('wallet-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'loans',
+          filter: `lender_id=eq.${(supabase.auth.getUser()).data.user?.id}`
+        },
+        () => {
+          // Invalidate queries to refresh the data
+          queryClient.invalidateQueries({ queryKey: ['lending-stats'] });
+          queryClient.invalidateQueries({ queryKey: ['wallets'] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const chartData = [
+    { name: 'Available', value: availableBalance },
+    { name: 'Lent Out', value: lendingStats.total_lent },
+    { name: 'Expected Interest', value: lendingStats.total_expected_interest }
+  ].filter(item => item.value > 0);
 
   const CurrencyIndicator = ({ currency }: { currency: SupportedCurrency }) => (
     <span className="inline-flex items-center gap-1.5 font-medium">
@@ -68,43 +118,64 @@ export default function Wallet() {
                 </TabsList>
               </Tabs>
             </div>
-            <div className="text-4xl font-bold">
-              {isLoading ? (
-                <span className="text-tribbe-sage">Loading...</span>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-background flex items-center justify-center text-sm border">
-                    {selectedCurrency.substring(0, 1)}
-                  </span>
-                  {currencySymbols[selectedCurrency]}{currentBalance.toFixed(2)}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <div className="text-4xl font-bold">
+                  {isLoading ? (
+                    <span className="text-tribbe-sage">Loading...</span>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-full bg-background flex items-center justify-center text-sm border">
+                        {selectedCurrency.substring(0, 1)}
+                      </span>
+                      {currencySymbols[selectedCurrency]}{currentBalance.toFixed(2)}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <p className="text-tribbe-sage">Available Balance</p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-              {wallets.map((wallet) => (
-                <Card
-                  key={wallet.currency}
-                  className={`p-4 cursor-pointer transition-colors ${
-                    selectedCurrency === wallet.currency
-                      ? 'bg-tribbe-lime bg-opacity-10'
-                      : ''
-                  }`}
-                  onClick={() => setSelectedCurrency(wallet.currency as SupportedCurrency)}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-background flex items-center justify-center text-xs border">
-                      {wallet.currency.substring(0, 1)}
-                    </span>
-                    <span className="font-medium">{wallet.currency}</span>
+                <p className="text-tribbe-sage">Total Balance</p>
+
+                <div className="mt-4 space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-tribbe-sage">Available Balance:</span>
+                    <span className="font-medium">{currencySymbols[selectedCurrency]}{availableBalance.toFixed(2)}</span>
                   </div>
-                  <div className="text-xl font-bold mt-2">
-                    {currencySymbols[wallet.currency as SupportedCurrency]}
-                    {wallet.balance.toFixed(2)}
+                  <div className="flex justify-between">
+                    <span className="text-tribbe-sage">Amount Lent:</span>
+                    <span className="font-medium">{currencySymbols[selectedCurrency]}{lendingStats.total_lent.toFixed(2)}</span>
                   </div>
-                </Card>
-              ))}
+                  <div className="flex justify-between">
+                    <span className="text-tribbe-sage">Expected Interest:</span>
+                    <span className="font-medium text-[#A9FF22]">+{currencySymbols[selectedCurrency]}{lendingStats.total_expected_interest.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="h-[300px]">
+                {!isLoadingStats && chartData.length > 0 && (
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={chartData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={80}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        {chartData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        formatter={(value: number) => `${currencySymbols[selectedCurrency]}${value.toFixed(2)}`}
+                      />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                )}
+              </div>
             </div>
           </div>
         </Card>

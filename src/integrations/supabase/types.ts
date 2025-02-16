@@ -9,6 +9,45 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      loans: {
+        Row: {
+          amount: number
+          borrower_id: string
+          created_at: string
+          currency: Database["public"]["Enums"]["supported_currency"]
+          due_date: string
+          id: string
+          interest_rate: number
+          lender_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          borrower_id: string
+          created_at?: string
+          currency: Database["public"]["Enums"]["supported_currency"]
+          due_date: string
+          id?: string
+          interest_rate: number
+          lender_id: string
+          status: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          borrower_id?: string
+          created_at?: string
+          currency?: Database["public"]["Enums"]["supported_currency"]
+          due_date?: string
+          id?: string
+          interest_rate?: number
+          lender_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       wallets: {
         Row: {
           balance: number
@@ -41,7 +80,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_wallet_lending_stats: {
+        Args: {
+          wallet_owner_id: string
+          wallet_currency: Database["public"]["Enums"]["supported_currency"]
+        }
+        Returns: {
+          total_lent: number
+          total_expected_interest: number
+        }[]
+      }
     }
     Enums: {
       supported_currency: "GBP" | "USD" | "KES" | "EUR"
