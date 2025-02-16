@@ -1,5 +1,5 @@
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,7 +39,7 @@ export default function Flami() {
     // Rate limiting check on client side
     const now = Date.now();
     const timeSinceLastMessage = now - lastMessageTime;
-    if (timeSinceLastMessage < 2000) { // 2 second cooldown
+    if (timeSinceLastMessage < 3000) { // Increased to 3 second cooldown
       toast({
         title: "Please wait",
         description: "Please wait a moment before sending another message.",
@@ -71,6 +71,9 @@ export default function Flami() {
         role: "user",
         content: input.trim()
       });
+
+      // Add artificial delay before making the request
+      await new Promise(resolve => setTimeout(resolve, 500));
 
       // Call our edge function
       const { data, error } = await supabase.functions.invoke('chat', {
