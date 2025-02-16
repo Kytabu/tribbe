@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, LineChart, Line, XAxis, YAxis, ReferenceDot } from "recharts";
+import { format } from "date-fns";
 
 type SupportedCurrency = 'GBP' | 'USD' | 'KES' | 'EUR';
 
@@ -25,7 +25,6 @@ export default function Wallet() {
   const queryClient = useQueryClient();
   const [userId, setUserId] = useState<string | null>(null);
 
-  // Get user ID on component mount
   useEffect(() => {
     const getCurrentUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -63,14 +62,31 @@ export default function Wallet() {
       if (error) throw error;
       return data[0] || { total_lent: 0, total_expected_interest: 0 };
     },
-    enabled: !!userId // Only run query when userId is available
+    enabled: !!userId
+  });
+
+  const { data: transactionHistory = [], isLoading: isLoadingTransactions } = useQuery({
+    queryKey: ['transactions', selectedCurrency, userId],
+    queryFn: async () => {
+      if (!userId) return [];
+
+      const { data, error } = await supabase
+        .rpc('get_wallet_transactions', {
+          p_wallet_currency: selectedCurrency,
+          p_user_id: userId,
+          p_limit: 30
+        });
+      
+      if (error) throw error;
+      return data || [];
+    },
+    enabled: !!userId
   });
 
   const currentWallet = wallets.find(w => w.currency === selectedCurrency);
   const currentBalance = currentWallet?.balance || 0;
   const availableBalance = currentBalance - (lendingStats.total_lent || 0);
 
-  // Subscribe to real-time updates for loans
   useEffect(() => {
     if (!userId) return;
 
@@ -85,7 +101,6 @@ export default function Wallet() {
           filter: `lender_id=eq.${userId}`
         },
         () => {
-          // Invalidate queries to refresh the data
           queryClient.invalidateQueries({ queryKey: ['lending-stats'] });
           queryClient.invalidateQueries({ queryKey: ['wallets'] });
         }
@@ -96,6 +111,37 @@ export default function Wallet() {
       supabase.removeChannel(channel);
     };
   }, [userId, queryClient]);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    const channel = supabase
+      .channel('wallet-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'transactions',
+          filter: `wallet_id=eq.${currentWallet?.id}`
+        },
+        () => {
+          queryClient.invalidateQueries({ queryKey: ['transactions'] });
+          queryClient.invalidateQueries({ queryKey: ['wallets'] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId, currentWallet?.id, queryClient]);
+
+  const formattedTransactionHistory = transactionHistory.map(tx => ({
+    ...tx,
+    formattedDate: format(new Date(tx.created_at), 'HH:mm'),
+    amount: Number(tx.running_balance)
+  }));
 
   const chartData = [
     { name: 'Available', value: availableBalance, icon: <PiggyBank className="w-4 h-4" /> },
@@ -186,59 +232,42 @@ export default function Wallet() {
                 </div>
               </div>
 
-              <div className="h-[300px] animate-fade-in">
-                {!isLoadingStats && chartData.length > 0 && (
+              <div className="h-[100px] relative animate-fade-in">
+                {!isLoadingTransactions && formattedTransactionHistory.length > 0 && (
                   <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={chartData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={60}
-                        outerRadius={80}
-                        paddingAngle={5}
-                        dataKey="value"
+                    <LineChart data={formattedTransactionHistory}>
+                      <Line 
+                        type="monotone" 
+                        dataKey="amount" 
+                        stroke="#A9FF22" 
+                        strokeWidth={2}
+                        dot={false}
+                      />
+                      <XAxis 
+                        dataKey="formattedDate" 
+                        tick={{ fontSize: 10 }}
+                        interval="preserveStartEnd"
+                      />
+                      <YAxis 
+                        hide 
+                        domain={['dataMin - 1000', 'dataMax + 1000']}
+                      />
+                      <ReferenceDot
+                        x={formattedTransactionHistory[formattedTransactionHistory.length - 1]?.formattedDate}
+                        y={formattedTransactionHistory[formattedTransactionHistory.length - 1]?.amount}
+                        r={4}
+                        fill="#A9FF22"
+                        className="animate-pulse"
                       >
-                        {chartData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip 
-                        formatter={(value: number) => `${currencySymbols[selectedCurrency]}${value.toFixed(2)}`}
-                        content={({ active, payload }) => {
-                          if (active && payload && payload.length) {
-                            const data = payload[0].payload;
-                            return (
-                              <div className="bg-background p-3 rounded-lg border shadow-lg">
-                                <div className="flex items-center gap-2">
-                                  {data.icon}
-                                  <span className="font-medium">{data.name}</span>
-                                </div>
-                                <div className="text-[#A9FF22] font-bold mt-1">
-                                  {currencySymbols[selectedCurrency]}{data.value.toFixed(2)}
-                                </div>
-                              </div>
-                            );
-                          }
-                          return null;
-                        }}
-                      />
-                      <Legend
-                        content={({ payload }) => (
-                          <div className="flex justify-center gap-4 mt-4">
-                            {payload?.map((entry, index) => (
-                              <div key={`legend-${index}`} className="flex items-center gap-2">
-                                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }} />
-                                <div className="flex items-center gap-1">
-                                  {chartData[index].icon}
-                                  <span>{entry.value}</span>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      />
-                    </PieChart>
+                        <animate
+                          attributeName="r"
+                          from="4"
+                          to="6"
+                          dur="1.5s"
+                          repeatCount="indefinite"
+                        />
+                      </ReferenceDot>
+                    </LineChart>
                   </ResponsiveContainer>
                 )}
               </div>
@@ -291,9 +320,37 @@ export default function Wallet() {
             <History className="h-5 w-5" />
             <h3 className="text-lg font-medium">Recent Transactions</h3>
           </div>
-          <div className="text-center text-tribbe-sage py-8">
-            No transactions yet
-          </div>
+          {transactionHistory.length === 0 ? (
+            <div className="text-center text-tribbe-sage py-8">
+              No transactions yet
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {transactionHistory.map((tx) => (
+                <div 
+                  key={tx.created_at.toString()} 
+                  className="p-4 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105"
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      {tx.amount >= 0 ? (
+                        <ArrowUpRight className="h-5 w-5 text-[#A9FF22]" />
+                      ) : (
+                        <ArrowDownRight className="h-5 w-5 text-[#FF6B6B]" />
+                      )}
+                      <div>
+                        <div className="font-medium">{format(new Date(tx.created_at), 'MMM d, yyyy HH:mm')}</div>
+                        <div className="text-sm text-tribbe-sage">{tx.description}</div>
+                      </div>
+                    </div>
+                    <span className={`font-medium ${tx.amount >= 0 ? 'text-[#A9FF22]' : 'text-[#FF6B6B]'}`}>
+                      {tx.amount >= 0 ? '+' : ''}{currencySymbols[selectedCurrency]}{Math.abs(Number(tx.amount)).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </Card>
       </div>
     </AppLayout>

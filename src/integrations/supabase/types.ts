@@ -48,6 +48,47 @@ export type Database = {
         }
         Relationships: []
       }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          description: string | null
+          id: string
+          recipient_name: string | null
+          type: string
+          updated_at: string
+          wallet_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          recipient_name?: string | null
+          type: string
+          updated_at?: string
+          wallet_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          description?: string | null
+          id?: string
+          recipient_name?: string | null
+          type?: string
+          updated_at?: string
+          wallet_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       wallets: {
         Row: {
           balance: number
@@ -88,6 +129,18 @@ export type Database = {
         Returns: {
           total_lent: number
           total_expected_interest: number
+        }[]
+      }
+      get_wallet_transactions: {
+        Args: {
+          p_wallet_currency: Database["public"]["Enums"]["supported_currency"]
+          p_user_id: string
+          p_limit?: number
+        }
+        Returns: {
+          amount: number
+          running_balance: number
+          created_at: string
         }[]
       }
     }
