@@ -1,7 +1,5 @@
 
 import { PiggyBank, Gem, Trophy } from "lucide-react";
-import { LineChart, Line, XAxis, YAxis, ReferenceDot, ResponsiveContainer } from "recharts";
-import { format } from "date-fns";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
 
@@ -24,17 +22,10 @@ export function BalanceDisplay({
   selectedCurrency,
   currencySymbols,
   availableBalance,
-  lendingStats,
-  transactionHistory
+  lendingStats
 }: BalanceDisplayProps) {
-  const formattedTransactionHistory = transactionHistory.map(tx => ({
-    ...tx,
-    formattedDate: format(new Date(tx.created_at), 'HH:mm'),
-    amount: Number(tx.running_balance)
-  }));
-
   return (
-    <div className="space-y-2 animate-fade-in"> {/* Reduced from space-y-4 to space-y-2 */}
+    <div className="space-y-2 animate-fade-in">
       <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
         {isLoading ? (
           <span className="text-tribbe-sage animate-pulse">Loading...</span>
@@ -49,49 +40,9 @@ export function BalanceDisplay({
           </div>
         )}
       </div>
-      <p className="text-tribbe-sage mb-1">Total Balance</p>
+      <p className="text-tribbe-sage">Total Balance</p>
 
-      <div className="h-[80px] relative mb-2"> {/* Reduced height from 100px to 80px and added mb-2 */}
-        {!isLoading && formattedTransactionHistory.length > 0 && (
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={formattedTransactionHistory}>
-              <Line 
-                type="monotone" 
-                dataKey="amount" 
-                stroke="#A9FF22" 
-                strokeWidth={2}
-                dot={false}
-              />
-              <XAxis 
-                dataKey="formattedDate" 
-                tick={{ fontSize: 10 }}
-                interval="preserveStartEnd"
-              />
-              <YAxis 
-                hide 
-                domain={['dataMin - 1000', 'dataMax + 1000']}
-              />
-              <ReferenceDot
-                x={formattedTransactionHistory[formattedTransactionHistory.length - 1]?.formattedDate}
-                y={formattedTransactionHistory[formattedTransactionHistory.length - 1]?.amount}
-                r={4}
-                fill="#A9FF22"
-                className="animate-pulse"
-              >
-                <animate
-                  attributeName="r"
-                  from="4"
-                  to="6"
-                  dur="1.5s"
-                  repeatCount="indefinite"
-                />
-              </ReferenceDot>
-            </LineChart>
-          </ResponsiveContainer>
-        )}
-      </div>
-
-      <div className="space-y-2"> {/* Reduced from space-y-4 to space-y-2 */}
+      <div className="space-y-2">
         <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
