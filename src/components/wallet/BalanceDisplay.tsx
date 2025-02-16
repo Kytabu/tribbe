@@ -1,5 +1,5 @@
 
-import { PiggyBank, Gem, Trophy } from "lucide-react";
+import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
 
@@ -68,6 +68,33 @@ export function BalanceDisplay({
               <span className="text-tribbe-sage">Expected Interest:</span>
             </div>
             <span className="font-medium text-[#A9FF22]">+{currencySymbols[selectedCurrency]} {lendingStats.total_expected_interest.toFixed(2)}</span>
+          </div>
+        </div>
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <CreditCard className="w-5 h-5 text-[#79CFFF]" />
+              <span className="text-tribbe-sage">Amount Borrowed:</span>
+            </div>
+            <span className="font-medium">{currencySymbols[selectedCurrency]} 0.00</span>
+          </div>
+        </div>
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Clock className="w-5 h-5 text-[#FF6B6B]" />
+              <span className="text-tribbe-sage">Interest Due:</span>
+            </div>
+            <span className="font-medium text-[#FF6B6B]">+{currencySymbols[selectedCurrency]} 0.00</span>
+          </div>
+        </div>
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Wallet className="w-5 h-5 text-[#A9FF22]" />
+              <span className="text-tribbe-sage">New Balance:</span>
+            </div>
+            <span className="font-medium">{currencySymbols[selectedCurrency]} {currentBalance.toFixed(2)}</span>
           </div>
         </div>
       </div>
