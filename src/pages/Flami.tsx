@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,7 @@ export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "Hi! I'm Flami, your financial companion. Ready to level up your finances? 🎮",
+      content: "Hey! Flami here. I am your financial companion. Stop leaving money on the table? 🎮",
       role: "assistant",
       timestamp: new Date(),
     },
