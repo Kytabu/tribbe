@@ -4,6 +4,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  useSidebarState,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import {
@@ -66,9 +67,15 @@ const footerItems = [
 
 export function AppSidebar() {
   const location = useLocation();
+  const { isOpen } = useSidebarState();
 
   return (
-    <Sidebar>
+    <Sidebar
+      className={cn(
+        "transition-transform duration-300 transform fixed h-full",
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      )}
+    >
       <SidebarHeader className="p-4">
         <h1 className="text-2xl font-bold text-tribbe-charcoal">Tribbe</h1>
       </SidebarHeader>
