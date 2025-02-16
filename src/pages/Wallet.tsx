@@ -37,7 +37,7 @@ export default function Wallet() {
 
   const CurrencyIndicator = ({ currency }: { currency: SupportedCurrency }) => (
     <span className="inline-flex items-center gap-1.5 font-medium">
-      <span className="w-6 h-6 rounded-full bg-background flex items-center justify-center text-xs border">
+      <span className="w-6 h-6 rounded-full bg-background flex items-center justify-center text-xs border group-data-[state=active]:text-[#A9FF22]">
         {currency.substring(0, 1)}
       </span>
       {currency}
@@ -53,16 +53,16 @@ export default function Wallet() {
               <h2 className="text-2xl font-bold text-tribbe-charcoal">My Wallet</h2>
               <Tabs value={selectedCurrency} onValueChange={(value) => setSelectedCurrency(value as SupportedCurrency)} className="w-full max-w-md">
                 <TabsList className="grid grid-cols-4 w-full">
-                  <TabsTrigger value="KES" className="data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                  <TabsTrigger value="KES" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
                     <CurrencyIndicator currency="KES" />
                   </TabsTrigger>
-                  <TabsTrigger value="USD" className="data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                  <TabsTrigger value="USD" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
                     <CurrencyIndicator currency="USD" />
                   </TabsTrigger>
-                  <TabsTrigger value="GBP" className="data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                  <TabsTrigger value="GBP" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
                     <CurrencyIndicator currency="GBP" />
                   </TabsTrigger>
-                  <TabsTrigger value="EUR" className="data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
+                  <TabsTrigger value="EUR" className="group data-[state=active]:bg-tribbe-lime data-[state=active]:text-black">
                     <CurrencyIndicator currency="EUR" />
                   </TabsTrigger>
                 </TabsList>
