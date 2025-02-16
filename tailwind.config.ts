@@ -49,11 +49,13 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         tribbe: {
-          gold: "#FFB100",
-          terracotta: "#E85D04",
-          sand: "#FAF3E0",
-          charcoal: "#1B1B1B",
-          sage: "#4A5759",
+          lime: "#A9FF22",
+          lilac: "#C699FF",
+          aqua: "#79CFFF",
+          yellow: "#F6D83E",
+          grey: "#1A2733",
+          black: "#000000",
+          white: "#FFFFFF",
         },
       },
       borderRadius: {
