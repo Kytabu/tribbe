@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,10 @@ export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "Hello! I'm Flami, your AI assistant. How can I help you today?",
+      content: "Hi! I'm Flami, your financial companion. Here are some ways I can help you:\n\n" +
+        "1. 💰 \"Help me create a budget that works for my lifestyle\"\n" +
+        "2. 💡 \"What are some practical ways to start saving money?\"\n" +
+        "3. 🎯 \"I want to learn about setting financial goals\"",
       role: "assistant",
       timestamp: new Date(),
     },
@@ -133,7 +135,7 @@ export default function Flami() {
                         : "bg-muted"
                     }`}
                   >
-                    <p className="text-sm">{message.content}</p>
+                    <p className="text-sm whitespace-pre-line">{message.content}</p>
                   </div>
                 </div>
               ))}
