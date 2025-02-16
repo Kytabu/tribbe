@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -20,10 +21,7 @@ export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "Hi! I'm Flami, your financial companion. Here are some ways I can help you:\n\n" +
-        "1. 💰 \"Help me create a budget that works for my lifestyle\"\n" +
-        "2. 💡 \"What are some practical ways to start saving money?\"\n" +
-        "3. 🎯 \"I want to learn about setting financial goals\"",
+      content: "Hi! I'm Flami, your financial companion. How can I help you today?",
       role: "assistant",
       timestamp: new Date(),
     },
@@ -31,6 +29,17 @@ export default function Flami() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [lastMessageTime, setLastMessageTime] = useState(0);
+
+  const suggestions = [
+    { emoji: "💰", text: "Help me create a budget that works for my lifestyle" },
+    { emoji: "💡", text: "What are some practical ways to start saving money?" },
+    { emoji: "🎯", text: "I want to learn about setting financial goals" },
+  ];
+
+  const handleSuggestionClick = (text: string) => {
+    setInput(text);
+    handleSubmit(new Event('submit') as React.FormEvent);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +50,7 @@ export default function Flami() {
     // Rate limiting check on client side
     const now = Date.now();
     const timeSinceLastMessage = now - lastMessageTime;
-    if (timeSinceLastMessage < 3000) { // Increased to 3 second cooldown
+    if (timeSinceLastMessage < 3000) { // 3 second cooldown
       toast({
         title: "Please wait",
         description: "Please wait a moment before sending another message.",
@@ -139,6 +148,21 @@ export default function Flami() {
                   </div>
                 </div>
               ))}
+              {messages.length === 1 && (
+                <div className="grid grid-cols-1 gap-2 mt-4">
+                  {suggestions.map((suggestion, index) => (
+                    <Button
+                      key={index}
+                      variant="outline"
+                      className="text-left h-auto py-3 px-4 hover:bg-muted/50"
+                      onClick={() => handleSuggestionClick(suggestion.text)}
+                    >
+                      <span className="mr-2">{suggestion.emoji}</span>
+                      {suggestion.text}
+                    </Button>
+                  ))}
+                </div>
+              )}
             </div>
           </ScrollArea>
           <form onSubmit={handleSubmit} className="mt-4 flex gap-2">
