@@ -3,7 +3,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, ArrowDownRight, History } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,6 +22,19 @@ const COLORS = ['#A9FF22', '#FF6B6B', '#4ECDC4'];
 
 export default function Wallet() {
   const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>('KES');
+  const queryClient = useQueryClient();
+  const [userId, setUserId] = useState<string | null>(null);
+
+  // Get user ID on component mount
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUserId(user.id);
+      }
+    };
+    getCurrentUser();
+  }, []);
 
   const { data: wallets = [], isLoading } = useQuery({
     queryKey: ['wallets'],
@@ -37,17 +50,20 @@ export default function Wallet() {
   });
 
   const { data: lendingStats = { total_lent: 0, total_expected_interest: 0 }, isLoading: isLoadingStats } = useQuery({
-    queryKey: ['lending-stats', selectedCurrency],
+    queryKey: ['lending-stats', selectedCurrency, userId],
     queryFn: async () => {
+      if (!userId) return { total_lent: 0, total_expected_interest: 0 };
+
       const { data, error } = await supabase
         .rpc('get_wallet_lending_stats', {
-          wallet_owner_id: (await supabase.auth.getUser()).data.user?.id,
+          wallet_owner_id: userId,
           wallet_currency: selectedCurrency
         });
       
       if (error) throw error;
       return data[0] || { total_lent: 0, total_expected_interest: 0 };
-    }
+    },
+    enabled: !!userId // Only run query when userId is available
   });
 
   const currentWallet = wallets.find(w => w.currency === selectedCurrency);
@@ -56,6 +72,8 @@ export default function Wallet() {
 
   // Subscribe to real-time updates for loans
   useEffect(() => {
+    if (!userId) return;
+
     const channel = supabase
       .channel('wallet-updates')
       .on(
@@ -64,7 +82,7 @@ export default function Wallet() {
           event: '*',
           schema: 'public',
           table: 'loans',
-          filter: `lender_id=eq.${(supabase.auth.getUser()).data.user?.id}`
+          filter: `lender_id=eq.${userId}`
         },
         () => {
           // Invalidate queries to refresh the data
@@ -77,7 +95,7 @@ export default function Wallet() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [userId, queryClient]);
 
   const chartData = [
     { name: 'Available', value: availableBalance },
