@@ -31,7 +31,7 @@ export default function Flami() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() || isLoading) return;
 
     // Add user message
     const userMessage: Message = {
@@ -61,7 +61,18 @@ export default function Flami() {
         body: { messages: chatMessages }
       });
 
-      if (error) throw error;
+      if (error) {
+        // Check if it's a rate limit error
+        if (error.message.includes('429') || error.message.toLowerCase().includes('too many requests')) {
+          toast({
+            title: "Rate Limit",
+            description: "Please wait a moment before sending another message.",
+            variant: "destructive",
+          });
+          return;
+        }
+        throw error;
+      }
 
       // Add AI response to messages
       const assistantMessage: Message = {
@@ -75,7 +86,7 @@ export default function Flami() {
       console.error('Chat error:', error);
       toast({
         title: "Error",
-        description: "Failed to get response from Flami. Please try again.",
+        description: "Failed to get response from Flami. Please try again in a moment.",
         variant: "destructive",
       });
     } finally {
