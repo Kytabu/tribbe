@@ -5,7 +5,7 @@ const Index = () => {
       <div className="space-y-6 text-center animate-fade-in mx-auto px-4 max-w-2xl w-full">
         <div className="space-y-4">
           <img 
-            src="/tribbe-logo.svg"
+            src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
             alt="Tribbe Logo"
             className="h-12 w-auto mx-auto"
           />
