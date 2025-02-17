@@ -15,11 +15,11 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Navigate to splash after fade animation completes
+  // Navigate to setup after fade animation completes
   useEffect(() => {
     if (!isVisible) {
       const navigationTimer = setTimeout(() => {
-        navigate('/onboarding');
+        navigate('/setup');
       }, 300); // Match this with the CSS transition duration
 
       return () => clearTimeout(navigationTimer);
