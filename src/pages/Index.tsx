@@ -27,13 +27,13 @@ const Index = () => {
   }, [isVisible, navigate]);
 
   return (
-    <div className="min-h-screen bg-tribbe-sand flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-tribbe-sand flex flex-col items-center px-6 pt-20">
       <div 
-        className={`space-y-6 text-center mx-auto px-4 max-w-2xl w-full transition-opacity duration-300 ${
+        className={`space-y-6 text-center mx-auto max-w-2xl w-full transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="space-y-4">
+        <div className="space-y-6">
           <img 
             src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
             alt="Tribbe Logo"
