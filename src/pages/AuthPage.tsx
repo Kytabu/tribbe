@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -96,7 +97,7 @@ const AuthPage = () => {
               <div className="flex justify-center">
                 <Button
                   variant="secondary"
-                  className="w-96 bg-tribbe-aqua hover:bg-tribbe-aqua/90 text-tribbe-black h-18 rounded-full text-lg"
+                  className="w-96 bg-tribbe-aqua hover:bg-tribbe-aqua/90 text-tribbe-black h-18 rounded-full text-base font-normal" /* Changed from text-lg and removed default font-medium */
                   onClick={() => setIsVerifying(true)}
                 >
                   <Phone className="mr-3 h-5 w-5" />
@@ -106,7 +107,7 @@ const AuthPage = () => {
               <div className="flex justify-center">
                 <Button
                   variant="outline"
-                  className="w-96 bg-tribbe-lime hover:bg-tribbe-lime/90 text-tribbe-black border-0 h-18 rounded-full text-lg"
+                  className="w-96 bg-tribbe-lime hover:bg-tribbe-lime/90 text-tribbe-black border-0 h-18 rounded-full text-base font-normal" /* Changed from text-lg and removed default font-medium */
                   onClick={() => setIsVerifying(true)}
                 >
                   <Mail className="mr-3 h-5 w-5" />
