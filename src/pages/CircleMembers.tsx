@@ -1,18 +1,9 @@
 
 import { AppLayout } from "@/components/layout/AppLayout";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Users } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-
-interface Contribution {
-  amount: number;
-  created_at: string;
-  profiles: {
-    full_name: string | null;
-    avatar_url: string | null;
-  };
-}
 
 const CircleMembers = () => {
   const navigate = useNavigate();
@@ -23,22 +14,12 @@ const CircleMembers = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('circle_contributions')
-        .select(`
-          amount,
-          created_at,
-          profiles:user_id (
-            full_name,
-            avatar_url
-          )
-        `)
+        .select('amount, created_at')
         .eq('circle_id', circleId)
         .order('amount', { ascending: false });
 
-      if (error) {
-        console.error('Query error:', error);
-        throw error;
-      }
-      return data as Contribution[];
+      if (error) throw error;
+      return data;
     },
     enabled: !!circleId,
   });
@@ -53,6 +34,12 @@ const CircleMembers = () => {
           <h1 className="text-xl font-righteous text-white">Members</h1>
         </div>
 
+        {/* Members count */}
+        <div className="flex items-center gap-2 text-gray-400">
+          <Users className="w-4 h-4" />
+          <span>{contributions?.length || 0} contributors</span>
+        </div>
+
         <div className="space-y-3">
           {isLoading ? (
             <div className="text-center text-gray-400">Loading...</div>
@@ -65,17 +52,11 @@ const CircleMembers = () => {
                 className="flex items-center justify-between p-4 bg-tribbe-grey/30 rounded-lg"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-tribbe-grey overflow-hidden">
-                    <img
-                      src={contribution.profiles.avatar_url || `https://i.pravatar.cc/40?img=${index + 1}`}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="w-10 h-10 rounded-full bg-tribbe-grey flex items-center justify-center text-white">
+                    {index + 1}
                   </div>
                   <div>
-                    <p className="text-white font-medium">
-                      {contribution.profiles.full_name || `Member ${index + 1}`}
-                    </p>
+                    <p className="text-white">Contributor {index + 1}</p>
                     <p className="text-sm text-gray-400">
                       {new Date(contribution.created_at).toLocaleDateString()}
                     </p>
