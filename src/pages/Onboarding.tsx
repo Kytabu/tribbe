@@ -87,6 +87,8 @@ const Onboarding = () => {
           <Lottie
             animationData={content.animation}
             loop={true}
+            autoplay={true}
+            style={{ width: '100%', height: '100%' }}
             className="w-full h-full"
           />
         </div>
