@@ -29,20 +29,20 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-tribbe-sand flex flex-col items-center justify-center">
       <div 
-        className={`space-y-40 text-center mx-auto px-4 max-w-2xl w-full transition-opacity duration-300 ${
+        className={`space-y-6 text-center mx-auto px-4 max-w-2xl w-full transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="space-y-40">
+        <div className="space-y-4">
           <img 
             src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
             alt="Tribbe Logo"
-            className="w-32 mx-auto"
+            className="w-48 mx-auto"
           />
           <img 
             src="/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png"
             alt="Illustration of people interacting with a network visualization"
-            className="w-32 mx-auto"
+            className="w-64 mx-auto"
           />
         </div>
       </div>
