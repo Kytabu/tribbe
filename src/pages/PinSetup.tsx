@@ -173,7 +173,7 @@ const PinSetup = () => {
         {step === "confirm" && pin === confirmPin && pin.length === 4 && (
           <div className="mt-8 flex justify-center">
             <Button 
-              onClick={() => navigate("/setup")}
+              onClick={() => navigate("/flami")}
               className="w-32 bg-tribbe-lime hover:bg-tribbe-lime/90 text-slate-900 font-medium"
             >
               Done
@@ -186,3 +186,4 @@ const PinSetup = () => {
 };
 
 export default PinSetup;
+
