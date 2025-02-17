@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,7 @@ const Onboarding = () => {
 
   const handleNext = () => {
     if (currentScreen === TOTAL_SCREENS - 1) {
-      navigate("/home"); // Changed from "/" to "/home"
+      navigate("/flami");
     } else {
       setCurrentScreen((prev) => prev + 1);
     }
@@ -32,7 +31,7 @@ const Onboarding = () => {
   };
 
   const handleSkip = () => {
-    navigate("/home"); // Changed from "/" to "/home"
+    navigate("/flami");
   };
 
   const getScreenContent = (screen: number) => {

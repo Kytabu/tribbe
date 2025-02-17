@@ -25,9 +25,7 @@ const App = () => (
             <Route path="/home" element={<Index />} />
             <Route path="/flami" element={<Flami />} />
             <Route path="/wallet" element={<Wallet />} />
-            {/* Redirect root to onboarding */}
-            <Route path="/" element={<Navigate to="/onboarding" replace />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/" element={<Index />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

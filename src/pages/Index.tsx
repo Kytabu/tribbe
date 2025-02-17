@@ -1,10 +1,21 @@
 
-import { AppLayout } from "@/components/layout/AppLayout";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/onboarding");
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
-    <AppLayout>
-      <div className="flex flex-col items-center justify-center min-h-[80vh] text-center space-y-6">
+    <div className="min-h-screen bg-tribbe-sand flex flex-col items-center justify-center">
+      <div className="space-y-6 text-center animate-fade-in">
         <div className="space-y-2">
           <span className="px-3 py-1 text-sm text-tribbe-terracotta bg-tribbe-terracotta/10 rounded-full">
             Welcome to Tribbe
@@ -18,8 +29,8 @@ const Index = () => {
           digital money circles, social credit, and AI-powered financial management.
         </p>
       </div>
-    </AppLayout>
+    </div>
   );
-}
+};
 
 export default Index;
