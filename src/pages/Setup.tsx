@@ -15,9 +15,11 @@ import {
 } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Switch } from "@/components/ui/switch";
+import { useTheme } from "next-themes";
 
 const Setup = () => {
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
 
   return (
     <AppLayout>
@@ -38,9 +40,7 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">Profile, Phone number, ID, etc</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <ChevronRight className="w-5 h-5" />
           </div>
 
           {/* PIN Management Section */}
@@ -55,9 +55,7 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">Set up or change your security PIN</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <ChevronRight className="w-5 h-5" />
           </div>
 
           {/* My Account Section */}
@@ -69,9 +67,7 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">Money Lent, borrowed and invested</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <ChevronRight className="w-5 h-5" />
           </div>
 
           {/* Premium Section */}
@@ -83,9 +79,7 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">Money Lent, borrowed and invested</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <ChevronRight className="w-5 h-5" />
           </div>
 
           {/* Notifications Section */}
@@ -97,9 +91,7 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">Toggle various alerts on & off</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <ChevronRight className="w-5 h-5" />
           </div>
 
           {/* Privacy Section */}
@@ -111,9 +103,7 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">See your privacy settings</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <ChevronRight className="w-5 h-5" />
           </div>
 
           {/* Security Section */}
@@ -125,9 +115,7 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">Manage your security settings</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <ChevronRight className="w-5 h-5" />
           </div>
 
           {/* Support Section */}
@@ -139,9 +127,7 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">Chat with us at anytime</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
-              <ChevronRight className="w-5 h-5" />
-            </Button>
+            <ChevronRight className="w-5 h-5" />
           </div>
 
           {/* Dark Mode Section */}
@@ -153,7 +139,10 @@ const Setup = () => {
                 <p className="text-sm text-muted-foreground">Toggle dark mode on & off</p>
               </div>
             </div>
-            <Switch />
+            <Switch 
+              checked={theme === "dark"}
+              onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+            />
           </div>
         </div>
       </div>
