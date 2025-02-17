@@ -137,9 +137,14 @@ export default function Flami() {
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto h-[calc(100vh-2rem)] flex flex-col">
+        <div className="relative mb-4">
+          <h1 className="text-4xl font-righteous text-tribbe-lime text-center">Flami</h1>
+          <div className="absolute right-0 top-0">
+            <ProgressBar userLevel={userLevel} userPoints={userPoints} />
+          </div>
+        </div>
+        
         <Card className="flex-1 flex flex-col p-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <ProgressBar userLevel={userLevel} userPoints={userPoints} />
-          
           <ScrollArea className="flex-1 pr-4">
             <div className="space-y-4">
               {messages.map((message) => (
