@@ -128,11 +128,16 @@ const AuthPage = () => {
       {!isVerifying ? (
         <div className="w-full max-w-md space-y-12">
           <div className="space-y-8">
-            <div className="text-center">
+            <div className="text-center space-y-6">
               <img 
                 src="/lovable-uploads/24576fa2-343c-42db-b26e-e56b0aa76cc8.png" 
                 alt="Tribbe" 
-                className="w-48 mx-auto mb-8"
+                className="w-48 mx-auto"
+              />
+              <img 
+                src="/lovable-uploads/5a9bef54-1771-4c06-8d31-2140f23f1388.png" 
+                alt="Network Illustration" 
+                className="w-64 mx-auto"
               />
             </div>
 
