@@ -33,16 +33,16 @@ const Index = () => {
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="space-y-8"> {/* Changed from space-y-6 to space-y-8 to add 30px spacing */}
+        <div className="space-y-8">
           <img 
             src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
             alt="Tribbe Logo"
-            className="w-72 mx-auto"
+            className="w-[27rem] mx-auto" /* Increased from w-72 (18rem) to 27rem (50% larger) */
           />
           <img 
             src="/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png"
             alt="Illustration of people interacting with a network visualization"
-            className="w-72 mx-auto" /* Changed from w-96 to w-72 to match logo width */
+            className="w-[27rem] mx-auto" /* Increased from w-72 (18rem) to 27rem (50% larger) */
           />
         </div>
       </div>
