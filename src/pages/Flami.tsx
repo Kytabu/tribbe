@@ -16,7 +16,7 @@ export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "Hey! Flami here. I am your financial companion. Stop leaving money on the table? 🎮",
+      content: "🎮",
       role: "assistant",
       timestamp: new Date(),
     },
