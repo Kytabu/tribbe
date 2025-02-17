@@ -142,21 +142,25 @@ const AuthPage = () => {
             </div>
 
             <div className="space-y-4 mt-32">
-              <Button
-                variant="secondary"
-                className="w-full bg-tribbe-aqua hover:bg-tribbe-aqua/90 text-tribbe-black h-12 rounded-full"
-                onClick={() => setIsVerifying(true)}
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Continue with number
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-tribbe-black border-0 h-12 rounded-full"
-              >
-                <Mail className="mr-2 h-5 w-5" />
-                Continue with email
-              </Button>
+              <div className="flex justify-center">
+                <Button
+                  variant="secondary"
+                  className="w-64 bg-tribbe-aqua hover:bg-tribbe-aqua/90 text-tribbe-black h-12 rounded-full"
+                  onClick={() => setIsVerifying(true)}
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  Continue with number
+                </Button>
+              </div>
+              <div className="flex justify-center">
+                <Button
+                  variant="outline"
+                  className="w-64 bg-tribbe-lime hover:bg-tribbe-lime/90 text-tribbe-black border-0 h-12 rounded-full"
+                >
+                  <Mail className="mr-2 h-5 w-5" />
+                  Continue with email
+                </Button>
+              </div>
               
               <p className="text-center text-sm text-white/60 mt-4">
                 by signing up, you accept our Terms and Conditions.
