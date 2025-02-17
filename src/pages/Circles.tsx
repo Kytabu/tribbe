@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { CirclePlus, Search, ChevronRight } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { useNavigate } from "react-router-dom";
 
 interface CircleType {
   id: string;
@@ -64,34 +65,41 @@ const circles: CircleType[] = [
   },
 ];
 
-const CircleItem = ({ circle }: { circle: CircleType }) => (
-  <Card className="bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300">
-    <button className="w-full p-4 flex items-center gap-4">
-      <img 
-        src={circle.image} 
-        alt="" 
-        className="w-12 h-12 rounded-full object-cover"
-      />
-      <div className="flex-1">
-        <div className="flex justify-between items-start mb-1">
-          <div>
-            <h3 className="text-lg font-medium text-white">{circle.name}</h3>
-            <p className="text-sm text-gray-400">
-              {circle.type} | {circle.daysLeft} days
-            </p>
+const CircleItem = ({ circle }: { circle: CircleType }) => {
+  const navigate = useNavigate();
+  
+  return (
+    <Card className="bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300">
+      <button 
+        className="w-full p-4 flex items-center gap-4"
+        onClick={() => navigate(`/circles/${circle.id}`)}
+      >
+        <img 
+          src={circle.image} 
+          alt="" 
+          className="w-12 h-12 rounded-full object-cover"
+        />
+        <div className="flex-1">
+          <div className="flex justify-between items-start mb-1">
+            <div>
+              <h3 className="text-lg font-medium text-white">{circle.name}</h3>
+              <p className="text-sm text-gray-400">
+                {circle.type} | {circle.daysLeft} days
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-sm text-tribbe-lime">
+                {typeof circle.amount === 'number' ? `Kes ${circle.amount.toLocaleString()}` : circle.amount}
+              </p>
+            </div>
           </div>
-          <div className="text-right">
-            <p className="text-sm text-tribbe-lime">
-              {typeof circle.amount === 'number' ? `Kes ${circle.amount.toLocaleString()}` : circle.amount}
-            </p>
-          </div>
+          <Progress value={circle.progress} className="h-1.5" />
         </div>
-        <Progress value={circle.progress} className="h-1.5" />
-      </div>
-      <ChevronRight className="w-5 h-5 text-gray-400" />
-    </button>
-  </Card>
-);
+        <ChevronRight className="w-5 h-5 text-gray-400" />
+      </button>
+    </Card>
+  );
+};
 
 const Circles = () => {
   return (

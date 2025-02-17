@@ -11,6 +11,7 @@ import AccountPage from "@/pages/AccountPage";
 import NotFound from "@/pages/NotFound";
 import Wallet from "@/pages/Wallet";
 import Circles from "@/pages/Circles";
+import CircleDetails from "@/pages/CircleDetails";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/account" element={<AccountPage />} />
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/circles" element={<Circles />} />
+        <Route path="/circles/:id" element={<CircleDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
