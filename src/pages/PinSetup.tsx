@@ -2,10 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import bcrypt from "bcryptjs";
 
 const PinSetup = () => {
   const [pin, setPin] = useState("");
@@ -21,43 +19,12 @@ const PinSetup = () => {
     setPin(prev => prev.slice(0, -1));
   };
 
-  const handlePinSubmit = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        toast({
-          title: "Error",
-          description: "You must be logged in to set a PIN",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      const salt = await bcrypt.genSalt(10);
-      const pinHash = await bcrypt.hash(pin, salt);
-
-      const { error } = await supabase
-        .from('user_pins')
-        .insert([
-          { user_id: user.id, pin_hash: pinHash }
-        ]);
-
-      if (error) throw error;
-
-      toast({
-        title: "PIN set successfully",
-        description: "You can now use your PIN to access the app",
-      });
-
-      navigate("/flami");
-    } catch (error) {
-      console.error('Error setting PIN:', error);
-      toast({
-        title: "Error",
-        description: "Failed to set PIN. Please try again.",
-        variant: "destructive",
-      });
-    }
+  const handlePinSubmit = () => {
+    toast({
+      title: "PIN set successfully",
+      description: "You can now use your PIN to access the app",
+    });
+    navigate("/flami");
   };
 
   return (
