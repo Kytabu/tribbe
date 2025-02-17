@@ -7,9 +7,11 @@ const Index = () => {
           <span className="px-3 py-1 text-sm text-tribbe-terracotta bg-tribbe-terracotta/10 rounded-full inline-block">
             Hi!
           </span>
-          <h1 className="text-4xl font-bold text-tribbe-charcoal mt-4">
-            Hi. Welcome to Tribbe, your AI money manager.
-          </h1>
+          <img 
+            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" 
+            alt="Person using a laptop, representing AI money management"
+            className="w-full h-auto rounded-lg shadow-lg mt-4 object-cover"
+          />
         </div>
         <p className="text-tribbe-sage text-lg max-w-xl mx-auto">
           Welcome to your AI money manager.
