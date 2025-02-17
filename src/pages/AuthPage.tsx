@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -129,34 +128,13 @@ const AuthPage = () => {
         <div className="w-full max-w-md space-y-12">
           <div className="space-y-8">
             <div className="text-center">
-              <img 
-                src="/lovable-uploads/ed0e93cf-0b51-4b1b-b1b3-5087ed5faefa.png" 
-                alt="Tribbe" 
-                className="w-32 mx-auto mb-8"
-              />
-              <div className="relative">
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <div 
-                    key={i} 
-                    className="text-tribbe-lime font-bold text-2xl tracking-wider transform"
-                    style={{
-                      position: 'absolute',
-                      width: '100%',
-                      top: `${i * 1.5}rem`,
-                      transform: `rotate(${-5 + i * 2}deg)`,
-                      left: `${i * 0.5}rem`
-                    }}
-                  >
-                    SHARE SMARTER
-                  </div>
-                ))}
-              </div>
+              <div className="w-32 h-32 mx-auto mb-8" />
             </div>
 
             <div className="space-y-4 mt-32">
               <Button
                 variant="secondary"
-                className="w-full bg-[#D6BCFA] hover:bg-[#D6BCFA]/90 text-black h-12 rounded-full"
+                className="w-full bg-tribbe-aqua hover:bg-tribbe-aqua/90 text-tribbe-black h-12 rounded-full"
                 onClick={() => setIsVerifying(true)}
               >
                 <Phone className="mr-2 h-5 w-5" />
@@ -164,7 +142,7 @@ const AuthPage = () => {
               </Button>
               <Button
                 variant="outline"
-                className="w-full bg-[#1A1F2C] hover:bg-[#1A1F2C]/90 text-white border-0 h-12 rounded-full"
+                className="w-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-tribbe-black border-0 h-12 rounded-full"
               >
                 <Mail className="mr-2 h-5 w-5" />
                 Continue with email
