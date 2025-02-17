@@ -37,12 +37,12 @@ const Index = () => {
           <img 
             src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
             alt="Tribbe Logo"
-            className="w-48 mx-auto"
+            className="w-72 mx-auto" /* Increased from w-48 to w-72 (50% larger) */
           />
           <img 
             src="/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png"
             alt="Illustration of people interacting with a network visualization"
-            className="w-64 mx-auto"
+            className="w-96 mx-auto" /* Increased from w-64 to w-96 (50% larger) */
           />
         </div>
       </div>
