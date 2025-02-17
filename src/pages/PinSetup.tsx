@@ -42,11 +42,8 @@ const PinSetup = () => {
       <div className="w-full max-w-md space-y-12">
         <div className="text-center space-y-4">
           <h1 className="text-2xl font-bold text-foreground">
-            Create Your PIN
+            Your Pin Please
           </h1>
-          <p className="text-foreground/90 text-lg">
-            Choose a 4-digit PIN to secure your account
-          </p>
         </div>
 
         <div className="flex justify-center space-x-4 mb-12">
