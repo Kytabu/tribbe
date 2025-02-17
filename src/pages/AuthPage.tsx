@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
+import { Mail, Phone } from "lucide-react";
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -123,74 +124,89 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center space-y-2">
-          <h1 className="text-2xl font-bold">Welcome to Flami</h1>
-          <p className="text-muted-foreground">
-            {isVerifying 
-              ? "Enter the verification code sent to your phone"
-              : "Enter your phone number to get started"
-            }
-          </p>
-        </div>
+    <div className="min-h-screen bg-tribbe-grey flex flex-col items-center px-6 pt-20">
+      {!isVerifying ? (
+        <div className="w-full max-w-md space-y-12">
+          <div className="space-y-8">
+            <div className="text-center">
+              <img 
+                src="/lovable-uploads/ed0e93cf-0b51-4b1b-b1b3-5087ed5faefa.png" 
+                alt="Tribbe" 
+                className="w-32 mx-auto mb-8"
+              />
+              <div className="relative">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="text-tribbe-lime font-bold text-2xl tracking-wider transform"
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      top: `${i * 1.5}rem`,
+                      transform: `rotate(${-5 + i * 2}deg)`,
+                      left: `${i * 0.5}rem`
+                    }}
+                  >
+                    SHARE SMARTER
+                  </div>
+                ))}
+              </div>
+            </div>
 
+            <div className="space-y-4 mt-32">
+              <Button
+                variant="secondary"
+                className="w-full bg-[#D6BCFA] hover:bg-[#D6BCFA]/90 text-black h-12 rounded-full"
+                onClick={() => setIsVerifying(true)}
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                Continue with number
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full bg-[#1A1F2C] hover:bg-[#1A1F2C]/90 text-white border-0 h-12 rounded-full"
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                Continue with email
+              </Button>
+              
+              <p className="text-center text-sm text-white/60 mt-4">
+                by signing up, you accept our Terms and Conditions.
+              </p>
+              
+              <div className="text-center mt-8">
+                <p className="text-white/80 text-sm">
+                  Already member? <Button variant="link" className="text-white p-0">Login</Button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
         <Card>
           <CardContent className="p-6">
-            {!isVerifying ? (
-              <form onSubmit={handlePhoneSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Input
-                    type="tel"
-                    placeholder="Phone number"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="text-lg"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={loading || !phoneNumber}
-                >
-                  {loading ? "Sending..." : "Continue"}
-                </Button>
-              </form>
-            ) : (
-              <form onSubmit={handleVerificationSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Input
-                    type="text"
-                    placeholder="Verification code"
-                    value={verificationCode}
-                    onChange={(e) => setVerificationCode(e.target.value)}
-                    maxLength={6}
-                    className="text-lg text-center tracking-[0.5em]"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={loading || verificationCode.length !== 6}
-                >
-                  {loading ? "Verifying..." : "Verify"}
-                </Button>
-              </form>
-            )}
-            
-            <div className="mt-4 text-center">
+            <form onSubmit={handleVerificationSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Input
+                  type="text"
+                  placeholder="Verification code"
+                  value={verificationCode}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                  maxLength={6}
+                  className="text-lg text-center tracking-[0.5em]"
+                />
+              </div>
               <Button
-                type="button"
-                variant="outline"
-                onClick={handleSkip}
-                className="text-muted-foreground hover:text-foreground"
+                type="submit"
+                className="w-full"
+                disabled={loading || verificationCode.length !== 6}
               >
-                Skip Authentication (Dev Only)
+                {loading ? "Verifying..." : "Verify"}
               </Button>
-            </div>
+            </form>
           </CardContent>
         </Card>
-      </div>
+      )}
     </div>
   );
 };
