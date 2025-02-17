@@ -21,7 +21,7 @@ const Index = () => {
             Welcome to Tribbe
           </span>
           <h1 className="text-4xl font-bold text-tribbe-charcoal mt-4">
-            Your Digital Money Circle
+            Hi. Welcome to Tribbe, your AI money manager.
           </h1>
         </div>
         <p className="text-tribbe-sage text-lg max-w-xl">
