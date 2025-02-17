@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Send } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 interface ChatInputProps {
   input: string;
@@ -25,7 +25,7 @@ export function ChatInput({ input, isLoading, onInputChange, onSubmit }: ChatInp
         disabled={isLoading || !input.trim()}
         className="bg-tribbe-lime text-black hover:bg-tribbe-lime/80 transition-all duration-300"
       >
-        <Send className="h-4 w-4" />
+        <ArrowUp className="h-4 w-4" />
       </Button>
     </form>
   );
