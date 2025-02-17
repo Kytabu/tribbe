@@ -93,7 +93,12 @@ export function AppSidebar() {
                   "bg-tribbe-charcoal/10 text-tribbe-charcoal font-medium"
               )}
             >
-              <item.icon className="w-5 h-5" />
+              <item.icon 
+                className={cn(
+                  "w-5 h-5",
+                  location.pathname === item.href ? "text-tribbe-aqua" : "text-tribbe-lime"
+                )} 
+              />
               <span>{item.label}</span>
             </Link>
           ))}
@@ -111,7 +116,12 @@ export function AppSidebar() {
                   "bg-tribbe-charcoal/10 text-tribbe-charcoal font-medium"
               )}
             >
-              <item.icon className="w-5 h-5" />
+              <item.icon 
+                className={cn(
+                  "w-5 h-5",
+                  location.pathname === item.href ? "text-tribbe-aqua" : "text-tribbe-lime"
+                )} 
+              />
               <span>{item.label}</span>
             </Link>
           ))}
