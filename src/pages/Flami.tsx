@@ -138,7 +138,7 @@ export default function Flami() {
     <AppLayout>
       <div className="container max-w-4xl mx-auto h-[calc(100vh-2rem)] flex flex-col">
         <div className="relative mb-4">
-          <h1 className="text-4xl font-righteous text-tribbe-lime text-center">Flami</h1>
+          <h1 className="text-4xl font-righteous text-tribbe-lime text-center">flami</h1>
           <div className="absolute right-0 top-0">
             <ProgressBar userLevel={userLevel} userPoints={userPoints} />
           </div>
