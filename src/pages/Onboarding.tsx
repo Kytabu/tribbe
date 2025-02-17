@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { X, ArrowRight, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Lottie from "lottie-react";
 
@@ -70,19 +70,21 @@ const Onboarding = () => {
   const content = getScreenContent(currentScreen);
 
   return (
-    <div className="min-h-screen bg-tribbe-grey flex flex-col items-center justify-between p-6 relative">
-      {/* Skip button - Updated styling */}
-      <Button
-        variant="secondary"
-        className="absolute top-4 right-4 bg-tribbe-lime text-tribbe-black hover:bg-tribbe-lime/90 font-medium px-6"
-        onClick={handleSkip}
-      >
-        Skip
-      </Button>
-
+    <div className="min-h-screen bg-tribbe-grey flex flex-col justify-between p-4 relative">
       {/* Main content */}
-      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-md gap-8 animate-fade-in">
-        <div className="w-full aspect-square relative">
+      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-[90%] mx-auto">
+        {/* Skip button aligned with content width */}
+        <div className="w-full flex justify-end mb-6">
+          <Button
+            variant="secondary"
+            className="bg-tribbe-lime text-tribbe-black hover:bg-tribbe-lime/90 font-medium px-6"
+            onClick={handleSkip}
+          >
+            Skip
+          </Button>
+        </div>
+
+        <div className="w-full aspect-square relative mb-8">
           <Lottie
             animationData={content.animation}
             loop={true}
@@ -91,13 +93,13 @@ const Onboarding = () => {
             className="w-full h-full"
           />
         </div>
-        <h1 className="text-2xl md:text-3xl text-white text-center font-semibold">
+        <h1 className="text-xl sm:text-2xl md:text-3xl text-white text-center font-semibold mb-8">
           {content.title}
         </h1>
       </div>
 
       {/* Navigation */}
-      <div className="w-full max-w-md space-y-6">
+      <div className="w-full max-w-[90%] mx-auto space-y-6">
         {/* Progress dots */}
         <div className="flex justify-center gap-2">
           {Array.from({ length: TOTAL_SCREENS }).map((_, index) => (
