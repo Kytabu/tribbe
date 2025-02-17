@@ -40,15 +40,17 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
             <Button
               key={index}
               variant="outline"
-              className="flex-none w-48 text-left h-auto py-3 px-4 hover:bg-tribbe-lime hover:text-black flex items-center gap-2 group transition-all duration-300 animate-fade-in bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+              className="flex-none w-48 h-auto py-4 px-5 hover:bg-tribbe-lime hover:text-black flex flex-col items-start gap-2 group transition-all duration-300 animate-fade-in bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-2xl border-muted"
               onClick={() => onSuggestionClick(suggestion.text, suggestion.points)}
             >
-              <div className="flex items-center gap-2 flex-1 justify-between">
+              <div className="flex items-center gap-2 w-full justify-between">
                 {suggestion.icon}
-                <span className="text-sm font-medium text-center flex-1">{suggestion.text}</span>
                 <span className="text-xs bg-tribbe-lime/20 px-2 py-1 rounded-full group-hover:bg-black/20">
                   +{suggestion.points}
                 </span>
+              </div>
+              <div className="text-sm font-normal">
+                <span className="font-bold">Automate</span> my {suggestion.text.split(" ").slice(-1)[0]}
               </div>
             </Button>
           ))}
