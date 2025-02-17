@@ -91,10 +91,11 @@ const PinSetup = () => {
             onChange={value => step === "create" ? setPin(value) : setConfirmPin(value)}
             render={({ slots }) => (
               <InputOTPGroup className="gap-4">
-                {slots.map((slot, index) => (
+                {slots.map((slot, idx) => (
                   <InputOTPSlot 
-                    key={index} 
+                    key={idx} 
                     {...slot}
+                    index={idx}
                     className="bg-white/10 border-white/20 text-white"
                   />
                 ))}

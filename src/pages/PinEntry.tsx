@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -62,7 +61,6 @@ const PinEntry = () => {
       const isMatch = await bcrypt.compare(pin, userPin.pin_hash);
 
       if (isMatch) {
-        // Reset attempts on successful login
         await supabase
           .from('user_pins')
           .update({ attempts: 0 })
@@ -70,7 +68,6 @@ const PinEntry = () => {
 
         navigate("/flami");
       } else {
-        // Increment attempts
         const newAttempts = (userPin.attempts || 0) + 1;
         await supabase
           .from('user_pins')
@@ -109,10 +106,11 @@ const PinEntry = () => {
             onChange={setPin}
             render={({ slots }) => (
               <InputOTPGroup className="gap-4">
-                {slots.map((slot, index) => (
+                {slots.map((slot, idx) => (
                   <InputOTPSlot 
-                    key={index} 
+                    key={idx} 
                     {...slot}
+                    index={idx}
                     className="bg-white/10 border-white/20 text-white"
                   />
                 ))}
