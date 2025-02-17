@@ -70,79 +70,75 @@ const Onboarding = () => {
   const content = getScreenContent(currentScreen);
 
   return (
-    <div className="h-[100dvh] bg-tribbe-grey flex flex-col p-4">
-      <div className="w-full max-w-[90%] mx-auto flex flex-col h-full">
-        {/* Skip button */}
-        <div className="flex justify-end">
-          <Button
-            variant="secondary"
-            className="bg-tribbe-lime text-tribbe-black hover:bg-tribbe-lime/90 font-medium px-6"
-            onClick={handleSkip}
-          >
-            Skip
-          </Button>
+    <div className="min-h-screen bg-tribbe-grey flex flex-col items-center justify-between p-6 relative">
+      {/* Skip button - Updated styling */}
+      <Button
+        variant="secondary"
+        className="absolute top-4 right-4 bg-tribbe-lime text-tribbe-black hover:bg-tribbe-lime/90 font-medium px-6"
+        onClick={handleSkip}
+      >
+        Skip
+      </Button>
+
+      {/* Main content */}
+      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-md gap-8 animate-fade-in">
+        <div className="w-full aspect-square relative">
+          <Lottie
+            animationData={content.animation}
+            loop={true}
+            autoplay={true}
+            style={{ width: '100%', height: '100%' }}
+            className="w-full h-full"
+          />
         </div>
+        <h1 className="text-2xl md:text-3xl text-white text-center font-semibold">
+          {content.title}
+        </h1>
+      </div>
 
-        {/* Main content */}
-        <div className="flex-1 flex flex-col justify-center items-center gap-4">
-          <div className="w-full aspect-square">
-            <Lottie
-              animationData={content.animation}
-              loop={true}
-              autoplay={true}
-              style={{ width: '100%', height: '100%' }}
-              className="w-full h-full"
-            />
-          </div>
-          <h1 className="text-xl sm:text-2xl md:text-3xl text-white text-center font-semibold">
-            {content.title}
-          </h1>
-        </div>
-
-        {/* Navigation */}
-        <div className="space-y-4">
-          {/* Progress dots */}
-          <div className="flex justify-center gap-2">
-            {Array.from({ length: TOTAL_SCREENS }).map((_, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-300",
-                  index === currentScreen
-                    ? "bg-white w-4"
-                    : "bg-white/30"
-                )}
-              />
-            ))}
-          </div>
-
-          {/* Navigation buttons */}
-          <div className="flex justify-between items-center">
-            <Button
-              variant="ghost"
+      {/* Navigation */}
+      <div className="w-full max-w-md space-y-6">
+        {/* Progress dots */}
+        <div className="flex justify-center gap-2">
+          {Array.from({ length: TOTAL_SCREENS }).map((_, index) => (
+            <div
+              key={index}
               className={cn(
-                "text-white",
-                currentScreen === 0 && "invisible"
+                "w-2 h-2 rounded-full transition-all duration-300",
+                index === currentScreen
+                  ? "bg-white w-4"
+                  : "bg-white/30"
               )}
-              onClick={handleBack}
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
-            </Button>
-            <Button
-              className="bg-white text-tribbe-grey hover:bg-white/90"
-              onClick={handleNext}
-            >
-              {currentScreen === TOTAL_SCREENS - 1 ? (
-                "Start"
-              ) : (
-                <>
-                  Next
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </>
-              )}
-            </Button>
-          </div>
+            />
+          ))}
+        </div>
+
+        {/* Navigation buttons */}
+        <div className="flex justify-between items-center">
+          <Button
+            variant="ghost"
+            className={cn(
+              "text-white",
+              currentScreen === 0 && "invisible"
+            )}
+            onClick={handleBack}
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back
+          </Button>
+          <Button
+            className="bg-white text-tribbe-grey hover:bg-white/90"
+            onClick={handleNext}
+          >
+            {currentScreen === TOTAL_SCREENS - 1 ? (
+              "Start"
+            ) : (
+              <>
+                Next
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </>
+            )}
+          </Button>
         </div>
       </div>
     </div>
