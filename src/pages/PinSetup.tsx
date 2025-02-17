@@ -41,8 +41,8 @@ const PinSetup = () => {
 
       <div className="w-full max-w-md space-y-12">
         <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold text-foreground">
-            Your Pin Please
+          <h1 className="text-2xl text-foreground font-normal">
+            your pin please
           </h1>
         </div>
 
