@@ -16,7 +16,7 @@ export function ChatInput({ input, isLoading, onInputChange, onSubmit }: ChatInp
       <Textarea
         value={input}
         onChange={(e) => onInputChange(e.target.value)}
-        placeholder="Type your message to earn points..."
+        placeholder="How can I help grow your bag today?"
         className="min-h-[50px] max-h-[200px] flex-1"
         disabled={isLoading}
       />
