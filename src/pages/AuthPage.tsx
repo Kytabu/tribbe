@@ -115,6 +115,13 @@ const AuthPage = () => {
     }
   };
 
+  const handleSkip = () => {
+    toast({
+      description: "Authentication skipped for development",
+    });
+    navigate("/pin-setup");
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-md space-y-8">
@@ -170,6 +177,17 @@ const AuthPage = () => {
                 </Button>
               </form>
             )}
+            
+            <div className="mt-4 text-center">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleSkip}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                Skip Authentication (Dev Only)
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
