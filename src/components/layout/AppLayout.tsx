@@ -9,7 +9,6 @@ interface AppLayoutProps {
   children: React.ReactNode;
 }
 
-// New component that uses the useSidebar hook
 function LayoutContent({ children }: AppLayoutProps) {
   const { open, setOpen } = useSidebar();
 
@@ -20,7 +19,7 @@ function LayoutContent({ children }: AppLayoutProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="fixed top-4 left-4 z-50"
+          className="fixed top-4 left-4 z-50 bg-tribbe-lime hover:bg-tribbe-lime/90"
           onClick={() => setOpen(!open)}
         >
           <MenuIcon className="h-6 w-6" />
@@ -31,7 +30,6 @@ function LayoutContent({ children }: AppLayoutProps) {
   );
 }
 
-// Main layout component that provides the context
 export function AppLayout({ children }: AppLayoutProps) {
   return (
     <SidebarProvider defaultOpen={false}>
