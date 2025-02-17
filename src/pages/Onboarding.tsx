@@ -31,27 +31,27 @@ const Onboarding = () => {
     switch (screen) {
       case 0:
         return {
-          image: "/splash_1.png",
+          image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
           title: "Your network is your net-worth.",
         };
       case 1:
         return {
-          image: "/splash_2.png",
+          image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
           title: "Get cash from those that care about you, fast.",
         };
       case 2:
         return {
-          image: "/splash_3.png",
+          image: "https://images.unsplash.com/photo-1500673922987-e212871fec22",
           title: "Use A.I. to help you make & save money.",
         };
       case 3:
         return {
-          image: "/splash_4.png",
+          image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b",
           title: "Lend money to those that pay you back.",
         };
       case 4:
         return {
-          image: "/splash_5.png",
+          image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
           title: "Tribbe is your network. Trust is your net-worth.",
         };
       default:
@@ -79,7 +79,7 @@ const Onboarding = () => {
           <img
             src={content.image}
             alt={`Onboarding step ${currentScreen + 1}`}
-            className="w-full h-full object-contain animate-float"
+            className="w-full h-full object-contain animate-float rounded-lg"
           />
         </div>
         <h1 className="text-2xl md:text-3xl text-white text-center font-semibold">
