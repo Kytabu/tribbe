@@ -174,7 +174,7 @@ const PinSetup = () => {
           <div className="mt-8 flex justify-center">
             <Button 
               onClick={() => navigate("/setup")}
-              className="w-32 bg-green-500 hover:bg-green-600 text-slate-900 font-medium"
+              className="w-32 bg-tribbe-lime hover:bg-tribbe-lime/90 text-slate-900 font-medium"
             >
               Done
             </Button>
