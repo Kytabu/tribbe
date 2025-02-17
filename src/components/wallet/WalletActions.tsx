@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, ArrowDownRight, BanknoteIcon, CreditCard } from "lucide-react";
+import { Smartphone, CreditCard } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 
 interface WalletActionsProps {
@@ -20,7 +20,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
             <span className="w-6 h-6 rounded-full bg-background flex items-center justify-center text-xs border">
               {selectedCurrency.substring(0, 1)}
             </span>
-            <BanknoteIcon className="h-5 w-5 text-tribbe-lime" />
+            <Smartphone className="h-5 w-5 text-tribbe-lime" />
           </div>
           <div className="text-left">
             <div className="font-bold text-tribbe-lime">Connect M-Pesa Number</div>
