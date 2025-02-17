@@ -23,8 +23,8 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
             <ArrowUpRight className="h-5 w-5" />
           </div>
           <div className="text-left">
-            <div className="font-medium">Money In</div>
-            <div className="text-sm text-tribbe-sage">Add funds to your wallet</div>
+            <div className="font-medium">Connect M-Pesa Number</div>
+            <div className="text-sm text-tribbe-sage">Link your M-Pesa for instant transfers</div>
           </div>
         </div>
       </Button>
@@ -42,8 +42,8 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
             <ArrowDownRight className="h-5 w-5" />
           </div>
           <div className="text-left">
-            <div className="font-medium">Money Out</div>
-            <div className="text-sm text-tribbe-sage">Withdraw from your wallet</div>
+            <div className="font-medium">Connect Cards</div>
+            <div className="text-sm text-tribbe-sage">Add your debit and credit cards</div>
           </div>
         </div>
       </Button>
