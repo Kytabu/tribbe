@@ -127,7 +127,7 @@ const Onboarding = () => {
             Back
           </Button>
           <Button
-            className="bg-white text-tribbe-grey hover:bg-white/90"
+            className="bg-tribbe-aqua text-tribbe-black hover:bg-tribbe-aqua/90"
             onClick={handleNext}
           >
             {currentScreen === TOTAL_SCREENS - 1 ? (
