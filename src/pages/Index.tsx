@@ -44,6 +44,9 @@ const Index = () => {
             alt="AI and Finance Illustration"
             className="w-[27rem] mx-auto"
           />
+          <h2 className="text-2xl font-bold text-tribbe-lime">
+            the new way to do money
+          </h2>
         </div>
       </div>
     </div>
