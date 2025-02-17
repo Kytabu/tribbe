@@ -108,6 +108,7 @@ const AuthPage = () => {
                 <Button
                   variant="outline"
                   className="w-64 bg-tribbe-lime hover:bg-tribbe-lime/90 text-tribbe-black border-0 h-12 rounded-full"
+                  onClick={() => setIsVerifying(true)}
                 >
                   <Mail className="mr-2 h-5 w-5" />
                   Continue with email
