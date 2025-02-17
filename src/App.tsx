@@ -12,6 +12,7 @@ import Wallet from "./pages/Wallet";
 import Onboarding from "./pages/Onboarding";
 import PinSetup from "./pages/PinSetup";
 import PinEntry from "./pages/PinEntry";
+import Setup from "./pages/Setup";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/pin-setup" element={<PinSetup />} />
             <Route path="/pin-entry" element={<PinEntry />} />
+            <Route path="/setup" element={<Setup />} />
             <Route path="/" element={<Index />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
