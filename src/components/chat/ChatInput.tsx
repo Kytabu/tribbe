@@ -12,21 +12,23 @@ interface ChatInputProps {
 
 export function ChatInput({ input, isLoading, onInputChange, onSubmit }: ChatInputProps) {
   return (
-    <form onSubmit={onSubmit} className="mt-4 flex gap-2">
-      <Textarea
-        value={input}
-        onChange={(e) => onInputChange(e.target.value)}
-        placeholder="How can I help grow your bag today?"
-        className="min-h-[50px] max-h-[200px] flex-1"
-        disabled={isLoading}
-      />
-      <Button 
-        type="submit" 
-        disabled={isLoading || !input.trim()}
-        className="bg-tribbe-lime hover:bg-black hover:text-tribbe-lime text-black transition-all duration-300 rounded-full p-0 w-10 h-10"
-      >
-        <ArrowUp className="h-4 w-4" />
-      </Button>
+    <form onSubmit={onSubmit} className="mt-4">
+      <div className="relative">
+        <Textarea
+          value={input}
+          onChange={(e) => onInputChange(e.target.value)}
+          placeholder="How can I help grow your bag today?"
+          className="min-h-[50px] max-h-[200px] pr-12"
+          disabled={isLoading}
+        />
+        <Button 
+          type="submit" 
+          disabled={isLoading || !input.trim()}
+          className="bg-tribbe-lime hover:bg-black hover:text-tribbe-lime text-black transition-all duration-300 rounded-full p-0 w-8 h-8 absolute right-2 bottom-2"
+        >
+          <ArrowUp className="h-4 w-4" />
+        </Button>
+      </div>
     </form>
   );
 }
