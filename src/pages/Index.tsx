@@ -5,7 +5,7 @@ const Index = () => {
       <div className="space-y-6 text-center animate-fade-in">
         <div className="space-y-2">
           <span className="px-3 py-1 text-sm text-tribbe-terracotta bg-tribbe-terracotta/10 rounded-full">
-            Welcome to Tribbe
+            Hi!
           </span>
           <h1 className="text-4xl font-bold text-tribbe-charcoal mt-4">
             Hi. Welcome to Tribbe, your AI money manager.
