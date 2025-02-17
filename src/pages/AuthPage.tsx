@@ -20,39 +20,14 @@ const AuthPage = () => {
     setLoading(true);
 
     try {
-      // In a real implementation, this would send an SMS
-      // For now, we'll create a verification code entry
-      const code = Math.floor(100000 + Math.random() * 900000).toString();
-      const expires = new Date(Date.now() + 10 * 60000); // 10 minutes from now
-
-      // First create the auth user
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        phone: phoneNumber,
-        password: code // Using the code as the password for now
+      // For development, we'll just show the verification code
+      const code = "123456";
+      
+      toast({
+        description: `Verification code: ${code}`,
       });
-
-      if (authError) throw authError;
-
-      if (authData.user) {
-        // Create verification code entry
-        const { error: verificationError } = await supabase
-          .from('verification_codes')
-          .insert([
-            {
-              user_id: authData.user.id,
-              code,
-              expires_at: expires.toISOString(),
-            }
-          ]);
-
-        if (verificationError) throw verificationError;
-
-        toast({
-          description: `Verification code: ${code}`,
-        });
-        
-        setIsVerifying(true);
-      }
+      
+      setIsVerifying(true);
     } catch (error: any) {
       console.error('Error during phone submission:', error);
       toast({
@@ -70,40 +45,17 @@ const AuthPage = () => {
     setLoading(true);
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        throw new Error("No user found");
+      // For development, just check if the code matches
+      if (verificationCode === "123456") {
+        toast({
+          description: "Verification successful",
+        });
+
+        // Redirect to Flami page instead of PIN setup
+        navigate("/flami");
+      } else {
+        throw new Error("Invalid verification code");
       }
-
-      // Verify the code
-      const { data: verificationData, error: verificationError } = await supabase
-        .from('verification_codes')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('code', verificationCode)
-        .eq('status', 'pending')
-        .gt('expires_at', new Date().toISOString())
-        .single();
-
-      if (verificationError || !verificationData) {
-        throw new Error("Invalid or expired code");
-      }
-
-      // Update verification status
-      const { error: updateError } = await supabase
-        .from('verification_codes')
-        .update({ status: 'verified' })
-        .eq('id', verificationData.id);
-
-      if (updateError) throw updateError;
-
-      toast({
-        description: "Phone number verified successfully",
-      });
-
-      // Redirect to PIN setup
-      navigate("/pin-setup");
     } catch (error: any) {
       console.error('Error during verification:', error);
       toast({
@@ -120,7 +72,7 @@ const AuthPage = () => {
     toast({
       description: "Authentication skipped for development",
     });
-    navigate("/pin-setup");
+    navigate("/flami");
   };
 
   return (
