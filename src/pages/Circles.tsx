@@ -55,8 +55,12 @@ const Circles = () => {
   return (
     <AppLayout>
       <div className="space-y-8">
-        <div className="flex items-center justify-between">
+        <div>
           <h1 className="text-3xl font-righteous text-tribbe-lime">My Circles</h1>
+          <p className="text-muted-foreground mt-2">Let AI set goals for you and help you achieve them</p>
+        </div>
+
+        <div className="flex items-center justify-end">
           <Button 
             className="group hover:scale-105 transition-transform duration-300"
             onClick={() => console.log("Create new circle")}
