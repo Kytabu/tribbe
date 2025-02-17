@@ -7,11 +7,11 @@ import { cn } from "@/lib/utils";
 import Lottie from "lottie-react";
 
 // Import Lottie animations
-import networkAnimation from "/animations/network.json";
-import cashAnimation from "/animations/cash.json";
-import aiAnimation from "/animations/ai.json";
-import lendAnimation from "/animations/lend.json";
-import trustAnimation from "/animations/trust.json";
+import networkAnimation from "../assets/animations/network.json";
+import cashAnimation from "../assets/animations/cash.json";
+import aiAnimation from "../assets/animations/ai.json";
+import lendAnimation from "../assets/animations/lend.json";
+import trustAnimation from "../assets/animations/trust.json";
 
 const TOTAL_SCREENS = 5;
 
