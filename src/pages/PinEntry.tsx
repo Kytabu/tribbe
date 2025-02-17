@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import bcrypt from "bcryptjs";
@@ -93,6 +92,9 @@ const PinEntry = () => {
   const handleNumberClick = (number: string) => {
     if (pin.length < 4) {
       setPin(prev => prev + number);
+      if (pin.length === 3) {
+        verifyPin();
+      }
     }
   };
 
@@ -106,11 +108,11 @@ const PinEntry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-md space-y-12">
         <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold text-white">Your account is secured.</h1>
-          <p className="text-white/90 text-lg">Type your PIN to unlock it.</p>
+          <h1 className="text-2xl font-bold text-foreground">Your account is secured.</h1>
+          <p className="text-foreground/90 text-lg">Type your PIN to unlock it.</p>
         </div>
 
         <div className="flex justify-center space-x-4 mb-12">
@@ -118,7 +120,7 @@ const PinEntry = () => {
             <div
               key={index}
               className={`w-4 h-4 rounded-full border-2 ${
-                pin.length > index ? "bg-tribbe-lime border-tribbe-lime" : "border-white/50"
+                pin.length > index ? "bg-primary border-primary" : "border-foreground/50"
               }`}
             />
           ))}
@@ -129,26 +131,26 @@ const PinEntry = () => {
             <button
               key={i + 1}
               onClick={() => handleNumberClick((i + 1).toString())}
-              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity"
+              className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
             >
               {i + 1}
             </button>
           ))}
           <button
             onClick={handleLogout}
-            className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity"
+            className="text-primary text-lg hover:opacity-80 transition-opacity"
           >
             Log out
           </button>
           <button
             onClick={() => handleNumberClick("0")}
-            className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity"
+            className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
           >
             0
           </button>
           <button
             onClick={handleDelete}
-            className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity"
+            className="text-primary text-lg hover:opacity-80 transition-opacity"
           >
             Delete
           </button>

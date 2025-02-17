@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
@@ -90,13 +89,13 @@ const PinSetup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-md space-y-12">
         <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold text-white">
+          <h1 className="text-2xl font-bold text-foreground">
             {step === "create" ? "Create Your PIN" : "Confirm Your PIN"}
           </h1>
-          <p className="text-white/90 text-lg">
+          <p className="text-foreground/90 text-lg">
             {step === "create" 
               ? "Choose a 4-digit PIN to secure your account" 
               : "Enter the same PIN again to confirm"}
@@ -109,8 +108,8 @@ const PinSetup = () => {
               key={index}
               className={`w-4 h-4 rounded-full border-2 ${
                 (step === "create" ? pin.length > index : confirmPin.length > index)
-                  ? "bg-tribbe-lime border-tribbe-lime"
-                  : "border-white/50"
+                  ? "bg-primary border-primary"
+                  : "border-foreground/50"
               }`}
             />
           ))}
@@ -121,7 +120,7 @@ const PinSetup = () => {
             <button
               key={i + 1}
               onClick={() => handleNumberClick((i + 1).toString())}
-              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity"
+              className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
             >
               {i + 1}
             </button>
@@ -129,13 +128,13 @@ const PinSetup = () => {
           <div className="w-full" />
           <button
             onClick={() => handleNumberClick("0")}
-            className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity"
+            className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
           >
             0
           </button>
           <button
             onClick={handleDelete}
-            className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity"
+            className="text-primary text-lg hover:opacity-80 transition-opacity"
           >
             Delete
           </button>
