@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
@@ -19,7 +20,7 @@ const PinSetup = () => {
     } else if (step === "confirm" && confirmPin.length < 4) {
       setConfirmPin(prev => prev + number);
       if (confirmPin.length === 3) {
-        handlePinSubmit();
+        setTimeout(() => handlePinSubmit(), 300);
       }
     }
   };
@@ -33,12 +34,27 @@ const PinSetup = () => {
   };
 
   const handlePinSubmit = async () => {
+    // Add console logs to debug the PIN values
+    console.log('Pin:', pin);
+    console.log('ConfirmPin:', confirmPin);
+    console.log('Step:', step);
+
+    // If we're still in create step and pin is complete, move to confirm
     if (step === "create" && pin.length === 4) {
       setStep("confirm");
       return;
     }
 
-    if (pin !== confirmPin) {
+    // Wait for the last digit to be added to confirmPin
+    if (confirmPin.length < 4) {
+      return;
+    }
+
+    // Now compare the PINs
+    const newPin = pin;
+    const newConfirmPin = confirmPin;
+
+    if (newPin !== newConfirmPin) {
       toast({
         title: "PINs don't match",
         description: "Please try again",
@@ -62,7 +78,7 @@ const PinSetup = () => {
       }
 
       const salt = await bcrypt.genSalt(10);
-      const pinHash = await bcrypt.hash(pin, salt);
+      const pinHash = await bcrypt.hash(newPin, salt);
 
       const { error } = await supabase
         .from('user_pins')
