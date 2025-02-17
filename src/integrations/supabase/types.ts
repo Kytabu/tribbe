@@ -89,6 +89,36 @@ export type Database = {
           },
         ]
       }
+      user_pins: {
+        Row: {
+          attempts: number | null
+          created_at: string
+          id: string
+          pin_hash: string
+          status: Database["public"]["Enums"]["pin_status"] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number | null
+          created_at?: string
+          id?: string
+          pin_hash: string
+          status?: Database["public"]["Enums"]["pin_status"] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number | null
+          created_at?: string
+          id?: string
+          pin_hash?: string
+          status?: Database["public"]["Enums"]["pin_status"] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       wallets: {
         Row: {
           balance: number
@@ -145,6 +175,7 @@ export type Database = {
       }
     }
     Enums: {
+      pin_status: "active" | "disabled"
       supported_currency: "GBP" | "USD" | "KES" | "EUR"
     }
     CompositeTypes: {

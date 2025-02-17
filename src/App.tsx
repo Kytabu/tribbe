@@ -10,6 +10,8 @@ import NotFound from "./pages/NotFound";
 import Flami from "./pages/Flami";
 import Wallet from "./pages/Wallet";
 import Onboarding from "./pages/Onboarding";
+import PinSetup from "./pages/PinSetup";
+import PinEntry from "./pages/PinEntry";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
             <Route path="/home" element={<Index />} />
             <Route path="/flami" element={<Flami />} />
             <Route path="/wallet" element={<Wallet />} />
+            <Route path="/pin-setup" element={<PinSetup />} />
+            <Route path="/pin-entry" element={<PinEntry />} />
             <Route path="/" element={<Index />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
