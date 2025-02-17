@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -70,14 +71,13 @@ const Onboarding = () => {
 
   return (
     <div className="min-h-screen bg-tribbe-grey flex flex-col items-center justify-between p-6 relative">
-      {/* Skip button */}
+      {/* Skip button - Updated styling */}
       <Button
-        variant="ghost"
-        size="icon"
-        className="absolute top-4 right-4 text-white"
+        variant="secondary"
+        className="absolute top-4 right-4 bg-tribbe-lime text-tribbe-black hover:bg-tribbe-lime/90 font-medium px-6"
         onClick={handleSkip}
       >
-        <X className="h-6 w-6" />
+        Skip
       </Button>
 
       {/* Main content */}
