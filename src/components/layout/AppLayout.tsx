@@ -19,10 +19,10 @@ function LayoutContent({ children }: AppLayoutProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="fixed top-4 left-4 z-50 bg-tribbe-lime hover:bg-tribbe-lime/90"
+          className="fixed top-4 left-4 z-50 hover:bg-tribbe-lime"
           onClick={() => setOpen(!open)}
         >
-          <MenuIcon className="h-6 w-6" />
+          <MenuIcon className="h-6 w-6 text-tribbe-lime hover:text-tribbe-black" />
         </Button>
         <div className="max-w-7xl mx-auto">{children}</div>
       </main>
