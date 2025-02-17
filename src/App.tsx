@@ -9,23 +9,26 @@ import PinSetup from "@/pages/PinSetup";
 import PinEntry from "@/pages/PinEntry";
 import AccountPage from "@/pages/AccountPage";
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "next-themes";
 import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/setup" element={<Setup />} />
-        <Route path="/wallet" element={<Wallet />} />
-        <Route path="/flami" element={<Flami />} />
-        <Route path="/pin-setup" element={<PinSetup />} />
-        <Route path="/pin-entry" element={<PinEntry />} />
-        <Route path="/account" element={<AccountPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Toaster />
-    </Router>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/setup" element={<Setup />} />
+          <Route path="/wallet" element={<Wallet />} />
+          <Route path="/flami" element={<Flami />} />
+          <Route path="/pin-setup" element={<PinSetup />} />
+          <Route path="/pin-entry" element={<PinEntry />} />
+          <Route path="/account" element={<AccountPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Toaster />
+      </Router>
+    </ThemeProvider>
   );
 }
 
