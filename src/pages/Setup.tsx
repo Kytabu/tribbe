@@ -27,7 +27,10 @@ const Setup = () => {
         
         <div className="space-y-4">
           {/* Me Section */}
-          <div className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer">
+          <div 
+            className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
+            onClick={() => navigate("/account")}
+          >
             <div className="flex items-center gap-3">
               <User className="w-5 h-5 text-primary" />
               <div>

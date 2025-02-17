@@ -48,6 +48,42 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          id_number: string | null
+          id_type: Database["public"]["Enums"]["id_type"] | null
+          phone_number: string | null
+          updated_at: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          id_number?: string | null
+          id_type?: Database["public"]["Enums"]["id_type"] | null
+          phone_number?: string | null
+          updated_at?: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          id_number?: string | null
+          id_type?: Database["public"]["Enums"]["id_type"] | null
+          phone_number?: string | null
+          updated_at?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
       transactions: {
         Row: {
           amount: number
@@ -175,6 +211,7 @@ export type Database = {
       }
     }
     Enums: {
+      id_type: "national_id" | "passport" | "drivers_license"
       pin_status: "active" | "disabled"
       supported_currency: "GBP" | "USD" | "KES" | "EUR"
     }
