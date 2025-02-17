@@ -12,7 +12,7 @@ const Index = () => {
           <img 
             src="/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png"
             alt="Illustration of people interacting with a network visualization"
-            className="w-3/4 h-auto rounded-lg shadow-lg object-contain mx-auto"
+            className="w-[45%] h-auto rounded-lg shadow-lg object-contain mx-auto"
           />
         </div>
       </div>
