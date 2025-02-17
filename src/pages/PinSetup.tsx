@@ -95,7 +95,8 @@ const PinSetup = () => {
         description: "You can now use your PIN to access the app",
       });
 
-      navigate("/pin-entry");
+      // Instead of navigating directly, wait for user to click "Done"
+      // The button will be shown once PIN is confirmed
     } catch (error) {
       console.error('Error setting PIN:', error);
       toast({
@@ -167,6 +168,18 @@ const PinSetup = () => {
             Delete
           </button>
         </div>
+
+        {/* Done Button - Only shown when PIN is confirmed and matches */}
+        {step === "confirm" && pin === confirmPin && pin.length === 4 && (
+          <div className="mt-8 flex justify-center">
+            <Button 
+              onClick={() => navigate("/setup")}
+              className="w-32"
+            >
+              Done
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
