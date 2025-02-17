@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -78,52 +77,51 @@ const AuthPage = () => {
   return (
     <div className="min-h-screen bg-tribbe-grey flex flex-col items-center px-6 pt-20">
       {!isVerifying ? (
-        <div className="w-full max-w-xl space-y-16"> {/* Increased from max-w-md and space-y-12 */}
-          <div className="space-y-12"> {/* Increased from space-y-8 */}
-            <div className="text-center space-y-9"> {/* Increased from space-y-6 */}
+        <div className="w-full max-w-xl space-y-16">
+          <div className="space-y-12">
+            <div className="text-center space-y-9">
               <img 
                 src="/lovable-uploads/24576fa2-343c-42db-b26e-e56b0aa76cc8.png" 
                 alt="Tribbe" 
-                className="w-72 mx-auto" /* Increased from w-48 */
+                className="w-72 mx-auto"
               />
               <img 
                 src="/lovable-uploads/5a9bef54-1771-4c06-8d31-2140f23f1388.png" 
                 alt="Network Illustration" 
-                className="w-96 mx-auto" /* Increased from w-64 */
+                className="w-96 mx-auto"
               />
             </div>
 
-            <div className="space-y-6 mt-48"> {/* Increased from space-y-4 and mt-32 */}
+            <div className="space-y-6 mt-48">
               <div className="flex justify-center">
                 <Button
                   variant="secondary"
-                  className="w-96 bg-tribbe-aqua hover:bg-tribbe-aqua/90 text-tribbe-black h-18 rounded-full text-lg" /* Increased from w-64, h-12, and added text-lg */
+                  className="w-96 bg-tribbe-aqua hover:bg-tribbe-aqua/90 text-tribbe-black h-18 rounded-full text-lg"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <Phone className="mr-3 h-7 w-7" /> {/* Increased from h-5 w-5 and mr-2 */}
+                  <Phone className="mr-3 h-5 w-5" />
                   Continue with number
                 </Button>
               </div>
               <div className="flex justify-center">
                 <Button
                   variant="outline"
-                  className="w-96 bg-tribbe-lime hover:bg-tribbe-lime/90 text-tribbe-black border-0 h-18 rounded-full text-lg" /* Increased from w-64, h-12, and added text-lg */
+                  className="w-96 bg-tribbe-lime hover:bg-tribbe-lime/90 text-tribbe-black border-0 h-18 rounded-full text-lg"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <Mail className="mr-3 h-7 w-7" /> {/* Increased from h-5 w-5 and mr-2 */}
+                  <Mail className="mr-3 h-5 w-5" />
                   Continue with email
                 </Button>
               </div>
               
-              {/* Social login buttons */}
-              <div className="flex justify-center gap-6 mt-6"> {/* Increased from gap-4 and mt-4 */}
+              <div className="flex justify-center gap-6 mt-6">
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-18 h-18 bg-black hover:bg-black/90 border-0" /* Increased from w-12 h-12 */
+                  className="rounded-full w-18 h-18 bg-black hover:bg-black/90 border-0"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <svg className="h-7 w-7" viewBox="0 0 48 48"> {/* Increased from h-5 w-5 */}
+                  <svg className="h-5 w-5" viewBox="0 0 48 48">
                     <path fill="#4CAF50" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
                     <path fill="#4CAF50" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
                     <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
@@ -133,18 +131,18 @@ const AuthPage = () => {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-18 h-18 bg-black hover:bg-black/90 border-0" /* Increased from w-12 h-12 */
+                  className="rounded-full w-18 h-18 bg-black hover:bg-black/90 border-0"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <Apple className="h-7 w-7 text-[#4CAF50]" /> {/* Increased from h-5 w-5 */}
+                  <Apple className="h-5 w-5 text-[#4CAF50]" />
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-18 h-18 bg-black hover:bg-black/90 border-0" /* Increased from w-12 h-12 */
+                  className="rounded-full w-18 h-18 bg-black hover:bg-black/90 border-0"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <Facebook className="h-7 w-7 text-[#4CAF50]" /> {/* Increased from h-5 w-5 */}
+                  <Facebook className="h-5 w-5 text-[#4CAF50]" />
                 </Button>
               </div>
               
@@ -161,22 +159,22 @@ const AuthPage = () => {
           </div>
         </div>
       ) : (
-        <Card className="w-96"> {/* Increased card width */}
-          <CardContent className="p-9"> {/* Increased from p-6 */}
-            <form onSubmit={handleVerificationSubmit} className="space-y-6"> {/* Increased from space-y-4 */}
-              <div className="space-y-3"> {/* Increased from space-y-2 */}
+        <Card className="w-96">
+          <CardContent className="p-9">
+            <form onSubmit={handleVerificationSubmit} className="space-y-6">
+              <div className="space-y-3">
                 <Input
                   type="text"
                   placeholder="Verification code"
                   value={verificationCode}
                   onChange={(e) => setVerificationCode(e.target.value)}
                   maxLength={6}
-                  className="text-xl text-center tracking-[0.5em] h-14" /* Increased from text-lg and added height */
+                  className="text-xl text-center tracking-[0.5em] h-14"
                 />
               </div>
               <Button
                 type="submit"
-                className="w-full h-14 text-lg" /* Increased height and font size */
+                className="w-full h-14 text-lg"
                 disabled={loading || verificationCode.length !== 6}
               >
                 {loading ? "Verifying..." : "Verify"}
