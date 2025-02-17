@@ -66,15 +66,17 @@ const AccountPage = () => {
       if (error) {
         if (error.code === 'PGRST116') {
           // Profile doesn't exist, create one
+          const currentTime = new Date().toISOString();
           const newProfile = {
             id: user.id,
             full_name: '',
             username: '',
             phone_number: '',
             id_number: '',
-            id_type: null,
+            id_type: null as IdType | null,
             avatar_url: null,
-            created_at: new Date().toISOString()
+            created_at: currentTime,
+            updated_at: currentTime // Add the missing updated_at field
           };
 
           const { error: insertError } = await supabase
