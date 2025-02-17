@@ -1,106 +1,127 @@
 
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { CirclePlus, Users, DollarSign, UserPlus } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { CirclePlus, Search, ChevronRight } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
-interface CircleCardProps {
+interface CircleType {
+  id: string;
   name: string;
-  memberCount: number;
-  amount: number;
-  gradient: string;
+  type: "Fundraiser" | "Investment" | "Activity" | "Event";
+  daysLeft: number;
+  amount: number | "Free" | "Chip in";
+  progress: number;
+  image: string;
 }
 
-const CircleCard = ({ name, memberCount, amount, gradient }: CircleCardProps) => (
-  <Card className={`${gradient} group hover:scale-105 transition-transform duration-300`}>
-    <CardContent className="p-6 text-black">
-      <h3 className="text-xl font-righteous mb-4">{name}</h3>
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Users className="w-4 h-4" />
-          <span className="text-sm">{memberCount} members</span>
+const circles: CircleType[] = [
+  {
+    id: "1",
+    name: "Jemo's Graduation",
+    type: "Fundraiser",
+    daysLeft: 19,
+    amount: "Chip in",
+    progress: 65,
+    image: "https://images.unsplash.com/photo-1582562124811-c09040d0a901",
+  },
+  {
+    id: "2",
+    name: "Sam & Co. Ltd",
+    type: "Investment",
+    daysLeft: 70,
+    amount: 500000,
+    progress: 80,
+    image: "https://images.unsplash.com/photo-1501286353178-1ec881214838",
+  },
+  {
+    id: "3",
+    name: "Peter's Place",
+    type: "Activity",
+    daysLeft: 8,
+    amount: "Free",
+    progress: 40,
+    image: "https://images.unsplash.com/photo-1466721591366-2d5fba72006d",
+  },
+  {
+    id: "4",
+    name: "Boyz II Men",
+    type: "Event",
+    daysLeft: 13,
+    amount: 3000,
+    progress: 25,
+    image: "https://images.unsplash.com/photo-1535268647677-300dbf3d78d1",
+  },
+  {
+    id: "5",
+    name: "Cucu's Funeral",
+    type: "Fundraiser",
+    daysLeft: 9,
+    amount: "Chip in",
+    progress: 15,
+    image: "https://images.unsplash.com/photo-1452378174528-3090a4bba7b2",
+  },
+];
+
+const CircleItem = ({ circle }: { circle: CircleType }) => (
+  <Card className="bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300">
+    <button className="w-full p-4 flex items-center gap-4">
+      <img 
+        src={circle.image} 
+        alt="" 
+        className="w-12 h-12 rounded-full object-cover"
+      />
+      <div className="flex-1">
+        <div className="flex justify-between items-start mb-1">
+          <div>
+            <h3 className="text-lg font-medium text-white">{circle.name}</h3>
+            <p className="text-sm text-gray-400">
+              {circle.type} | {circle.daysLeft} days
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-sm text-tribbe-lime">
+              {typeof circle.amount === 'number' ? `Kes ${circle.amount.toLocaleString()}` : circle.amount}
+            </p>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <DollarSign className="w-4 h-4" />
-          <span className="text-sm">${amount.toLocaleString()}</span>
-        </div>
-        <Button 
-          variant="default" 
-          className="w-full mt-4 bg-black/20 hover:bg-black/30"
-          onClick={() => console.log("Add person to circle")}
-        >
-          <UserPlus className="w-4 h-4 mr-2" />
-          Add Person
-        </Button>
+        <Progress value={circle.progress} className="h-1.5" />
       </div>
-    </CardContent>
+      <ChevronRight className="w-5 h-5 text-gray-400" />
+    </button>
   </Card>
 );
 
 const Circles = () => {
-  // Sample data - would come from your backend in a real app
-  const circles = [
-    {
-      name: "Family Savings",
-      memberCount: 5,
-      amount: 12500,
-      gradient: "bg-tribbe-lime",
-    },
-    {
-      name: "Investment Club",
-      memberCount: 8,
-      amount: 25000,
-      gradient: "bg-tribbe-lilac",
-    },
-    {
-      name: "Emergency Fund",
-      memberCount: 3,
-      amount: 5000,
-      gradient: "bg-tribbe-yellow",
-    },
-    {
-      name: "Vacation Fund",
-      memberCount: 4,
-      amount: 7500,
-      gradient: "bg-tribbe-aqua",
-    },
-    {
-      name: "Business Ventures",
-      memberCount: 6,
-      amount: 15000,
-      gradient: "bg-[#FEC6A1]",
-    },
-    {
-      name: "Education Fund",
-      memberCount: 2,
-      amount: 10000,
-      gradient: "bg-[#FFDEE2]",
-    },
-  ];
-
   return (
     <AppLayout>
-      <div className="space-y-4">
+      <div className="space-y-6">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Input 
+            type="text" 
+            placeholder="Search circles" 
+            className="pl-10 bg-tribbe-grey/50 border-none text-white placeholder:text-gray-400"
+          />
+        </div>
+
         <div>
-          <h1 className="text-3xl font-righteous text-tribbe-lime">My Circles</h1>
-          <p className="text-tribbe-lime mt-2">Let AI set goals for you and help you achieve them</p>
+          <h2 className="text-2xl font-medium text-white mb-4">Current circles</h2>
+          <div className="space-y-3">
+            {circles.map((circle) => (
+              <CircleItem key={circle.id} circle={circle} />
+            ))}
+          </div>
         </div>
 
-        <div className="flex items-center justify-end">
-          <Button 
-            className="group hover:scale-105 transition-transform duration-300"
-            onClick={() => console.log("Create new circle")}
-          >
-            <CirclePlus className="w-5 h-5 mr-2" />
-            Create Circle
-          </Button>
-        </div>
-
-        <div className="flex flex-col space-y-4">
-          {circles.map((circle, index) => (
-            <CircleCard key={index} {...circle} />
-          ))}
-        </div>
+        <Button 
+          className="w-full bg-black text-white hover:bg-black/80"
+          onClick={() => console.log("Create new circle")}
+        >
+          <CirclePlus className="w-5 h-5 mr-2" />
+          Create a new circle
+        </Button>
       </div>
     </AppLayout>
   );
