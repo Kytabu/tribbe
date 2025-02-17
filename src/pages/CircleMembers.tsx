@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 interface Contribution {
   amount: number;
   created_at: string;
-  user: {
+  profiles: {
     full_name: string | null;
     avatar_url: string | null;
   };
@@ -26,7 +26,7 @@ const CircleMembers = () => {
         .select(`
           amount,
           created_at,
-          user:user_id (
+          profiles:user_id (
             full_name,
             avatar_url
           )
@@ -67,14 +67,14 @@ const CircleMembers = () => {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-tribbe-grey overflow-hidden">
                     <img
-                      src={contribution.user.avatar_url || `https://i.pravatar.cc/40?img=${index + 1}`}
+                      src={contribution.profiles.avatar_url || `https://i.pravatar.cc/40?img=${index + 1}`}
                       alt=""
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div>
                     <p className="text-white font-medium">
-                      {contribution.user.full_name || `Member ${index + 1}`}
+                      {contribution.profiles.full_name || `Member ${index + 1}`}
                     </p>
                     <p className="text-sm text-gray-400">
                       {new Date(contribution.created_at).toLocaleDateString()}

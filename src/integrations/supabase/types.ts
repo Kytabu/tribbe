@@ -42,6 +42,13 @@ export type Database = {
             referencedRelation: "circles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "circle_contributions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       circles: {
