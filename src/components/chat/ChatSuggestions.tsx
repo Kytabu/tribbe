@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Trophy, Star, Sparkle } from "lucide-react";
 import { Suggestion } from "@/types/chat";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 interface ChatSuggestionsProps {
   onSuggestionClick: (text: string, points: number) => void;
@@ -27,23 +28,28 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 gap-2 mt-4">
-      {suggestions.map((suggestion, index) => (
-        <Button
-          key={index}
-          variant="outline"
-          className="text-left h-auto py-3 px-4 hover:bg-tribbe-lime hover:text-black flex items-center gap-2 group transition-all duration-300 animate-fade-in"
-          onClick={() => onSuggestionClick(suggestion.text, suggestion.points)}
-        >
-          <div className="flex items-center gap-2 flex-1">
-            {suggestion.icon}
-            {suggestion.text}
-          </div>
-          <span className="text-xs bg-tribbe-lime/20 px-2 py-1 rounded-full group-hover:bg-black/20">
-            +{suggestion.points} pts
-          </span>
-        </Button>
-      ))}
+    <div className="fixed bottom-20 left-0 right-0 px-4 z-10">
+      <ScrollArea className="w-full whitespace-nowrap">
+        <div className="flex space-x-4 pb-4">
+          {suggestions.map((suggestion, index) => (
+            <Button
+              key={index}
+              variant="outline"
+              className="flex-none w-72 text-left h-auto py-3 px-4 hover:bg-tribbe-lime hover:text-black flex items-center gap-2 group transition-all duration-300 animate-fade-in bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+              onClick={() => onSuggestionClick(suggestion.text, suggestion.points)}
+            >
+              <div className="flex items-center gap-2 flex-1">
+                {suggestion.icon}
+                {suggestion.text}
+              </div>
+              <span className="text-xs bg-tribbe-lime/20 px-2 py-1 rounded-full group-hover:bg-black/20">
+                +{suggestion.points} pts
+              </span>
+            </Button>
+          ))}
+        </div>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
     </div>
   );
 }
