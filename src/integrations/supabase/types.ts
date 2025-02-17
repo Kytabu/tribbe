@@ -155,6 +155,39 @@ export type Database = {
         }
         Relationships: []
       }
+      verification_codes: {
+        Row: {
+          attempts: number | null
+          code: string
+          created_at: string
+          expires_at: string
+          id: string
+          status: Database["public"]["Enums"]["verification_status"] | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          attempts?: number | null
+          code: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          status?: Database["public"]["Enums"]["verification_status"] | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          attempts?: number | null
+          code?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          status?: Database["public"]["Enums"]["verification_status"] | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       wallets: {
         Row: {
           balance: number
@@ -214,6 +247,7 @@ export type Database = {
       id_type: "national_id" | "passport" | "drivers_license"
       pin_status: "active" | "disabled"
       supported_currency: "GBP" | "USD" | "KES" | "EUR"
+      verification_status: "pending" | "verified" | "failed"
     }
     CompositeTypes: {
       [_ in never]: never
