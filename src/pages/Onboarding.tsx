@@ -4,6 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { X, ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Lottie from "lottie-react";
+
+// Import Lottie animations
+import networkAnimation from "/animations/network.json";
+import cashAnimation from "/animations/cash.json";
+import aiAnimation from "/animations/ai.json";
+import lendAnimation from "/animations/lend.json";
+import trustAnimation from "/animations/trust.json";
 
 const TOTAL_SCREENS = 5;
 
@@ -31,31 +39,31 @@ const Onboarding = () => {
     switch (screen) {
       case 0:
         return {
-          image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+          animation: networkAnimation,
           title: "Your network is your net-worth.",
         };
       case 1:
         return {
-          image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
+          animation: cashAnimation,
           title: "Get cash from those that care about you, fast.",
         };
       case 2:
         return {
-          image: "https://images.unsplash.com/photo-1500673922987-e212871fec22",
+          animation: aiAnimation,
           title: "Use A.I. to help you make & save money.",
         };
       case 3:
         return {
-          image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b",
+          animation: lendAnimation,
           title: "Lend money to those that pay you back.",
         };
       case 4:
         return {
-          image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
+          animation: trustAnimation,
           title: "Tribbe is your network. Trust is your net-worth.",
         };
       default:
-        return { image: "", title: "" };
+        return { animation: networkAnimation, title: "" };
     }
   };
 
@@ -76,10 +84,10 @@ const Onboarding = () => {
       {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center w-full max-w-md gap-8 animate-fade-in">
         <div className="w-full aspect-square relative">
-          <img
-            src={content.image}
-            alt={`Onboarding step ${currentScreen + 1}`}
-            className="w-full h-full object-contain animate-float rounded-lg"
+          <Lottie
+            animationData={content.animation}
+            loop={true}
+            className="w-full h-full"
           />
         </div>
         <h1 className="text-2xl md:text-3xl text-white text-center font-semibold">
