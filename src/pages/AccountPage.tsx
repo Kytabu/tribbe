@@ -32,24 +32,62 @@ const AccountPage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: "Not authenticated",
+          description: "Please sign in to access this page",
+          variant: "destructive",
+        });
+        navigate("/");
+        return;
+      }
+      fetchProfile();
+    };
+
+    checkAuth();
+  }, [navigate]);
 
   const fetchProfile = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        navigate('/auth');
+        navigate("/");
         return;
       }
 
-      const { data: profile, error } = await supabase
+      let { data: profile, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', user.id)
         .single();
 
-      if (error) throw error;
+      if (error) {
+        if (error.code === 'PGRST116') {
+          // Profile doesn't exist, create one
+          const newProfile = {
+            id: user.id,
+            full_name: '',
+            username: '',
+            phone_number: '',
+            id_number: '',
+            id_type: null,
+            avatar_url: null,
+            created_at: new Date().toISOString()
+          };
+
+          const { error: insertError } = await supabase
+            .from('profiles')
+            .insert([newProfile]);
+
+          if (insertError) throw insertError;
+          profile = newProfile;
+        } else {
+          throw error;
+        }
+      }
+
       if (profile) {
         setProfile(profile);
       }
@@ -68,7 +106,15 @@ const AccountPage = () => {
   const handleUpdate = async (field: keyof Profile, value: string) => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        toast({
+          title: "Not authenticated",
+          description: "Please sign in to update your profile",
+          variant: "destructive",
+        });
+        navigate("/");
+        return;
+      }
 
       const updates = {
         id: user.id,
