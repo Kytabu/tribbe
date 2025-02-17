@@ -15,11 +15,11 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Navigate to setup after fade animation completes
+  // Navigate to auth after fade animation completes
   useEffect(() => {
     if (!isVisible) {
       const navigationTimer = setTimeout(() => {
-        navigate('/setup');
+        navigate('/auth');
       }, 300); // Match this with the CSS transition duration
 
       return () => clearTimeout(navigationTimer);
