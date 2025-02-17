@@ -23,7 +23,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
             <Smartphone className="h-5 w-5 text-tribbe-lime" />
           </div>
           <div className="text-left">
-            <div className="font-bold text-tribbe-lime">Connect M-Pesa Number</div>
+            <div className="font-bold text-tribbe-lime">Connect M-Pesa</div>
             <div className="text-sm text-white font-normal">Link your M-Pesa for instant transfers</div>
           </div>
         </div>
