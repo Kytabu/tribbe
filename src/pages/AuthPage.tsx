@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -128,7 +129,11 @@ const AuthPage = () => {
         <div className="w-full max-w-md space-y-12">
           <div className="space-y-8">
             <div className="text-center">
-              <div className="w-32 h-32 mx-auto mb-8" />
+              <img 
+                src="/lovable-uploads/24576fa2-343c-42db-b26e-e56b0aa76cc8.png" 
+                alt="Tribbe" 
+                className="w-48 mx-auto mb-8"
+              />
             </div>
 
             <div className="space-y-4 mt-32">
