@@ -11,10 +11,6 @@ const Index = () => {
             Hi. Welcome to Tribbe, your AI money manager.
           </h1>
         </div>
-        <p className="text-tribbe-sage text-lg max-w-xl">
-          Join a community of young Africans building wealth together through
-          digital money circles, social credit, and AI-powered financial management.
-        </p>
       </div>
     </div>
   );
