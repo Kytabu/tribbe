@@ -1,18 +1,5 @@
 
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 const Index = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/onboarding");
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [navigate]);
-
   return (
     <div className="min-h-screen bg-tribbe-sand flex flex-col items-center justify-center">
       <div className="space-y-6 text-center animate-fade-in">
