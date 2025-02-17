@@ -8,9 +8,9 @@ const Index = () => {
             Hi!
           </span>
           <img 
-            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" 
-            alt="Person using a laptop, representing AI money management"
-            className="w-full h-auto rounded-lg shadow-lg mt-4 object-cover"
+            src="/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png"
+            alt="Illustration of people interacting with a network visualization"
+            className="w-full h-auto rounded-lg shadow-lg mt-4 object-contain"
           />
         </div>
         <p className="text-tribbe-sage text-lg max-w-xl mx-auto">
