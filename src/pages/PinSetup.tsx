@@ -9,65 +9,19 @@ import bcrypt from "bcryptjs";
 
 const PinSetup = () => {
   const [pin, setPin] = useState("");
-  const [confirmPin, setConfirmPin] = useState("");
-  const [step, setStep] = useState<"create" | "confirm">("create");
   const navigate = useNavigate();
 
   const handleNumberClick = (number: string) => {
-    if (step === "create" && pin.length < 4) {
+    if (pin.length < 4) {
       setPin(prev => prev + number);
-      if (pin.length === 3) {
-        setTimeout(() => setStep("confirm"), 300);
-      }
-    } else if (step === "confirm" && confirmPin.length < 4) {
-      setConfirmPin(prev => prev + number);
-      if (confirmPin.length === 3) {
-        setTimeout(() => handlePinSubmit(), 300);
-      }
     }
   };
 
   const handleDelete = () => {
-    if (step === "create") {
-      setPin(prev => prev.slice(0, -1));
-    } else {
-      setConfirmPin(prev => prev.slice(0, -1));
-    }
+    setPin(prev => prev.slice(0, -1));
   };
 
   const handlePinSubmit = async () => {
-    // Add console logs to debug the PIN values
-    console.log('Pin:', pin);
-    console.log('ConfirmPin:', confirmPin);
-    console.log('Step:', step);
-
-    // If we're still in create step and pin is complete, move to confirm
-    if (step === "create" && pin.length === 4) {
-      setStep("confirm");
-      return;
-    }
-
-    // Wait for the last digit to be added to confirmPin
-    if (confirmPin.length < 4) {
-      return;
-    }
-
-    // Now compare the PINs
-    const newPin = pin;
-    const newConfirmPin = confirmPin;
-
-    if (newPin !== newConfirmPin) {
-      toast({
-        title: "PINs don't match",
-        description: "Please try again",
-        variant: "destructive",
-      });
-      setPin("");
-      setConfirmPin("");
-      setStep("create");
-      return;
-    }
-
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
@@ -80,7 +34,7 @@ const PinSetup = () => {
       }
 
       const salt = await bcrypt.genSalt(10);
-      const pinHash = await bcrypt.hash(newPin, salt);
+      const pinHash = await bcrypt.hash(pin, salt);
 
       const { error } = await supabase
         .from('user_pins')
@@ -95,8 +49,7 @@ const PinSetup = () => {
         description: "You can now use your PIN to access the app",
       });
 
-      // Instead of navigating directly, wait for user to click "Done"
-      // The button will be shown once PIN is confirmed
+      navigate("/flami");
     } catch (error) {
       console.error('Error setting PIN:', error);
       toast({
@@ -122,12 +75,10 @@ const PinSetup = () => {
       <div className="w-full max-w-md space-y-12">
         <div className="text-center space-y-4">
           <h1 className="text-2xl font-bold text-foreground">
-            {step === "create" ? "Create Your PIN" : "Confirm Your PIN"}
+            Create Your PIN
           </h1>
           <p className="text-foreground/90 text-lg">
-            {step === "create" 
-              ? "Choose a 4-digit PIN to secure your account" 
-              : "Enter the same PIN again to confirm"}
+            Choose a 4-digit PIN to secure your account
           </p>
         </div>
 
@@ -136,7 +87,7 @@ const PinSetup = () => {
             <div
               key={index}
               className={`w-4 h-4 rounded-full border-2 ${
-                (step === "create" ? pin.length > index : confirmPin.length > index)
+                pin.length > index
                   ? "bg-primary border-primary"
                   : "border-foreground/50"
               }`}
@@ -169,11 +120,11 @@ const PinSetup = () => {
           </button>
         </div>
 
-        {/* Done Button - Only shown when PIN is confirmed and matches */}
-        {step === "confirm" && pin === confirmPin && pin.length === 4 && (
+        {/* Done Button - Show when PIN is complete */}
+        {pin.length === 4 && (
           <div className="mt-8 flex justify-center">
             <Button 
-              onClick={() => navigate("/flami")}
+              onClick={handlePinSubmit}
               className="w-32 bg-tribbe-lime hover:bg-tribbe-lime/90 text-slate-900 font-medium"
             >
               Done
@@ -186,4 +137,3 @@ const PinSetup = () => {
 };
 
 export default PinSetup;
-
