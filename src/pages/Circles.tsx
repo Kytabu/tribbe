@@ -36,28 +36,28 @@ const Circles = () => {
       name: "Family Savings",
       memberCount: 5,
       amount: 12500,
-      gradient: "bg-gradient-to-br from-tribbe-lime to-tribbe-aqua",
+      gradient: "bg-tribbe-lime",
     },
     {
       name: "Investment Club",
       memberCount: 8,
       amount: 25000,
-      gradient: "bg-gradient-to-br from-tribbe-lilac to-tribbe-aqua",
+      gradient: "bg-tribbe-lilac",
     },
     {
       name: "Emergency Fund",
       memberCount: 3,
       amount: 5000,
-      gradient: "bg-gradient-to-br from-tribbe-yellow to-tribbe-lime",
+      gradient: "bg-tribbe-yellow",
     },
   ];
 
   return (
     <AppLayout>
-      <div className="space-y-8">
+      <div className="space-y-4">
         <div>
           <h1 className="text-3xl font-righteous text-tribbe-lime">My Circles</h1>
-          <p className="text-muted-foreground mt-2">Let AI set goals for you and help you achieve them</p>
+          <p className="text-tribbe-lime mt-2">Let AI set goals for you and help you achieve them</p>
         </div>
 
         <div className="flex items-center justify-end">
@@ -70,7 +70,7 @@ const Circles = () => {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-col space-y-4">
           {circles.map((circle, index) => (
             <CircleCard key={index} {...circle} />
           ))}
