@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
@@ -9,7 +10,8 @@ import {
   Shield,
   HelpCircle,
   Moon,
-  ChevronRight
+  ChevronRight,
+  KeyRound
 } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Switch } from "@/components/ui/switch";
@@ -31,6 +33,23 @@ const Setup = () => {
               <div>
                 <h2 className="font-medium">Me</h2>
                 <p className="text-sm text-muted-foreground">Profile, Phone number, ID, etc</p>
+              </div>
+            </div>
+            <Button variant="ghost" size="icon">
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </div>
+
+          {/* PIN Management Section */}
+          <div 
+            className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
+            onClick={() => navigate("/pin-setup")}
+          >
+            <div className="flex items-center gap-3">
+              <KeyRound className="w-5 h-5 text-primary" />
+              <div>
+                <h2 className="font-medium">PIN Management</h2>
+                <p className="text-sm text-muted-foreground">Set up or change your security PIN</p>
               </div>
             </div>
             <Button variant="ghost" size="icon">
