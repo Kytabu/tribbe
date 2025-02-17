@@ -118,7 +118,7 @@ const AuthPage = () => {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-27 h-27 bg-black hover:bg-black/90 border-0"
+                  className="rounded-full w-16 h-16 bg-black hover:bg-black/90 border-0"
                   onClick={() => setIsVerifying(true)}
                 >
                   <svg className="h-5 w-5" viewBox="0 0 48 48">
@@ -131,7 +131,7 @@ const AuthPage = () => {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-27 h-27 bg-black hover:bg-black/90 border-0"
+                  className="rounded-full w-16 h-16 bg-black hover:bg-black/90 border-0"
                   onClick={() => setIsVerifying(true)}
                 >
                   <Apple className="h-5 w-5 text-[#4CAF50]" />
@@ -139,7 +139,7 @@ const AuthPage = () => {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-27 h-27 bg-black hover:bg-black/90 border-0"
+                  className="rounded-full w-16 h-16 bg-black hover:bg-black/90 border-0"
                   onClick={() => setIsVerifying(true)}
                 >
                   <Facebook className="h-5 w-5 text-[#4CAF50]" />
