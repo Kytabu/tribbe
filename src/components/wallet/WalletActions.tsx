@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { ArrowUpRight, ArrowDownRight, BanknoteIcon, CreditCard } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 
 interface WalletActionsProps {
@@ -20,7 +20,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
             <span className="w-6 h-6 rounded-full bg-background flex items-center justify-center text-xs border">
               {selectedCurrency.substring(0, 1)}
             </span>
-            <ArrowUpRight className="h-5 w-5" />
+            <BanknoteIcon className="h-5 w-5 text-tribbe-lime" />
           </div>
           <div className="text-left">
             <div className="font-bold text-tribbe-lime">Connect M-Pesa Number</div>
@@ -39,11 +39,11 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
             <span className="w-6 h-6 rounded-full bg-background flex items-center justify-center text-xs border">
               {selectedCurrency.substring(0, 1)}
             </span>
-            <ArrowDownRight className="h-5 w-5" />
+            <CreditCard className="h-5 w-5 text-tribbe-lime" />
           </div>
           <div className="text-left">
-            <div className="font-medium">Connect Cards</div>
-            <div className="text-sm text-tribbe-sage">Add your debit and credit cards</div>
+            <div className="font-bold text-tribbe-lime">Connect Cards</div>
+            <div className="text-sm text-white font-normal">Add your debit and credit cards</div>
           </div>
         </div>
       </Button>
