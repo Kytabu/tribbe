@@ -21,7 +21,7 @@ const Onboarding = () => {
 
   const handleNext = () => {
     if (currentScreen === TOTAL_SCREENS - 1) {
-      navigate("/");
+      navigate("/home"); // Changed from "/" to "/home"
     } else {
       setCurrentScreen((prev) => prev + 1);
     }
@@ -32,7 +32,7 @@ const Onboarding = () => {
   };
 
   const handleSkip = () => {
-    navigate("/");
+    navigate("/home"); // Changed from "/" to "/home"
   };
 
   const getScreenContent = (screen: number) => {
