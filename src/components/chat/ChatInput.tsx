@@ -23,7 +23,7 @@ export function ChatInput({ input, isLoading, onInputChange, onSubmit }: ChatInp
       <Button 
         type="submit" 
         disabled={isLoading || !input.trim()}
-        className="bg-tribbe-lime text-black hover:bg-tribbe-lime/80 transition-all duration-300 rounded-full p-0 w-10 h-10"
+        className="bg-tribbe-lime hover:bg-black hover:text-tribbe-lime text-black transition-all duration-300 rounded-full p-0 w-10 h-10"
       >
         <ArrowUp className="h-4 w-4" />
       </Button>
