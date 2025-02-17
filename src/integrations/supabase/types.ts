@@ -9,6 +9,80 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      circle_contributions: {
+        Row: {
+          amount: number
+          circle_id: string
+          created_at: string | null
+          id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          circle_id: string
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          circle_id?: string
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "circle_contributions_circle_id_fkey"
+            columns: ["circle_id"]
+            isOneToOne: false
+            referencedRelation: "circles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      circles: {
+        Row: {
+          created_at: string | null
+          creator_id: string
+          deadline: string | null
+          description: string | null
+          id: string
+          location: string | null
+          name: string
+          target_amount: number
+          type: Database["public"]["Enums"]["circle_type"]
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          creator_id: string
+          deadline?: string | null
+          description?: string | null
+          id?: string
+          location?: string | null
+          name: string
+          target_amount?: number
+          type?: Database["public"]["Enums"]["circle_type"]
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          creator_id?: string
+          deadline?: string | null
+          description?: string | null
+          id?: string
+          location?: string | null
+          name?: string
+          target_amount?: number
+          type?: Database["public"]["Enums"]["circle_type"]
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       loans: {
         Row: {
           amount: number
@@ -244,6 +318,7 @@ export type Database = {
       }
     }
     Enums: {
+      circle_type: "fundraiser" | "community" | "event"
       id_type: "national_id" | "passport" | "drivers_license"
       pin_status: "active" | "disabled"
       supported_currency: "GBP" | "USD" | "KES" | "EUR"

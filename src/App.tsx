@@ -12,6 +12,7 @@ import NotFound from "@/pages/NotFound";
 import Wallet from "@/pages/Wallet";
 import Circles from "@/pages/Circles";
 import CircleDetails from "@/pages/CircleDetails";
+import CircleMembers from "@/pages/CircleMembers";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/circles" element={<Circles />} />
         <Route path="/circles/:id" element={<CircleDetails />} />
+        <Route path="/circles/:id/members" element={<CircleMembers />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />

@@ -3,10 +3,11 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, CalendarDays, Target, MapPin, ListTodo } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CircleDetails = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   return (
     <AppLayout>
@@ -102,7 +103,10 @@ const CircleDetails = () => {
         {/* Members */}
         <div className="space-y-2">
           <h2 className="text-base font-medium text-white">Members</h2>
-          <div className="flex -space-x-2 overflow-hidden p-3 bg-tribbe-grey/30 rounded-xl">
+          <button 
+            onClick={() => navigate(`/circles/${id}/members`)}
+            className="w-full flex -space-x-2 overflow-hidden p-3 bg-tribbe-grey/30 rounded-xl hover:bg-tribbe-grey/50 transition-colors"
+          >
             {[...Array(9)].map((_, i) => (
               <div
                 key={i}
@@ -118,7 +122,7 @@ const CircleDetails = () => {
             <div className="w-8 h-8 rounded-full border-2 border-background bg-tribbe-grey flex items-center justify-center text-white text-xs">
               20+
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Action Button */}
