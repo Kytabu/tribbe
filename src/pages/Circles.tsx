@@ -107,7 +107,7 @@ const Circles = () => {
         </div>
 
         <div>
-          <h2 className="text-2xl font-medium text-white mb-4">Current circles</h2>
+          <h2 className="text-2xl font-righteous text-tribbe-lime mb-4">Current circles</h2>
           <div className="space-y-3">
             {circles.map((circle) => (
               <CircleItem key={circle.id} circle={circle} />
