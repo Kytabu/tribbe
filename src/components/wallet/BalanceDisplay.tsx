@@ -118,7 +118,7 @@ export function BalanceDisplay({
                 <img 
                   src="/lovable-uploads/b145f32d-c53a-4dfd-bc4f-c501335741ab.png" 
                   alt="Tribbe Logo" 
-                  className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime"
+                  className="w-5 h-auto object-contain group-hover:text-tribbe-lime"
                 />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
               </div>
@@ -198,7 +198,7 @@ export function BalanceDisplay({
                 <img 
                   src="/lovable-uploads/b145f32d-c53a-4dfd-bc4f-c501335741ab.png" 
                   alt="Tribbe Logo" 
-                  className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime"
+                  className="w-5 h-auto object-contain group-hover:text-tribbe-lime"
                 />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
               </div>
