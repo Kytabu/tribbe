@@ -29,6 +29,7 @@ export function BalanceDisplay({
   lendingStats
 }: BalanceDisplayProps) {
   const [activeView, setActiveView] = useState<ViewType>('balance');
+  const [amount, setAmount] = useState<string>('');
 
   const BalanceView = () => (
     <div className="space-y-4 animate-fade-in">
@@ -88,11 +89,18 @@ export function BalanceDisplay({
           </span>
           <div className="relative">
             <Input
-              type="number"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={amount}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                setAmount(value);
+              }}
               placeholder="0.00"
-              className="text-4xl font-bold pl-8 h-12 bg-transparent border-none focus-visible:ring-0 bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]"
+              className="text-4xl font-bold pl-10 h-12 bg-transparent border-none focus-visible:ring-0 bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
-            <span className="absolute left-0 top-1/2 -translate-y-1/2 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
+            <span className="absolute left-0 top-1/2 -translate-y-1/2 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] pointer-events-none">
               {currencySymbols[selectedCurrency]}
             </span>
           </div>
