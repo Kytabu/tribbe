@@ -1,4 +1,4 @@
-import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone } from "lucide-react";
+import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone, Users, UserGroup, User } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
 import { Button } from "@/components/ui/button";
@@ -191,12 +191,8 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <img 
-                  src="/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png" 
-                  alt="Tribbe World Logo" 
-                  className="w-5 h-auto object-contain group-hover:text-tribbe-lime"
-                />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">The World of Tribbe</span>
+                <Users className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Close Friends</span>
               </div>
               <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
             </div>
@@ -210,10 +206,29 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <Wallet className="w-5 h-5 text-[#4ECDC4] group-hover:text-tribbe-lime" />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Bank Transfer</span>
+                <UserGroup className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circle</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">1-2 days</span>
+              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+            </div>
+          </Button>
+        </div>
+
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent group"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <img 
+                  src="/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png" 
+                  alt="Tribbe World Logo" 
+                  className="w-5 h-auto object-contain group-hover:text-tribbe-lime"
+                />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
+              </div>
+              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
             </div>
           </Button>
         </div>
