@@ -12,7 +12,7 @@ import {
   Wallet,
   Users,
   Circle,
-  ArrowDownRight,
+  Star,
   User,
   Settings,
   Camera,
@@ -46,8 +46,8 @@ const navigationItems = [
     href: "/money-in",
   },
   {
-    icon: ArrowDownRight,
-    label: "Money Out",
+    icon: Star,
+    label: "My Street Cred",
     href: "/money-out",
   },
 ];
