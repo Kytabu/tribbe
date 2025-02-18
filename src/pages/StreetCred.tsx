@@ -105,6 +105,13 @@ export default function StreetCred() {
       description: "Active participation in group activities boosts trust",
       icon: ChartLine,
       color: "text-pink-400"
+    },
+    {
+      title: "Network Growth",
+      score: 86,
+      description: "Inviting trusted friends expands your credibility network",
+      icon: User,
+      color: "text-orange-400"
     }
   ];
 
