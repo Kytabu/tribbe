@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -8,7 +9,6 @@ import { BalanceDisplay } from "@/components/wallet/BalanceDisplay";
 import { WalletActions } from "@/components/wallet/WalletActions";
 import { TransactionHistory } from "@/components/wallet/TransactionHistory";
 import { Transaction } from "@/types/wallet";
-import { Toggle } from "@/components/ui/toggle";
 import { Switch } from "@/components/ui/switch";
 
 export type SupportedCurrency = 'GBP' | 'USD' | 'KES' | 'EUR';
@@ -145,7 +145,7 @@ export default function Wallet() {
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto space-y-6">
-        <Card className="p-6 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300">
+        <Card className="p-6 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-tribbe-aqua">
           <div className="space-y-4">
             <div className="flex justify-between items-start">
               <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">My Wallet</h2>
