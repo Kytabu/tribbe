@@ -70,6 +70,44 @@ export default function StreetCred() {
     }
   ];
 
+  const creditTips = [
+    {
+      title: "Use Snap to Pay",
+      score: 90,
+      description: "Regular M-Pesa payments boost your reliability score",
+      icon: CreditCard,
+      color: "text-green-400"
+    },
+    {
+      title: "Join More Circles",
+      score: 85,
+      description: "Being in multiple trusted circles increases your score",
+      icon: User,
+      color: "text-blue-400"
+    },
+    {
+      title: "Active Lending",
+      score: 88,
+      description: "Lending to trusted members improves your score",
+      icon: BadgeCheck,
+      color: "text-yellow-400"
+    },
+    {
+      title: "Responsible Borrowing",
+      score: 82,
+      description: "Timely repayments strengthen your credit history",
+      icon: Shield,
+      color: "text-purple-400"
+    },
+    {
+      title: "Group Participation",
+      score: 87,
+      description: "Active participation in group activities boosts trust",
+      icon: ChartLine,
+      color: "text-pink-400"
+    }
+  ];
+
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto space-y-6">
@@ -113,7 +151,6 @@ export default function StreetCred() {
                 </div>
               </div>
 
-              {/* Star Rating - Right */}
               <div className="flex flex-col items-end gap-2">
                 <span className="text-sm text-gray-400">My Tribbe Rating</span>
                 <div className="flex items-center">
@@ -199,6 +236,32 @@ export default function StreetCred() {
                     </span>
                   </div>
                   <p className="text-sm text-gray-400">{factor.description}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <h3 className="text-xl font-medium text-white mt-8 mb-4">Ways to Improve Your Score</h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {creditTips.map((tip) => (
+            <Card 
+              key={tip.title} 
+              className="p-6 bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300"
+            >
+              <div className="flex items-start gap-4">
+                <div className={`p-3 rounded-full bg-black/20 ${tip.color}`}>
+                  <tip.icon className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex justify-between items-center mb-2">
+                    <h4 className="font-medium text-white">{tip.title}</h4>
+                    <span className="text-lg font-bold" style={{ color: currentLevel.color }}>
+                      {tip.score}%
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-400">{tip.description}</p>
                 </div>
               </div>
             </Card>
