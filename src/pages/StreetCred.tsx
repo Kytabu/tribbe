@@ -34,7 +34,7 @@ export default function StreetCred() {
 
   const currentLevel = getCurrentLevel(creditScore);
 
-  const rating = 4.75;
+  const rating = 4.25;
   const fullStars = Math.floor(rating);
   const partialStar = rating % 1;
   const remainingStars = 5 - Math.ceil(rating);
@@ -133,7 +133,7 @@ export default function StreetCred() {
                     <Star key={`empty-${i}`} className="w-6 h-6 text-yellow-400" />
                   ))}
                 </div>
-                <span className="text-sm text-gray-400">4.75/5</span>
+                <span className="text-sm text-gray-400">4.25/5</span>
               </div>
             </div>
 
