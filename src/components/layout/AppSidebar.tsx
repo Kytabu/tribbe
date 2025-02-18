@@ -1,3 +1,4 @@
+
 import {
   Sidebar,
   SidebarContent,
@@ -37,7 +38,7 @@ const navigationItems = [
   {
     icon: Users,
     label: "My Tribbe",
-    href: "/tribbe",
+    href: "/my-tribbe",
   },
   {
     icon: Camera,
