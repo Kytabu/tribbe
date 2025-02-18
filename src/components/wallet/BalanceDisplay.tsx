@@ -199,7 +199,7 @@ export function BalanceDisplay({
                 />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">Close Friends</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+              <span className="font-medium group-hover:text-tribbe-lime">kinda quick</span>
             </div>
           </Button>
         </div>
@@ -218,7 +218,7 @@ export function BalanceDisplay({
                 />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circle</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+              <span className="font-medium group-hover:text-tribbe-lime">should be fast</span>
             </div>
           </Button>
         </div>
