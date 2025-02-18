@@ -263,8 +263,8 @@ export default function StreetCred() {
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-medium text-white">{tip.title}</h4>
-                    <span className="text-lg font-bold" style={{ color: currentLevel.color }}>
+                    <h4 className="font-medium text-white mr-4">{tip.title}</h4>
+                    <span className="text-lg font-bold shrink-0" style={{ color: currentLevel.color }}>
                       {tip.score}%
                     </span>
                   </div>
