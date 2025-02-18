@@ -119,13 +119,23 @@ const Circles = () => {
             </Button>
             <h2 className="text-2xl font-righteous text-tribbe-lime">My Circles</h2>
           </div>
-          <div className="relative w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <Input 
-              type="text" 
-              placeholder="Search circles" 
-              className="pl-10 bg-tribbe-grey/50 border-none text-white placeholder:text-gray-400"
-            />
+          <div className="flex items-center gap-4">
+            <div className="relative w-64">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Input 
+                type="text" 
+                placeholder="Search circles" 
+                className="pl-10 bg-tribbe-grey/50 border-none text-white placeholder:text-gray-400"
+              />
+            </div>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => console.log("Create new circle")}
+              className="hover:bg-tribbe-lime/20"
+            >
+              <CirclePlus className="h-5 w-5 text-tribbe-lime" />
+            </Button>
           </div>
         </div>
 
@@ -134,14 +144,6 @@ const Circles = () => {
             <CircleItem key={circle.id} circle={circle} />
           ))}
         </div>
-
-        <Button 
-          className="w-full bg-black text-white hover:bg-black/80"
-          onClick={() => console.log("Create new circle")}
-        >
-          <CirclePlus className="w-5 h-5 mr-2" />
-          Create a new circle
-        </Button>
       </div>
     </AppLayout>
   );
