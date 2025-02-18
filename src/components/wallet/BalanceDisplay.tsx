@@ -115,8 +115,12 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <QrCode className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">M-Pesa</span>
+                <img 
+                  src="/lovable-uploads/b145f32d-c53a-4dfd-bc4f-c501335741ab.png" 
+                  alt="Tribbe Logo" 
+                  className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime"
+                />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
               </div>
               <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
             </div>
@@ -191,8 +195,12 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <QrCode className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">M-Pesa</span>
+                <img 
+                  src="/lovable-uploads/b145f32d-c53a-4dfd-bc4f-c501335741ab.png" 
+                  alt="Tribbe Logo" 
+                  className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime"
+                />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
               </div>
               <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
             </div>
