@@ -3,15 +3,38 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Shield, ChartLine, BadgeCheck, CreditCard } from "lucide-react";
+import { ArrowLeft, Shield, ChartLine, BadgeCheck, CreditCard, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+interface StreetCredLevel {
+  name: string;
+  color: string;
+  minScore: number;
+}
 
 export default function StreetCred() {
   const navigate = useNavigate();
   const [creditScore] = useState(720); // Example score
   const maxScore = 850;
   
+  const streetCredLevels: StreetCredLevel[] = [
+    { name: "The Newbie", color: "#FFCA99", minScore: 0 },
+    { name: "The Builder", color: "#F9FE03", minScore: 580 },
+    { name: "The Trailblazer", color: "#88D3FE", minScore: 670 },
+    { name: "The Innovator", color: "#A9FF22", minScore: 740 },
+    { name: "The Legend", color: "#C699FF", minScore: 800 }
+  ];
+
+  const getCurrentLevel = (score: number): StreetCredLevel => {
+    return streetCredLevels
+      .slice()
+      .reverse()
+      .find(level => score >= level.minScore) || streetCredLevels[0];
+  };
+
+  const currentLevel = getCurrentLevel(creditScore);
+
   const creditFactors = [
     {
       title: "Payment History",
@@ -43,12 +66,6 @@ export default function StreetCred() {
     }
   ];
 
-  const getScoreColor = (score: number) => {
-    if (score >= 750) return "text-green-400";
-    if (score >= 650) return "text-yellow-400";
-    return "text-red-400";
-  };
-
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto space-y-6">
@@ -68,17 +85,62 @@ export default function StreetCred() {
         {/* Main Score Card */}
         <Card className="p-8 bg-gradient-to-br from-background to-muted">
           <div className="text-center space-y-4">
+            {/* Level Icon */}
+            <div className="flex flex-col items-center gap-2">
+              <div 
+                className="w-16 h-16 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: currentLevel.color }}
+              >
+                <User className="w-8 h-8 text-black" />
+              </div>
+              <span 
+                className="text-lg font-medium"
+                style={{ color: currentLevel.color }}
+              >
+                {currentLevel.name}
+              </span>
+            </div>
+
             <h3 className="text-lg text-gray-400">Your Credit Score</h3>
-            <div className={`text-6xl font-bold ${getScoreColor(creditScore)}`}>
+            <div className="text-6xl font-bold" style={{ color: currentLevel.color }}>
               {creditScore}
             </div>
             <Progress 
               value={(creditScore / maxScore) * 100} 
               className="h-2 w-64 mx-auto"
+              style={{ 
+                '--progress-background': currentLevel.color,
+              } as React.CSSProperties}
             />
             <p className="text-sm text-gray-400">
               Out of {maxScore} points • Updated today
             </p>
+          </div>
+        </Card>
+
+        {/* Level Progress */}
+        <Card className="p-6 bg-tribbe-grey/50">
+          <h3 className="text-lg font-medium text-white mb-4">Street Cred Levels</h3>
+          <div className="space-y-4">
+            {streetCredLevels.slice().reverse().map((level, index) => (
+              <div key={level.name} className="flex items-center gap-4">
+                <div 
+                  className="w-8 h-8 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: level.color }}
+                >
+                  <User className="w-4 h-4 text-black" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-white">{level.name}</span>
+                    <span className="text-sm text-gray-400">{level.minScore}+</span>
+                  </div>
+                  {creditScore >= level.minScore && (
+                    <span className="text-xs text-tribbe-lime">Current Level</span>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </Card>
 
@@ -96,7 +158,7 @@ export default function StreetCred() {
                 <div className="flex-1">
                   <div className="flex justify-between items-center mb-2">
                     <h4 className="font-medium text-white">{factor.title}</h4>
-                    <span className={`text-lg font-bold ${getScoreColor(factor.score)}`}>
+                    <span className="text-lg font-bold" style={{ color: currentLevel.color }}>
                       {factor.score}%
                     </span>
                   </div>
