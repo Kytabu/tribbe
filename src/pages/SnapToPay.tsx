@@ -10,136 +10,130 @@ export default function SnapToPay() {
 
   return (
     <AppLayout>
-      <div className="max-w-4xl mx-auto space-y-6">
-        <div className="flex items-center gap-4 mb-6">
+      <div className="max-w-4xl mx-auto p-4 space-y-8">
+        <div className="flex items-center gap-4">
           <Button 
             variant="ghost" 
             size="icon"
             onClick={() => navigate("/flami")}
-            className="hover:bg-tribbe-lime"
+            className="hover:bg-tribbe-lime/20"
           >
-            <ArrowLeft className="h-6 w-6 text-tribbe-lime hover:text-tribbe-black" />
+            <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
           </Button>
-          <h1 className="text-2xl font-semibold">Snap to Pay</h1>
+          <h1 className="text-2xl font-medium text-tribbe-black">Snap to Pay</h1>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-          <Card className="hover:scale-105 transition-all duration-300 border-tribbe-lime">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2">
-                <QrCode className="h-6 w-6 text-tribbe-lime" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="group border-tribbe-lime/50 hover:border-tribbe-lime transition-colors duration-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <QrCode className="h-5 w-5 text-tribbe-lime" />
                 Scan QR Code
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-40 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+                className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <div className="text-center">
-                  <QrCode className="h-12 w-12 mx-auto mb-2" />
-                  <p className="font-medium">Scan QR code to pay</p>
-                  <p className="text-sm text-muted-foreground mt-1">Quick and secure payments</p>
+                <div className="text-center space-y-2">
+                  <QrCode className="h-10 w-10 mx-auto text-tribbe-lime" />
+                  <p className="font-medium text-sm">Quick and secure payments</p>
                 </div>
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="hover:scale-105 transition-all duration-300 border-tribbe-lime">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2">
-                <Smartphone className="h-6 w-6 text-tribbe-lime" />
+          <Card className="group border-tribbe-lime/50 hover:border-tribbe-lime transition-colors duration-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Smartphone className="h-5 w-5 text-tribbe-lime" />
                 Show My Code
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-40 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+                className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <div className="text-center">
-                  <QrCode className="h-12 w-12 mx-auto mb-2" />
-                  <p className="font-medium">Show your QR code</p>
-                  <p className="text-sm text-muted-foreground mt-1">Let others pay you instantly</p>
+                <div className="text-center space-y-2">
+                  <QrCode className="h-10 w-10 mx-auto text-tribbe-lime" />
+                  <p className="font-medium text-sm">Let others pay you instantly</p>
                 </div>
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="hover:scale-105 transition-all duration-300 border-tribbe-lime">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2">
-                <Building2 className="h-6 w-6 text-tribbe-lime" />
+          <Card className="group border-tribbe-lime/50 hover:border-tribbe-lime transition-colors duration-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-tribbe-lime" />
                 Snap Till Number
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-40 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+                className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <div className="text-center">
-                  <Building2 className="h-12 w-12 mx-auto mb-2" />
-                  <p className="font-medium">Pay with till number</p>
-                  <p className="text-sm text-muted-foreground mt-1">Quick payment at retail stores</p>
+                <div className="text-center space-y-2">
+                  <Building2 className="h-10 w-10 mx-auto text-tribbe-lime" />
+                  <p className="font-medium text-sm">Quick payment at retail stores</p>
                 </div>
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="hover:scale-105 transition-all duration-300 border-tribbe-lime">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex items-center gap-2">
-                <Receipt className="h-6 w-6 text-tribbe-lime" />
+          <Card className="group border-tribbe-lime/50 hover:border-tribbe-lime transition-colors duration-200">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Receipt className="h-5 w-5 text-tribbe-lime" />
                 Snap Paybill Number
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-40 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+                className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <div className="text-center">
-                  <Receipt className="h-12 w-12 mx-auto mb-2" />
-                  <p className="font-medium">Pay bills instantly</p>
-                  <p className="text-sm text-muted-foreground mt-1">Utility bills and services</p>
+                <div className="text-center space-y-2">
+                  <Receipt className="h-10 w-10 mx-auto text-tribbe-lime" />
+                  <p className="font-medium text-sm">Pay bills instantly</p>
                 </div>
               </Button>
             </CardContent>
           </Card>
         </div>
 
-        <Card className="mt-6 border-tribbe-lime">
-          <CardHeader>
-            <CardTitle>Recent Snap Payments</CardTitle>
+        <Card className="border-tribbe-lime/50">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">Recent Snap Payments</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 rounded-lg border border-tribbe-lime hover:bg-tribbe-lime/10 transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-tribbe-lime/20 flex items-center justify-center">
-                    <CreditCard className="h-5 w-5 text-tribbe-lime" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Coffee Shop</p>
-                    <p className="text-sm text-muted-foreground">Today, 10:30 AM</p>
-                  </div>
+          <CardContent className="space-y-3">
+            <div className="flex items-center justify-between p-3 rounded-lg border border-tribbe-lime/50 hover:border-tribbe-lime hover:bg-tribbe-lime/5 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-tribbe-lime/10 flex items-center justify-center">
+                  <CreditCard className="h-4 w-4 text-tribbe-lime" />
                 </div>
-                <span className="font-medium text-tribbe-lime">-£4.50</span>
+                <div>
+                  <p className="font-medium text-sm">Coffee Shop</p>
+                  <p className="text-xs text-muted-foreground">Today, 10:30 AM</p>
+                </div>
               </div>
+              <span className="font-medium text-sm text-tribbe-lime">-£4.50</span>
+            </div>
 
-              <div className="flex items-center justify-between p-3 rounded-lg border border-tribbe-lime hover:bg-tribbe-lime/10 transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-tribbe-lime/20 flex items-center justify-center">
-                    <CreditCard className="h-5 w-5 text-tribbe-lime" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Local Market</p>
-                    <p className="text-sm text-muted-foreground">Yesterday, 3:15 PM</p>
-                  </div>
+            <div className="flex items-center justify-between p-3 rounded-lg border border-tribbe-lime/50 hover:border-tribbe-lime hover:bg-tribbe-lime/5 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-tribbe-lime/10 flex items-center justify-center">
+                  <CreditCard className="h-4 w-4 text-tribbe-lime" />
                 </div>
-                <span className="font-medium text-tribbe-lime">-£12.75</span>
+                <div>
+                  <p className="font-medium text-sm">Local Market</p>
+                  <p className="text-xs text-muted-foreground">Yesterday, 3:15 PM</p>
+                </div>
               </div>
+              <span className="font-medium text-sm text-tribbe-lime">-£12.75</span>
             </div>
           </CardContent>
         </Card>
