@@ -115,10 +115,10 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Credit or Debit Card</span>
+                <QrCode className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">M-Pesa</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+              <span className="font-medium group-hover:text-tribbe-lime">Free</span>
             </div>
           </Button>
         </div>
@@ -130,10 +130,10 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <QrCode className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Open Banking</span>
+                <CreditCard className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Credit or Debit Card</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Free</span>
+              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
             </div>
           </Button>
         </div>
