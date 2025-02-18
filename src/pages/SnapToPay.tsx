@@ -2,7 +2,7 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { QrCode, CreditCard, ArrowLeft, Smartphone } from "lucide-react";
+import { QrCode, CreditCard, ArrowLeft, Smartphone, Building2, Receipt } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function SnapToPay() {
@@ -10,7 +10,7 @@ export default function SnapToPay() {
 
   return (
     <AppLayout>
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-4xl mx-auto space-y-6">
         <div className="flex items-center gap-4 mb-6">
           <Button 
             variant="ghost" 
@@ -23,9 +23,9 @@ export default function SnapToPay() {
           <h1 className="text-2xl font-semibold">Snap to Pay</h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
           <Card className="hover:scale-105 transition-all duration-300 border-tribbe-lime">
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <QrCode className="h-6 w-6 text-tribbe-lime" />
                 Scan QR Code
@@ -34,19 +34,19 @@ export default function SnapToPay() {
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full py-8 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+                className="w-full h-40 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
               >
                 <div className="text-center">
                   <QrCode className="h-12 w-12 mx-auto mb-2" />
-                  <p>Scan QR code to pay</p>
-                  <p className="text-sm text-muted-foreground">Quick and secure payments</p>
+                  <p className="font-medium">Scan QR code to pay</p>
+                  <p className="text-sm text-muted-foreground mt-1">Quick and secure payments</p>
                 </div>
               </Button>
             </CardContent>
           </Card>
 
           <Card className="hover:scale-105 transition-all duration-300 border-tribbe-lime">
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2">
                 <Smartphone className="h-6 w-6 text-tribbe-lime" />
                 Show My Code
@@ -55,12 +55,54 @@ export default function SnapToPay() {
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full py-8 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+                className="w-full h-40 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
               >
                 <div className="text-center">
                   <QrCode className="h-12 w-12 mx-auto mb-2" />
-                  <p>Show your QR code</p>
-                  <p className="text-sm text-muted-foreground">Let others pay you instantly</p>
+                  <p className="font-medium">Show your QR code</p>
+                  <p className="text-sm text-muted-foreground mt-1">Let others pay you instantly</p>
+                </div>
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:scale-105 transition-all duration-300 border-tribbe-lime">
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2">
+                <Building2 className="h-6 w-6 text-tribbe-lime" />
+                Snap Till Number
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Button
+                variant="outline"
+                className="w-full h-40 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+              >
+                <div className="text-center">
+                  <Building2 className="h-12 w-12 mx-auto mb-2" />
+                  <p className="font-medium">Pay with till number</p>
+                  <p className="text-sm text-muted-foreground mt-1">Quick payment at retail stores</p>
+                </div>
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="hover:scale-105 transition-all duration-300 border-tribbe-lime">
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2">
+                <Receipt className="h-6 w-6 text-tribbe-lime" />
+                Snap Paybill Number
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Button
+                variant="outline"
+                className="w-full h-40 border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+              >
+                <div className="text-center">
+                  <Receipt className="h-12 w-12 mx-auto mb-2" />
+                  <p className="font-medium">Pay bills instantly</p>
+                  <p className="text-sm text-muted-foreground mt-1">Utility bills and services</p>
                 </div>
               </Button>
             </CardContent>
