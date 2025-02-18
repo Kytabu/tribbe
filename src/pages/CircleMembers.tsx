@@ -60,7 +60,7 @@ const CircleMembers = () => {
           
           <div className="space-y-2">
             <p className="text-white">Raised: Kes {totalRaised.toLocaleString()}</p>
-            <div className="h-2 rounded-full bg-tribbe-grey overflow-hidden">
+            <div className="h-2 rounded-full bg-tribbe-grey/20 overflow-hidden">
               <div 
                 className="h-full bg-tribbe-lime rounded-full transition-all duration-500"
                 style={{ width: `${progressPercentage}%` }}
