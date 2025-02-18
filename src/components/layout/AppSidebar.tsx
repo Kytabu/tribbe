@@ -43,7 +43,7 @@ const navigationItems = [
   {
     icon: Camera,
     label: "Snap to Pay",
-    href: "/money-in",
+    href: "/snap-to-pay",
   },
   {
     icon: Star,
