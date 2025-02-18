@@ -36,10 +36,7 @@ export default function SnapToPay() {
                 variant="outline"
                 className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <div className="text-center space-y-2">
-                  <QrCode className="h-10 w-10 mx-auto text-tribbe-lime" />
-                  <p className="font-medium text-sm">Quick and secure payments</p>
-                </div>
+                <QrCode className="h-10 w-10 text-tribbe-lime" />
               </Button>
             </CardContent>
           </Card>
@@ -56,10 +53,7 @@ export default function SnapToPay() {
                 variant="outline"
                 className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <div className="text-center space-y-2">
-                  <QrCode className="h-10 w-10 mx-auto text-tribbe-lime" />
-                  <p className="font-medium text-sm">Let others pay you instantly</p>
-                </div>
+                <QrCode className="h-10 w-10 text-tribbe-lime" />
               </Button>
             </CardContent>
           </Card>
@@ -76,10 +70,7 @@ export default function SnapToPay() {
                 variant="outline"
                 className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <div className="text-center space-y-2">
-                  <Building2 className="h-10 w-10 mx-auto text-tribbe-lime" />
-                  <p className="font-medium text-sm">Quick payment at retail stores</p>
-                </div>
+                <Building2 className="h-10 w-10 text-tribbe-lime" />
               </Button>
             </CardContent>
           </Card>
@@ -96,10 +87,7 @@ export default function SnapToPay() {
                 variant="outline"
                 className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <div className="text-center space-y-2">
-                  <Receipt className="h-10 w-10 mx-auto text-tribbe-lime" />
-                  <p className="font-medium text-sm">Pay bills instantly</p>
-                </div>
+                <Receipt className="h-10 w-10 text-tribbe-lime" />
               </Button>
             </CardContent>
           </Card>
