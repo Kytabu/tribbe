@@ -1,4 +1,4 @@
-import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone, Users, User, Circle } from "lucide-react";
+import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone, Users, User } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
 import { Button } from "@/components/ui/button";
@@ -308,10 +308,7 @@ export function BalanceDisplay({
                 />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circles</span>
               </div>
-              <div className="flex items-center gap-1">
-                <Circle className="w-4 h-4" />
-                <Plus className="w-3 h-3 -ml-2" />
-              </div>
+              <Plus className="w-5 h-5 text-tribbe-sage group-hover:text-tribbe-lime" />
             </div>
           </Button>
         </div>
