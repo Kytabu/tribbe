@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,7 +19,7 @@ export default function SnapToPay() {
           >
             <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
           </Button>
-          <h1 className="text-2xl font-medium text-tribbe-black">Snap to Pay</h1>
+          <h1 className="text-2xl font-medium text-tribbe-lime font-righteous">Snap to Pay</h1>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
