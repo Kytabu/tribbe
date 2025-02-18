@@ -27,17 +27,23 @@ export default function MyTribbe() {
     trustScore: 85
   };
 
-  // Mock network members - In a real app, this would come from your backend
+  // Updated network members with new profile pictures
   const networkMembers = [
-    { id: 1, name: "Sarah K", image: "/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png" },
-    { id: 2, name: "John M", image: "/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" },
-    { id: 3, name: "Alice W", image: "/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png" },
-    { id: 4, name: "David R", image: "/lovable-uploads/5a9bef54-1771-4c06-8d31-2140f23f1388.png" },
-    { id: 5, name: "Mary J", image: "/lovable-uploads/7d875948-ce43-436a-a356-9bce6f1a1226.png" },
-    // Adding more without images to show fallback
-    { id: 6, name: "Peter O" },
-    { id: 7, name: "Lucy N" },
-    { id: 8, name: "James K" }
+    { id: 1, name: "Marcus", image: "/lovable-uploads/f29046e7-6c9f-4575-b220-e2d0a678b967.png" },
+    { id: 2, name: "Aisha", image: "/lovable-uploads/99f41a26-6b2a-406b-a31a-c22eb89c42b8.png" },
+    { id: 3, name: "Michael", image: "/lovable-uploads/5e55cc02-ae1b-40fc-b807-633a5540308a.png" },
+    { id: 4, name: "Tim", image: "/lovable-uploads/c8a61242-9472-4c27-a50d-adbc2e7a24b0.png" },
+    { id: 5, name: "Crystal", image: "/lovable-uploads/29034cbf-7a42-409d-bad4-0f84c8fd02e7.png" },
+    { id: 6, name: "Marcus B", image: "/lovable-uploads/aa757ca5-a282-4eac-9369-b740b480634b.png" },
+    { id: 7, name: "Julie", image: "/lovable-uploads/fe9a1b29-6cb9-4261-b765-b18704cc84df.png" },
+    { id: 8, name: "Tracy", image: "/lovable-uploads/e9d2cccf-1741-44e2-9dc4-477305cc0dae.png" },
+    { id: 9, name: "Casey", image: "/lovable-uploads/c9f9a69f-1921-4c6f-8a7c-9813e9daf14b.png" },
+    { id: 10, name: "Jordan", image: "/lovable-uploads/4824985b-0953-47d2-a395-2c5071a76006.png" },
+    { id: 11, name: "Sam", image: "/lovable-uploads/c1c23c5c-90f5-4baa-a4b9-25ac8900c468.png" },
+    { id: 12, name: "Riley", image: "/lovable-uploads/3dd625e4-28a3-4005-92a7-0b2aad3fa575.png" },
+    { id: 13, name: "Chris", image: "/lovable-uploads/a66bb083-0a55-45b2-9fbb-b899fee07494.png" },
+    { id: 14, name: "Alex", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
+    { id: 15, name: "Sidney", image: "/lovable-uploads/89161f75-e901-43d2-835f-e937209cbbac.png" }
   ];
 
   return (
