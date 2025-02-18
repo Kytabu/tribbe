@@ -42,39 +42,39 @@ export function BalanceDisplay({
         )}
       </div>
       
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
         <Button
-          variant="ghost"
-          className="p-0 h-auto text-tribbe-sage hover:text-tribbe-lime hover:bg-transparent"
+          variant="outline"
+          size="sm"
+          className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
         >
+          <Wallet className="h-4 w-4 mr-1" />
           Total Balance
         </Button>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-          >
-            <Plus className="h-4 w-4 mr-1" />
-            Add
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-          >
-            <MessageSquare className="h-4 w-4 mr-1" />
-            Request
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-          >
-            <Send className="h-4 w-4 mr-1" />
-            Send
-          </Button>
-        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+        >
+          <Plus className="h-4 w-4 mr-1" />
+          Add
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+        >
+          <MessageSquare className="h-4 w-4 mr-1" />
+          Request
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+        >
+          <Send className="h-4 w-4 mr-1" />
+          Send
+        </Button>
       </div>
 
       <div className="space-y-2">
