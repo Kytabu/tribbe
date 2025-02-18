@@ -1,4 +1,3 @@
-
 import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone, Users, User } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
@@ -246,24 +245,89 @@ export function BalanceDisplay({
   );
 
   const SendMoneyView = () => (
-    <div className="p-4 text-center animate-fade-in">
-      <div className="text-xl font-semibold text-tribbe-sage mb-4">
-        Send Money to Friends
+    <div className="space-y-4 animate-fade-in">
+      <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
+        <div className="flex items-center gap-2">
+          <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm border text-black font-bold">
+            {selectedCurrency.substring(0, 1)}
+          </span>
+          <div className="relative rounded-lg border-2 border-tribbe-lime p-2">
+            <Input
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={amount}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                setAmount(value);
+              }}
+              placeholder="0.00"
+              className="text-4xl font-bold pl-16 h-12 bg-transparent border-none focus-visible:ring-0 bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] pointer-events-none whitespace-nowrap">
+              {currencySymbols[selectedCurrency]}
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="space-y-4">
-        <Input
-          type="text"
-          placeholder="Enter recipient's email or username"
-          className="w-full"
-        />
-        <Input
-          type="number"
-          placeholder="Amount"
-          className="w-full"
-        />
-        <Button className="w-full bg-tribbe-lime text-black hover:bg-tribbe-lime/90">
-          Send Money
-        </Button>
+      
+      <div className="space-y-2">
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent group"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <img 
+                  src="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png" 
+                  alt="Green Flame Icon" 
+                  className="w-5 h-5 object-contain"
+                />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Close Friends</span>
+              </div>
+              <span className="font-medium group-hover:text-tribbe-lime">kinda quick</span>
+            </div>
+          </Button>
+        </div>
+
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent group"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <img 
+                  src="/lovable-uploads/db93bdb2-b924-4cd9-ba73-27b77b8358d3.png" 
+                  alt="Blue Flame Icon" 
+                  className="w-5 h-5 object-contain"
+                />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circle</span>
+              </div>
+              <span className="font-medium group-hover:text-tribbe-lime">should be fast</span>
+            </div>
+          </Button>
+        </div>
+
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent group"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <img 
+                  src="/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" 
+                  alt="Purple Flame Icon" 
+                  className="w-5 h-5 object-contain"
+                />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
+              </div>
+              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+            </div>
+          </Button>
+        </div>
       </div>
     </div>
   );
