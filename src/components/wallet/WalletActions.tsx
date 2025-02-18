@@ -24,7 +24,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
           </div>
           <div className="text-left">
             <div className="font-bold text-tribbe-lime">Connect M-Pesa</div>
-            <div className="text-sm text-white font-normal">Link your M-Pesa to grow your credit score</div>
+            <div className="text-sm text-white font-normal">Link M-Pesa to grow your street cred</div>
           </div>
         </div>
       </Button>
@@ -43,7 +43,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
           </div>
           <div className="text-left">
             <div className="font-bold text-tribbe-lime">Connect Cards</div>
-            <div className="text-sm text-white font-normal">Link your card to grow your credit score</div>
+            <div className="text-sm text-white font-normal">Link cards to grow your street cred</div>
           </div>
         </div>
       </Button>
