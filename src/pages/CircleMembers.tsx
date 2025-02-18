@@ -1,6 +1,6 @@
 
 import { AppLayout } from "@/components/layout/AppLayout";
-import { ChevronLeft, Users, Search, Plus, WhatsappIcon } from "lucide-react";
+import { ChevronLeft, Users, Search, Plus, Share2 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -132,7 +132,7 @@ const CircleMembers = () => {
             variant="outline" 
             className="w-full bg-[#25D366] text-white hover:bg-[#25D366]/90 border-none"
           >
-            <WhatsappIcon className="w-4 h-4 mr-2" />
+            <Share2 className="w-4 h-4 mr-2" />
             Invite other friends
           </Button>
         </div>
