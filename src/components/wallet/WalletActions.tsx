@@ -13,7 +13,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
       <Button
         variant="outline"
         size="lg"
-        className="h-auto py-6 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted"
+        className="h-auto py-6 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted border-tribbe-lime"
       >
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
