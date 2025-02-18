@@ -16,6 +16,7 @@ import CircleDetails from "@/pages/CircleDetails";
 import CircleMembers from "@/pages/CircleMembers";
 import SnapToPay from "@/pages/SnapToPay";
 import StreetCred from "@/pages/StreetCred";
+import MyTribbe from "@/pages/MyTribbe";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/circles/:id/members" element={<CircleMembers />} />
         <Route path="/snap-to-pay" element={<SnapToPay />} />
         <Route path="/street-cred" element={<StreetCred />} />
+        <Route path="/my-tribbe" element={<MyTribbe />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
