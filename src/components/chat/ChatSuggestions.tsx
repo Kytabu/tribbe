@@ -27,7 +27,7 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
     },
     { 
       icon: <Star className="h-4 w-4 text-tribbe-lime" />, 
-      text: "Automate my money",
+      text: "Payoff my loans",
       points: 25
     }
   ];
