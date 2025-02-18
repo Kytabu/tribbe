@@ -118,7 +118,7 @@ export function BalanceDisplay({
                 <QrCode className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">M-Pesa</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Free</span>
+              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
             </div>
           </Button>
         </div>
