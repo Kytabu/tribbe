@@ -111,14 +111,14 @@ export function BalanceDisplay({
         <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
           <Button
             variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent"
+            className="w-full justify-start p-0 hover:bg-transparent group"
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-[#A9FF22]" />
-                <span className="text-tribbe-sage">Credit or Debit Card</span>
+                <CreditCard className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Credit or Debit Card</span>
               </div>
-              <span className="font-medium">Instant</span>
+              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
             </div>
           </Button>
         </div>
@@ -126,14 +126,14 @@ export function BalanceDisplay({
         <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
           <Button
             variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent"
+            className="w-full justify-start p-0 hover:bg-transparent group"
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <QrCode className="w-5 h-5 text-[#FF6B6B]" />
-                <span className="text-tribbe-sage">Open Banking</span>
+                <QrCode className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Open Banking</span>
               </div>
-              <span className="font-medium">Free</span>
+              <span className="font-medium group-hover:text-tribbe-lime">Free</span>
             </div>
           </Button>
         </div>
@@ -141,14 +141,14 @@ export function BalanceDisplay({
         <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
           <Button
             variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent"
+            className="w-full justify-start p-0 hover:bg-transparent group"
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <Wallet className="w-5 h-5 text-[#4ECDC4]" />
-                <span className="text-tribbe-sage">Bank Transfer</span>
+                <Wallet className="w-5 h-5 text-[#4ECDC4] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Bank Transfer</span>
               </div>
-              <span className="font-medium">1-2 days</span>
+              <span className="font-medium group-hover:text-tribbe-lime">1-2 days</span>
             </div>
           </Button>
         </div>
