@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -84,37 +83,52 @@ export default function StreetCred() {
 
         {/* Main Score Card */}
         <Card className="p-8 bg-gradient-to-br from-background to-muted">
-          <div className="text-center space-y-4">
-            {/* Level Icon */}
-            <div className="flex flex-col items-center gap-2">
-              <div 
-                className="w-16 h-16 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: currentLevel.color }}
-              >
-                <User className="w-8 h-8 text-black" />
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              {/* Level Icon and Name - Left */}
+              <div className="flex items-center gap-4">
+                <div 
+                  className="w-16 h-16 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: currentLevel.color }}
+                >
+                  <User className="w-8 h-8 text-black" />
+                </div>
+                <span 
+                  className="text-lg font-medium"
+                  style={{ color: currentLevel.color }}
+                >
+                  {currentLevel.name}
+                </span>
               </div>
-              <span 
-                className="text-lg font-medium"
-                style={{ color: currentLevel.color }}
-              >
-                {currentLevel.name}
-              </span>
+
+              {/* Credit Score - Center */}
+              <div className="text-center">
+                <h3 className="text-lg text-gray-400 mb-2">Your Credit Score</h3>
+                <div 
+                  className="text-6xl font-bold" 
+                  style={{ color: currentLevel.color }}
+                >
+                  {creditScore}
+                </div>
+              </div>
+
+              {/* Empty div for flex alignment */}
+              <div className="w-[200px]"></div>
             </div>
 
-            <h3 className="text-lg text-gray-400">Your Credit Score</h3>
-            <div className="text-6xl font-bold" style={{ color: currentLevel.color }}>
-              {creditScore}
+            {/* Progress Bar - Bottom */}
+            <div className="text-center">
+              <Progress 
+                value={(creditScore / maxScore) * 100} 
+                className="h-2 w-full mb-2"
+                style={{ 
+                  '--progress-background': currentLevel.color,
+                } as React.CSSProperties}
+              />
+              <p className="text-sm text-gray-400">
+                Out of {maxScore} points • Updated today
+              </p>
             </div>
-            <Progress 
-              value={(creditScore / maxScore) * 100} 
-              className="h-2 w-64 mx-auto"
-              style={{ 
-                '--progress-background': currentLevel.color,
-              } as React.CSSProperties}
-            />
-            <p className="text-sm text-gray-400">
-              Out of {maxScore} points • Updated today
-            </p>
           </div>
         </Card>
 
