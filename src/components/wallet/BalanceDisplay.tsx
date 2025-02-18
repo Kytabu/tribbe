@@ -57,7 +57,7 @@ export function BalanceDisplay({
           className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
         >
           <Plus className="h-4 w-4 mr-1" />
-          Add
+          Add Money
         </Button>
         <Button
           variant="outline"
