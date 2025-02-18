@@ -44,9 +44,9 @@ export function BalanceDisplay({
       
       <div className="flex items-center gap-2">
         <Button
-          variant="outline"
+          variant="default"
           size="sm"
-          className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+          className="bg-tribbe-lime text-black hover:bg-tribbe-lime/90"
         >
           <Wallet className="h-4 w-4 mr-1" />
           Total Balance
