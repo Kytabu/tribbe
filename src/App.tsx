@@ -10,6 +10,7 @@ import AuthPage from "@/pages/AuthPage";
 import AccountPage from "@/pages/AccountPage";
 import NotFound from "@/pages/NotFound";
 import Wallet from "@/pages/Wallet";
+import AddMoney from "@/pages/AddMoney";
 import Circles from "@/pages/Circles";
 import CircleDetails from "@/pages/CircleDetails";
 import CircleMembers from "@/pages/CircleMembers";
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/flami" element={<Flami />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/wallet" element={<Wallet />} />
+        <Route path="/wallet/add-money" element={<AddMoney />} />
         <Route path="/circles" element={<Circles />} />
         <Route path="/circles/:id" element={<CircleDetails />} />
         <Route path="/circles/:id/members" element={<CircleMembers />} />

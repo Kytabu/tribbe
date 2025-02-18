@@ -3,6 +3,7 @@ import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageS
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface BalanceDisplayProps {
   isLoading: boolean;
@@ -25,6 +26,8 @@ export function BalanceDisplay({
   availableBalance,
   lendingStats
 }: BalanceDisplayProps) {
+  const navigate = useNavigate();
+
   return (
     <div className="space-y-2 animate-fade-in">
       <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
@@ -55,6 +58,7 @@ export function BalanceDisplay({
           variant="outline"
           size="sm"
           className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+          onClick={() => navigate('/wallet/add-money')}
         >
           <Plus className="h-4 w-4 mr-1" />
           Add Money
