@@ -4,13 +4,15 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   Users,
   Wallet,
   ChartLine,
   BadgeCheck,
   CreditCard,
-  UserPlus
+  UserPlus,
+  MoreHorizontal
 } from "lucide-react";
 
 export default function MyTribbe() {
@@ -24,6 +26,19 @@ export default function MyTribbe() {
     creditScore: 720,
     trustScore: 85
   };
+
+  // Mock network members - In a real app, this would come from your backend
+  const networkMembers = [
+    { id: 1, name: "Sarah K", image: "/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png" },
+    { id: 2, name: "John M", image: "/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" },
+    { id: 3, name: "Alice W", image: "/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png" },
+    { id: 4, name: "David R", image: "/lovable-uploads/5a9bef54-1771-4c06-8d31-2140f23f1388.png" },
+    { id: 5, name: "Mary J", image: "/lovable-uploads/7d875948-ce43-436a-a356-9bce6f1a1226.png" },
+    // Adding more without images to show fallback
+    { id: 6, name: "Peter O" },
+    { id: 7, name: "Lucy N" },
+    { id: 8, name: "James K" }
+  ];
 
   return (
     <AppLayout>
@@ -51,6 +66,45 @@ export default function MyTribbe() {
               <div className="text-3xl font-bold text-tribbe-lime">{stats.trustScore}%</div>
             </div>
             <Progress value={stats.trustScore} className="h-2" />
+          </CardContent>
+        </Card>
+
+        {/* Network Members Section */}
+        <Card className="bg-tribbe-grey/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-medium text-white">Your Network</h2>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate("/circles")}
+                className="text-gray-400 hover:text-white"
+              >
+                View All <MoreHorizontal className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+            <div className="flex flex-wrap gap-4">
+              {networkMembers.slice(0, 7).map((member) => (
+                <Avatar key={member.id} className="w-12 h-12 border-2 border-tribbe-grey">
+                  {member.image ? (
+                    <AvatarImage src={member.image} alt={member.name} />
+                  ) : (
+                    <AvatarFallback className="bg-tribbe-grey text-white">
+                      {member.name.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+              ))}
+              {stats.networkSize > 7 && (
+                <Button 
+                  variant="outline" 
+                  className="w-12 h-12 rounded-full bg-tribbe-grey/50 hover:bg-tribbe-grey border-2 border-tribbe-grey"
+                  onClick={() => navigate("/circles")}
+                >
+                  +{stats.networkSize - 7}
+                </Button>
+              )}
+            </div>
           </CardContent>
         </Card>
 
