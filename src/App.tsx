@@ -14,6 +14,7 @@ import AddMoney from "@/pages/AddMoney";
 import Circles from "@/pages/Circles";
 import CircleDetails from "@/pages/CircleDetails";
 import CircleMembers from "@/pages/CircleMembers";
+import SnapToPay from "@/pages/SnapToPay";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/circles" element={<Circles />} />
         <Route path="/circles/:id" element={<CircleDetails />} />
         <Route path="/circles/:id/members" element={<CircleMembers />} />
+        <Route path="/snap-to-pay" element={<SnapToPay />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
