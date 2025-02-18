@@ -332,7 +332,7 @@ export function BalanceDisplay({
                 <Switch
                   checked={autoTribbe}
                   onCheckedChange={setAutoTribbe}
-                  className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border-2 border-tribbe-lime"
+                  className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border border-tribbe-lime"
                 />
               </div>
             </div>
