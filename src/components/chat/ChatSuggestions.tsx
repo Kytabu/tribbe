@@ -22,7 +22,7 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
     },
     { 
       icon: <Sparkle className="h-4 w-4 text-tribbe-aqua" />, 
-      text: "Automate my investing",
+      text: "Find me Kes 5000",
       points: 20
     },
     { 
@@ -50,7 +50,7 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
                 </span>
               </div>
               <div className="text-sm font-normal">
-                <span className="font-bold">Automate</span> my {suggestion.text.split(" ").slice(-1)[0]}
+                {suggestion.text}
               </div>
             </Button>
           ))}
