@@ -191,7 +191,11 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <Users className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+                <img 
+                  src="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png" 
+                  alt="Green Flame Icon" 
+                  className="w-5 h-5 object-contain"
+                />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">Close Friends</span>
               </div>
               <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
@@ -206,7 +210,11 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <Users className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+                <img 
+                  src="/lovable-uploads/db93bdb2-b924-4cd9-ba73-27b77b8358d3.png" 
+                  alt="Blue Flame Icon" 
+                  className="w-5 h-5 object-contain"
+                />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circle</span>
               </div>
               <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
@@ -222,9 +230,9 @@ export function BalanceDisplay({
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
                 <img 
-                  src="/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png" 
-                  alt="Tribbe World Logo" 
-                  className="w-5 h-auto object-contain group-hover:text-tribbe-lime"
+                  src="/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" 
+                  alt="Purple Flame Icon" 
+                  className="w-5 h-5 object-contain"
                 />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
               </div>
