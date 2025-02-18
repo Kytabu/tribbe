@@ -100,63 +100,49 @@ export function BalanceDisplay({
       </div>
       
       <div className="space-y-2">
-        <div className="grid grid-cols-3 gap-2">
-          {[5, 10, 20, 50, 100, 200].map((amount) => (
-            <Button
-              key={amount}
-              variant="outline"
-              className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black transition-all duration-300 hover:scale-105"
-            >
-              {currencySymbols[selectedCurrency]}{amount}
-            </Button>
-          ))}
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-[#A9FF22]" />
+                <span className="text-tribbe-sage">Credit or Debit Card</span>
+              </div>
+              <span className="font-medium">Instant</span>
+            </div>
+          </Button>
         </div>
 
-        <div className="space-y-2">
-          <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-            <Button
-              variant="ghost"
-              className="w-full justify-start p-0 hover:bg-transparent"
-            >
-              <div className="flex justify-between items-center w-full">
-                <div className="flex items-center gap-2">
-                  <CreditCard className="w-5 h-5 text-[#A9FF22]" />
-                  <span className="text-tribbe-sage">Credit or Debit Card</span>
-                </div>
-                <span className="font-medium">Instant</span>
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <QrCode className="w-5 h-5 text-[#FF6B6B]" />
+                <span className="text-tribbe-sage">Open Banking</span>
               </div>
-            </Button>
-          </div>
+              <span className="font-medium">Free</span>
+            </div>
+          </Button>
+        </div>
 
-          <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-            <Button
-              variant="ghost"
-              className="w-full justify-start p-0 hover:bg-transparent"
-            >
-              <div className="flex justify-between items-center w-full">
-                <div className="flex items-center gap-2">
-                  <QrCode className="w-5 h-5 text-[#FF6B6B]" />
-                  <span className="text-tribbe-sage">Open Banking</span>
-                </div>
-                <span className="font-medium">Free</span>
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <Wallet className="w-5 h-5 text-[#4ECDC4]" />
+                <span className="text-tribbe-sage">Bank Transfer</span>
               </div>
-            </Button>
-          </div>
-
-          <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-            <Button
-              variant="ghost"
-              className="w-full justify-start p-0 hover:bg-transparent"
-            >
-              <div className="flex justify-between items-center w-full">
-                <div className="flex items-center gap-2">
-                  <Wallet className="w-5 h-5 text-[#4ECDC4]" />
-                  <span className="text-tribbe-sage">Bank Transfer</span>
-                </div>
-                <span className="font-medium">1-2 days</span>
-              </div>
-            </Button>
-          </div>
+              <span className="font-medium">1-2 days</span>
+            </div>
+          </Button>
         </div>
       </div>
     </div>
