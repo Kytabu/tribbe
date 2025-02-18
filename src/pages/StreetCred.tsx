@@ -113,7 +113,9 @@ export default function StreetCred() {
                 </div>
               </div>
 
+              {/* Star Rating - Right */}
               <div className="flex flex-col items-end gap-2">
+                <span className="text-sm text-gray-400">My Tribbe Rating</span>
                 <div className="flex items-center">
                   {[...Array(fullStars)].map((_, i) => (
                     <Star key={`full-${i}`} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
