@@ -30,7 +30,7 @@ export function BalanceDisplay({
 
   return (
     <div className="space-y-2 animate-fade-in">
-      <div className="border-2 border-tribbe-aqua rounded-lg p-4 space-y-4">
+      <div className="space-y-4">
         <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
           {isLoading ? (
             <span className="text-tribbe-sage animate-pulse">Loading...</span>

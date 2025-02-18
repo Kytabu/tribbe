@@ -147,7 +147,7 @@ export default function Wallet() {
       <div className="container max-w-4xl mx-auto space-y-6">
         <Card className="p-6 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-tribbe-aqua">
           <div className="space-y-4">
-            <div className="flex justify-between items-start">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
               <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">My Wallet</h2>
               <CurrencyTabs
                 selectedCurrency={selectedCurrency}
