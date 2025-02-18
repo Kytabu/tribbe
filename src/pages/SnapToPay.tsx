@@ -53,7 +53,7 @@ export default function SnapToPay() {
                 variant="outline"
                 className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
-                <QrCode className="h-10 w-10 text-tribbe-lime" />
+                <Smartphone className="h-10 w-10 text-tribbe-lime" />
               </Button>
             </CardContent>
           </Card>
