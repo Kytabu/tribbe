@@ -12,10 +12,10 @@ import {
   Wallet,
   Users,
   Circle,
-  ArrowUpRight,
   ArrowDownRight,
   User,
   Settings,
+  Camera,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -41,8 +41,8 @@ const navigationItems = [
     href: "/tribbe",
   },
   {
-    icon: ArrowUpRight,
-    label: "Money In",
+    icon: Camera,
+    label: "Snap to Pay",
     href: "/money-in",
   },
   {
