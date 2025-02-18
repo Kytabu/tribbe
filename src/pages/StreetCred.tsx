@@ -3,7 +3,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Shield, ChartLineUp, BadgeCheck, CreditCard } from "lucide-react";
+import { ArrowLeft, Shield, ChartLine, BadgeCheck, CreditCard } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -31,7 +31,7 @@ export default function StreetCred() {
       title: "Length of Credit",
       score: 75,
       description: "Your credit history is 2 years old",
-      icon: ChartLineUp,
+      icon: ChartLine,
       color: "text-yellow-400"
     },
     {
