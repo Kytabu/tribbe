@@ -1,4 +1,3 @@
-
 import {
   Sidebar,
   SidebarContent,
@@ -48,7 +47,7 @@ const navigationItems = [
   {
     icon: Star,
     label: "My Street Cred",
-    href: "/money-out",
+    href: "/street-cred",
   },
 ];
 
