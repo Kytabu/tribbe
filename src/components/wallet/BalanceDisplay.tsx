@@ -325,14 +325,14 @@ export function BalanceDisplay({
                   alt="Purple Flame Icon" 
                   className="w-5 h-5 object-contain"
                 />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">The Tribbe</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">Automate</span>
                 <Switch
                   checked={autoTribbe}
                   onCheckedChange={setAutoTribbe}
-                  className="data-[state=checked]:bg-tribbe-lime"
+                  className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime"
                 />
               </div>
             </div>
