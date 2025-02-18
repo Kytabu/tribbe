@@ -157,24 +157,77 @@ export function BalanceDisplay({
   );
 
   const RequestMoneyView = () => (
-    <div className="p-4 text-center animate-fade-in">
-      <div className="text-xl font-semibold text-tribbe-sage mb-4">
-        Request Money from Friends
+    <div className="space-y-4 animate-fade-in">
+      <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
+        <div className="flex items-center gap-2">
+          <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm border text-black font-bold">
+            {selectedCurrency.substring(0, 1)}
+          </span>
+          <div className="relative rounded-lg border-2 border-tribbe-lime p-2">
+            <Input
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={amount}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                setAmount(value);
+              }}
+              placeholder="0.00"
+              className="text-4xl font-bold pl-16 h-12 bg-transparent border-none focus-visible:ring-0 bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] pointer-events-none whitespace-nowrap">
+              {currencySymbols[selectedCurrency]}
+            </span>
+          </div>
+        </div>
       </div>
-      <div className="space-y-4">
-        <Input
-          type="text"
-          placeholder="Enter friend's email or username"
-          className="w-full"
-        />
-        <Input
-          type="number"
-          placeholder="Amount"
-          className="w-full"
-        />
-        <Button className="w-full bg-tribbe-lime text-black hover:bg-tribbe-lime/90">
-          Send Request
-        </Button>
+      
+      <div className="space-y-2">
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent group"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <QrCode className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">M-Pesa</span>
+              </div>
+              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+            </div>
+          </Button>
+        </div>
+
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent group"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Credit or Debit Card</span>
+              </div>
+              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+            </div>
+          </Button>
+        </div>
+
+        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
+          <Button
+            variant="ghost"
+            className="w-full justify-start p-0 hover:bg-transparent group"
+          >
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-2">
+                <Wallet className="w-5 h-5 text-[#4ECDC4] group-hover:text-tribbe-lime" />
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Bank Transfer</span>
+              </div>
+              <span className="font-medium group-hover:text-tribbe-lime">1-2 days</span>
+            </div>
+          </Button>
+        </div>
       </div>
     </div>
   );
