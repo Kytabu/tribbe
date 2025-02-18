@@ -31,7 +31,7 @@ export function BalanceDisplay({
   const [activeView, setActiveView] = useState<ViewType>('balance');
 
   const BalanceView = () => (
-    <div className="space-y-2 animate-fade-in">
+    <div className="space-y-4 animate-fade-in">
       <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
         {isLoading ? (
           <span className="text-tribbe-sage animate-pulse">Loading...</span>
