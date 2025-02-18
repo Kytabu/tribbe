@@ -122,7 +122,7 @@ export default function StreetCred() {
         <Card className="p-6 bg-tribbe-grey/50">
           <h3 className="text-lg font-medium text-white mb-4">Street Cred Levels</h3>
           <div className="space-y-4">
-            {streetCredLevels.slice().reverse().map((level, index) => (
+            {streetCredLevels.slice().reverse().map((level) => (
               <div key={level.name} className="flex items-center gap-4">
                 <div 
                   className="w-8 h-8 rounded-full flex items-center justify-center"
@@ -135,7 +135,7 @@ export default function StreetCred() {
                     <span className="font-medium text-white">{level.name}</span>
                     <span className="text-sm text-gray-400">{level.minScore}+</span>
                   </div>
-                  {creditScore >= level.minScore && (
+                  {level.name === currentLevel.name && (
                     <span className="text-xs text-tribbe-lime">Current Level</span>
                   )}
                 </div>
