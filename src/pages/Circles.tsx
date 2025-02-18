@@ -3,7 +3,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { CirclePlus, Search, ChevronRight } from "lucide-react";
+import { CirclePlus, Search, ChevronRight, ArrowLeft } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 
@@ -102,10 +102,23 @@ const CircleItem = ({ circle }: { circle: CircleType }) => {
 };
 
 const Circles = () => {
+  const navigate = useNavigate();
+
   return (
     <AppLayout>
       <div className="space-y-6">
-        <div className="flex justify-end">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => navigate("/flami")}
+              className="hover:bg-tribbe-lime/20"
+            >
+              <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
+            </Button>
+            <h2 className="text-2xl font-righteous text-tribbe-lime">My Circles</h2>
+          </div>
           <div className="relative w-64">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <Input 
@@ -116,13 +129,10 @@ const Circles = () => {
           </div>
         </div>
 
-        <div>
-          <h2 className="text-2xl font-righteous text-tribbe-lime mb-4">Current circles</h2>
-          <div className="space-y-3">
-            {circles.map((circle) => (
-              <CircleItem key={circle.id} circle={circle} />
-            ))}
-          </div>
+        <div className="space-y-3">
+          {circles.map((circle) => (
+            <CircleItem key={circle.id} circle={circle} />
+          ))}
         </div>
 
         <Button 
