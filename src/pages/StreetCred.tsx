@@ -132,12 +132,14 @@ export default function StreetCred() {
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <span className="font-medium text-white">{level.name}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-white">{level.name}</span>
+                      {level.name === currentLevel.name && (
+                        <span className="text-xs text-tribbe-lime">Current Level</span>
+                      )}
+                    </div>
                     <span className="text-sm text-gray-400">{level.minScore}+</span>
                   </div>
-                  {level.name === currentLevel.name && (
-                    <span className="text-xs text-tribbe-lime">Current Level</span>
-                  )}
                 </div>
               </div>
             ))}
