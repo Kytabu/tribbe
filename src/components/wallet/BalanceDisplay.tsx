@@ -27,21 +27,28 @@ export function BalanceDisplay({
 }: BalanceDisplayProps) {
   return (
     <div className="space-y-2 animate-fade-in">
-      <div className="flex items-center gap-2 justify-between">
-        <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
-          {isLoading ? (
-            <span className="text-tribbe-sage animate-pulse">Loading...</span>
-          ) : (
-            <div className="flex items-center gap-2">
-              <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm border text-black font-bold">
-                {selectedCurrency.substring(0, 1)}
-              </span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
-                {currencySymbols[selectedCurrency]} {currentBalance.toFixed(2)}
-              </span>
-            </div>
-          )}
-        </div>
+      <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
+        {isLoading ? (
+          <span className="text-tribbe-sage animate-pulse">Loading...</span>
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm border text-black font-bold">
+              {selectedCurrency.substring(0, 1)}
+            </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
+              {currencySymbols[selectedCurrency]} {currentBalance.toFixed(2)}
+            </span>
+          </div>
+        )}
+      </div>
+      
+      <div className="flex items-center justify-between">
+        <Button
+          variant="ghost"
+          className="p-0 h-auto text-tribbe-sage hover:text-tribbe-lime hover:bg-transparent"
+        >
+          Total Balance
+        </Button>
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
@@ -69,12 +76,6 @@ export function BalanceDisplay({
           </Button>
         </div>
       </div>
-      <Button
-        variant="ghost"
-        className="p-0 h-auto text-tribbe-sage hover:text-tribbe-lime hover:bg-transparent"
-      >
-        Total Balance
-      </Button>
 
       <div className="space-y-2">
         <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
