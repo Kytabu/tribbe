@@ -30,55 +30,57 @@ export function BalanceDisplay({
 
   return (
     <div className="space-y-2 animate-fade-in">
-      <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
-        {isLoading ? (
-          <span className="text-tribbe-sage animate-pulse">Loading...</span>
-        ) : (
-          <div className="flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm border text-black font-bold">
-              {selectedCurrency.substring(0, 1)}
-            </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
-              {currencySymbols[selectedCurrency]} {currentBalance.toFixed(2)}
-            </span>
-          </div>
-        )}
-      </div>
-      
-      <div className="flex items-center gap-2">
-        <Button
-          variant="default"
-          size="sm"
-          className="bg-tribbe-lime text-black hover:bg-tribbe-lime/90"
-        >
-          <Wallet className="h-4 w-4 mr-1" />
-          Total Balance
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-          onClick={() => navigate('/wallet/add-money')}
-        >
-          <Plus className="h-4 w-4 mr-1" />
-          Add Money
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-        >
-          <MessageSquare className="h-4 w-4 mr-1" />
-          Request
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-        >
-          <Send className="h-4 w-4 mr-1" />
-          Send
-        </Button>
+      <div className="border-2 border-tribbe-aqua rounded-lg p-4 space-y-4">
+        <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
+          {isLoading ? (
+            <span className="text-tribbe-sage animate-pulse">Loading...</span>
+          ) : (
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm border text-black font-bold">
+                {selectedCurrency.substring(0, 1)}
+              </span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
+                {currencySymbols[selectedCurrency]} {currentBalance.toFixed(2)}
+              </span>
+            </div>
+          )}
+        </div>
+        
+        <div className="flex items-center gap-2">
+          <Button
+            variant="default"
+            size="sm"
+            className="bg-tribbe-lime text-black hover:bg-tribbe-lime/90"
+          >
+            <Wallet className="h-4 w-4 mr-1" />
+            Total Balance
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+            onClick={() => navigate('/wallet/add-money')}
+          >
+            <Plus className="h-4 w-4 mr-1" />
+            Add Money
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+          >
+            <MessageSquare className="h-4 w-4 mr-1" />
+            Request
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+          >
+            <Send className="h-4 w-4 mr-1" />
+            Send
+          </Button>
+        </div>
       </div>
 
       <div className="space-y-2">
