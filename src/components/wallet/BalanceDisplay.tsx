@@ -1,3 +1,4 @@
+
 import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone, Users, User } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
@@ -56,7 +57,7 @@ export function BalanceDisplay({
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
-              <span className="text-tribbe-sage">Available Balance:</span>
+              <span className="text-tribbe-sage">Amount In:</span>
             </div>
             <span className="font-medium">{currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}</span>
           </div>
@@ -65,7 +66,7 @@ export function BalanceDisplay({
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Gem className="w-5 h-5 text-[#FF6B6B]" />
-              <span className="text-tribbe-sage">Amount Lent:</span>
+              <span className="text-tribbe-sage">Amount Out:</span>
             </div>
             <span className="font-medium">{currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}</span>
           </div>
