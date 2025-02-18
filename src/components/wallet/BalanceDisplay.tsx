@@ -146,7 +146,7 @@ export function BalanceDisplay({
           >
             <div className="flex justify-between items-center w-full">
               <div className="flex items-center gap-2">
-                <Wallet className="w-5 h-5 text-[#4ECDC4] group-hover:text-tribbe-lime" />
+                <Wallet className="w-5 h-5 text-[#C699FF] group-hover:text-tribbe-lime" />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">Bank Transfer</span>
               </div>
               <span className="font-medium group-hover:text-tribbe-lime">1-2 days</span>
