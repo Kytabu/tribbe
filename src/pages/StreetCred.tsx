@@ -2,7 +2,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Shield, ChartLine, BadgeCheck, CreditCard, User } from "lucide-react";
+import { ArrowLeft, Shield, ChartLine, BadgeCheck, CreditCard, User, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -14,7 +14,7 @@ interface StreetCredLevel {
 
 export default function StreetCred() {
   const navigate = useNavigate();
-  const [creditScore] = useState(720); // Example score
+  const [creditScore] = useState(720);
   const maxScore = 850;
   
   const streetCredLevels: StreetCredLevel[] = [
@@ -33,6 +33,11 @@ export default function StreetCred() {
   };
 
   const currentLevel = getCurrentLevel(creditScore);
+
+  const rating = 4.75;
+  const fullStars = Math.floor(rating);
+  const partialStar = rating % 1;
+  const remainingStars = 5 - Math.ceil(rating);
 
   const creditFactors = [
     {
@@ -68,7 +73,6 @@ export default function StreetCred() {
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto space-y-6">
-        {/* Header Section */}
         <div className="flex items-center gap-3">
           <Button 
             variant="ghost" 
@@ -81,11 +85,9 @@ export default function StreetCred() {
           <h2 className="text-2xl font-righteous text-tribbe-lime">My Street Cred</h2>
         </div>
 
-        {/* Main Score Card */}
         <Card className="p-8 bg-gradient-to-br from-background to-muted">
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              {/* Level Icon and Name - Left */}
               <div className="flex items-center gap-4">
                 <div 
                   className="w-16 h-16 rounded-full flex items-center justify-center"
@@ -101,7 +103,6 @@ export default function StreetCred() {
                 </span>
               </div>
 
-              {/* Credit Score - Center */}
               <div className="text-center">
                 <h3 className="text-lg text-gray-400 mb-2">Your Credit Score</h3>
                 <div 
@@ -112,11 +113,30 @@ export default function StreetCred() {
                 </div>
               </div>
 
-              {/* Empty div for flex alignment */}
-              <div className="w-[200px]"></div>
+              <div className="flex flex-col items-end gap-2">
+                <div className="flex items-center">
+                  {[...Array(fullStars)].map((_, i) => (
+                    <Star key={`full-${i}`} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                  ))}
+                  {partialStar > 0 && (
+                    <div className="relative">
+                      <Star className="w-6 h-6 text-yellow-400" />
+                      <div 
+                        className="absolute top-0 left-0 overflow-hidden"
+                        style={{ width: `${partialStar * 100}%` }}
+                      >
+                        <Star className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                      </div>
+                    </div>
+                  )}
+                  {[...Array(remainingStars)].map((_, i) => (
+                    <Star key={`empty-${i}`} className="w-6 h-6 text-yellow-400" />
+                  ))}
+                </div>
+                <span className="text-sm text-gray-400">4.75/5</span>
+              </div>
             </div>
 
-            {/* Progress Bar - Bottom */}
             <div className="text-center">
               <Progress 
                 value={(creditScore / maxScore) * 100} 
@@ -132,7 +152,6 @@ export default function StreetCred() {
           </div>
         </Card>
 
-        {/* Level Progress */}
         <Card className="p-6 bg-tribbe-grey/50">
           <h3 className="text-lg font-medium text-white mb-4">Street Cred Levels</h3>
           <div className="space-y-4">
@@ -160,7 +179,6 @@ export default function StreetCred() {
           </div>
         </Card>
 
-        {/* Credit Factors Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {creditFactors.map((factor) => (
             <Card 
@@ -185,7 +203,6 @@ export default function StreetCred() {
           ))}
         </div>
 
-        {/* Tips Section */}
         <Card className="p-6 bg-tribbe-grey/50">
           <h3 className="text-lg font-medium text-white mb-4">How to Improve Your Score</h3>
           <ul className="space-y-3 text-sm text-gray-400">
