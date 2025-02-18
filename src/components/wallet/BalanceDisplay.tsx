@@ -1,9 +1,10 @@
-import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone, Users, User } from "lucide-react";
+import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone, Users, User, Circle } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 
 interface BalanceDisplayProps {
   isLoading: boolean;
@@ -26,10 +27,12 @@ export function BalanceDisplay({
   selectedCurrency,
   currencySymbols,
   availableBalance,
-  lendingStats
+  lendingStats,
+  transactionHistory
 }: BalanceDisplayProps) {
   const [activeView, setActiveView] = useState<ViewType>('balance');
   const [amount, setAmount] = useState<string>('');
+  const [autoTribbe, setAutoTribbe] = useState(false);
 
   const BalanceView = () => (
     <div className="space-y-4 animate-fade-in">
@@ -284,9 +287,9 @@ export function BalanceDisplay({
                   alt="Green Flame Icon" 
                   className="w-5 h-5 object-contain"
                 />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Close Friends</span>
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Requests</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">kinda quick</span>
+              <span className="font-medium group-hover:text-tribbe-lime">12</span>
             </div>
           </Button>
         </div>
@@ -303,9 +306,12 @@ export function BalanceDisplay({
                   alt="Blue Flame Icon" 
                   className="w-5 h-5 object-contain"
                 />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circle</span>
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circles</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">should be fast</span>
+              <div className="flex items-center gap-1">
+                <Circle className="w-4 h-4" />
+                <Plus className="w-3 h-3 -ml-2" />
+              </div>
             </div>
           </Button>
         </div>
@@ -324,7 +330,14 @@ export function BalanceDisplay({
                 />
                 <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
               </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+              <div className="flex items-center gap-2">
+                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Automate</span>
+                <Switch
+                  checked={autoTribbe}
+                  onCheckedChange={setAutoTribbe}
+                  className="data-[state=checked]:bg-tribbe-lime"
+                />
+              </div>
             </div>
           </Button>
         </div>
