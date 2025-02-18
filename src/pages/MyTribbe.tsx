@@ -93,7 +93,11 @@ export default function MyTribbe() {
               {networkMembers.slice(0, 7).map((member) => (
                 <Avatar key={member.id} className="w-12 h-12 border-2 border-tribbe-grey">
                   {member.image ? (
-                    <AvatarImage src={member.image} alt={member.name} />
+                    <AvatarImage 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="object-cover"
+                    />
                   ) : (
                     <AvatarFallback className="bg-tribbe-grey text-white">
                       {member.name.split(' ').map(n => n[0]).join('')}
