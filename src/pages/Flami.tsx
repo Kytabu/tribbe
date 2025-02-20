@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
@@ -156,13 +155,8 @@ How can I help you grow your bag today?`,
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto h-[calc(100vh-2rem)] flex flex-col">
-        <div className="relative mb-4 flex flex-col items-center">
-          <img 
-            src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
-            alt="Tribbe Logo" 
-            className="w-12 h-12 mb-2"
-          />
-          <h1 className="text-4xl font-righteous text-tribbe-lime">flami</h1>
+        <div className="relative mb-4">
+          <h1 className="text-4xl font-righteous text-tribbe-lime text-center">flami</h1>
           <div className="absolute right-0 top-0">
             <ProgressBar userLevel={userLevel} userPoints={userPoints} />
           </div>

@@ -21,6 +21,15 @@ export function ChatMessage({ message }: ChatMessageProps) {
             : "bg-muted animate-slide-in"
         )}
       >
+        {message.role === "assistant" && (
+          <div className="flex items-center gap-2 mb-2">
+            <img 
+              src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
+              alt="Tribbe Logo" 
+              className="w-6 h-6"
+            />
+          </div>
+        )}
         <p className="text-sm whitespace-pre-line">{message.content}</p>
       </div>
     </div>
