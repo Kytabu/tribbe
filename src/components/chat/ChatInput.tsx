@@ -8,16 +8,17 @@ interface ChatInputProps {
   isLoading: boolean;
   onInputChange: (value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
+  placeholder?: string;
 }
 
-export function ChatInput({ input, isLoading, onInputChange, onSubmit }: ChatInputProps) {
+export function ChatInput({ input, isLoading, onInputChange, onSubmit, placeholder = "Shall we grow your wealth today?" }: ChatInputProps) {
   return (
     <form onSubmit={onSubmit} className="mt-4">
       <div className="relative">
         <Textarea
           value={input}
           onChange={(e) => onInputChange(e.target.value)}
-          placeholder="Shall we grow your wealth today?"
+          placeholder={placeholder}
           className="min-h-[50px] max-h-[200px] pr-12"
           disabled={isLoading}
         />

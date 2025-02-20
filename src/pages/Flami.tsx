@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,12 +9,14 @@ import { ChatInput } from "@/components/chat/ChatInput";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatSuggestions } from "@/components/chat/ChatSuggestions";
 import { Message } from "@/types/chat";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Flami() {
   const navigate = useNavigate();
   const [messages] = useState<Message[]>([]);
+  const [activityMessages, setActivityMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const [activityInput, setActivityInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   
   const creditScore = 720;
@@ -24,6 +27,21 @@ export default function Flami() {
     { name: "The Innovator", color: "#A9FF22", minScore: 740 },
     { name: "The Legend", color: "#C699FF", minScore: 800 }
   ];
+
+  useEffect(() => {
+    // Add initial welcome message
+    const welcomeMessage: Message = {
+      id: "welcome",
+      content: "Welcome back! Here's what's been happening on Tribbe:\n\n" +
+              "• John Doe borrowed Kes 5,000 from you 2 hours ago\n" +
+              "• Jane Smith borrowed Kes 10,000 5 hours ago\n" +
+              "• You joined the Family Circle yesterday\n\n" +
+              "How can I help you today?",
+      role: "assistant",
+      timestamp: new Date()
+    };
+    setActivityMessages([welcomeMessage]);
+  }, []);
 
   const getCurrentLevel = (score: number) => {
     return streetCredLevels
@@ -40,30 +58,15 @@ export default function Flami() {
     setInput("");
   };
 
+  const handleActivitySubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Activity message submitted:", activityInput);
+    setActivityInput("");
+  };
+
   const handleSuggestionClick = (text: string, points: number) => {
     console.log("Suggestion clicked:", text, points);
   };
-
-  const recentActivities = [
-    {
-      type: "lending",
-      user: "John Doe",
-      amount: "5,000",
-      time: "2 hours ago"
-    },
-    {
-      type: "borrowing",
-      user: "Jane Smith",
-      amount: "10,000",
-      time: "5 hours ago"
-    },
-    {
-      type: "circle",
-      name: "Family Circle",
-      action: "joined",
-      time: "1 day ago"
-    }
-  ];
 
   return (
     <AppLayout>
@@ -107,6 +110,7 @@ export default function Flami() {
                 Chat with Flami
               </TabsTrigger>
               <TabsTrigger value="activity" className="text-sm">
+                <MessageSquare className="w-4 h-4 mr-2" />
                 Recent Activity
               </TabsTrigger>
             </TabsList>
@@ -130,31 +134,21 @@ export default function Flami() {
               </div>
             </TabsContent>
 
-            <TabsContent value="activity" className="space-y-4 flex-1">
-              <div className="space-y-4">
-                {recentActivities.map((activity, index) => (
-                  <div 
-                    key={index}
-                    className="p-4 rounded-lg bg-muted backdrop-blur supports-[backdrop-filter]:bg-muted/95 border animate-fade-in"
-                  >
-                    {activity.type === "lending" && (
-                      <p className="text-sm text-muted-foreground">
-                        <span className="text-tribbe-lime">{activity.user}</span> borrowed Kes {activity.amount} from you {activity.time}
-                      </p>
-                    )}
-                    {activity.type === "borrowing" && (
-                      <p className="text-sm text-muted-foreground">
-                        You borrowed Kes {activity.amount} from <span className="text-tribbe-lime">{activity.user}</span> {activity.time}
-                      </p>
-                    )}
-                    {activity.type === "circle" && (
-                      <p className="text-sm text-muted-foreground">
-                        You {activity.action} the <span className="text-tribbe-lime">{activity.name}</span> {activity.time}
-                      </p>
-                    )}
-                  </div>
-                ))}
+            <TabsContent value="activity" className="flex-1 flex flex-col min-h-0">
+              <div className="flex-1 overflow-y-auto">
+                <div className="space-y-4 py-4">
+                  {activityMessages.map((message) => (
+                    <ChatMessage key={message.id} message={message} />
+                  ))}
+                </div>
               </div>
+              <ChatInput 
+                input={activityInput}
+                isLoading={isLoading}
+                onInputChange={(value) => setActivityInput(value)}
+                onSubmit={handleActivitySubmit}
+                placeholder="What would you like?"
+              />
             </TabsContent>
           </Tabs>
         </Card>
