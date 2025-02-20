@@ -2,9 +2,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
-  User,
-  CreditCard,
-  Crown,
   Bell,
   Lock,
   Shield,
@@ -24,25 +21,10 @@ const Setup = () => {
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto py-8">
-        <h1 className="text-2xl font-bold mb-2">All about Me</h1>
-        <p className="text-muted-foreground mb-8">Tailor your experience</p>
+        <h1 className="text-2xl font-bold mb-2">Settings</h1>
+        <p className="text-muted-foreground mb-8">Configure your app preferences</p>
         
         <div className="space-y-4">
-          {/* Me Section */}
-          <div 
-            className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
-            onClick={() => navigate("/account")}
-          >
-            <div className="flex items-center gap-3">
-              <User className="w-5 h-5 text-primary" />
-              <div>
-                <h2 className="font-medium">Me</h2>
-                <p className="text-sm text-muted-foreground">Profile, Phone number, ID, etc</p>
-              </div>
-            </div>
-            <ChevronRight className="w-5 h-5" />
-          </div>
-
           {/* PIN Management Section */}
           <div 
             className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
@@ -53,30 +35,6 @@ const Setup = () => {
               <div>
                 <h2 className="font-medium">PIN Management</h2>
                 <p className="text-sm text-muted-foreground">Set up or change your security PIN</p>
-              </div>
-            </div>
-            <ChevronRight className="w-5 h-5" />
-          </div>
-
-          {/* My Account Section */}
-          <div className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer">
-            <div className="flex items-center gap-3">
-              <CreditCard className="w-5 h-5 text-primary" />
-              <div>
-                <h2 className="font-medium">My Account</h2>
-                <p className="text-sm text-muted-foreground">Money Lent, borrowed and invested</p>
-              </div>
-            </div>
-            <ChevronRight className="w-5 h-5" />
-          </div>
-
-          {/* Premium Section */}
-          <div className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer">
-            <div className="flex items-center gap-3">
-              <Crown className="w-5 h-5 text-[#A9FF22]" />
-              <div>
-                <h2 className="font-medium">Premium</h2>
-                <p className="text-sm text-muted-foreground">Money Lent, borrowed and invested</p>
               </div>
             </div>
             <ChevronRight className="w-5 h-5" />
@@ -100,7 +58,7 @@ const Setup = () => {
               <Lock className="w-5 h-5 text-primary" />
               <div>
                 <h2 className="font-medium">Privacy</h2>
-                <p className="text-sm text-muted-foreground">See your privacy settings</p>
+                <p className="text-sm text-muted-foreground">Manage your privacy settings</p>
               </div>
             </div>
             <ChevronRight className="w-5 h-5" />
@@ -151,3 +109,4 @@ const Setup = () => {
 };
 
 export default Setup;
+
