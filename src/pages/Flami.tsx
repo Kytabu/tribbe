@@ -117,12 +117,12 @@ export default function Flami() {
 
             <TabsContent value="chat" className="space-y-4">
               <div className="h-[50vh] overflow-y-auto space-y-4 py-4">
-                <div className="px-4">
-                  <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
-                </div>
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
+                <div className="px-4 mt-auto">
+                  <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
+                </div>
               </div>
               <ChatInput 
                 input={input}
