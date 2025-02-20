@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
@@ -16,7 +15,7 @@ export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: `👋 Good day! Here's your financial update:
+      content: `👋 Hey Tonee! Here's your financial update:
 
 🌟 Credit Score: 720 (Up 15 points this month)
 💰 Wallet Balance: KES 45,000
