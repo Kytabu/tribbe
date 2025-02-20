@@ -13,7 +13,6 @@ import {
   Users,
   Circle,
   Star,
-  User,
   Settings,
   Camera,
 } from "lucide-react";
@@ -54,7 +53,13 @@ const navigationItems = [
 
 const footerItems = [
   {
-    icon: User,
+    icon: () => (
+      <img 
+        src="/lovable-uploads/8539168b-de31-44b2-bf34-441396547926.png" 
+        alt="Profile" 
+        className="w-5 h-5 rounded-full"
+      />
+    ),
     label: "Profile",
     href: "/profile",
   },
@@ -120,12 +125,16 @@ export function AppSidebar() {
                   "bg-tribbe-charcoal/10 text-tribbe-charcoal font-medium"
               )}
             >
-              <item.icon 
-                className={cn(
-                  "w-5 h-5",
-                  location.pathname === item.href ? "text-tribbe-aqua" : "text-tribbe-lime"
-                )} 
-              />
+              {typeof item.icon === 'function' ? (
+                item.icon()
+              ) : (
+                <item.icon 
+                  className={cn(
+                    "w-5 h-5",
+                    location.pathname === item.href ? "text-tribbe-aqua" : "text-tribbe-lime"
+                  )} 
+                />
+              )}
               <span>{item.label}</span>
             </Link>
           ))}
