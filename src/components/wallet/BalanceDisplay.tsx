@@ -38,7 +38,7 @@ export function BalanceDisplay({
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <Button
-          variant={activeView === 'balance' ? "default" : "outline"}
+          variant={activeView === 'balance' ? "default" : "ghost"}
           size="sm"
           className={`${
             activeView === 'balance' 
@@ -48,10 +48,10 @@ export function BalanceDisplay({
           onClick={() => setActiveView('balance')}
         >
           <Wallet className="h-4 w-4 mr-1" />
-          Total Balance
+          Balance
         </Button>
         <Button
-          variant={activeView === 'add' ? "default" : "outline"}
+          variant={activeView === 'add' ? "default" : "ghost"}
           size="sm"
           className={`${
             activeView === 'add' 
@@ -64,7 +64,7 @@ export function BalanceDisplay({
           Add Money
         </Button>
         <Button
-          variant={activeView === 'request' ? "default" : "outline"}
+          variant={activeView === 'request' ? "default" : "ghost"}
           size="sm"
           className={`${
             activeView === 'request' 
@@ -77,7 +77,7 @@ export function BalanceDisplay({
           Request
         </Button>
         <Button
-          variant={activeView === 'send' ? "default" : "outline"}
+          variant={activeView === 'send' ? "default" : "ghost"}
           size="sm"
           className={`${
             activeView === 'send' 
