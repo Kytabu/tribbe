@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -210,19 +209,15 @@ export default function StreetCred() {
                 })}
               </div>
               <div 
-                className="absolute top-0 transform -translate-x-1/2 -translate-y-full"
+                className="absolute top-0 transform -translate-x-1/2 -translate-y-1/2"
                 style={{ left: `${progressPercentage}%` }}
               >
-                <div className="relative">
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1">
-                    <div 
-                      className="w-3 h-3 rotate-45 transform origin-center"
-                      style={{ backgroundColor: currentLevel.color }}
-                    />
-                  </div>
-                </div>
+                <div 
+                  className="w-4 h-4 rounded-full border-2 border-background"
+                  style={{ backgroundColor: currentLevel.color }}
+                />
               </div>
-              <p className="text-sm text-gray-400 mt-2 text-center">
+              <p className="text-sm text-gray-400 mt-4 text-center">
                 Out of {maxScore} points • Updated today
               </p>
             </div>
