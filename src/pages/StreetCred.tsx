@@ -134,7 +134,7 @@ export default function StreetCred() {
 
         <Card className="p-8 bg-gradient-to-br from-background to-muted">
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="grid grid-cols-3 items-center">
               <div className="flex items-center gap-4">
                 <div 
                   className="p-1 rounded-full"
@@ -154,7 +154,7 @@ export default function StreetCred() {
                 </span>
               </div>
 
-              <div className="text-center">
+              <div className="flex flex-col items-center justify-center">
                 <h3 className="text-lg text-gray-400 mb-2">Your Credit Score</h3>
                 <div 
                   className="text-6xl font-bold" 

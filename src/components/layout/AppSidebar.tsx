@@ -1,4 +1,3 @@
-
 import {
   Sidebar,
   SidebarContent,
@@ -64,28 +63,52 @@ const navigationItems: NavigationItem[] = [
   },
 ];
 
-const footerItems: FooterItem[] = [
-  {
-    icon: () => (
-      <img 
-        src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
-        alt="Profile" 
-        className="w-5 h-5 object-cover rounded-full"
-      />
-    ),
-    label: "Profile",
-    href: "/profile",
-  },
-  {
-    icon: Settings,
-    label: "Setup",
-    href: "/setup",
-  },
-];
-
 export function AppSidebar() {
   const location = useLocation();
   const { open } = useSidebar();
+
+  // Use the same credit score logic
+  const creditScore = 720;
+  const streetCredLevels = [
+    { name: "The Newbie", color: "#FFCA99", minScore: 300 },
+    { name: "The Builder", color: "#F9FE03", minScore: 580 },
+    { name: "The Trailblazer", color: "#88D3FE", minScore: 670 },
+    { name: "The Innovator", color: "#A9FF22", minScore: 740 },
+    { name: "The Legend", color: "#C699FF", minScore: 800 }
+  ];
+
+  const getCurrentLevel = (score: number) => {
+    return streetCredLevels
+      .slice()
+      .reverse()
+      .find(level => score >= level.minScore) || streetCredLevels[0];
+  };
+
+  const currentLevel = getCurrentLevel(creditScore);
+
+  const footerItems: FooterItem[] = [
+    {
+      icon: () => (
+        <div 
+          className="p-0.5 rounded-full"
+          style={{ backgroundColor: currentLevel.color }}
+        >
+          <img 
+            src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
+            alt="Profile" 
+            className="w-5 h-5 object-cover rounded-full border border-background"
+          />
+        </div>
+      ),
+      label: "Profile",
+      href: "/profile",
+    },
+    {
+      icon: Settings,
+      label: "Setup",
+      href: "/setup",
+    },
+  ];
 
   return (
     <Sidebar
