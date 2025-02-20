@@ -2,12 +2,25 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Progress } from "@/components/ui/progress";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
   const [shouldNavigate, setShouldNavigate] = useState(false);
   const navigate = useNavigate();
+
+  // Check authentication status first
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate('/auth');
+        return;
+      }
+    };
+    checkAuth();
+  }, [navigate]);
 
   useEffect(() => {
     const startTime = Date.now();
@@ -40,7 +53,7 @@ const Index = () => {
     if (!isVisible && shouldNavigate) {
       const navigationTimer = setTimeout(() => {
         setShouldNavigate(false); // Prevent further navigation attempts
-        navigate('/pin-entry');
+        navigate('/pin-entry', { replace: true }); // Use replace to prevent back navigation
       }, 300); // Match this with the CSS transition duration
 
       return () => clearTimeout(navigationTimer);
