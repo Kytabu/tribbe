@@ -40,11 +40,6 @@ export function BalanceDisplay({
         <Button
           variant={activeView === 'balance' ? "default" : "ghost"}
           size="sm"
-          className={`${
-            activeView === 'balance' 
-              ? "bg-tribbe-lime text-black hover:bg-tribbe-lime/90" 
-              : "border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-          } w-[140px]`}
           onClick={() => setActiveView('balance')}
         >
           <Wallet className="h-4 w-4 mr-1" />
@@ -53,11 +48,6 @@ export function BalanceDisplay({
         <Button
           variant={activeView === 'add' ? "default" : "ghost"}
           size="sm"
-          className={`${
-            activeView === 'add' 
-              ? "bg-tribbe-lime text-black hover:bg-tribbe-lime/90" 
-              : "border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-          } w-[140px]`}
           onClick={() => setActiveView('add')}
         >
           <Plus className="h-4 w-4 mr-1" />
@@ -66,11 +56,6 @@ export function BalanceDisplay({
         <Button
           variant={activeView === 'request' ? "default" : "ghost"}
           size="sm"
-          className={`${
-            activeView === 'request' 
-              ? "bg-tribbe-lime text-black hover:bg-tribbe-lime/90" 
-              : "border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-          } w-[140px]`}
           onClick={() => setActiveView('request')}
         >
           <MessageSquare className="h-4 w-4 mr-1" />
@@ -79,11 +64,6 @@ export function BalanceDisplay({
         <Button
           variant={activeView === 'send' ? "default" : "ghost"}
           size="sm"
-          className={`${
-            activeView === 'send' 
-              ? "bg-tribbe-lime text-black hover:bg-tribbe-lime/90" 
-              : "border-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-          } w-[140px]`}
           onClick={() => setActiveView('send')}
         >
           <Send className="h-4 w-4 mr-1" />
