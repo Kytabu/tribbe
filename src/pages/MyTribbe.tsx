@@ -25,7 +25,7 @@ export default function MyTribbe() {
 
   // Mock data - In a real app, this would come from your backend
   const stats = {
-    networkSize: 24,
+    networkSize: 12,
     activeCircles: 3,
     totalLent: 15000,
     creditScore: 720,
@@ -34,20 +34,24 @@ export default function MyTribbe() {
 
   // Updated network members with new profile pictures
   const networkMembers = [
-    { id: 1, name: "Marcus", image: "/lovable-uploads/804acb0a-1ab2-4faf-9910-863c5c917a3e.png" },
-    { id: 2, name: "Aisha", image: "/lovable-uploads/3d1e665d-eed4-4c04-904f-bac63a57b959.png" },
-    { id: 3, name: "Michael", image: "/lovable-uploads/bf878166-6407-457b-ac97-59a01d4a528b.png" },
-    { id: 4, name: "Tim", image: "/lovable-uploads/66fbe866-eb36-4919-8f4c-80c32c87225a.png" },
-    { id: 5, name: "Crystal", image: "/lovable-uploads/df05789c-bbc1-4876-94fc-9950d71a6c4f.png" },
-    { id: 6, name: "Marcus B", image: "/lovable-uploads/66f92311-3685-46c4-bc13-0d10f1eadbf8.png" },
-    { id: 7, name: "Julie", image: "/lovable-uploads/92b6f0c7-407b-48ab-92cf-e8f16a7cf424.png" },
-    { id: 8, name: "Tracy", image: "/lovable-uploads/4bdd41de-73c5-4948-84b1-aa4ba2e6afa8.png" }
+    { id: 1, name: "Sarah", image: "/lovable-uploads/237ca64a-021e-4578-9f08-b9fb2245f01e.png" },
+    { id: 2, name: "Marcus", image: "/lovable-uploads/02bff5e9-ea21-4298-ad23-9d9ce111b691.png" },
+    { id: 3, name: "James", image: "/lovable-uploads/e25c10fb-ede6-40a6-be94-ae27ae122714.png" },
+    { id: 4, name: "Diana", image: "/lovable-uploads/bc82d70e-eb04-4dc9-82d5-a9f4e4c0c0e8.png" },
+    { id: 5, name: "Michael", image: "/lovable-uploads/c3603a81-6764-4f8a-bf9a-f8fa6f277493.png" },
+    { id: 6, name: "Lisa", image: "/lovable-uploads/eaebdf3c-f654-426e-9882-d23cfc6c3be2.png" },
+    { id: 7, name: "John", image: "/lovable-uploads/5cd0a2a3-10ab-405a-957a-918146dc1cc6.png" },
+    { id: 8, name: "Angela", image: "/lovable-uploads/42287469-a1c7-4d88-b55c-db500133e882.png" },
+    { id: 9, name: "David", image: "/lovable-uploads/cff39b6d-626c-4165-9ffe-16558234dc9b.png" },
+    { id: 10, name: "Rachel", image: "/lovable-uploads/caae7b31-135b-4f5d-a905-5e292142cbb9.png" },
+    { id: 11, name: "Chris", image: "/lovable-uploads/bf1a4aaa-ea56-44a2-a14f-183edcf2b8b3.png" },
+    { id: 12, name: "Tanya", image: "/lovable-uploads/289c745d-027d-40b4-8355-97b6a87d064e.png" }
   ];
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
-      const scrollAmount = 200; // Adjust this value to control scroll distance
+      const scrollAmount = 200;
       const newScrollLeft = direction === 'left' 
         ? container.scrollLeft - scrollAmount 
         : container.scrollLeft + scrollAmount;
@@ -120,26 +124,13 @@ export default function MyTribbe() {
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {networkMembers.map((member) => (
-                  <Avatar key={member.id} className="w-12 h-12 border-2 border-tribbe-grey flex-shrink-0">
-                    <AvatarImage 
-                      src={member.image} 
-                      alt={member.name} 
-                      className="object-cover"
-                    />
-                    <AvatarFallback className="bg-tribbe-grey text-white">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </AvatarFallback>
-                  </Avatar>
+                  <img
+                    key={member.id}
+                    src={member.image}
+                    alt={member.name}
+                    className="w-12 h-12 flex-shrink-0"
+                  />
                 ))}
-                {stats.networkSize > networkMembers.length && (
-                  <Button 
-                    variant="outline" 
-                    className="w-12 h-12 rounded-full bg-tribbe-grey/50 hover:bg-tribbe-grey border-2 border-tribbe-grey flex-shrink-0"
-                    onClick={() => navigate("/circles")}
-                  >
-                    +{stats.networkSize - networkMembers.length}
-                  </Button>
-                )}
               </div>
               {canScrollLeft && (
                 <Button
