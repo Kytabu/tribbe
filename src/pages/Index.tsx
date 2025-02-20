@@ -33,18 +33,18 @@ const Index = () => {
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="space-y-8">
+        <div className="space-y-6">
           <img 
             src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
             alt="Tribbe Logo"
-            className="w-[27rem] mx-auto"
+            className="w-96 mx-auto"
           />
           <img 
             src="/lovable-uploads/7d875948-ce43-436a-a356-9bce6f1a1226.png"
             alt="AI and Finance Illustration"
-            className="w-[27rem] mx-auto"
+            className="w-96 mx-auto"
           />
-          <h2 className="text-4xl font-righteous text-tribbe-lime w-[27rem] mx-auto">
+          <h2 className="text-4xl font-righteous text-tribbe-lime w-96 mx-auto pt-6">
             the new way to do money
           </h2>
         </div>
