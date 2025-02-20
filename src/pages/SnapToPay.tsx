@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,7 +24,7 @@ export default function SnapToPay() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="group border-tribbe-lime/50 hover:border-tribbe-lime transition-colors duration-200">
+          <Card className="group border-tribbe-lime hover:border-tribbe-lime/80 transition-colors duration-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <QrCode className="h-5 w-5 text-tribbe-lime" />
@@ -40,53 +41,53 @@ export default function SnapToPay() {
             </CardContent>
           </Card>
 
-          <Card className="group border-tribbe-lime/50 hover:border-tribbe-lime transition-colors duration-200">
+          <Card className="group border-tribbe-lilac hover:border-tribbe-lilac/80 transition-colors duration-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Smartphone className="h-5 w-5 text-tribbe-lime" />
+                <Smartphone className="h-5 w-5 text-tribbe-lilac" />
                 Show My Code
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
+                className="w-full h-32 border-tribbe-lilac/50 group-hover:border-tribbe-lilac group-hover:bg-tribbe-lilac/5"
               >
-                <Smartphone className="h-10 w-10 text-tribbe-lime" />
+                <Smartphone className="h-10 w-10 text-tribbe-lilac" />
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="group border-tribbe-lime/50 hover:border-tribbe-lime transition-colors duration-200">
+          <Card className="group border-tribbe-aqua hover:border-tribbe-aqua/80 transition-colors duration-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-tribbe-lime" />
+                <Building2 className="h-5 w-5 text-tribbe-aqua" />
                 Snap Till Number
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
+                className="w-full h-32 border-tribbe-aqua/50 group-hover:border-tribbe-aqua group-hover:bg-tribbe-aqua/5"
               >
-                <Building2 className="h-10 w-10 text-tribbe-lime" />
+                <Building2 className="h-10 w-10 text-tribbe-aqua" />
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="group border-tribbe-lime/50 hover:border-tribbe-lime transition-colors duration-200">
+          <Card className="group border-tribbe-yellow hover:border-tribbe-yellow/80 transition-colors duration-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Receipt className="h-5 w-5 text-tribbe-lime" />
+                <Receipt className="h-5 w-5 text-tribbe-yellow" />
                 Snap Paybill Number
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-32 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
+                className="w-full h-32 border-tribbe-yellow/50 group-hover:border-tribbe-yellow group-hover:bg-tribbe-yellow/5"
               >
-                <Receipt className="h-10 w-10 text-tribbe-lime" />
+                <Receipt className="h-10 w-10 text-tribbe-yellow" />
               </Button>
             </CardContent>
           </Card>
