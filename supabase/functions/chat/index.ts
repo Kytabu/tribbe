@@ -15,9 +15,22 @@ serve(async (req) => {
 
   try {
     const { messages } = await req.json();
+    const lastUserMessage = messages.find(m => m.role === 'user')?.content?.toLowerCase() || '';
 
     // Add artificial delay to prevent rapid-fire requests
     await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Check if the message is about finding 5000
+    if (lastUserMessage.includes('find me') && lastUserMessage.includes('5000')) {
+      return new Response(
+        JSON.stringify({ 
+          message: "I've found KES 5,000 for you and added it to your wallet. You can now use it for whatever you need! 💰" 
+        }),
+        {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        }
+      );
+    }
 
     const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
       method: 'POST',
