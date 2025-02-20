@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Mail, Phone, Apple, Facebook } from "lucide-react";
+import { Mail, Phone, Apple, Facebook, Check } from "lucide-react";
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const AuthPage = () => {
 
     try {
       // For development, we'll just show the verification code
-      const code = "123456";
+      const code = "1234";
       
       toast({
         description: `Verification code: ${code}`,
@@ -43,7 +43,7 @@ const AuthPage = () => {
 
     try {
       // For development, just check if the code matches
-      if (verificationCode === "123456") {
+      if (verificationCode === "1234") {
         toast({
           description: "Verification successful",
         });
@@ -64,12 +64,9 @@ const AuthPage = () => {
   };
 
   const handleNumberClick = (number: string) => {
-    if (verificationCode.length < 6) {
+    if (verificationCode.length < 4) {
       const newCode = verificationCode + number;
       setVerificationCode(newCode);
-      if (newCode.length === 6) {
-        handleVerificationSubmit();
-      }
     }
   };
 
@@ -168,7 +165,7 @@ const AuthPage = () => {
           </div>
 
           <div className="flex justify-center space-x-4 mb-12">
-            {[...Array(6)].map((_, index) => (
+            {[...Array(4)].map((_, index) => (
               <div
                 key={index}
                 className={`w-4 h-4 rounded-full border-2 ${
@@ -201,6 +198,21 @@ const AuthPage = () => {
             >
               Delete
             </button>
+          </div>
+
+          <div className="flex justify-center mt-8">
+            <Button
+              onClick={handleVerificationSubmit}
+              disabled={verificationCode.length !== 4}
+              className={`w-32 h-12 rounded-full transition-colors ${
+                verificationCode.length === 4 
+                ? "bg-tribbe-lime hover:bg-tribbe-lime/90 text-black" 
+                : "bg-gray-600 text-gray-400"
+              }`}
+            >
+              <Check className="mr-2 h-5 w-5" />
+              Done
+            </Button>
           </div>
         </div>
       )}
