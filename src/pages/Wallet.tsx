@@ -156,7 +156,6 @@ export default function Wallet() {
                   variant="ghost" 
                   size="icon"
                   onClick={() => navigate("/flami")}
-                  className="hover:bg-tribbe-lime/20"
                 >
                   <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
                 </Button>

@@ -89,7 +89,7 @@ export function BalanceDisplay({
           </div>
 
           <div className="space-y-2">
-            <div className="w-full h-[60px] px-4 rounded-lg border border-border/50 bg-card text-card-foreground">
+            <div className="w-full h-[60px] px-4 rounded-lg bg-card text-card-foreground">
               <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
                   <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
@@ -101,7 +101,7 @@ export function BalanceDisplay({
               </div>
             </div>
 
-            <div className="w-full h-[60px] px-4 rounded-lg border border-border/50 bg-card text-card-foreground">
+            <div className="w-full h-[60px] px-4 rounded-lg bg-card text-card-foreground">
               <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
                   <Gem className="w-5 h-5 text-[#FF6B6B]" />
@@ -113,7 +113,7 @@ export function BalanceDisplay({
               </div>
             </div>
 
-            <div className="w-full h-[60px] px-4 rounded-lg border border-border/50 bg-card text-card-foreground">
+            <div className="w-full h-[60px] px-4 rounded-lg bg-card text-card-foreground">
               <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
                   <Trophy className="w-5 h-5 text-[#4ECDC4]" />
