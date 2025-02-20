@@ -24,7 +24,7 @@ export default function SnapToPay() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="group border-tribbe-lime hover:border-tribbe-lime/80 transition-colors duration-200">
+          <Card className="group border-0 hover:bg-tribbe-lime/5 transition-colors duration-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <QrCode className="h-5 w-5 text-tribbe-lime" />
@@ -41,7 +41,7 @@ export default function SnapToPay() {
             </CardContent>
           </Card>
 
-          <Card className="group border-tribbe-lilac hover:border-tribbe-lilac/80 transition-colors duration-200">
+          <Card className="group border-0 hover:bg-tribbe-lilac/5 transition-colors duration-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Smartphone className="h-5 w-5 text-tribbe-lilac" />
@@ -58,7 +58,7 @@ export default function SnapToPay() {
             </CardContent>
           </Card>
 
-          <Card className="group border-tribbe-aqua hover:border-tribbe-aqua/80 transition-colors duration-200">
+          <Card className="group border-0 hover:bg-tribbe-aqua/5 transition-colors duration-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Building2 className="h-5 w-5 text-tribbe-aqua" />
@@ -75,7 +75,7 @@ export default function SnapToPay() {
             </CardContent>
           </Card>
 
-          <Card className="group border-tribbe-yellow hover:border-tribbe-yellow/80 transition-colors duration-200">
+          <Card className="group border-0 hover:bg-tribbe-yellow/5 transition-colors duration-200">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Receipt className="h-5 w-5 text-tribbe-yellow" />
@@ -93,7 +93,7 @@ export default function SnapToPay() {
           </Card>
         </div>
 
-        <Card className="border-tribbe-lime/50">
+        <Card className="border-0">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg">Recent Snap Payments</CardTitle>
           </CardHeader>
