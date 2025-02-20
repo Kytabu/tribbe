@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
@@ -12,6 +12,29 @@ const AuthPage = () => {
   const [verificationCode, setVerificationCode] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // Add keyboard event listener
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (isVerifying) {
+        // Handle numeric keys
+        if (/^[0-9]$/.test(event.key) && verificationCode.length < 4) {
+          setVerificationCode(prev => prev + event.key);
+        }
+        // Handle backspace
+        if (event.key === 'Backspace') {
+          setVerificationCode(prev => prev.slice(0, -1));
+        }
+        // Handle enter when code is complete
+        if (event.key === 'Enter' && verificationCode.length === 4) {
+          handleVerificationSubmit();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [isVerifying, verificationCode]);
 
   const handlePhoneSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
