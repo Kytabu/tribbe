@@ -71,7 +71,7 @@ export default function Flami() {
 
   return (
     <AppLayout>
-      <div className="container max-w-4xl mx-auto">
+      <div className="container max-w-4xl mx-auto min-h-screen flex flex-col pb-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <Button
@@ -103,8 +103,8 @@ export default function Flami() {
           </Button>
         </div>
 
-        <Card className="bg-background p-6">
-          <Tabs defaultValue="chat" className="w-full">
+        <Card className="bg-background p-6 flex-1 flex flex-col">
+          <Tabs defaultValue="chat" className="w-full h-full flex flex-col">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="chat" className="text-sm">
                 <MessageSquare className="w-4 h-4 mr-2" />
@@ -115,14 +115,14 @@ export default function Flami() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="chat" className="space-y-4">
-              <div className="h-[50vh] flex flex-col">
+            <TabsContent value="chat" className="flex-1 flex flex-col space-y-4">
+              <div className="flex-1 flex flex-col">
                 <div className="flex-1 overflow-y-auto space-y-4 py-4">
                   {messages.map((message) => (
                     <ChatMessage key={message.id} message={message} />
                   ))}
                 </div>
-                <div className="px-4 py-2 border-t border-muted">
+                <div className="px-4">
                   <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function Flami() {
               />
             </TabsContent>
 
-            <TabsContent value="activity" className="space-y-4">
+            <TabsContent value="activity" className="space-y-4 flex-1">
               <div className="space-y-4">
                 {recentActivities.map((activity, index) => (
                   <div 
