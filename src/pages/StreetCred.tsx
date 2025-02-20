@@ -134,12 +134,11 @@ export default function StreetCred() {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div 
-                  className="w-16 h-16 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: currentLevel.color }}
-                >
-                  <User className="w-8 h-8 text-black" />
-                </div>
+                <img 
+                  src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png"
+                  alt="Profile"
+                  className="w-16 h-16 rounded-full object-cover"
+                />
                 <span 
                   className="text-lg font-medium"
                   style={{ color: currentLevel.color }}

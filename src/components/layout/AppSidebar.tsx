@@ -15,10 +15,23 @@ import {
   Star,
   Settings,
   Camera,
+  LucideIcon,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
-const navigationItems = [
+interface NavigationItem {
+  icon: LucideIcon;
+  label: string;
+  href: string;
+}
+
+interface FooterItem {
+  icon: LucideIcon | (() => JSX.Element);
+  label: string;
+  href: string;
+}
+
+const navigationItems: NavigationItem[] = [
   {
     icon: MessageCircle,
     label: "Flami",
@@ -51,7 +64,7 @@ const navigationItems = [
   },
 ];
 
-const footerItems = [
+const footerItems: FooterItem[] = [
   {
     icon: () => (
       <img 
