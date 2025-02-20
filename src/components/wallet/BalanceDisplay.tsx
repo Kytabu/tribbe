@@ -1,4 +1,3 @@
-
 import { PiggyBank, Gem, Trophy, CreditCard, Clock, Wallet, Plus, Send, MessageSquare, ArrowLeft, QrCode, Smartphone, Users, User } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { Transaction } from "@/types/wallet";
@@ -53,33 +52,42 @@ export function BalanceDisplay({
       </div>
 
       <div className="space-y-2">
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <div className="flex justify-between items-center">
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
               <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
               <span className="text-tribbe-sage">Amount In:</span>
             </div>
             <span className="font-medium">{currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}</span>
           </div>
-        </div>
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <div className="flex justify-between items-center">
+        </Button>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
               <Gem className="w-5 h-5 text-[#FF6B6B]" />
               <span className="text-tribbe-sage">Amount Out:</span>
             </div>
             <span className="font-medium">{currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}</span>
           </div>
-        </div>
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <div className="flex justify-between items-center">
+        </Button>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
               <Trophy className="w-5 h-5 text-[#4ECDC4]" />
               <span className="text-tribbe-sage">Expected Interest:</span>
             </div>
             <span className="font-medium text-[#A9FF22]">+{currencySymbols[selectedCurrency]} {lendingStats.total_expected_interest.toFixed(2)}</span>
           </div>
-        </div>
+        </Button>
       </div>
     </div>
   );
@@ -112,50 +120,44 @@ export function BalanceDisplay({
       </div>
       
       <div className="space-y-2">
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <Smartphone className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">M-Pesa</span>
-              </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <Smartphone className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">M-Pesa</span>
             </div>
-          </Button>
-        </div>
+            <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+          </div>
+        </Button>
 
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-[#79CFFF] group-hover:text-tribbe-lime" />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Credit or Debit Card</span>
-              </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <CreditCard className="w-5 h-5 text-[#79CFFF] group-hover:text-tribbe-lime" />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">Credit or Debit Card</span>
             </div>
-          </Button>
-        </div>
+            <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+          </div>
+        </Button>
 
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <Wallet className="w-5 h-5 text-[#C699FF] group-hover:text-tribbe-lime" />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Bank Transfer</span>
-              </div>
-              <span className="font-medium group-hover:text-tribbe-lime">1-2 days</span>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <Wallet className="w-5 h-5 text-[#C699FF] group-hover:text-tribbe-lime" />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">Bank Transfer</span>
             </div>
-          </Button>
-        </div>
+            <span className="font-medium group-hover:text-tribbe-lime">1-2 days</span>
+          </div>
+        </Button>
       </div>
     </div>
   );
@@ -188,62 +190,56 @@ export function BalanceDisplay({
       </div>
       
       <div className="space-y-2">
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <img 
-                  src="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png" 
-                  alt="Green Flame Icon" 
-                  className="w-5 h-5 object-contain"
-                />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Close Friends</span>
-              </div>
-              <span className="font-medium group-hover:text-tribbe-lime">kinda quick</span>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <img 
+                src="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png" 
+                alt="Green Flame Icon" 
+                className="w-5 h-5 object-contain"
+              />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">Close Friends</span>
             </div>
-          </Button>
-        </div>
+            <span className="font-medium group-hover:text-tribbe-lime">kinda quick</span>
+          </div>
+        </Button>
 
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <img 
-                  src="/lovable-uploads/db93bdb2-b924-4cd9-ba73-27b77b8358d3.png" 
-                  alt="Blue Flame Icon" 
-                  className="w-5 h-5 object-contain"
-                />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circle</span>
-              </div>
-              <span className="font-medium group-hover:text-tribbe-lime">should be fast</span>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <img 
+                src="/lovable-uploads/db93bdb2-b924-4cd9-ba73-27b77b8358d3.png" 
+                alt="Blue Flame Icon" 
+                className="w-5 h-5 object-contain"
+              />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circle</span>
             </div>
-          </Button>
-        </div>
+            <span className="font-medium group-hover:text-tribbe-lime">should be fast</span>
+          </div>
+        </Button>
 
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <img 
-                  src="/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" 
-                  alt="Purple Flame Icon" 
-                  className="w-5 h-5 object-contain"
-                />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
-              </div>
-              <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <img 
+                src="/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" 
+                alt="Purple Flame Icon" 
+                className="w-5 h-5 object-contain"
+              />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Tribbe</span>
             </div>
-          </Button>
-        </div>
+            <span className="font-medium group-hover:text-tribbe-lime">Instant</span>
+          </div>
+        </Button>
       </div>
     </div>
   );
@@ -276,69 +272,63 @@ export function BalanceDisplay({
       </div>
       
       <div className="space-y-2">
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <img 
-                  src="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png" 
-                  alt="Green Flame Icon" 
-                  className="w-5 h-5 object-contain"
-                />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Requests</span>
-              </div>
-              <span className="font-medium group-hover:text-tribbe-lime">12</span>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <img 
+                src="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png" 
+                alt="Green Flame Icon" 
+                className="w-5 h-5 object-contain"
+              />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">Requests</span>
             </div>
-          </Button>
-        </div>
+            <span className="font-medium group-hover:text-tribbe-lime">12</span>
+          </div>
+        </Button>
 
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <img 
-                  src="/lovable-uploads/db93bdb2-b924-4cd9-ba73-27b77b8358d3.png" 
-                  alt="Blue Flame Icon" 
-                  className="w-5 h-5 object-contain"
-                />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circles</span>
-              </div>
-              <Plus className="w-5 h-5 text-tribbe-sage group-hover:text-tribbe-lime" />
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <img 
+                src="/lovable-uploads/db93bdb2-b924-4cd9-ba73-27b77b8358d3.png" 
+                alt="Blue Flame Icon" 
+                className="w-5 h-5 object-contain"
+              />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">My Circles</span>
             </div>
-          </Button>
-        </div>
+            <Plus className="w-5 h-5 text-tribbe-sage group-hover:text-tribbe-lime" />
+          </div>
+        </Button>
 
-        <div className="p-3 rounded-lg bg-gradient-to-r from-background to-muted border transition-all duration-300 hover:scale-105">
-          <Button
-            variant="ghost"
-            className="w-full justify-start p-0 hover:bg-transparent group"
-          >
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-2">
-                <img 
-                  src="/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" 
-                  alt="Purple Flame Icon" 
-                  className="w-5 h-5 object-contain"
-                />
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">The Tribbe</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-tribbe-sage group-hover:text-tribbe-lime">Automate</span>
-                <Switch
-                  checked={autoTribbe}
-                  onCheckedChange={setAutoTribbe}
-                  className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border border-tribbe-lime"
-                />
-              </div>
+        <Button
+          variant="ghost"
+          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+        >
+          <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+              <img 
+                src="/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" 
+                alt="Purple Flame Icon" 
+                className="w-5 h-5 object-contain"
+              />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">The Tribbe</span>
             </div>
-          </Button>
-        </div>
+            <div className="flex items-center gap-2">
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">Automate</span>
+              <Switch
+                checked={autoTribbe}
+                onCheckedChange={setAutoTribbe}
+                className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border border-tribbe-lime"
+              />
+            </div>
+          </div>
+        </Button>
       </div>
     </div>
   );
