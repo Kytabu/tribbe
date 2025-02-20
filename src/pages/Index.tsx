@@ -1,18 +1,36 @@
 
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Progress } from "@/components/ui/progress";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Start fade out after 5 seconds
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 5000);
+    const startTime = Date.now();
+    const duration = 5000; // 5 seconds
 
-    return () => clearTimeout(timer);
+    const updateProgress = () => {
+      const currentTime = Date.now();
+      const elapsed = currentTime - startTime;
+      const newProgress = Math.min((elapsed / duration) * 100, 100);
+      
+      if (elapsed < duration) {
+        setProgress(newProgress);
+        requestAnimationFrame(updateProgress);
+      } else {
+        setProgress(100);
+        setIsVisible(false);
+      }
+    };
+
+    requestAnimationFrame(updateProgress);
+
+    return () => {
+      setProgress(0);
+    };
   }, []);
 
   // Navigate to auth after fade animation completes
@@ -49,6 +67,7 @@ const Index = () => {
           <h2 className="text-4xl font-righteous text-tribbe-lime mx-auto" style={{ width: '27rem' }}>
             the new way to do money
           </h2>
+          <Progress value={progress} className="w-[27rem] mx-auto h-2" />
         </div>
       </div>
     </div>
