@@ -58,10 +58,10 @@ export function BalanceDisplay({
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
-              <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
-              <span className="text-tribbe-sage">Amount In:</span>
+              <PiggyBank className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">Amount In</span>
             </div>
-            <span className="font-medium">{currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}</span>
+            <span className="font-medium group-hover:text-tribbe-lime">{currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}</span>
           </div>
         </Button>
         <Button
@@ -70,10 +70,10 @@ export function BalanceDisplay({
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
-              <Gem className="w-5 h-5 text-[#FF6B6B]" />
-              <span className="text-tribbe-sage">Amount Out:</span>
+              <Gem className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">Amount Out</span>
             </div>
-            <span className="font-medium">{currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}</span>
+            <span className="font-medium group-hover:text-tribbe-lime">{currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}</span>
           </div>
         </Button>
         <Button
@@ -82,10 +82,10 @@ export function BalanceDisplay({
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-[#4ECDC4]" />
-              <span className="text-tribbe-sage">Expected Interest:</span>
+              <Trophy className="w-5 h-5 text-[#4ECDC4] group-hover:text-tribbe-lime" />
+              <span className="text-tribbe-sage group-hover:text-tribbe-lime">Expected Interest</span>
             </div>
-            <span className="font-medium text-[#A9FF22]">+{currencySymbols[selectedCurrency]} {lendingStats.total_expected_interest.toFixed(2)}</span>
+            <span className="font-medium group-hover:text-tribbe-lime">+{currencySymbols[selectedCurrency]} {lendingStats.total_expected_interest.toFixed(2)}</span>
           </div>
         </Button>
       </div>
