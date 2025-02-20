@@ -42,7 +42,6 @@ export default function MyTribbe() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
 
-  // Updated contacts data with the remaining profile pictures
   const contacts = [
     { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
     { id: "2", name: "Bob Johnson", phone: "+254 723 456 789", image: "/lovable-uploads/a66bb083-0a55-45b2-9fbb-b899fee07494.png" },
@@ -120,7 +119,6 @@ export default function MyTribbe() {
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto space-y-6 py-6">
-        {/* Header Section */}
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-white">My Tribbe</h1>
           <Button 
@@ -132,7 +130,6 @@ export default function MyTribbe() {
           </Button>
         </div>
 
-        {/* Trust Score Card */}
         <Card className="bg-tribbe-grey/50">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
@@ -146,7 +143,6 @@ export default function MyTribbe() {
           </CardContent>
         </Card>
 
-        {/* Network Members Section */}
         <Card className="bg-tribbe-grey/50">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
@@ -200,9 +196,7 @@ export default function MyTribbe() {
           </CardContent>
         </Card>
 
-        {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Network Size */}
           <Card className="bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300">
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
@@ -210,35 +204,18 @@ export default function MyTribbe() {
                   <Users className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-sm text-gray-400">Network Size</h3>
-                  <p className="text-2xl font-bold text-white">{stats.networkSize}</p>
-                  <p className="text-xs text-gray-400">Connected members</p>
+                  <h3 className="text-sm text-gray-400">My Total Tribbes</h3>
+                  <p className="text-2xl font-bold text-white">{5}</p>
+                  <p className="text-xs text-gray-400">Active memberships</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Active Circles */}
           <Card className="bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300">
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
                 <div className="p-3 rounded-full bg-black/20 text-green-400">
-                  <BadgeCheck className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-sm text-gray-400">Active Circles</h3>
-                  <p className="text-2xl font-bold text-white">{stats.activeCircles}</p>
-                  <p className="text-xs text-gray-400">Current memberships</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Total Lent */}
-          <Card className="bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300">
-            <CardContent className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-black/20 text-yellow-400">
                   <Wallet className="w-6 h-6" />
                 </div>
                 <div>
@@ -246,14 +223,30 @@ export default function MyTribbe() {
                   <p className="text-2xl font-bold text-white">
                     KES {stats.totalLent.toLocaleString()}
                   </p>
-                  <p className="text-xs text-gray-400">Across all circles</p>
+                  <p className="text-xs text-gray-400">To Tribbe</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-full bg-black/20 text-red-400">
+                  <Wallet className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-sm text-gray-400">Total Borrowed</h3>
+                  <p className="text-2xl font-bold text-white">
+                    KES {(25000).toLocaleString()}
+                  </p>
+                  <p className="text-xs text-gray-400">From Tribbe</p>
                 </div>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Button 
             variant="outline" 
@@ -288,7 +281,6 @@ export default function MyTribbe() {
           </Button>
         </div>
 
-        {/* View All Members Dialog */}
         <Dialog open={showAllMembers} onOpenChange={setShowAllMembers}>
           <DialogContent className="bg-tribbe-grey/95 border-tribbe-grey max-w-3xl">
             <DialogHeader>
@@ -331,7 +323,6 @@ export default function MyTribbe() {
           </DialogContent>
         </Dialog>
 
-        {/* Contact List Sheet */}
         <Sheet open={showContactList} onOpenChange={setShowContactList}>
           <SheetContent className="w-full sm:max-w-md p-0">
             <SheetHeader className="p-6 border-b border-tribbe-grey">
