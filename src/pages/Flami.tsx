@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,7 +16,6 @@ export default function Flami() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   
-  // Add credit score logic
   const creditScore = 720;
   const streetCredLevels = [
     { name: "The Newbie", color: "#FFCA99", minScore: 300 },
@@ -38,13 +36,11 @@ export default function Flami() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle chat submission logic here
     console.log("Submitted:", input);
     setInput("");
   };
 
   const handleSuggestionClick = (text: string, points: number) => {
-    // Handle suggestion click logic here
     console.log("Suggestion clicked:", text, points);
   };
 
@@ -71,9 +67,7 @@ export default function Flami() {
 
   return (
     <AppLayout>
-      {/* Main container - full height */}
       <div className="container max-w-4xl mx-auto h-[calc(100vh-2rem)] flex flex-col pb-6">
-        {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <Button
@@ -105,9 +99,7 @@ export default function Flami() {
           </Button>
         </div>
 
-        {/* Card - fills remaining height */}
         <Card className="flex-1 bg-background p-6 flex flex-col min-h-0">
-          {/* Tabs container - full height of card */}
           <Tabs defaultValue="chat" className="flex flex-col h-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="chat" className="text-sm">
@@ -119,9 +111,7 @@ export default function Flami() {
               </TabsTrigger>
             </TabsList>
 
-            {/* Chat tab content - full height minus header */}
             <TabsContent value="chat" className="flex-1 flex flex-col min-h-0">
-              {/* Messages container - scrollable */}
               <div className="flex-1 overflow-y-auto">
                 <div className="space-y-4 py-4">
                   {messages.map((message) => (
@@ -129,17 +119,14 @@ export default function Flami() {
                   ))}
                 </div>
               </div>
-              {/* Bottom section - fixed at bottom */}
-              <div className="pt-4 border-t">
-                <div className="space-y-4">
-                  <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
-                  <ChatInput 
-                    input={input}
-                    isLoading={isLoading}
-                    onInputChange={(value) => setInput(value)}
-                    onSubmit={handleSubmit}
-                  />
-                </div>
+              <div className="space-y-4">
+                <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
+                <ChatInput 
+                  input={input}
+                  isLoading={isLoading}
+                  onInputChange={(value) => setInput(value)}
+                  onSubmit={handleSubmit}
+                />
               </div>
             </TabsContent>
 
