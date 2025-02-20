@@ -3,7 +3,12 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Users,
   Wallet,
@@ -13,7 +18,8 @@ import {
   UserPlus,
   MoreHorizontal,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  X
 } from "lucide-react";
 import { useState, useRef } from "react";
 
@@ -22,6 +28,7 @@ export default function MyTribbe() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [showAllMembers, setShowAllMembers] = useState(false);
 
   // Mock data - In a real app, this would come from your backend
   const stats = {
@@ -110,7 +117,7 @@ export default function MyTribbe() {
               <Button 
                 variant="ghost" 
                 size="sm"
-                onClick={() => navigate("/circles")}
+                onClick={() => setShowAllMembers(true)}
                 className="text-gray-400 hover:text-white"
               >
                 View All <MoreHorizontal className="w-4 h-4 ml-2" />
@@ -243,6 +250,49 @@ export default function MyTribbe() {
             </div>
           </Button>
         </div>
+
+        {/* View All Members Dialog */}
+        <Dialog open={showAllMembers} onOpenChange={setShowAllMembers}>
+          <DialogContent className="bg-tribbe-grey/95 border-tribbe-grey max-w-3xl">
+            <DialogHeader>
+              <div className="flex items-center justify-between">
+                <DialogTitle className="text-xl font-bold text-white">Network Members</DialogTitle>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowAllMembers(false)}
+                  className="text-gray-400 hover:text-white"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </DialogHeader>
+            <div className="grid grid-cols-6 gap-4 p-4">
+              {networkMembers.slice(0, 6).map((member) => (
+                <div key={member.id} className="flex flex-col items-center space-y-2">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-16 h-16"
+                  />
+                  <p className="text-sm text-gray-300">{member.name}</p>
+                </div>
+              ))}
+            </div>
+            <div className="grid grid-cols-6 gap-4 p-4">
+              {networkMembers.slice(6).map((member) => (
+                <div key={member.id} className="flex flex-col items-center space-y-2">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-16 h-16"
+                  />
+                  <p className="text-sm text-gray-300">{member.name}</p>
+                </div>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </AppLayout>
   );
