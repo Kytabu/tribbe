@@ -18,7 +18,7 @@ const buttonVariants = cva(
           "border-2 border-tribbe-lime text-tribbe-lime bg-background hover:bg-tribbe-lime hover:text-black",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "border-2 border-tribbe-lime text-tribbe-lime hover:bg-tribbe-lime hover:text-black",
+        ghost: "text-tribbe-lime hover:bg-background/50",
         link: "text-tribbe-lime underline-offset-4 hover:underline",
         gold: "bg-tribbe-gold text-white hover:bg-tribbe-gold/90",
       },

@@ -153,7 +153,6 @@ export default function Wallet() {
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
               <div className="flex items-center gap-3">
                 <Button 
-                  className="border-0 hover:bg-background/50"
                   variant="ghost" 
                   size="icon"
                   onClick={() => navigate("/flami")}
