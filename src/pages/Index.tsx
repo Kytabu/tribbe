@@ -33,11 +33,11 @@ const Index = () => {
     };
   }, []);
 
-  // Navigate to auth after fade animation completes
+  // Navigate to pin-entry after fade animation completes
   useEffect(() => {
     if (!isVisible) {
       const navigationTimer = setTimeout(() => {
-        navigate('/auth');
+        navigate('/pin-entry');
       }, 300); // Match this with the CSS transition duration
 
       return () => clearTimeout(navigationTimer);
