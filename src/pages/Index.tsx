@@ -10,18 +10,6 @@ const Index = () => {
   const [shouldNavigate, setShouldNavigate] = useState(false);
   const navigate = useNavigate();
 
-  // Check authentication status first
-  useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        navigate('/auth');
-        return;
-      }
-    };
-    checkAuth();
-  }, [navigate]);
-
   useEffect(() => {
     const startTime = Date.now();
     const duration = 5000; // 5 seconds
@@ -48,13 +36,14 @@ const Index = () => {
     };
   }, []);
 
-  // Navigate to pin-entry after fade animation completes
+  // Navigate after the 5-second animation completes
   useEffect(() => {
     if (!isVisible && shouldNavigate) {
-      const navigationTimer = setTimeout(() => {
-        setShouldNavigate(false); // Prevent further navigation attempts
-        navigate('/pin-entry', { replace: true }); // Use replace to prevent back navigation
-      }, 300); // Match this with the CSS transition duration
+      const navigationTimer = setTimeout(async () => {
+        setShouldNavigate(false);
+        const { data: { user } } = await supabase.auth.getUser();
+        navigate(user ? '/pin-entry' : '/auth', { replace: true });
+      }, 300);
 
       return () => clearTimeout(navigationTimer);
     }
