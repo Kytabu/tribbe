@@ -38,6 +38,7 @@ export function BalanceDisplay({
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <Button
+          className={`border-0 ${activeView === 'balance' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
           variant={activeView === 'balance' ? "default" : "ghost"}
           size="sm"
           onClick={() => setActiveView('balance')}
@@ -46,6 +47,7 @@ export function BalanceDisplay({
           Balance
         </Button>
         <Button
+          className={`border-0 ${activeView === 'add' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
           variant={activeView === 'add' ? "default" : "ghost"}
           size="sm"
           onClick={() => setActiveView('add')}
@@ -54,6 +56,7 @@ export function BalanceDisplay({
           Add Money
         </Button>
         <Button
+          className={`border-0 ${activeView === 'request' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
           variant={activeView === 'request' ? "default" : "ghost"}
           size="sm"
           onClick={() => setActiveView('request')}
@@ -62,6 +65,7 @@ export function BalanceDisplay({
           Request
         </Button>
         <Button
+          className={`border-0 ${activeView === 'send' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
           variant={activeView === 'send' ? "default" : "ghost"}
           size="sm"
           onClick={() => setActiveView('send')}
@@ -78,7 +82,7 @@ export function BalanceDisplay({
               <span className="text-tribbe-sage animate-pulse">Loading...</span>
             ) : (
               <div className="flex items-center gap-2">
-                <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm border text-black font-bold">
+                <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm text-black font-bold">
                   {selectedCurrency.substring(0, 1)}
                 </span>
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
@@ -89,7 +93,7 @@ export function BalanceDisplay({
           </div>
 
           <div className="space-y-2">
-            <div className="w-full h-[60px] px-4 rounded-lg bg-card text-card-foreground">
+            <div className="w-full h-[60px] px-4 rounded-lg bg-muted text-card-foreground">
               <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
                   <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
@@ -101,7 +105,7 @@ export function BalanceDisplay({
               </div>
             </div>
 
-            <div className="w-full h-[60px] px-4 rounded-lg bg-card text-card-foreground">
+            <div className="w-full h-[60px] px-4 rounded-lg bg-muted text-card-foreground">
               <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
                   <Gem className="w-5 h-5 text-[#FF6B6B]" />
@@ -113,7 +117,7 @@ export function BalanceDisplay({
               </div>
             </div>
 
-            <div className="w-full h-[60px] px-4 rounded-lg bg-card text-card-foreground">
+            <div className="w-full h-[60px] px-4 rounded-lg bg-muted text-card-foreground">
               <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
                   <Trophy className="w-5 h-5 text-[#4ECDC4]" />
