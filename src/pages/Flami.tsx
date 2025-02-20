@@ -71,7 +71,9 @@ export default function Flami() {
 
   return (
     <AppLayout>
-      <div className="container max-w-4xl mx-auto min-h-screen flex flex-col pb-6">
+      {/* Main container - full height */}
+      <div className="container max-w-4xl mx-auto h-[calc(100vh-2rem)] flex flex-col pb-6">
+        {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <Button
@@ -103,8 +105,10 @@ export default function Flami() {
           </Button>
         </div>
 
-        <Card className="bg-background p-6 flex-1 flex flex-col">
-          <Tabs defaultValue="chat" className="w-full h-full flex flex-col">
+        {/* Card - fills remaining height */}
+        <Card className="flex-1 bg-background p-6 flex flex-col min-h-0">
+          {/* Tabs container - full height of card */}
+          <Tabs defaultValue="chat" className="flex flex-col h-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="chat" className="text-sm">
                 <MessageSquare className="w-4 h-4 mr-2" />
@@ -115,22 +119,27 @@ export default function Flami() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="chat" className="flex-1 flex flex-col h-full">
-              <div className="flex-grow overflow-y-auto space-y-4 py-4">
-                {messages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
-              </div>
-              <div className="sticky bottom-0 space-y-4 mt-auto">
-                <div className="px-4">
-                  <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
+            {/* Chat tab content - full height minus header */}
+            <TabsContent value="chat" className="flex-1 flex flex-col min-h-0">
+              {/* Messages container - scrollable */}
+              <div className="flex-1 overflow-y-auto">
+                <div className="space-y-4 py-4">
+                  {messages.map((message) => (
+                    <ChatMessage key={message.id} message={message} />
+                  ))}
                 </div>
-                <ChatInput 
-                  input={input}
-                  isLoading={isLoading}
-                  onInputChange={(value) => setInput(value)}
-                  onSubmit={handleSubmit}
-                />
+              </div>
+              {/* Bottom section - fixed at bottom */}
+              <div className="pt-4 border-t">
+                <div className="space-y-4">
+                  <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
+                  <ChatInput 
+                    input={input}
+                    isLoading={isLoading}
+                    onInputChange={(value) => setInput(value)}
+                    onSubmit={handleSubmit}
+                  />
+                </div>
               </div>
             </TabsContent>
 
