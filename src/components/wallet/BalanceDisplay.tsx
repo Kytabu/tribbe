@@ -124,7 +124,7 @@ export function BalanceDisplay({
       <div className="space-y-2">
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
@@ -137,7 +137,7 @@ export function BalanceDisplay({
 
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
@@ -150,7 +150,7 @@ export function BalanceDisplay({
 
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
@@ -194,7 +194,7 @@ export function BalanceDisplay({
       <div className="space-y-2">
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
@@ -211,7 +211,7 @@ export function BalanceDisplay({
 
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
@@ -228,7 +228,7 @@ export function BalanceDisplay({
 
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
@@ -276,7 +276,7 @@ export function BalanceDisplay({
       <div className="space-y-2">
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
@@ -293,7 +293,7 @@ export function BalanceDisplay({
 
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
@@ -310,7 +310,7 @@ export function BalanceDisplay({
 
         <Button
           variant="ghost"
-          className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+          className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
         >
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-2">
