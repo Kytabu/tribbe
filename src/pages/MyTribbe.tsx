@@ -42,16 +42,16 @@ export default function MyTribbe() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
 
-  // Mock contacts data
+  // Updated contacts data with the remaining profile pictures
   const contacts = [
-    { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png" },
-    { id: "2", name: "Bob Johnson", phone: "+254 723 456 789", image: "/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" },
-    { id: "3", name: "Carol Williams", phone: "+254 734 567 890", image: "/lovable-uploads/89161f75-e901-43d2-835f-e937209cbbac.png" },
-    { id: "4", name: "David Brown", phone: "+254 745 678 901", image: "/lovable-uploads/99f41a26-6b2a-406b-a31a-c22eb89c42b8.png" },
-    { id: "5", name: "Eva Davis", phone: "+254 756 789 012", image: "/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png" },
-    { id: "6", name: "Frank Miller", phone: "+254 767 890 123", image: "/lovable-uploads/24576fa2-343c-42db-b26e-e56b0aa76cc8.png" },
-    { id: "7", name: "Grace Taylor", phone: "+254 778 901 234", image: "/lovable-uploads/29034cbf-7a42-409d-bad4-0f84c8fd02e7.png" },
-    { id: "8", name: "Henry Wilson", phone: "+254 789 012 345", image: "/lovable-uploads/3dd625e4-28a3-4005-92a7-0b2aad3fa575.png" }
+    { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
+    { id: "2", name: "Bob Johnson", phone: "+254 723 456 789", image: "/lovable-uploads/a66bb083-0a55-45b2-9fbb-b899fee07494.png" },
+    { id: "3", name: "Carol Williams", phone: "+254 734 567 890", image: "/lovable-uploads/aa757ca5-a282-4eac-9369-b740b480634b.png" },
+    { id: "4", name: "David Brown", phone: "+254 745 678 901", image: "/lovable-uploads/b145f32d-c53a-4dfd-bc4f-c501335741ab.png" },
+    { id: "5", name: "Eva Davis", phone: "+254 756 789 012", image: "/lovable-uploads/bf878166-6407-457b-ac97-59a01d4a528b.png" },
+    { id: "6", name: "Frank Miller", phone: "+254 767 890 123", image: "/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png" },
+    { id: "7", name: "Grace Taylor", phone: "+254 778 901 234", image: "/lovable-uploads/c1c23c5c-90f5-4baa-a4b9-25ac8900c468.png" },
+    { id: "8", name: "Henry Wilson", phone: "+254 789 012 345", image: "/lovable-uploads/c8a61242-9472-4c27-a50d-adbc2e7a24b0.png" }
   ];
 
   const filteredContacts = contacts
@@ -370,7 +370,7 @@ export default function MyTribbe() {
                   />
                   <div className="flex-1 text-left">
                     <h3 className="text-white font-medium">{contact.name}</h3>
-                    <p className="text-gray-400 text-sm">{contact.phone}</p>
+                    <p className="text-sm text-gray-400">{contact.phone}</p>
                   </div>
                   <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center
                     ${selectedContacts.includes(contact.id)
