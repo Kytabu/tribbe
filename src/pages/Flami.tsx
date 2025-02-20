@@ -14,6 +14,8 @@ import { useState } from "react";
 export default function Flami() {
   const navigate = useNavigate();
   const [messages] = useState<Message[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   
   // Add credit score logic
   const creditScore = 720;
@@ -33,6 +35,18 @@ export default function Flami() {
   };
 
   const currentLevel = getCurrentLevel(creditScore);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle chat submission logic here
+    console.log("Submitted:", input);
+    setInput("");
+  };
+
+  const handleSuggestionClick = (text: string, points: number) => {
+    // Handle suggestion click logic here
+    console.log("Suggestion clicked:", text, points);
+  };
 
   return (
     <AppLayout>
@@ -86,11 +100,16 @@ export default function Flami() {
                   <ChatMessage key={message.id} message={message} />
                 ))}
               </div>
-              <ChatInput />
+              <ChatInput 
+                input={input}
+                isLoading={isLoading}
+                onInputChange={(value) => setInput(value)}
+                onSubmit={handleSubmit}
+              />
             </TabsContent>
 
             <TabsContent value="suggestions">
-              <ChatSuggestions />
+              <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
             </TabsContent>
           </Tabs>
         </Card>
