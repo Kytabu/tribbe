@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 
 export default function Flami() {
   const navigate = useNavigate();
-  const [messages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [activityMessages, setActivityMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [activityInput, setActivityInput] = useState("");
@@ -74,18 +74,54 @@ export default function Flami() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitted:", input);
+    if (!input.trim()) return;
+
+    // Add user message
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content: input,
+      role: "user",
+      timestamp: new Date()
+    };
+    setMessages(prev => [...prev, userMessage]);
     setInput("");
+
+    // Simulate assistant response
+    setIsLoading(true);
+    setTimeout(() => {
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "Thanks for your message! How else can I help you today? 😊",
+        role: "assistant",
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, assistantMessage]);
+      setIsLoading(false);
+    }, 1000);
   };
 
   const handleActivitySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Activity message submitted:", activityInput);
+    if (!activityInput.trim()) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content: activityInput,
+      role: "user",
+      timestamp: new Date()
+    };
+    setActivityMessages(prev => [...prev, userMessage]);
     setActivityInput("");
   };
 
   const handleSuggestionClick = (text: string, points: number) => {
-    console.log("Suggestion clicked:", text, points);
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content: text,
+      role: "user",
+      timestamp: new Date()
+    };
+    setMessages(prev => [...prev, userMessage]);
   };
 
   return (
