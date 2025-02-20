@@ -55,9 +55,9 @@ const footerItems = [
   {
     icon: () => (
       <img 
-        src="/lovable-uploads/8539168b-de31-44b2-bf34-441396547926.png" 
+        src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
         alt="Profile" 
-        className="w-5 h-5 rounded-full"
+        className="w-5 h-5 object-cover rounded-full"
       />
     ),
     label: "Profile",
