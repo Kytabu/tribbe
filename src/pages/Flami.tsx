@@ -1,185 +1,98 @@
-import { useState } from "react";
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
-import { Message } from "@/types/chat";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { ArrowLeft, MessageSquare } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ChatInput } from "@/components/chat/ChatInput";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatSuggestions } from "@/components/chat/ChatSuggestions";
-import { ChatInput } from "@/components/chat/ChatInput";
-import { ProgressBar } from "@/components/chat/ProgressBar";
+import { Message } from "@/types/chat";
+import { useState } from "react";
 
 export default function Flami() {
-  const { toast } = useToast();
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      content: `👋 Hey Tonee! Here's your financial update:
+  const navigate = useNavigate();
+  const [messages] = useState<Message[]>([]);
+  
+  // Add credit score logic
+  const creditScore = 720;
+  const streetCredLevels = [
+    { name: "The Newbie", color: "#FFCA99", minScore: 300 },
+    { name: "The Builder", color: "#F9FE03", minScore: 580 },
+    { name: "The Trailblazer", color: "#88D3FE", minScore: 670 },
+    { name: "The Innovator", color: "#A9FF22", minScore: 740 },
+    { name: "The Legend", color: "#C699FF", minScore: 800 }
+  ];
 
-🌟 Credit Score: 720 (Up 15 points this month)
-💰 Wallet Balance: KES 45,000
-🔄 Recent Transactions:
-- Received KES 15,000 from Sarah (Circle contribution)
-- Sent KES 5,000 to Local Market
-- Earned KES 2,500 interest from lending
-
-📈 Opportunities:
-- 3 active lending requests in your network
-- 2 new savings circles you might be interested in
-- Your credit limit can be increased by 20% based on your activity
-
-💡 Tips:
-- Consider joining the "Business Growth" circle - it matches your financial goals
-- Your consistent payments have improved your trust score
-- You're on track to reach your savings goal by next month
-
-How can I help you grow your bag today?`,
-      role: "assistant",
-      timestamp: new Date(),
-    },
-  ]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [lastMessageTime, setLastMessageTime] = useState(0);
-  const [userLevel, setUserLevel] = useState(1);
-  const [userPoints, setUserPoints] = useState(0);
-
-  const handleSuggestionClick = async (text: string, points: number) => {
-    setInput(text);
-    if (!isLoading) {
-      await handleMessage(text, points);
-    }
+  const getCurrentLevel = (score: number) => {
+    return streetCredLevels
+      .slice()
+      .reverse()
+      .find(level => score >= level.minScore) || streetCredLevels[0];
   };
 
-  const handleMessage = async (content: string, points: number = 5) => {
-    const now = Date.now();
-    const timeSinceLastMessage = now - lastMessageTime;
-    if (timeSinceLastMessage < 3000) {
-      toast({
-        title: "Cooldown Active!",
-        description: "Wait a moment before your next move! ⏳",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: content.trim(),
-      role: "user",
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
-    setIsLoading(true);
-    setLastMessageTime(now);
-
-    try {
-      const chatMessages = messages.map(msg => ({
-        role: msg.role,
-        content: msg.content
-      }));
-      chatMessages.push({
-        role: "user",
-        content: content.trim()
-      });
-
-      await new Promise(resolve => setTimeout(resolve, 500));
-
-      const { data, error } = await supabase.functions.invoke('chat', {
-        body: { messages: chatMessages }
-      });
-
-      if (error) {
-        if (error.message.includes('429') || error.message.toLowerCase().includes('too many requests')) {
-          toast({
-            title: "Energy Depleted!",
-            description: "Take a short break to recharge. ⚡",
-            variant: "destructive",
-          });
-          return;
-        }
-        throw error;
-      }
-
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        content: data.message,
-        role: "assistant",
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, assistantMessage]);
-      
-      setUserPoints(prev => {
-        const newPoints = prev + points;
-        if (newPoints >= userLevel * 100) {
-          setUserLevel(l => l + 1);
-          toast({
-            title: "🎉 Level Up!",
-            description: `You've reached level ${userLevel + 1}! Keep growing!`,
-            variant: "default",
-            className: "bg-tribbe-lime text-black",
-          });
-        }
-        return newPoints;
-      });
-
-      if (points > 5) {
-        toast({
-          title: "🌟 Points Earned!",
-          description: `+${points} points for exploring financial wisdom!`,
-          variant: "default",
-          className: "bg-tribbe-aqua text-black",
-        });
-      }
-    } catch (error) {
-      console.error('Chat error:', error);
-      toast({
-        title: "Quest Failed!",
-        description: "Connection lost with Flami. Try again soon! 🔄",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-    await handleMessage(input);
-  };
+  const currentLevel = getCurrentLevel(creditScore);
 
   return (
     <AppLayout>
-      <div className="container max-w-4xl mx-auto h-[calc(100vh-2rem)] flex flex-col">
-        <div className="relative mb-4">
-          <h1 className="text-4xl font-righteous text-tribbe-lime text-center">flami</h1>
-          <div className="absolute right-0 top-0">
-            <ProgressBar userLevel={userLevel} userPoints={userPoints} />
+      <div className="container max-w-4xl mx-auto">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate("/wallet")}
+              className="hover:bg-tribbe-lime/20"
+            >
+              <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
+            </Button>
+            <h2 className="text-2xl font-righteous text-tribbe-lime">Flami</h2>
           </div>
-        </div>
-        
-        <Card className="flex-1 flex flex-col p-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <ScrollArea className="flex-1 pr-4">
-            <div className="space-y-4">
-              {messages.map((message) => (
-                <ChatMessage key={message.id} message={message} />
-              ))}
-              {messages.length === 1 && (
-                <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
-              )}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/street-cred")}
+            className="hover:bg-tribbe-lime/20 relative group"
+          >
+            <div 
+              className="p-0.5 rounded-full transition-transform duration-200 group-hover:scale-105"
+              style={{ backgroundColor: currentLevel.color }}
+            >
+              <img 
+                src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
+                alt="Profile" 
+                className="w-8 h-8 rounded-full object-cover border border-background"
+              />
             </div>
-          </ScrollArea>
-          
-          <ChatInput
-            input={input}
-            isLoading={isLoading}
-            onInputChange={setInput}
-            onSubmit={handleSubmit}
-          />
+          </Button>
+        </div>
+
+        <Card className="bg-gradient-to-br from-background to-muted p-6">
+          <Tabs defaultValue="chat" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="chat" className="text-sm">
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Chat with Flami
+              </TabsTrigger>
+              <TabsTrigger value="suggestions" className="text-sm">
+                Recent Activity
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="chat" className="space-y-4">
+              <div className="h-[60vh] overflow-y-auto space-y-4 py-4">
+                {messages.map((message) => (
+                  <ChatMessage key={message.id} message={message} />
+                ))}
+              </div>
+              <ChatInput />
+            </TabsContent>
+
+            <TabsContent value="suggestions">
+              <ChatSuggestions />
+            </TabsContent>
+          </Tabs>
         </Card>
       </div>
     </AppLayout>
