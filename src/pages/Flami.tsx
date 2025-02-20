@@ -158,7 +158,7 @@ export default function Flami() {
           </Button>
         </div>
 
-        <Card className="flex-1 bg-background p-6 overflow-hidden">
+        <Card className="flex-1 bg-background p-6">
           <Tabs defaultValue="chat" className="h-full flex flex-col">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="chat" className="text-sm">
@@ -173,7 +173,7 @@ export default function Flami() {
 
             <TabsContent 
               value="chat" 
-              className="mt-4 flex flex-col flex-1 overflow-hidden"
+              className="h-[calc(100%-3rem)] flex flex-col mt-4"
             >
               <div className="flex-1 overflow-y-auto">
                 <div className="space-y-4">
@@ -182,7 +182,7 @@ export default function Flami() {
                   ))}
                 </div>
               </div>
-              <div className="pt-4 border-t mt-4">
+              <div className="pt-4 border-t">
                 <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
                 <ChatInput 
                   input={input}
