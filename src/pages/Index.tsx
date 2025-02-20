@@ -45,7 +45,7 @@ const Index = () => {
   }, [isVisible, navigate]);
 
   return (
-    <div className="min-h-screen bg-tribbe-sand flex flex-col items-center px-6 pt-20">
+    <div className="min-h-screen bg-background flex flex-col items-center px-6 pt-20">
       <div 
         className={`space-y-8 text-center mx-auto max-w-2xl w-full transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
@@ -64,7 +64,7 @@ const Index = () => {
               className="w-[27rem] mx-auto"
             />
           </div>
-          <h2 className="text-4xl font-righteous text-tribbe-lime mx-auto" style={{ width: '27rem' }}>
+          <h2 className="text-4xl font-righteous text-primary mx-auto" style={{ width: '27rem' }}>
             the new way to do money
           </h2>
           <Progress value={progress} className="w-[27rem] mx-auto h-2" />
