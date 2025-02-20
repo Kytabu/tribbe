@@ -33,30 +33,28 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
   ];
 
   return (
-    <div className="fixed bottom-20 left-0 right-0 px-4 z-10">
-      <ScrollArea className="w-full whitespace-nowrap">
-        <div className="flex space-x-4 pb-4">
-          {suggestions.map((suggestion, index) => (
-            <Button
-              key={index}
-              variant="outline"
-              className="flex-none w-48 h-auto py-4 px-5 hover:bg-tribbe-lime hover:text-black flex flex-col items-start gap-2 group transition-all duration-300 animate-fade-in bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-2xl border-muted"
-              onClick={() => onSuggestionClick(suggestion.text, suggestion.points)}
-            >
-              <div className="flex items-center gap-2 w-full justify-between">
-                {suggestion.icon}
-                <span className="text-xs bg-tribbe-lime/20 px-2 py-1 rounded-full group-hover:bg-black/20">
-                  +{suggestion.points}
-                </span>
-              </div>
-              <div className="text-sm font-normal">
-                {suggestion.text}
-              </div>
-            </Button>
-          ))}
-        </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
-    </div>
+    <ScrollArea className="w-full whitespace-nowrap">
+      <div className="flex space-x-4 pb-4">
+        {suggestions.map((suggestion, index) => (
+          <Button
+            key={index}
+            variant="outline"
+            className="flex-none w-48 h-auto py-4 px-5 hover:bg-tribbe-lime hover:text-black flex flex-col items-start gap-2 group transition-all duration-300 animate-fade-in bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-2xl border-muted"
+            onClick={() => onSuggestionClick(suggestion.text, suggestion.points)}
+          >
+            <div className="flex items-center gap-2 w-full justify-between">
+              {suggestion.icon}
+              <span className="text-xs bg-tribbe-lime/20 px-2 py-1 rounded-full group-hover:bg-black/20">
+                +{suggestion.points}
+              </span>
+            </div>
+            <div className="text-sm font-normal">
+              {suggestion.text}
+            </div>
+          </Button>
+        ))}
+      </div>
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
   );
 }
