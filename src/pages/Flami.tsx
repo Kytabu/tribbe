@@ -76,7 +76,6 @@ export default function Flami() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       content: input,
@@ -86,7 +85,6 @@ export default function Flami() {
     setMessages(prev => [...prev, userMessage]);
     setInput("");
 
-    // Simulate assistant response
     setIsLoading(true);
     setTimeout(() => {
       const assistantMessage: Message = {
@@ -112,6 +110,19 @@ export default function Flami() {
     };
     setActivityMessages(prev => [...prev, userMessage]);
     setActivityInput("");
+
+    // Add AI response for activity messages
+    setIsLoading(true);
+    setTimeout(() => {
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "I've noted your activity request. Is there anything specific you'd like to know about your recent transactions or circle activities? 🤔",
+        role: "assistant",
+        timestamp: new Date()
+      };
+      setActivityMessages(prev => [...prev, assistantMessage]);
+      setIsLoading(false);
+    }, 1000);
   };
 
   const handleSuggestionClick = (text: string, points: number) => {
