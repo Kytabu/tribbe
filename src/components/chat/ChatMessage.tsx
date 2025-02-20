@@ -13,7 +13,10 @@ export function ChatMessage({ message }: ChatMessageProps) {
         message.role === "user" ? "justify-end" : "justify-start"
       )}
     >
-      <div className="flex flex-col">
+      <div className={cn(
+        "flex flex-col",
+        message.role === "assistant" ? "w-full pr-8" : "max-w-[80%]"
+      )}>
         {message.role === "assistant" ? (
           <div className="mb-1">
             <img 
@@ -33,10 +36,10 @@ export function ChatMessage({ message }: ChatMessageProps) {
         )}
         <div
           className={cn(
-            "max-w-[80%] rounded-lg p-3",
+            "rounded-lg p-3",
             message.role === "user"
               ? "bg-tribbe-lime text-black ml-4 animate-fade-in"
-              : "bg-muted animate-slide-in"
+              : "bg-muted animate-slide-in w-full"
           )}
         >
           <p className="text-sm whitespace-pre-line">{message.content}</p>
