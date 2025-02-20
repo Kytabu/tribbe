@@ -15,7 +15,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
     >
       <div className={cn(
         "flex flex-col",
-        message.role === "assistant" ? "w-full pr-8" : "max-w-[80%]"
+        message.role === "assistant" ? "w-[70%]" : "max-w-[80%]"
       )}>
         {message.role === "assistant" ? (
           <div className="mb-1">
