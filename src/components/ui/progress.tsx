@@ -26,7 +26,7 @@ const Progress = React.forwardRef<
           #33C3F0 100%
         )`,
         backgroundSize: '200% 100%',
-        animation: 'gradient 2s ease infinite'
+        animation: 'gradient 5s ease infinite'
       }}
     />
   </ProgressPrimitive.Root>
