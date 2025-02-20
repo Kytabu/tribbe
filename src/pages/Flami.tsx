@@ -115,13 +115,13 @@ export default function Flami() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="chat" className="flex-1 flex flex-col">
+            <TabsContent value="chat" className="flex-1 flex flex-col justify-between">
               <div className="flex-1 overflow-y-auto space-y-4 py-4">
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
               </div>
-              <div className="mt-auto space-y-4">
+              <div className="space-y-4">
                 <div className="px-4">
                   <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
                 </div>
