@@ -46,7 +46,7 @@ const Index = () => {
               className="w-[27rem] mx-auto"
             />
           </div>
-          <h2 className="text-2xl font-righteous text-tribbe-lime w-[27rem] mx-auto">
+          <h2 className="text-2xl font-righteous text-tribbe-lime mx-auto" style={{ width: '27rem' }}>
             the new way to do money
           </h2>
         </div>
