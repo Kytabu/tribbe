@@ -18,7 +18,7 @@ export function ChatInput({ input, isLoading, onInputChange, onSubmit }: ChatInp
           value={input}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder="Shall we grow your wealth today?"
-          className="min-h-[50px] max-h-[200px] pr-12 placeholder:text-tribbe-lime"
+          className="min-h-[50px] max-h-[200px] pr-12"
           disabled={isLoading}
         />
         <Button 
