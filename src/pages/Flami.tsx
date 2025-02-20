@@ -16,7 +16,26 @@ export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "🎮",
+      content: `👋 Good day! Here's your financial update:
+
+🌟 Credit Score: 720 (Up 15 points this month)
+💰 Wallet Balance: KES 45,000
+🔄 Recent Transactions:
+- Received KES 15,000 from Sarah (Circle contribution)
+- Sent KES 5,000 to Local Market
+- Earned KES 2,500 interest from lending
+
+📈 Opportunities:
+- 3 active lending requests in your network
+- 2 new savings circles you might be interested in
+- Your credit limit can be increased by 20% based on your activity
+
+💡 Tips:
+- Consider joining the "Business Growth" circle - it matches your financial goals
+- Your consistent payments have improved your trust score
+- You're on track to reach your savings goal by next month
+
+How can I help you grow your bag today?`,
       role: "assistant",
       timestamp: new Date(),
     },
