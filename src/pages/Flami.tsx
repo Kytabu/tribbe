@@ -103,7 +103,7 @@ export default function Flami() {
           </Button>
         </div>
 
-        <Card className="bg-white p-6">
+        <Card className="bg-background p-6">
           <Tabs defaultValue="chat" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="chat" className="text-sm">
@@ -122,7 +122,7 @@ export default function Flami() {
                     <ChatMessage key={message.id} message={message} />
                   ))}
                 </div>
-                <div className="px-4 py-2 border-t">
+                <div className="px-4 py-2 border-t border-muted">
                   <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
                 </div>
               </div>
@@ -139,7 +139,7 @@ export default function Flami() {
                 {recentActivities.map((activity, index) => (
                   <div 
                     key={index}
-                    className="p-4 rounded-lg bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/95 border animate-fade-in"
+                    className="p-4 rounded-lg bg-muted backdrop-blur supports-[backdrop-filter]:bg-muted/95 border animate-fade-in"
                   >
                     {activity.type === "lending" && (
                       <p className="text-sm text-muted-foreground">

@@ -39,7 +39,7 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
           <Button
             key={index}
             variant="outline"
-            className="shrink-0 h-auto py-4 px-5 hover:bg-tribbe-lime hover:text-black flex flex-col items-start gap-2 group transition-all duration-300 animate-fade-in bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/95 rounded-2xl border-muted"
+            className="shrink-0 h-auto py-4 px-5 hover:bg-tribbe-lime hover:text-black flex flex-col items-start gap-2 group transition-all duration-300 animate-fade-in bg-muted backdrop-blur supports-[backdrop-filter]:bg-muted/95 rounded-2xl border-muted"
             onClick={() => onSuggestionClick(suggestion.text, suggestion.points)}
           >
             <div className="flex items-center gap-2 w-full justify-between">
