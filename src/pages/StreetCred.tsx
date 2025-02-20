@@ -17,9 +17,10 @@ export default function StreetCred() {
   const navigate = useNavigate();
   const [creditScore] = useState(720);
   const maxScore = 850;
+  const minScore = 300;
   
   const streetCredLevels: StreetCredLevel[] = [
-    { name: "The Newbie", color: "#FFCA99", minScore: 0 },
+    { name: "The Newbie", color: "#FFCA99", minScore: 300 },
     { name: "The Builder", color: "#F9FE03", minScore: 580 },
     { name: "The Trailblazer", color: "#88D3FE", minScore: 670 },
     { name: "The Innovator", color: "#A9FF22", minScore: 740 },
@@ -34,7 +35,7 @@ export default function StreetCred() {
   };
 
   const currentLevel = getCurrentLevel(creditScore);
-  const progressPercentage = (creditScore / maxScore) * 100;
+  const progressPercentage = ((creditScore - minScore) / (maxScore - minScore)) * 100;
 
   const rating = 4.25;
   const fullStars = Math.floor(rating);
@@ -136,11 +137,16 @@ export default function StreetCred() {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <img 
-                  src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png"
-                  alt="Profile"
-                  className="w-16 h-16 rounded-full object-cover"
-                />
+                <div 
+                  className="p-1 rounded-full"
+                  style={{ backgroundColor: currentLevel.color }}
+                >
+                  <img 
+                    src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png"
+                    alt="Profile"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-background"
+                  />
+                </div>
                 <span 
                   className="text-lg font-medium"
                   style={{ color: currentLevel.color }}
@@ -188,8 +194,8 @@ export default function StreetCred() {
               <div className="flex w-full h-2 rounded-full overflow-hidden">
                 {streetCredLevels.map((level, index) => {
                   const width = index === streetCredLevels.length - 1
-                    ? (maxScore - level.minScore) / maxScore * 100
-                    : (streetCredLevels[index + 1].minScore - level.minScore) / maxScore * 100;
+                    ? (maxScore - level.minScore) / (maxScore - minScore) * 100
+                    : (streetCredLevels[index + 1].minScore - level.minScore) / (maxScore - minScore) * 100;
                   
                   return (
                     <div
