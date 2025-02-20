@@ -3,6 +3,13 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import {
   Dialog,
   DialogContent,
@@ -19,7 +26,9 @@ import {
   MoreHorizontal,
   ChevronLeft,
   ChevronRight,
-  X
+  X,
+  Search,
+  Check
 } from "lucide-react";
 import { useState, useRef } from "react";
 
@@ -29,8 +38,37 @@ export default function MyTribbe() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [showAllMembers, setShowAllMembers] = useState(false);
+  const [showContactList, setShowContactList] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
 
-  // Mock data - In a real app, this would come from your backend
+  // Mock contacts data
+  const contacts = [
+    { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/784abd5e-2229-418f-8511-8a081c09fa02.png" },
+    { id: "2", name: "Bob Johnson", phone: "+254 723 456 789", image: "/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png" },
+    { id: "3", name: "Carol Williams", phone: "+254 734 567 890", image: "/lovable-uploads/89161f75-e901-43d2-835f-e937209cbbac.png" },
+    { id: "4", name: "David Brown", phone: "+254 745 678 901", image: "/lovable-uploads/99f41a26-6b2a-406b-a31a-c22eb89c42b8.png" },
+    { id: "5", name: "Eva Davis", phone: "+254 756 789 012", image: "/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png" },
+    { id: "6", name: "Frank Miller", phone: "+254 767 890 123", image: "/lovable-uploads/24576fa2-343c-42db-b26e-e56b0aa76cc8.png" },
+    { id: "7", name: "Grace Taylor", phone: "+254 778 901 234", image: "/lovable-uploads/29034cbf-7a42-409d-bad4-0f84c8fd02e7.png" },
+    { id: "8", name: "Henry Wilson", phone: "+254 789 012 345", image: "/lovable-uploads/3dd625e4-28a3-4005-92a7-0b2aad3fa575.png" }
+  ];
+
+  const filteredContacts = contacts
+    .filter(contact => 
+      contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      contact.phone.includes(searchQuery)
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const toggleContactSelection = (contactId: string) => {
+    setSelectedContacts(prev => 
+      prev.includes(contactId) 
+        ? prev.filter(id => id !== contactId)
+        : [...prev, contactId]
+    );
+  };
+
   const stats = {
     networkSize: 12,
     activeCircles: 3,
@@ -39,7 +77,6 @@ export default function MyTribbe() {
     trustScore: 85
   };
 
-  // Updated network members with new profile pictures
   const networkMembers = [
     { id: 1, name: "Sarah", image: "/lovable-uploads/237ca64a-021e-4578-9f08-b9fb2245f01e.png" },
     { id: 2, name: "Marcus", image: "/lovable-uploads/02bff5e9-ea21-4298-ad23-9d9ce111b691.png" },
@@ -87,7 +124,7 @@ export default function MyTribbe() {
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold text-white">My Tribbe</h1>
           <Button 
-            onClick={() => navigate("/circles")}
+            onClick={() => setShowContactList(true)}
             className="bg-tribbe-lime hover:bg-tribbe-lime/90 text-black"
           >
             <UserPlus className="w-4 h-4 mr-2" />
@@ -293,6 +330,72 @@ export default function MyTribbe() {
             </div>
           </DialogContent>
         </Dialog>
+
+        {/* Contact List Sheet */}
+        <Sheet open={showContactList} onOpenChange={setShowContactList}>
+          <SheetContent className="w-full sm:max-w-md p-0">
+            <SheetHeader className="p-6 border-b border-tribbe-grey">
+              <div className="flex items-center justify-between">
+                <SheetTitle className="text-xl font-bold text-white">Add Contacts</SheetTitle>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowContactList(false)}
+                  className="text-gray-400 hover:text-white"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="relative mt-4">
+                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                <Input
+                  placeholder="Search contacts..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-tribbe-grey/50 border-tribbe-grey text-white placeholder:text-gray-400"
+                />
+              </div>
+            </SheetHeader>
+            <div className="overflow-y-auto h-[calc(100vh-8rem)]">
+              {filteredContacts.map((contact) => (
+                <button
+                  key={contact.id}
+                  onClick={() => toggleContactSelection(contact.id)}
+                  className="w-full flex items-center gap-4 p-4 hover:bg-tribbe-grey/50 border-b border-tribbe-grey transition-colors"
+                >
+                  <img
+                    src={contact.image}
+                    alt={contact.name}
+                    className="w-12 h-12 rounded-full"
+                  />
+                  <div className="flex-1 text-left">
+                    <h3 className="text-white font-medium">{contact.name}</h3>
+                    <p className="text-gray-400 text-sm">{contact.phone}</p>
+                  </div>
+                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center
+                    ${selectedContacts.includes(contact.id)
+                      ? 'border-tribbe-lime bg-tribbe-lime'
+                      : 'border-gray-400'
+                    }`}
+                  >
+                    {selectedContacts.includes(contact.id) && (
+                      <Check className="w-4 h-4 text-black" />
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+            <div className="border-t border-tribbe-grey p-4 bg-background">
+              <Button 
+                onClick={() => setShowContactList(false)}
+                className="w-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-black"
+                disabled={selectedContacts.length === 0}
+              >
+                Add Selected Contacts ({selectedContacts.length})
+              </Button>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </AppLayout>
   );
