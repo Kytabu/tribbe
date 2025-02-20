@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,11 +11,17 @@ import {
   BadgeCheck,
   CreditCard,
   UserPlus,
-  MoreHorizontal
+  MoreHorizontal,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
+import { useState, useRef } from "react";
 
 export default function MyTribbe() {
   const navigate = useNavigate();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
   // Mock data - In a real app, this would come from your backend
   const stats = {
@@ -29,22 +34,40 @@ export default function MyTribbe() {
 
   // Updated network members with new profile pictures
   const networkMembers = [
-    { id: 1, name: "Marcus", image: "/lovable-uploads/f29046e7-6c9f-4575-b220-e2d0a678b967.png" },
-    { id: 2, name: "Aisha", image: "/lovable-uploads/99f41a26-6b2a-406b-a31a-c22eb89c42b8.png" },
-    { id: 3, name: "Michael", image: "/lovable-uploads/5e55cc02-ae1b-40fc-b807-633a5540308a.png" },
-    { id: 4, name: "Tim", image: "/lovable-uploads/c8a61242-9472-4c27-a50d-adbc2e7a24b0.png" },
-    { id: 5, name: "Crystal", image: "/lovable-uploads/29034cbf-7a42-409d-bad4-0f84c8fd02e7.png" },
-    { id: 6, name: "Marcus B", image: "/lovable-uploads/aa757ca5-a282-4eac-9369-b740b480634b.png" },
-    { id: 7, name: "Julie", image: "/lovable-uploads/fe9a1b29-6cb9-4261-b765-b18704cc84df.png" },
-    { id: 8, name: "Tracy", image: "/lovable-uploads/e9d2cccf-1741-44e2-9dc4-477305cc0dae.png" },
-    { id: 9, name: "Casey", image: "/lovable-uploads/c9f9a69f-1921-4c6f-8a7c-9813e9daf14b.png" },
-    { id: 10, name: "Jordan", image: "/lovable-uploads/4824985b-0953-47d2-a395-2c5071a76006.png" },
-    { id: 11, name: "Sam", image: "/lovable-uploads/c1c23c5c-90f5-4baa-a4b9-25ac8900c468.png" },
-    { id: 12, name: "Riley", image: "/lovable-uploads/3dd625e4-28a3-4005-92a7-0b2aad3fa575.png" },
-    { id: 13, name: "Chris", image: "/lovable-uploads/a66bb083-0a55-45b2-9fbb-b899fee07494.png" },
-    { id: 14, name: "Alex", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
-    { id: 15, name: "Sidney", image: "/lovable-uploads/89161f75-e901-43d2-835f-e937209cbbac.png" }
+    { id: 1, name: "Marcus", image: "/lovable-uploads/804acb0a-1ab2-4faf-9910-863c5c917a3e.png" },
+    { id: 2, name: "Aisha", image: "/lovable-uploads/3d1e665d-eed4-4c04-904f-bac63a57b959.png" },
+    { id: 3, name: "Michael", image: "/lovable-uploads/bf878166-6407-457b-ac97-59a01d4a528b.png" },
+    { id: 4, name: "Tim", image: "/lovable-uploads/66fbe866-eb36-4919-8f4c-80c32c87225a.png" },
+    { id: 5, name: "Crystal", image: "/lovable-uploads/df05789c-bbc1-4876-94fc-9950d71a6c4f.png" },
+    { id: 6, name: "Marcus B", image: "/lovable-uploads/66f92311-3685-46c4-bc13-0d10f1eadbf8.png" },
+    { id: 7, name: "Julie", image: "/lovable-uploads/92b6f0c7-407b-48ab-92cf-e8f16a7cf424.png" },
+    { id: 8, name: "Tracy", image: "/lovable-uploads/4bdd41de-73c5-4948-84b1-aa4ba2e6afa8.png" }
   ];
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const scrollAmount = 200; // Adjust this value to control scroll distance
+      const newScrollLeft = direction === 'left' 
+        ? container.scrollLeft - scrollAmount 
+        : container.scrollLeft + scrollAmount;
+      
+      container.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      setCanScrollLeft(container.scrollLeft > 0);
+      setCanScrollRight(
+        container.scrollLeft < container.scrollWidth - container.clientWidth
+      );
+    }
+  };
 
   return (
     <AppLayout>
@@ -89,29 +112,53 @@ export default function MyTribbe() {
                 View All <MoreHorizontal className="w-4 h-4 ml-2" />
               </Button>
             </div>
-            <div className="flex flex-wrap gap-4">
-              {networkMembers.slice(0, 7).map((member) => (
-                <Avatar key={member.id} className="w-12 h-12 border-2 border-tribbe-grey">
-                  {member.image ? (
+            <div className="relative">
+              <div 
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
+                ref={scrollContainerRef}
+                onScroll={handleScroll}
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {networkMembers.map((member) => (
+                  <Avatar key={member.id} className="w-12 h-12 border-2 border-tribbe-grey flex-shrink-0">
                     <AvatarImage 
                       src={member.image} 
                       alt={member.name} 
                       className="object-cover"
                     />
-                  ) : (
                     <AvatarFallback className="bg-tribbe-grey text-white">
                       {member.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
-                  )}
-                </Avatar>
-              ))}
-              {stats.networkSize > 7 && (
-                <Button 
-                  variant="outline" 
-                  className="w-12 h-12 rounded-full bg-tribbe-grey/50 hover:bg-tribbe-grey border-2 border-tribbe-grey"
-                  onClick={() => navigate("/circles")}
+                  </Avatar>
+                ))}
+                {stats.networkSize > networkMembers.length && (
+                  <Button 
+                    variant="outline" 
+                    className="w-12 h-12 rounded-full bg-tribbe-grey/50 hover:bg-tribbe-grey border-2 border-tribbe-grey flex-shrink-0"
+                    onClick={() => navigate("/circles")}
+                  >
+                    +{stats.networkSize - networkMembers.length}
+                  </Button>
+                )}
+              </div>
+              {canScrollLeft && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70"
+                  onClick={() => scroll('left')}
                 >
-                  +{stats.networkSize - 7}
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+              )}
+              {canScrollRight && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70"
+                  onClick={() => scroll('right')}
+                >
+                  <ChevronRight className="h-4 w-4" />
                 </Button>
               )}
             </div>
