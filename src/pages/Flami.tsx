@@ -122,8 +122,8 @@ export default function Flami() {
           </Button>
         </div>
 
-        <Card className="flex-1 bg-background p-6 flex flex-col min-h-0">
-          <Tabs defaultValue="chat" className="flex-1 flex flex-col">
+        <Card className="flex-1 bg-background p-6">
+          <Tabs defaultValue="chat" className="h-full flex flex-col">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="chat" className="text-sm">
                 <MessageSquare className="w-4 h-4 mr-2" />
@@ -135,15 +135,18 @@ export default function Flami() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden pt-0 mt-4">
-              <div className="flex-1 overflow-y-auto">
-                <div className="space-y-4">
+            <TabsContent 
+              value="chat" 
+              className="flex-1 flex flex-col h-full"
+            >
+              <div className="flex-1 overflow-y-auto min-h-0">
+                <div className="space-y-4 py-4">
                   {messages.map((message) => (
                     <ChatMessage key={message.id} message={message} />
                   ))}
                 </div>
               </div>
-              <div className="space-y-4">
+              <div className="mt-auto pt-4 border-t">
                 <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
                 <ChatInput 
                   input={input}
@@ -154,21 +157,26 @@ export default function Flami() {
               </div>
             </TabsContent>
 
-            <TabsContent value="activity" className="flex-1 flex flex-col overflow-hidden pt-0 mt-4">
-              <div className="flex-1 overflow-y-auto">
-                <div className="space-y-4">
+            <TabsContent 
+              value="activity" 
+              className="flex-1 flex flex-col h-full"
+            >
+              <div className="flex-1 overflow-y-auto min-h-0">
+                <div className="space-y-4 py-4">
                   {activityMessages.map((message) => (
                     <ChatMessage key={message.id} message={message} />
                   ))}
                 </div>
               </div>
-              <ChatInput 
-                input={activityInput}
-                isLoading={isLoading}
-                onInputChange={(value) => setActivityInput(value)}
-                onSubmit={handleActivitySubmit}
-                placeholder="What would you like?"
-              />
+              <div className="mt-auto pt-4 border-t">
+                <ChatInput 
+                  input={activityInput}
+                  isLoading={isLoading}
+                  onInputChange={(value) => setActivityInput(value)}
+                  onSubmit={handleActivitySubmit}
+                  placeholder="What would you like?"
+                />
+              </div>
             </TabsContent>
           </Tabs>
         </Card>
