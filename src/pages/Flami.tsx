@@ -48,6 +48,27 @@ export default function Flami() {
     console.log("Suggestion clicked:", text, points);
   };
 
+  const recentActivities = [
+    {
+      type: "lending",
+      user: "John Doe",
+      amount: "5,000",
+      time: "2 hours ago"
+    },
+    {
+      type: "borrowing",
+      user: "Jane Smith",
+      amount: "10,000",
+      time: "5 hours ago"
+    },
+    {
+      type: "circle",
+      name: "Family Circle",
+      action: "joined",
+      time: "1 day ago"
+    }
+  ];
+
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto">
@@ -89,13 +110,14 @@ export default function Flami() {
                 <MessageSquare className="w-4 h-4 mr-2" />
                 Chat with Flami
               </TabsTrigger>
-              <TabsTrigger value="suggestions" className="text-sm">
+              <TabsTrigger value="activity" className="text-sm">
                 Recent Activity
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="chat" className="space-y-4">
-              <div className="h-[60vh] overflow-y-auto space-y-4 py-4">
+              <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
+              <div className="h-[50vh] overflow-y-auto space-y-4 py-4">
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
@@ -108,8 +130,31 @@ export default function Flami() {
               />
             </TabsContent>
 
-            <TabsContent value="suggestions">
-              <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
+            <TabsContent value="activity" className="space-y-4">
+              <div className="space-y-4">
+                {recentActivities.map((activity, index) => (
+                  <div 
+                    key={index}
+                    className="p-4 rounded-lg bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60 border animate-fade-in"
+                  >
+                    {activity.type === "lending" && (
+                      <p className="text-sm text-muted-foreground">
+                        <span className="text-tribbe-lime">{activity.user}</span> borrowed Kes {activity.amount} from you {activity.time}
+                      </p>
+                    )}
+                    {activity.type === "borrowing" && (
+                      <p className="text-sm text-muted-foreground">
+                        You borrowed Kes {activity.amount} from <span className="text-tribbe-lime">{activity.user}</span> {activity.time}
+                      </p>
+                    )}
+                    {activity.type === "circle" && (
+                      <p className="text-sm text-muted-foreground">
+                        You {activity.action} the <span className="text-tribbe-lime">{activity.name}</span> {activity.time}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
         </Card>
