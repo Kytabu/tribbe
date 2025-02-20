@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress";
 const Index = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [shouldNavigate, setShouldNavigate] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const Index = () => {
       } else {
         setProgress(100);
         setIsVisible(false);
+        setShouldNavigate(true);
       }
     };
 
@@ -35,14 +37,15 @@ const Index = () => {
 
   // Navigate to pin-entry after fade animation completes
   useEffect(() => {
-    if (!isVisible) {
+    if (!isVisible && shouldNavigate) {
       const navigationTimer = setTimeout(() => {
+        setShouldNavigate(false); // Prevent further navigation attempts
         navigate('/pin-entry');
       }, 300); // Match this with the CSS transition duration
 
       return () => clearTimeout(navigationTimer);
     }
-  }, [isVisible, navigate]);
+  }, [isVisible, shouldNavigate, navigate]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center px-6 pt-20">
