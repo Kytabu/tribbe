@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,9 +20,6 @@ import {
 import {
   Users,
   Wallet,
-  ChartLine,
-  BadgeCheck,
-  CreditCard,
   UserPlus,
   MoreHorizontal,
   ChevronLeft,
@@ -247,40 +245,6 @@ export default function MyTribbe() {
           </Card>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Button 
-            variant="outline" 
-            className="h-auto p-6 bg-tribbe-grey/50 hover:bg-tribbe-grey"
-            onClick={() => navigate("/street-cred")}
-          >
-            <div className="flex items-start gap-4 w-full">
-              <div className="p-3 rounded-full bg-black/20 text-purple-400">
-                <ChartLine className="w-6 h-6" />
-              </div>
-              <div className="text-left">
-                <h3 className="font-medium text-white">Check Credit Score</h3>
-                <p className="text-sm text-gray-400">View your current score: {stats.creditScore}</p>
-              </div>
-            </div>
-          </Button>
-
-          <Button 
-            variant="outline" 
-            className="h-auto p-6 bg-tribbe-grey/50 hover:bg-tribbe-grey"
-            onClick={() => navigate("/snap-to-pay")}
-          >
-            <div className="flex items-start gap-4 w-full">
-              <div className="p-3 rounded-full bg-black/20 text-pink-400">
-                <CreditCard className="w-6 h-6" />
-              </div>
-              <div className="text-left">
-                <h3 className="font-medium text-white">Quick Payment</h3>
-                <p className="text-sm text-gray-400">Send money via Snap to Pay</p>
-              </div>
-            </div>
-          </Button>
-        </div>
-
         <Dialog open={showAllMembers} onOpenChange={setShowAllMembers}>
           <DialogContent className="bg-tribbe-grey/95 border-tribbe-grey max-w-3xl">
             <DialogHeader>
@@ -370,7 +334,7 @@ export default function MyTribbe() {
                     }`}
                   >
                     {selectedContacts.includes(contact.id) && (
-                      <Check className="w-4 h-4 text-black" />
+                      <Check className="w-4 w-4 text-black" />
                     )}
                   </div>
                 </button>
