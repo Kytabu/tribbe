@@ -118,7 +118,9 @@ export function BalanceDisplay({
                   <PiggyBank className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
                   <span className="text-tribbe-sage group-hover:text-tribbe-lime">Amount In</span>
                 </div>
-                <span className="font-medium group-hover:text-tribbe-lime">{currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}</span>
+                <span className="font-medium group-hover:text-tribbe-lime">
+                  {currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}
+                </span>
               </div>
             </Button>
 
@@ -131,7 +133,9 @@ export function BalanceDisplay({
                   <Gem className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
                   <span className="text-tribbe-sage group-hover:text-tribbe-lime">Amount Out</span>
                 </div>
-                <span className="font-medium group-hover:text-tribbe-lime">{currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}</span>
+                <span className="font-medium group-hover:text-tribbe-lime">
+                  {currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}
+                </span>
               </div>
             </Button>
 
@@ -144,7 +148,9 @@ export function BalanceDisplay({
                   <Trophy className="w-5 h-5 text-[#4ECDC4] group-hover:text-tribbe-lime" />
                   <span className="text-tribbe-sage group-hover:text-tribbe-lime">Expected Interest</span>
                 </div>
-                <span className="font-medium group-hover:text-tribbe-lime">+{currencySymbols[selectedCurrency]} {lendingStats.total_expected_interest.toFixed(2)}</span>
+                <span className="font-medium group-hover:text-tribbe-lime">
+                  +{currencySymbols[selectedCurrency]} {lendingStats.total_expected_interest.toFixed(2)}
+                </span>
               </div>
             </Button>
           </div>
@@ -177,11 +183,11 @@ export function BalanceDisplay({
               </div>
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
@@ -194,7 +200,7 @@ export function BalanceDisplay({
 
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
@@ -207,7 +213,7 @@ export function BalanceDisplay({
 
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
@@ -247,11 +253,11 @@ export function BalanceDisplay({
               </div>
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
@@ -268,7 +274,7 @@ export function BalanceDisplay({
 
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
@@ -285,7 +291,7 @@ export function BalanceDisplay({
 
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
@@ -329,11 +335,11 @@ export function BalanceDisplay({
               </div>
             </div>
           </div>
-          
+
           <div className="space-y-2">
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
@@ -350,7 +356,7 @@ export function BalanceDisplay({
 
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
@@ -367,7 +373,7 @@ export function BalanceDisplay({
 
             <Button
               variant="ghost"
-              className="w-full p-3 h-auto justify-start hover:bg-transparent group"
+              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
             >
               <div className="flex justify-between items-center w-full">
                 <div className="flex items-center gap-2">
