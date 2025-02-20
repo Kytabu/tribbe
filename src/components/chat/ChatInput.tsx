@@ -12,12 +12,22 @@ interface ChatInputProps {
 }
 
 export function ChatInput({ input, isLoading, onInputChange, onSubmit, placeholder = "Shall we grow your wealth today?" }: ChatInputProps) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (input.trim()) {
+        onSubmit(e);
+      }
+    }
+  };
+
   return (
     <form onSubmit={onSubmit} className="mt-4">
       <div className="relative">
         <Textarea
           value={input}
           onChange={(e) => onInputChange(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
           className="min-h-[50px] max-h-[200px] pr-12"
           disabled={isLoading}
