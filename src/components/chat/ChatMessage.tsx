@@ -13,24 +13,26 @@ export function ChatMessage({ message }: ChatMessageProps) {
         message.role === "user" ? "justify-end" : "justify-start"
       )}
     >
-      <div
-        className={cn(
-          "max-w-[80%] rounded-lg p-3",
-          message.role === "user"
-            ? "bg-tribbe-lime text-black ml-4 animate-fade-in"
-            : "bg-muted animate-slide-in"
-        )}
-      >
+      <div className="flex flex-col">
         {message.role === "assistant" && (
-          <div className="flex items-center gap-2 mb-2">
+          <div className="mb-1">
             <img 
               src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
               alt="Tribbe Logo" 
-              className="w-6 h-6"
+              className="w-6 h-auto"
             />
           </div>
         )}
-        <p className="text-sm whitespace-pre-line">{message.content}</p>
+        <div
+          className={cn(
+            "max-w-[80%] rounded-lg p-3",
+            message.role === "user"
+              ? "bg-tribbe-lime text-black ml-4 animate-fade-in"
+              : "bg-muted animate-slide-in"
+          )}
+        >
+          <p className="text-sm whitespace-pre-line">{message.content}</p>
+        </div>
       </div>
     </div>
   );
