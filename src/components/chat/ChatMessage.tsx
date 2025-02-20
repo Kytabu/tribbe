@@ -14,12 +14,20 @@ export function ChatMessage({ message }: ChatMessageProps) {
       )}
     >
       <div className="flex flex-col">
-        {message.role === "assistant" && (
+        {message.role === "assistant" ? (
           <div className="mb-1">
             <img 
               src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
               alt="Tribbe Logo" 
               className="w-6 h-auto"
+            />
+          </div>
+        ) : (
+          <div className="mb-1 flex justify-end">
+            <img 
+              src="/lovable-uploads/ecc713cc-73f6-4c89-9f3c-86ed3ab57613.png" 
+              alt="User Profile" 
+              className="w-6 h-auto rounded-full"
             />
           </div>
         )}
