@@ -89,50 +89,41 @@ export function BalanceDisplay({
           </div>
 
           <div className="space-y-2">
-            <Button
-              variant="ghost"
-              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
-            >
-              <div className="flex justify-between items-center w-full">
+            <div className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground group transition-colors duration-200 hover:border-tribbe-lime">
+              <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
-                  <PiggyBank className="w-5 h-5 text-[#A9FF22] group-hover:text-tribbe-lime" />
-                  <span className="text-tribbe-sage group-hover:text-tribbe-lime">Amount In</span>
+                  <PiggyBank className="w-5 h-5 text-[#A9FF22]" />
+                  <span className="text-tribbe-sage">Amount In</span>
                 </div>
-                <span className="font-medium group-hover:text-tribbe-lime">
+                <span className="font-medium text-tribbe-lime">
                   {currencySymbols[selectedCurrency]} {availableBalance.toFixed(2)}
                 </span>
               </div>
-            </Button>
+            </div>
 
-            <Button
-              variant="ghost"
-              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
-            >
-              <div className="flex justify-between items-center w-full">
+            <div className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground group transition-colors duration-200 hover:border-tribbe-lime">
+              <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
-                  <Gem className="w-5 h-5 text-[#FF6B6B] group-hover:text-tribbe-lime" />
-                  <span className="text-tribbe-sage group-hover:text-tribbe-lime">Amount Out</span>
+                  <Gem className="w-5 h-5 text-[#FF6B6B]" />
+                  <span className="text-tribbe-sage">Amount Out</span>
                 </div>
-                <span className="font-medium group-hover:text-tribbe-lime">
+                <span className="font-medium text-tribbe-lime">
                   {currencySymbols[selectedCurrency]} {lendingStats.total_lent.toFixed(2)}
                 </span>
               </div>
-            </Button>
+            </div>
 
-            <Button
-              variant="ghost"
-              className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
-            >
-              <div className="flex justify-between items-center w-full">
+            <div className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground group transition-colors duration-200 hover:border-tribbe-lime">
+              <div className="flex justify-between items-center w-full h-full">
                 <div className="flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-[#4ECDC4] group-hover:text-tribbe-lime" />
-                  <span className="text-tribbe-sage group-hover:text-tribbe-lime">Expected Interest</span>
+                  <Trophy className="w-5 h-5 text-[#4ECDC4]" />
+                  <span className="text-tribbe-sage">Expected Interest</span>
                 </div>
-                <span className="font-medium group-hover:text-tribbe-lime">
+                <span className="font-medium text-tribbe-lime">
                   +{currencySymbols[selectedCurrency]} {lendingStats.total_expected_interest.toFixed(2)}
                 </span>
               </div>
-            </Button>
+            </div>
           </div>
         </div>
       )}
