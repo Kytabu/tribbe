@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -33,6 +34,7 @@ export default function StreetCred() {
   };
 
   const currentLevel = getCurrentLevel(creditScore);
+  const progressPercentage = (creditScore / maxScore) * 100;
 
   const rating = 4.25;
   const fullStars = Math.floor(rating);
@@ -182,15 +184,39 @@ export default function StreetCred() {
               </div>
             </div>
 
-            <div className="text-center">
-              <Progress 
-                value={(creditScore / maxScore) * 100} 
-                className="h-2 w-full mb-2"
-                style={{ 
-                  '--progress-background': currentLevel.color,
-                } as React.CSSProperties}
-              />
-              <p className="text-sm text-gray-400">
+            <div className="relative">
+              <div className="flex w-full h-2 rounded-full overflow-hidden">
+                {streetCredLevels.map((level, index) => {
+                  const width = index === streetCredLevels.length - 1
+                    ? (maxScore - level.minScore) / maxScore * 100
+                    : (streetCredLevels[index + 1].minScore - level.minScore) / maxScore * 100;
+                  
+                  return (
+                    <div
+                      key={level.name}
+                      className="h-full"
+                      style={{
+                        width: `${width}%`,
+                        backgroundColor: level.color,
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              <div 
+                className="absolute top-0 transform -translate-x-1/2 -translate-y-full"
+                style={{ left: `${progressPercentage}%` }}
+              >
+                <div className="relative">
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1">
+                    <div 
+                      className="w-3 h-3 rotate-45 transform origin-center"
+                      style={{ backgroundColor: currentLevel.color }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-400 mt-2 text-center">
                 Out of {maxScore} points • Updated today
               </p>
             </div>
