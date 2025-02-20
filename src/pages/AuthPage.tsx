@@ -2,10 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, Apple, Facebook } from "lucide-react";
 
 const AuthPage = () => {
@@ -40,8 +38,7 @@ const AuthPage = () => {
     }
   };
 
-  const handleVerificationSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleVerificationSubmit = async () => {
     setLoading(true);
 
     try {
@@ -50,8 +47,6 @@ const AuthPage = () => {
         toast({
           description: "Verification successful",
         });
-
-        // Redirect to Flami page instead of PIN setup
         navigate("/flami");
       } else {
         throw new Error("Invalid verification code");
@@ -68,11 +63,18 @@ const AuthPage = () => {
     }
   };
 
-  const handleSkip = () => {
-    toast({
-      description: "Authentication skipped for development",
-    });
-    navigate("/flami");
+  const handleNumberClick = (number: string) => {
+    if (verificationCode.length < 6) {
+      const newCode = verificationCode + number;
+      setVerificationCode(newCode);
+      if (newCode.length === 6) {
+        handleVerificationSubmit();
+      }
+    }
+  };
+
+  const handleDelete = () => {
+    setVerificationCode(prev => prev.slice(0, -1));
   };
 
   return (
@@ -160,29 +162,47 @@ const AuthPage = () => {
           </div>
         </div>
       ) : (
-        <Card className="w-96">
-          <CardContent className="p-9">
-            <form onSubmit={handleVerificationSubmit} className="space-y-6">
-              <div className="space-y-3">
-                <Input
-                  type="text"
-                  placeholder="Verification code"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
-                  maxLength={6}
-                  className="text-xl text-center tracking-[0.5em] h-14"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full h-14 text-lg"
-                disabled={loading || verificationCode.length !== 6}
+        <div className="w-full max-w-md space-y-12">
+          <div className="text-center space-y-4">
+            <h1 className="text-2xl text-white font-normal">Enter verification code</h1>
+          </div>
+
+          <div className="flex justify-center space-x-4 mb-12">
+            {[...Array(6)].map((_, index) => (
+              <div
+                key={index}
+                className={`w-4 h-4 rounded-full border-2 ${
+                  verificationCode.length > index ? "bg-primary border-primary" : "border-foreground/50"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="grid grid-cols-3 gap-8">
+            {[...Array(9)].map((_, i) => (
+              <button
+                key={i + 1}
+                onClick={() => handleNumberClick((i + 1).toString())}
+                className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
               >
-                {loading ? "Verifying..." : "Verify"}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+                {i + 1}
+              </button>
+            ))}
+            <div className="w-full" />
+            <button
+              onClick={() => handleNumberClick("0")}
+              className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
+            >
+              0
+            </button>
+            <button
+              onClick={handleDelete}
+              className="text-primary text-lg hover:opacity-80 transition-opacity"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
