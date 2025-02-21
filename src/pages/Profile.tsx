@@ -36,13 +36,14 @@ const Profile = () => {
     username: "@tonee",
     national_id: "xxx xxx xxx xxx",
     premium: {
-      status: "Gold Member",
-      since: "Jan 2023",
+      status: "Free Account",
+      since: "",
       benefits: [
-        "Zero transaction fees",
-        "Priority support",
-        "Extended loan terms",
-        "Higher borrowing limits"
+        "Send Reminders",
+        "More Circles",
+        "More Tribbes",
+        "Premium Access",
+        "Rewards and Offers"
       ]
     }
   });
@@ -56,8 +57,8 @@ const Profile = () => {
 
   const handlePremiumClick = () => {
     toast({
-      title: profile.premium.status,
-      description: `Member since ${profile.premium.since}\nBenefits: ${profile.premium.benefits.join(", ")}`,
+      title: "Premium Features Available",
+      description: "Get premium love on Tribbe to unlock exclusive benefits and features",
     });
     navigate("/premium");
   };
