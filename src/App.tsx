@@ -18,6 +18,7 @@ import SnapToPay from "@/pages/SnapToPay";
 import StreetCred from "@/pages/StreetCred";
 import MyTribbe from "@/pages/MyTribbe";
 import Profile from "@/pages/Profile";
+import Premium from "@/pages/Premium";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/flami" element={<Flami />} />
         <Route path="/account" element={<AccountPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/premium" element={<Premium />} />
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/wallet/add-money" element={<AddMoney />} />
         <Route path="/circles" element={<Circles />} />
@@ -47,4 +49,3 @@ const App = () => {
 };
 
 export default App;
-
