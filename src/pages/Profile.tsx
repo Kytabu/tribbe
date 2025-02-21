@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   User,
-  CreditCard,
   Crown,
   ChevronRight,
   ArrowLeft,
@@ -21,12 +20,6 @@ interface ProfileData {
   phone_number: string;
   username: string;
   national_id: string;
-  stats: {
-    total_borrowed: number;
-    total_lent: number;
-    credit_score: number;
-    trusted_by: number;
-  };
   premium: {
     status: string;
     since: string;
@@ -42,12 +35,6 @@ const Profile = () => {
     phone_number: "+254 721 583 605",
     username: "@tonee",
     national_id: "xxx xxx xxx xxx",
-    stats: {
-      total_borrowed: 250000,
-      total_lent: 750000,
-      credit_score: 850,
-      trusted_by: 128
-    },
     premium: {
       status: "Gold Member",
       since: "Jan 2023",
@@ -65,14 +52,6 @@ const Profile = () => {
     toast({
       description: "Signed out from demo account",
     });
-  };
-
-  const handleAccountClick = () => {
-    toast({
-      title: "Account Statistics",
-      description: `Total Borrowed: KES ${profile.stats.total_borrowed.toLocaleString()}\nTotal Lent: KES ${profile.stats.total_lent.toLocaleString()}\nCredit Score: ${profile.stats.credit_score}\nTrusted by ${profile.stats.trusted_by} members`,
-    });
-    navigate("/wallet");
   };
 
   const handlePremiumClick = () => {
@@ -132,21 +111,6 @@ const Profile = () => {
               <div>
                 <h2 className="font-medium">Personal Information</h2>
                 <p className="text-sm text-muted-foreground">Profile details, phone number, ID verification</p>
-              </div>
-            </div>
-            <ChevronRight className="w-5 h-5" />
-          </div>
-
-          {/* My Account Section */}
-          <div 
-            className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
-            onClick={handleAccountClick}
-          >
-            <div className="flex items-center gap-3">
-              <CreditCard className="w-5 h-5 text-primary" />
-              <div>
-                <h2 className="font-medium">My Account</h2>
-                <p className="text-sm text-muted-foreground">Lending history, borrowing stats, investments</p>
               </div>
             </div>
             <ChevronRight className="w-5 h-5" />
