@@ -21,6 +21,17 @@ interface ProfileData {
   phone_number: string;
   username: string;
   national_id: string;
+  stats: {
+    total_borrowed: number;
+    total_lent: number;
+    credit_score: number;
+    trusted_by: number;
+  };
+  premium: {
+    status: string;
+    since: string;
+    benefits: string[];
+  };
 }
 
 const Profile = () => {
@@ -30,7 +41,23 @@ const Profile = () => {
     email: "tonee@tribbe.io",
     phone_number: "+254 721 583 605",
     username: "@tonee",
-    national_id: "xxx xxx xxx xxx"
+    national_id: "xxx xxx xxx xxx",
+    stats: {
+      total_borrowed: 250000,
+      total_lent: 750000,
+      credit_score: 850,
+      trusted_by: 128
+    },
+    premium: {
+      status: "Gold Member",
+      since: "Jan 2023",
+      benefits: [
+        "Zero transaction fees",
+        "Priority support",
+        "Extended loan terms",
+        "Higher borrowing limits"
+      ]
+    }
   });
 
   const handleSignOut = () => {
@@ -38,6 +65,22 @@ const Profile = () => {
     toast({
       description: "Signed out from demo account",
     });
+  };
+
+  const handleAccountClick = () => {
+    toast({
+      title: "Account Statistics",
+      description: `Total Borrowed: KES ${profile.stats.total_borrowed.toLocaleString()}\nTotal Lent: KES ${profile.stats.total_lent.toLocaleString()}\nCredit Score: ${profile.stats.credit_score}\nTrusted by ${profile.stats.trusted_by} members`,
+    });
+    navigate("/wallet");
+  };
+
+  const handlePremiumClick = () => {
+    toast({
+      title: profile.premium.status,
+      description: `Member since ${profile.premium.since}\nBenefits: ${profile.premium.benefits.join(", ")}`,
+    });
+    navigate("/premium");
   };
 
   return (
@@ -97,7 +140,7 @@ const Profile = () => {
           {/* My Account Section */}
           <div 
             className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
-            onClick={() => navigate("/wallet")}
+            onClick={handleAccountClick}
           >
             <div className="flex items-center gap-3">
               <CreditCard className="w-5 h-5 text-primary" />
@@ -112,7 +155,7 @@ const Profile = () => {
           {/* Premium Features Section */}
           <div 
             className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
-            onClick={() => navigate("/premium")}
+            onClick={handlePremiumClick}
           >
             <div className="flex items-center gap-3">
               <Crown className="w-5 h-5 text-[#A9FF22]" />
