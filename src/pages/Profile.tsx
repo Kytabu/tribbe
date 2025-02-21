@@ -59,7 +59,7 @@ const Profile = () => {
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
               <img 
-                src="/lovable-uploads/7be77052-2db0-40d8-8c58-0237091838d7.png"
+                src="/lovable-uploads/343535f4-8279-4914-b426-b360533410a3.png"
                 alt="Tonee Ndungu"
                 className="w-full h-full object-cover"
               />
