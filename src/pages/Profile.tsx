@@ -12,7 +12,6 @@ import {
   LogOut
 } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 
@@ -24,68 +23,17 @@ interface ProfileData {
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState<ProfileData>({
-    full_name: null,
-    email: null,
-    phone_number: null
+  const [profile] = useState<ProfileData>({
+    full_name: "Demo User",
+    email: "demo@tribbe.co",
+    phone_number: "+1 (555) 123-4567"
   });
 
-  useEffect(() => {
-    fetchProfileData();
-  }, []);
-
-  const fetchProfileData = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        toast({
-          title: "Not authenticated",
-          description: "Please sign in to view your profile",
-          variant: "destructive",
-        });
-        navigate("/auth");
-        return;
-      }
-
-      const { data: profileData, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (error) throw error;
-
-      setProfile({
-        full_name: profileData?.full_name || null,
-        email: user.email || null,
-        phone_number: profileData?.phone_number || null
-      });
-    } catch (error) {
-      console.error('Error fetching profile:', error);
-      toast({
-        title: "Error",
-        description: "Could not load profile information",
-        variant: "destructive",
-      });
-    }
-  };
-
-  const handleSignOut = async () => {
-    try {
-      await supabase.auth.signOut();
-      navigate("/auth");
-      toast({
-        description: "Successfully signed out",
-      });
-    } catch (error) {
-      console.error('Error signing out:', error);
-      toast({
-        title: "Error",
-        description: "Could not sign out",
-        variant: "destructive",
-      });
-    }
+  const handleSignOut = () => {
+    navigate("/auth");
+    toast({
+      description: "Signed out from demo account",
+    });
   };
 
   return (
@@ -109,17 +57,15 @@ const Profile = () => {
               <User className="w-8 h-8 text-primary" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold">{profile.full_name || 'Complete your profile'}</h2>
+              <h2 className="text-xl font-semibold">{profile.full_name}</h2>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="w-4 h-4" />
                 <span>{profile.email}</span>
               </div>
-              {profile.phone_number && (
-                <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                  <Phone className="w-4 h-4" />
-                  <span>{profile.phone_number}</span>
-                </div>
-              )}
+              <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                <Phone className="w-4 h-4" />
+                <span>{profile.phone_number}</span>
+              </div>
             </div>
           </div>
         </div>
