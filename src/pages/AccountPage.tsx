@@ -1,154 +1,36 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/components/ui/use-toast";
-import { Card, CardContent } from "@/components/ui/card";
-
-type IdType = 'national_id' | 'passport' | 'drivers_license';
 
 interface Profile {
-  full_name: string | null;
-  username: string | null;
-  phone_number: string | null;
-  id_number: string | null;
-  id_type: IdType | null;
-  avatar_url: string | null;
+  full_name: string;
+  username: string;
+  phone_number: string;
+  id_number: string;
 }
 
 const AccountPage = () => {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState<Profile>({
-    full_name: '',
-    username: '',
-    phone_number: '',
-    id_number: '',
-    id_type: null,
-    avatar_url: null
+  const [profile] = useState<Profile>({
+    full_name: "Tonee Ndungu",
+    username: "@tonee",
+    phone_number: "+254 721 583 605",
+    id_number: "xxx xxx xxx xxx"
   });
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        toast({
-          title: "Not authenticated",
-          description: "Please sign in to access this page",
-          variant: "destructive",
-        });
-        navigate("/");
-        return;
-      }
-      fetchProfile();
-    };
-
-    checkAuth();
-  }, [navigate]);
-
-  const fetchProfile = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        navigate("/");
-        return;
-      }
-
-      let { data: profile, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (error) {
-        if (error.code === 'PGRST116') {
-          // Profile doesn't exist, create one
-          const currentTime = new Date().toISOString();
-          const newProfile = {
-            id: user.id,
-            full_name: '',
-            username: '',
-            phone_number: '',
-            id_number: '',
-            id_type: null as IdType | null,
-            avatar_url: null,
-            created_at: currentTime,
-            updated_at: currentTime // Add the missing updated_at field
-          };
-
-          const { error: insertError } = await supabase
-            .from('profiles')
-            .insert([newProfile]);
-
-          if (insertError) throw insertError;
-          profile = newProfile;
-        } else {
-          throw error;
-        }
-      }
-
-      if (profile) {
-        setProfile(profile);
-      }
-    } catch (error) {
-      console.error('Error fetching profile:', error);
-      toast({
-        title: "Error",
-        description: "Could not load profile information",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleUpdate = async (field: keyof Profile, value: string) => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        toast({
-          title: "Not authenticated",
-          description: "Please sign in to update your profile",
-          variant: "destructive",
-        });
-        navigate("/");
-        return;
-      }
-
-      const updates = {
-        id: user.id,
-        [field]: value,
-        updated_at: new Date().toISOString(),
-      };
-
-      const { error } = await supabase
-        .from('profiles')
-        .update(updates)
-        .eq('id', user.id);
-
-      if (error) throw error;
-
-      setProfile(prev => ({ ...prev, [field]: value }));
-      toast({
-        description: "Profile updated successfully",
-      });
-    } catch (error) {
-      console.error('Error updating profile:', error);
-      toast({
-        title: "Error",
-        description: "Could not update profile",
-        variant: "destructive",
-      });
-    }
+  const handleChange = () => {
+    toast({
+      description: "Demo: Profile information cannot be changed",
+    });
   };
 
   return (
     <div className="min-h-screen bg-background p-6">
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex items-center gap-4 mb-6">
         <Button
           variant="ghost"
           size="icon"
@@ -156,58 +38,80 @@ const AccountPage = () => {
         >
           <ArrowLeft className="h-6 w-6" />
         </Button>
-        <h1 className="text-2xl font-bold">My Account</h1>
+        <h1 className="text-2xl font-bold">Account</h1>
       </div>
 
-      {loading ? (
-        <div className="flex justify-center">Loading...</div>
-      ) : (
-        <div className="space-y-6 max-w-2xl mx-auto">
-          {/* Basic Information */}
-          <Card>
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">Full Name</label>
-                  <Input
-                    value={profile.full_name || ''}
-                    onChange={(e) => handleUpdate('full_name', e.target.value)}
-                    placeholder="Enter your full name"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">Username</label>
-                  <Input
-                    value={profile.username || ''}
-                    onChange={(e) => handleUpdate('username', e.target.value)}
-                    placeholder="Choose a username"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">Phone Number</label>
-                  <Input
-                    value={profile.phone_number || ''}
-                    onChange={(e) => handleUpdate('phone_number', e.target.value)}
-                    placeholder="Enter your phone number"
-                    type="tel"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-muted-foreground">ID Number</label>
-                  <Input
-                    value={profile.id_number || ''}
-                    onChange={(e) => handleUpdate('id_number', e.target.value)}
-                    placeholder="Enter your ID number"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      <div className="flex justify-center mb-6">
+        <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary">
+          <img 
+            src="/lovable-uploads/7be77052-2db0-40d8-8c58-0237091838d7.png"
+            alt="Tonee Ndungu"
+            className="w-full h-full object-cover"
+          />
         </div>
-      )}
+      </div>
+      
+      <div className="text-center mb-8">
+        <h2 className="text-lg font-medium">{profile.username}</h2>
+        <p className="text-sm text-muted-foreground mt-1">You are verified with the following details</p>
+      </div>
+
+      <div className="space-y-6 max-w-md mx-auto">
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">* Full name</label>
+          <Input
+            value={profile.full_name}
+            readOnly
+            className="bg-card/50"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">User Name</label>
+          <Input
+            value={profile.username}
+            readOnly
+            className="bg-card/50"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">* Phone number</label>
+          <Input
+            value={profile.phone_number}
+            readOnly
+            className="bg-card/50"
+          />
+        </div>
+
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="h-5 w-5 rounded-full border border-muted-foreground" />
+          <span>Add new number</span>
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm text-muted-foreground">* National ID Number</label>
+          <Input
+            value={profile.id_number}
+            readOnly
+            className="bg-card/50"
+          />
+        </div>
+
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="h-5 w-5 rounded-full border border-muted-foreground" />
+          <span>Add other ID</span>
+        </div>
+
+        <p className="text-sm text-muted-foreground">* These fields are unchangeable</p>
+
+        <Button 
+          className="w-full"
+          onClick={handleChange}
+        >
+          Change
+        </Button>
+      </div>
     </div>
   );
 };

@@ -12,21 +12,25 @@ import {
   LogOut
 } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 
 interface ProfileData {
-  full_name: string | null;
-  email: string | null;
-  phone_number: string | null;
+  full_name: string;
+  email: string;
+  phone_number: string;
+  username: string;
+  national_id: string;
 }
 
 const Profile = () => {
   const navigate = useNavigate();
   const [profile] = useState<ProfileData>({
-    full_name: "Demo User",
-    email: "demo@tribbe.co",
-    phone_number: "+1 (555) 123-4567"
+    full_name: "Tonee Ndungu",
+    email: "tonee@tribbe.io",
+    phone_number: "+254 721 583 605",
+    username: "@tonee",
+    national_id: "xxx xxx xxx xxx"
   });
 
   const handleSignOut = () => {
@@ -53,8 +57,12 @@ const Profile = () => {
         {/* Profile Summary */}
         <div className="bg-card rounded-lg p-6 mb-6">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-              <User className="w-8 h-8 text-primary" />
+            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+              <img 
+                src="/lovable-uploads/7be77052-2db0-40d8-8c58-0237091838d7.png"
+                alt="Tonee Ndungu"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <h2 className="text-xl font-semibold">{profile.full_name}</h2>
