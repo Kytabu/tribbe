@@ -44,7 +44,7 @@ const AccountPage = () => {
       <div className="flex justify-center mb-6">
         <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary">
           <img 
-            src="/lovable-uploads/343535f4-8279-4914-b426-b360533410a3.png"
+            src="/lovable-uploads/4a593a53-ec2e-4ab3-a500-c2147809af06.png"
             alt="Tonee Ndungu"
             className="w-full h-full object-cover"
           />
