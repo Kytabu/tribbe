@@ -10,6 +10,7 @@ import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatSuggestions } from "@/components/chat/ChatSuggestions";
 import { Message } from "@/types/chat";
 import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Flami() {
   const navigate = useNavigate();
@@ -72,7 +73,7 @@ export default function Flami() {
 
   const currentLevel = getCurrentLevel(creditScore);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -84,21 +85,37 @@ export default function Flami() {
     };
     setMessages(prev => [...prev, userMessage]);
     setInput("");
-
     setIsLoading(true);
-    setTimeout(() => {
+
+    try {
+      const { data, error } = await supabase.functions.invoke('chat', {
+        body: { messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })) }
+      });
+
+      if (error) throw error;
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: "Thanks for your message! How else can I help you today? 😊",
+        content: data.message,
         role: "assistant",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error calling Mistral API:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment. 🙏",
+        role: "assistant",
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
-  const handleActivitySubmit = (e: React.FormEvent) => {
+  const handleActivitySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!activityInput.trim()) return;
 
@@ -110,19 +127,34 @@ export default function Flami() {
     };
     setActivityMessages(prev => [...prev, userMessage]);
     setActivityInput("");
-
-    // Add AI response for activity messages
     setIsLoading(true);
-    setTimeout(() => {
+
+    try {
+      const { data, error } = await supabase.functions.invoke('chat', {
+        body: { messages: [...activityMessages, userMessage].map(m => ({ role: m.role, content: m.content })) }
+      });
+
+      if (error) throw error;
+
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: "I've noted your activity request. Is there anything specific you'd like to know about your recent transactions or circle activities? 🤔",
+        content: data.message,
         role: "assistant",
         timestamp: new Date()
       };
       setActivityMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error calling Mistral API:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment. 🙏",
+        role: "assistant",
+        timestamp: new Date()
+      };
+      setActivityMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleSuggestionClick = (text: string, points: number) => {
