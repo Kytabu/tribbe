@@ -1,10 +1,10 @@
-
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { FlamiHeader } from "@/components/flami/FlamiHeader";
 import { FlamiTabs } from "@/components/flami/FlamiTabs";
 import { useState, useEffect } from "react";
 import { Message } from "@/types/chat";
 import { supabase } from "@/integrations/supabase/client";
+import { AppSidebar } from "@/components/layout/AppSidebar";
 
 export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -160,22 +160,27 @@ export default function Flami() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <SidebarProvider defaultOpen={false}>
-        <FlamiHeader currentLevelColor={currentLevel.color} />
-        <FlamiTabs
-          messages={messages}
-          activityMessages={activityMessages}
-          chatInput={chatInput}
-          activityInput={activityInput}
-          isLoading={isLoading}
-          onChatInputChange={setChatInput}
-          onActivityInputChange={setActivityInput}
-          onChatSubmit={handleChatSubmit}
-          onActivitySubmit={handleActivitySubmit}
-          onSuggestionClick={handleSuggestionClick}
-        />
-      </SidebarProvider>
-    </div>
+    <SidebarProvider defaultOpen={false}>
+      <div className="flex h-screen w-full">
+        <AppSidebar />
+        <div className="flex-1 flex flex-col min-h-screen bg-background">
+          <FlamiHeader currentLevelColor={currentLevel.color} />
+          <div className="flex-1 flex flex-col relative overflow-hidden max-w-3xl mx-auto w-full">
+            <FlamiTabs
+              messages={messages}
+              activityMessages={activityMessages}
+              chatInput={chatInput}
+              activityInput={activityInput}
+              isLoading={isLoading}
+              onChatInputChange={setChatInput}
+              onActivityInputChange={setActivityInput}
+              onChatSubmit={handleChatSubmit}
+              onActivitySubmit={handleActivitySubmit}
+              onSuggestionClick={handleSuggestionClick}
+            />
+          </div>
+        </div>
+      </div>
+    </SidebarProvider>
   );
 }

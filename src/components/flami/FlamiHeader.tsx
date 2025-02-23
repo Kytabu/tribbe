@@ -13,34 +13,34 @@ export function FlamiHeader({ currentLevelColor }: FlamiHeaderProps) {
   const navigate = useNavigate();
 
   return (
-    <header className="relative h-14 border-b border-black/10">
-      <div className="max-w-2xl mx-auto w-full px-4">
-        <div className="flex h-full items-center">
+    <header className="sticky top-0 z-50 w-full border-b border-black/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="max-w-3xl mx-auto w-full px-4">
+        <div className="flex h-14 items-center justify-between">
           <Button
             variant="ghost"
             size="icon"
-            className="mr-4 hover:bg-tribbe-lime"
+            className="hover:bg-background/80"
             onClick={() => setOpen(!open)}
           >
-            <MenuIcon className="h-6 w-6 text-tribbe-lime hover:text-tribbe-black" />
+            <MenuIcon className="h-5 w-5 text-tribbe-lime" />
           </Button>
-          <div className="flex-1 flex items-center justify-center">
-            <h2 className="text-xl font-righteous text-tribbe-lime">Flami</h2>
-          </div>
+          <h2 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-righteous text-tribbe-lime">
+            Flami
+          </h2>
           <Button
             variant="ghost"
             size="icon"
             onClick={() => navigate("/street-cred")}
-            className="hover:bg-tribbe-lime/20 relative group"
+            className="hover:bg-background/80"
           >
             <div 
-              className="p-0.5 rounded-full transition-transform duration-200 group-hover:scale-105"
+              className="p-0.5 rounded-full transition-transform duration-200 hover:scale-105"
               style={{ backgroundColor: currentLevelColor }}
             >
               <img 
                 src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
                 alt="Profile" 
-                className="w-8 h-8 rounded-full object-cover border border-background"
+                className="w-7 h-7 rounded-full object-cover"
               />
             </div>
           </Button>

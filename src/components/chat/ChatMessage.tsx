@@ -33,8 +33,8 @@ export function ChatMessage({ message }: ChatMessageProps) {
           className={cn(
             "rounded-2xl px-4 py-2 text-sm break-words",
             message.role === "assistant" 
-              ? "bg-muted" 
-              : "bg-tribbe-lime text-black"
+              ? "bg-muted border-none" 
+              : "bg-tribbe-lime/90 text-black border-none"
           )}
         >
           {message.content}
