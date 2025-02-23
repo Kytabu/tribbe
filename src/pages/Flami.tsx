@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -30,7 +29,6 @@ export default function Flami() {
   ];
 
   useEffect(() => {
-    // Add initial welcome message
     const welcomeMessage: Message = {
       id: "welcome",
       content: "Welcome back! 👋 Here's your Tribbe update:\n\n" +
@@ -169,9 +167,9 @@ export default function Flami() {
 
   return (
     <AppLayout>
-      <div className="container max-w-4xl mx-auto h-[calc(100vh-2rem)] flex flex-col pb-6">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
+      <div className="h-[100dvh] flex flex-col bg-background">
+        <div className="flex items-center justify-between px-4 py-3 border-b">
+          <div className="flex items-center gap-2">
             <Button
               variant="ghost"
               size="icon"
@@ -180,7 +178,7 @@ export default function Flami() {
             >
               <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
             </Button>
-            <h2 className="text-2xl font-righteous text-tribbe-lime">Flami</h2>
+            <h2 className="text-xl font-righteous text-tribbe-lime">Flami</h2>
           </div>
           <Button
             variant="ghost"
@@ -201,64 +199,62 @@ export default function Flami() {
           </Button>
         </div>
 
-        <Card className="flex-1 bg-background p-6">
-          <Tabs defaultValue="chat" className="h-full flex flex-col">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="chat" className="text-sm">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Chat with Flami
-              </TabsTrigger>
-              <TabsTrigger value="activity" className="text-sm">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Recent Activity
-              </TabsTrigger>
-            </TabsList>
+        <Tabs defaultValue="chat" className="flex-1 flex flex-col">
+          <TabsList className="grid w-full grid-cols-2 px-2 py-1">
+            <TabsTrigger value="chat" className="text-sm">
+              <MessageSquare className="w-4 h-4 mr-2" />
+              Chat with Flami
+            </TabsTrigger>
+            <TabsTrigger value="activity" className="text-sm">
+              <MessageSquare className="w-4 h-4 mr-2" />
+              Recent Activity
+            </TabsTrigger>
+          </TabsList>
 
-            <TabsContent 
-              value="chat" 
-              className="h-[calc(100%-3rem)] flex flex-col mt-4"
-            >
-              <div className="flex-1 overflow-y-auto">
-                <div className="space-y-4">
-                  {messages.map((message) => (
-                    <ChatMessage key={message.id} message={message} />
-                  ))}
-                </div>
+          <TabsContent 
+            value="chat" 
+            className="flex-1 flex flex-col px-4 overflow-hidden"
+          >
+            <div className="flex-1 overflow-y-auto pb-4">
+              <div className="space-y-4 min-h-full">
+                {messages.map((message) => (
+                  <ChatMessage key={message.id} message={message} />
+                ))}
               </div>
-              <div className="pt-4 border-t">
-                <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
-                <ChatInput 
-                  input={input}
-                  isLoading={isLoading}
-                  onInputChange={(value) => setInput(value)}
-                  onSubmit={handleSubmit}
-                />
-              </div>
-            </TabsContent>
+            </div>
+            <div className="pt-2 border-t bg-background">
+              <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
+              <ChatInput 
+                input={input}
+                isLoading={isLoading}
+                onInputChange={(value) => setInput(value)}
+                onSubmit={handleSubmit}
+              />
+            </div>
+          </TabsContent>
 
-            <TabsContent 
-              value="activity" 
-              className="flex-1 flex flex-col h-full"
-            >
-              <div className="flex-1 overflow-y-auto min-h-0">
-                <div className="space-y-4 py-4">
-                  {activityMessages.map((message) => (
-                    <ChatMessage key={message.id} message={message} />
-                  ))}
-                </div>
+          <TabsContent 
+            value="activity" 
+            className="flex-1 flex flex-col px-4 overflow-hidden"
+          >
+            <div className="flex-1 overflow-y-auto pb-4">
+              <div className="space-y-4">
+                {activityMessages.map((message) => (
+                  <ChatMessage key={message.id} message={message} />
+                ))}
               </div>
-              <div className="mt-auto pt-4 border-t">
-                <ChatInput 
-                  input={activityInput}
-                  isLoading={isLoading}
-                  onInputChange={(value) => setActivityInput(value)}
-                  onSubmit={handleActivitySubmit}
-                  placeholder="What would you like?"
-                />
-              </div>
-            </TabsContent>
-          </Tabs>
-        </Card>
+            </div>
+            <div className="pt-2 border-t bg-background">
+              <ChatInput 
+                input={activityInput}
+                isLoading={isLoading}
+                onInputChange={(value) => setActivityInput(value)}
+                onSubmit={handleActivitySubmit}
+                placeholder="What would you like?"
+              />
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </AppLayout>
   );
