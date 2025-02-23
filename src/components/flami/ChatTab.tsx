@@ -22,32 +22,18 @@ export function ChatTab({
   onSuggestionClick
 }: ChatTabProps) {
   return (
-    <div className="relative flex h-full flex-col overflow-hidden">
-      <div className="flex-1 overflow-y-auto">
-        <div className="flex flex-col items-center">
-          {messages.map((message) => (
-            <div key={message.id} className="w-full border-b border-black/10 dark:border-gray-900/50">
-              <div className="relative m-auto flex gap-4 p-4 text-base md:max-w-2xl md:gap-6 md:py-6 lg:max-w-2xl xl:max-w-3xl">
-                <ChatMessage message={message} />
-              </div>
-            </div>
-          ))}
+    <div className="relative flex flex-col h-full">
+      <div className="w-full overflow-x-auto no-scrollbar">
+        <div className="flex gap-2 px-1 pb-2 min-w-max">
+          <ChatSuggestions onSuggestionClick={onSuggestionClick} />
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-full border-t bg-gradient-to-t from-background pt-2">
-        <div className="stretch mx-2 flex flex-row gap-3 last:mb-2 md:mx-4 md:last:mb-6 lg:mx-auto lg:max-w-2xl xl:max-w-3xl">
-          <div className="relative flex h-full flex-1 flex-col">
-            <ChatSuggestions onSuggestionClick={onSuggestionClick} />
-            <ChatInput 
-              input={input}
-              isLoading={isLoading}
-              onInputChange={onInputChange}
-              onSubmit={onSubmit}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="h-32 md:h-48 flex-shrink-0" />
+      <ChatInput 
+        input={input}
+        isLoading={isLoading}
+        onInputChange={onInputChange}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }

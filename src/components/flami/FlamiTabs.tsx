@@ -31,8 +31,8 @@ export function FlamiTabs({
   onSuggestionClick
 }: FlamiTabsProps) {
   return (
-    <Tabs defaultValue="chat" className="flex-1 flex flex-col h-full">
-      <div className="bg-background">
+    <Tabs defaultValue="chat" className="flex flex-col h-full">
+      <div className="bg-background sticky top-0 z-10">
         <div className="max-w-2xl mx-auto w-full">
           <TabsList className="w-full flex justify-start gap-4 p-2">
             <TabsTrigger value="chat" className="px-1 py-1 text-sm data-[state=active]:text-tribbe-lime data-[state=active]:bg-transparent data-[state=active]:underline data-[state=active]:underline-offset-8 rounded-none">
@@ -45,10 +45,10 @@ export function FlamiTabs({
         </div>
       </div>
 
-      <TabsContent value="chat" className="flex-1 flex flex-col mt-0 h-full">
+      <TabsContent value="chat" className="flex-1 flex flex-col h-full overflow-hidden">
         <div className="flex-1 overflow-y-auto">
-          <div className="max-w-2xl mx-auto px-4">
-            <div className="flex flex-col-reverse gap-4">
+          <div className="max-w-2xl mx-auto px-4 pt-4">
+            <div className="flex flex-col-reverse">
               {messages.map((message) => (
                 <ChatMessage key={message.id} message={message} />
               ))}
@@ -56,7 +56,7 @@ export function FlamiTabs({
           </div>
         </div>
         
-        <div className="w-full mt-auto border-t bg-background/95 backdrop-blur">
+        <div className="w-full border-t bg-background/95 backdrop-blur">
           <div className="max-w-2xl mx-auto px-2 md:px-4 py-2">
             <ChatTab 
               messages={messages}

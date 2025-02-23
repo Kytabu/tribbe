@@ -27,20 +27,18 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
   ];
 
   return (
-    <div className="w-full overflow-x-auto scrollbar-hide">
-      <div className="flex gap-2 px-1 pb-2 w-max">
-        {suggestions.map((suggestion, index) => (
-          <Button
-            key={index}
-            variant="ghost"
-            className="shrink-0 h-auto py-2 px-3 hover:bg-muted/50 flex items-center gap-2 group transition-all duration-300 animate-fade-in rounded-xl text-muted-foreground hover:text-foreground whitespace-nowrap"
-            onClick={() => onSuggestionClick(suggestion.text, 0)}
-          >
-            {suggestion.icon}
-            <span className="text-sm">{suggestion.text}</span>
-          </Button>
-        ))}
-      </div>
+    <div className="flex gap-2 overflow-x-auto no-scrollbar">
+      {suggestions.map((suggestion, index) => (
+        <Button
+          key={index}
+          variant="ghost"
+          className="shrink-0 h-auto py-2 px-3 hover:bg-muted/50 flex items-center gap-2 group transition-all duration-300 animate-fade-in rounded-xl text-muted-foreground hover:text-foreground whitespace-nowrap"
+          onClick={() => onSuggestionClick(suggestion.text, 0)}
+        >
+          {suggestion.icon}
+          <span className="text-sm">{suggestion.text}</span>
+        </Button>
+      ))}
     </div>
   );
 }

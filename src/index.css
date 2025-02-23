@@ -4,79 +4,37 @@
 @tailwind utilities;
  
 @layer base {
-  :root[class~="dark"] {
-    --background: 210 27% 15%;
-    --foreground: 0 0% 100%;
- 
-    --card: 210 27% 15%;
-    --card-foreground: 0 0% 100%;
- 
-    --popover: 210 27% 15%;
-    --popover-foreground: 0 0% 100%;
- 
-    --primary: 83 100% 57%;
-    --primary-foreground: 0 0% 0%;
- 
-    --secondary: 261 100% 80%;
-    --secondary-foreground: 0 0% 0%;
- 
-    --muted: 210 27% 25%;
-    --muted-foreground: 0 0% 70%;
- 
-    --accent: 203 100% 74%;
-    --accent-foreground: 0 0% 0%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
- 
-    --border: 210 27% 25%;
-    --input: 210 27% 25%;
-    --ring: 0 0% 100%;
-  }
-
   :root {
-    --background: 210 27% 15%;
-    --foreground: 0 0% 100%;
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
  
-    --card: 210 27% 15%;
-    --card-foreground: 0 0% 100%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
  
-    --popover: 210 27% 15%;
-    --popover-foreground: 0 0% 100%;
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
  
-    --primary: 83 100% 57%;
-    --primary-foreground: 0 0% 0%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
  
-    --secondary: 261 100% 80%;
-    --secondary-foreground: 0 0% 0%;
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
  
-    --muted: 210 27% 25%;
-    --muted-foreground: 0 0% 70%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
  
-    --accent: 203 100% 74%;
-    --accent-foreground: 0 0% 0%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
  
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
  
-    --border: 210 27% 25%;
-    --input: 210 27% 25%;
-    --ring: 0 0% 100%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
  
-    --radius: 0.75rem;
-  }
-}
+    --ring: 216 34% 17%;
  
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  .dark body {
-    @apply bg-background text-foreground;
+    --radius: 0.5rem;
   }
 }
 
@@ -89,20 +47,13 @@
     scrollbar-width: none;
   }
 }
-
-/* Custom Animations */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
+ 
+@layer base {
+  * {
+    @apply border-border;
   }
-  50% {
-    transform: translateY(-10px);
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
 }
