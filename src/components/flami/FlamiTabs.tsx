@@ -49,52 +49,58 @@ export function FlamiTabs({
           </div>
         </div>
 
-        <TabsContent value="chat" className="flex-1 flex flex-col">
-          <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 min-h-full flex flex-col justify-end">
-              <div className="space-y-4 py-4">
-                {messages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
+        <TabsContent value="chat" className="flex-1 flex flex-col relative">
+          <div className="absolute inset-0 flex flex-col">
+            <div className="flex-1 overflow-y-auto">
+              <div className="max-w-2xl mx-auto px-4 flex flex-col h-full">
+                <div className="flex-1" />
+                <div className="space-y-4 py-4">
+                  {messages.map((message) => (
+                    <ChatMessage key={message.id} message={message} />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          
-          <div className="border-t bg-background/95 backdrop-blur p-2">
-            <div className="max-w-2xl mx-auto">
-              <ChatTab 
-                messages={messages}
-                input={chatInput}
-                isLoading={isLoading}
-                onInputChange={onChatInputChange}
-                onSubmit={onChatSubmit}
-                onSuggestionClick={onSuggestionClick}
-              />
+            
+            <div className="border-t bg-background/95 backdrop-blur p-2">
+              <div className="max-w-2xl mx-auto">
+                <ChatTab 
+                  messages={messages}
+                  input={chatInput}
+                  isLoading={isLoading}
+                  onInputChange={onChatInputChange}
+                  onSubmit={onChatSubmit}
+                  onSuggestionClick={onSuggestionClick}
+                />
+              </div>
             </div>
           </div>
         </TabsContent>
 
-        <TabsContent value="activity" className="flex-1 flex flex-col">
-          <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 min-h-full flex flex-col justify-end">
-              <div className="space-y-4 py-4">
-                {activityMessages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
+        <TabsContent value="activity" className="flex-1 flex flex-col relative">
+          <div className="absolute inset-0 flex flex-col">
+            <div className="flex-1 overflow-y-auto">
+              <div className="max-w-2xl mx-auto px-4 flex flex-col h-full">
+                <div className="flex-1" />
+                <div className="space-y-4 py-4">
+                  {activityMessages.map((message) => (
+                    <ChatMessage key={message.id} message={message} />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="border-t bg-background/95 backdrop-blur p-2">
-            <div className="max-w-2xl mx-auto">
-              <ChatTab 
-                messages={activityMessages}
-                input={activityInput}
-                isLoading={isLoading}
-                onInputChange={onActivityInputChange}
-                onSubmit={onActivitySubmit}
-                onSuggestionClick={onSuggestionClick}
-              />
+            <div className="border-t bg-background/95 backdrop-blur p-2">
+              <div className="max-w-2xl mx-auto">
+                <ChatTab 
+                  messages={activityMessages}
+                  input={activityInput}
+                  isLoading={isLoading}
+                  onInputChange={onActivityInputChange}
+                  onSubmit={onActivitySubmit}
+                  onSuggestionClick={onSuggestionClick}
+                />
+              </div>
             </div>
           </div>
         </TabsContent>
