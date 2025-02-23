@@ -39,6 +39,12 @@ export const EmailAuth = ({ onBack, onSubmit, loading }: EmailAuthProps) => {
         </Button>
       </div>
 
+      <img 
+        src="/lovable-uploads/2e96dadf-c241-4700-b74e-72f155818e87.png" 
+        alt="Tribbe Logo" 
+        className="w-40 mx-auto mt-8 mb-4"
+      />
+
       <div className="flex-1 flex items-center justify-center">
         <div className="w-full max-w-md space-y-6">
           <div className="text-center">
