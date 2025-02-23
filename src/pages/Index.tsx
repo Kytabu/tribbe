@@ -50,18 +50,18 @@ const Index = () => {
   }, [isVisible, shouldNavigate, navigate]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 sm:px-6">
+    <div className="min-h-screen bg-background flex flex-col items-center px-4 sm:px-6">
+      <img 
+        src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
+        alt="Tribbe Logo"
+        className="w-48 sm:w-80 mx-auto mt-8 sm:mt-12"
+      />
       <div 
-        className={`space-y-6 sm:space-y-8 text-center mx-auto w-full max-w-sm sm:max-w-2xl transition-opacity duration-300 ${
+        className={`flex-1 flex flex-col items-center justify-center w-full max-w-sm sm:max-w-2xl transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="space-y-6 sm:space-y-8">
-          <img 
-            src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
-            alt="Tribbe Logo"
-            className="w-48 sm:w-80 mx-auto"
-          />
+        <div className="space-y-6 sm:space-y-8 text-center">
           <div className="pt-3 sm:pt-5">
             <img 
               src="/lovable-uploads/7d875948-ce43-436a-a356-9bce6f1a1226.png"
