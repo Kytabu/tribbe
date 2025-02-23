@@ -51,8 +51,9 @@ export function FlamiTabs({
       <div className="pt-24">
         <TabsContent value="chat" className="flex-1 flex flex-col relative h-[calc(100vh-9rem)]">
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col justify-end">
-              <div className="flex flex-col gap-4">
+            <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col">
+              <div className="flex-1" /> {/* Spacer to push content to bottom */}
+              <div className="flex flex-col-reverse gap-4">
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
@@ -76,8 +77,9 @@ export function FlamiTabs({
 
         <TabsContent value="activity" className="flex-1 flex flex-col relative h-[calc(100vh-9rem)]">
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col justify-end">
-              <div className="flex flex-col gap-4">
+            <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col">
+              <div className="flex-1" /> {/* Spacer to push content to bottom */}
+              <div className="flex flex-col-reverse gap-4">
                 {activityMessages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
