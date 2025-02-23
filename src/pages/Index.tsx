@@ -54,7 +54,7 @@ const Index = () => {
       <img 
         src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
         alt="Tribbe Logo"
-        className="w-48 sm:w-80 mx-auto mt-8 sm:mt-12"
+        className="w-48 sm:w-80 mx-auto mt-16 sm:mt-20"
       />
       <div 
         className={`flex-1 flex flex-col items-center justify-center w-full max-w-sm sm:max-w-2xl transition-opacity duration-300 ${
