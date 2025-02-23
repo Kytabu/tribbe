@@ -1,18 +1,12 @@
 
 import { AppLayout } from "@/components/layout/AppLayout";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { MessageSquare } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { ChatInput } from "@/components/chat/ChatInput";
-import { ChatMessage } from "@/components/chat/ChatMessage";
-import { ChatSuggestions } from "@/components/chat/ChatSuggestions";
 import { Message } from "@/types/chat";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { FlamiHeader } from "@/components/flami/FlamiHeader";
+import { FlamiTabs } from "@/components/flami/FlamiTabs";
 
 export default function Flami() {
-  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
   const [activityMessages, setActivityMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -68,8 +62,6 @@ export default function Flami() {
       .reverse()
       .find(level => score >= level.minScore) || streetCredLevels[0];
   };
-
-  const currentLevel = getCurrentLevel(creditScore);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -165,95 +157,24 @@ export default function Flami() {
     setMessages(prev => [...prev, userMessage]);
   };
 
+  const currentLevel = getCurrentLevel(creditScore);
+
   return (
     <AppLayout>
       <div className="h-[100dvh] flex flex-col bg-background">
-        <div className="flex items-center justify-between px-4 py-3 border-b">
-          <div className="flex-1" />
-          <h2 className="flex-1 text-xl font-righteous text-tribbe-lime text-center">Flami</h2>
-          <div className="flex-1 flex justify-end">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate("/street-cred")}
-              className="hover:bg-tribbe-lime/20 relative group"
-            >
-              <div 
-                className="p-0.5 rounded-full transition-transform duration-200 group-hover:scale-105"
-                style={{ backgroundColor: currentLevel.color }}
-              >
-                <img 
-                  src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
-                  alt="Profile" 
-                  className="w-8 h-8 rounded-full object-cover border border-background"
-                />
-              </div>
-            </Button>
-          </div>
-        </div>
-
-        <Tabs defaultValue="chat" className="flex-1 flex flex-col">
-          <div className="border-b">
-            <TabsList className="w-full flex justify-center gap-2 py-2">
-              <TabsTrigger value="chat" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Chat
-              </TabsTrigger>
-              <TabsTrigger value="activity" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Activity
-              </TabsTrigger>
-            </TabsList>
-          </div>
-
-          <TabsContent 
-            value="chat" 
-            className="flex-1 flex flex-col overflow-hidden"
-          >
-            <div className="flex-1 overflow-y-auto pb-4 px-4 max-w-2xl mx-auto w-full">
-              <div className="space-y-4 min-h-full">
-                {messages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
-              </div>
-            </div>
-            <div className="pt-2 border-t bg-background">
-              <div className="max-w-2xl mx-auto px-4 w-full">
-                <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
-                <ChatInput 
-                  input={input}
-                  isLoading={isLoading}
-                  onInputChange={(value) => setInput(value)}
-                  onSubmit={handleSubmit}
-                />
-              </div>
-            </div>
-          </TabsContent>
-
-          <TabsContent 
-            value="activity" 
-            className="flex-1 flex flex-col overflow-hidden"
-          >
-            <div className="flex-1 overflow-y-auto pb-4 px-4 max-w-2xl mx-auto w-full">
-              <div className="space-y-4">
-                {activityMessages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
-              </div>
-            </div>
-            <div className="pt-2 border-t bg-background">
-              <div className="max-w-2xl mx-auto px-4 w-full">
-                <ChatInput 
-                  input={activityInput}
-                  isLoading={isLoading}
-                  onInputChange={(value) => setActivityInput(value)}
-                  onSubmit={handleActivitySubmit}
-                  placeholder="What would you like?"
-                />
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
+        <FlamiHeader currentLevelColor={currentLevel.color} />
+        <FlamiTabs
+          messages={messages}
+          activityMessages={activityMessages}
+          chatInput={input}
+          activityInput={activityInput}
+          isLoading={isLoading}
+          onChatInputChange={setInput}
+          onActivityInputChange={setActivityInput}
+          onChatSubmit={handleSubmit}
+          onActivitySubmit={handleActivitySubmit}
+          onSuggestionClick={handleSuggestionClick}
+        />
       </div>
     </AppLayout>
   );
