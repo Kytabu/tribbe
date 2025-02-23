@@ -32,8 +32,9 @@ export function FlamiTabs({
   onSuggestionClick
 }: FlamiTabsProps) {
   return (
-    <Tabs defaultValue="chat" className="flex flex-col h-[calc(100vh-3.5rem)]"> {/* Account for header height */}
-      <div className="bg-background fixed top-14 left-0 right-0 z-20 border-b">
+    <Tabs defaultValue="chat" className="flex flex-col min-h-0 h-[100dvh]">
+      {/* Fixed header */}
+      <div className="bg-background sticky top-0 z-20 border-b">
         <div className="max-w-2xl mx-auto w-full">
           <TabsList className="w-full flex justify-start gap-4 p-2">
             <TabsTrigger value="chat" className="px-1 py-1 text-sm data-[state=active]:text-tribbe-lime data-[state=active]:bg-transparent data-[state=active]:underline data-[state=active]:underline-offset-8 rounded-none flex items-center gap-2">
@@ -48,59 +49,63 @@ export function FlamiTabs({
         </div>
       </div>
 
-      <div className="pt-14">
-        <TabsContent value="chat" className="flex flex-col h-[calc(100vh-8.5rem)]"> {/* Account for both headers and input area */}
+      {/* Chat tab content */}
+      <TabsContent 
+        value="chat" 
+        className="flex-1 flex flex-col min-h-0"
+      >
+        <div className="flex-1 overflow-hidden flex flex-col">
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col">
-              <div className="flex-1" />
-              <div className="flex flex-col-reverse gap-4 pb-20"> {/* Add padding to prevent messages from being hidden behind input */}
-                {messages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
-              </div>
+            <div className="flex flex-col-reverse h-full">
+              {messages.map((message) => (
+                <ChatMessage key={message.id} message={message} />
+              ))}
             </div>
           </div>
-          
-          <div className="fixed bottom-0 left-0 right-0 w-full border-t bg-background/95 backdrop-blur">
-            <div className="max-w-2xl mx-auto px-2 md:px-4 py-2">
-              <ChatTab 
-                messages={messages}
-                input={chatInput}
-                isLoading={isLoading}
-                onInputChange={onChatInputChange}
-                onSubmit={onChatSubmit}
-                onSuggestionClick={onSuggestionClick}
-              />
-            </div>
-          </div>
-        </TabsContent>
+        </div>
 
-        <TabsContent value="activity" className="flex flex-col h-[calc(100vh-8.5rem)]"> {/* Match chat tab height */}
+        <div className="mt-auto border-t bg-background/95 backdrop-blur p-2">
+          <div className="max-w-2xl mx-auto">
+            <ChatTab 
+              messages={messages}
+              input={chatInput}
+              isLoading={isLoading}
+              onInputChange={onChatInputChange}
+              onSubmit={onChatSubmit}
+              onSuggestionClick={onSuggestionClick}
+            />
+          </div>
+        </div>
+      </TabsContent>
+
+      {/* Activity tab content */}
+      <TabsContent 
+        value="activity" 
+        className="flex-1 flex flex-col min-h-0"
+      >
+        <div className="flex-1 overflow-hidden flex flex-col">
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col">
-              <div className="flex-1" />
-              <div className="flex flex-col-reverse gap-4 pb-20"> {/* Add padding to prevent messages from being hidden behind input */}
-                {activityMessages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
-              </div>
+            <div className="flex flex-col-reverse h-full">
+              {activityMessages.map((message) => (
+                <ChatMessage key={message.id} message={message} />
+              ))}
             </div>
           </div>
+        </div>
 
-          <div className="fixed bottom-0 left-0 right-0 w-full border-t bg-background/95 backdrop-blur">
-            <div className="max-w-2xl mx-auto px-2 md:px-4 py-2">
-              <ChatTab 
-                messages={activityMessages}
-                input={activityInput}
-                isLoading={isLoading}
-                onInputChange={onActivityInputChange}
-                onSubmit={onActivitySubmit}
-                onSuggestionClick={onSuggestionClick}
-              />
-            </div>
+        <div className="mt-auto border-t bg-background/95 backdrop-blur p-2">
+          <div className="max-w-2xl mx-auto">
+            <ChatTab 
+              messages={activityMessages}
+              input={activityInput}
+              isLoading={isLoading}
+              onInputChange={onActivityInputChange}
+              onSubmit={onActivitySubmit}
+              onSuggestionClick={onSuggestionClick}
+            />
           </div>
-        </TabsContent>
-      </div>
+        </div>
+      </TabsContent>
     </Tabs>
   );
 }
