@@ -3,7 +3,7 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, CreditCard, QrCode, Wallet } from "lucide-react";
+import { CreditCard, QrCode, Wallet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddMoney() {
@@ -11,18 +11,8 @@ export default function AddMoney() {
 
   return (
     <AppLayout>
-      <div className="max-w-2xl mx-auto space-y-6">
-        <div className="flex items-center gap-4 mb-6">
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={() => navigate("/wallet")}
-            className="hover:bg-tribbe-lime"
-          >
-            <ArrowLeft className="h-6 w-6 text-tribbe-lime hover:text-tribbe-black" />
-          </Button>
-          <h1 className="text-2xl font-semibold">Add Money</h1>
-        </div>
+      <div className="max-w-2xl mx-auto space-y-6 p-4">
+        <h1 className="text-2xl font-semibold mb-6">Add Money</h1>
 
         <Card>
           <CardHeader>

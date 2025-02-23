@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 
 interface Profile {
@@ -14,7 +13,6 @@ interface Profile {
 }
 
 const AccountPage = () => {
-  const navigate = useNavigate();
   const [profile] = useState<Profile>({
     full_name: "Tonee Ndungu",
     username: "@tonee",
@@ -30,16 +28,7 @@ const AccountPage = () => {
 
   return (
     <div className="min-h-screen bg-background p-6">
-      <div className="flex items-center gap-4 mb-6">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeft className="h-6 w-6" />
-        </Button>
-        <h1 className="text-2xl font-bold">Account</h1>
-      </div>
+      <h1 className="text-2xl font-bold mb-6">Account</h1>
 
       <div className="flex justify-center mb-6">
         <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary">
