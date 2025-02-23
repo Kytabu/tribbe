@@ -51,8 +51,8 @@ export function FlamiTabs({
 
         <TabsContent value="chat" className="flex-1 flex flex-col">
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 h-full flex flex-col justify-end">
-              <div className="space-y-4">
+            <div className="max-w-2xl mx-auto px-4 min-h-full flex flex-col justify-end">
+              <div className="space-y-4 py-4">
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
@@ -76,8 +76,8 @@ export function FlamiTabs({
 
         <TabsContent value="activity" className="flex-1 flex flex-col">
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 h-full flex flex-col justify-end">
-              <div className="space-y-4">
+            <div className="max-w-2xl mx-auto px-4 min-h-full flex flex-col justify-end">
+              <div className="space-y-4 py-4">
                 {activityMessages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
