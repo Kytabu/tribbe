@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Mail, Phone, Apple, Facebook, Check } from "lucide-react";
+import { Mail, Phone, Apple, Facebook, Check, X } from "lucide-react";
 
 const AuthPage = () => {
   const navigate = useNavigate();
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [verificationCode, setVerificationCode] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isEmailFlow, setIsEmailFlow] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -30,6 +36,40 @@ const AuthPage = () => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [isVerifying, verificationCode]);
+
+  const handleEmailAuth = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      if (isLogin) {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (error) throw error;
+        navigate("/flami");
+      } else {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
+        if (error) throw error;
+        toast({
+          description: "Check your email for the confirmation link!",
+        });
+      }
+    } catch (error: any) {
+      console.error('Error during email auth:', error);
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handlePhoneSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,16 +119,68 @@ const AuthPage = () => {
     }
   };
 
-  const handleNumberClick = (number: string) => {
-    if (verificationCode.length < 4) {
-      const newCode = verificationCode + number;
-      setVerificationCode(newCode);
-    }
-  };
+  if (isEmailFlow) {
+    return (
+      <div className="min-h-screen bg-tribbe-grey flex flex-col px-4 sm:px-6">
+        <div className="flex items-center justify-between w-full pt-4">
+          <Button
+            variant="ghost"
+            className="text-white hover:text-tribbe-aqua"
+            onClick={() => setIsEmailFlow(false)}
+          >
+            <X className="h-6 w-6" />
+          </Button>
+          <Button
+            variant="ghost"
+            className="text-white hover:text-tribbe-aqua"
+            onClick={() => setIsLogin(!isLogin)}
+          >
+            {isLogin ? "Sign up" : "Login"}
+          </Button>
+        </div>
 
-  const handleDelete = () => {
-    setVerificationCode(prev => prev.slice(0, -1));
-  };
+        <div className="flex-1 flex items-center justify-center">
+          <div className="w-full max-w-md space-y-6">
+            <div className="text-center">
+              <h1 className="text-2xl font-semibold text-white mb-2">
+                {isLogin ? "Welcome back!" : "Create your account"}
+              </h1>
+              <p className="text-white/60 text-sm">
+                {isLogin ? "Sign in to continue" : "Sign up to get started"}
+              </p>
+            </div>
+
+            <form onSubmit={handleEmailAuth} className="space-y-4">
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-[#1A1F2C] border-0 text-white placeholder:text-white/40"
+                required
+              />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-[#1A1F2C] border-0 text-white placeholder:text-white/40"
+                required
+                minLength={6}
+              />
+              <Button
+                type="submit"
+                className="w-full bg-tribbe-aqua hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-aqua h-12 rounded-full transition-colors"
+                disabled={loading}
+              >
+                {loading ? "Loading..." : isLogin ? "Sign in" : "Sign up"}
+              </Button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-tribbe-grey flex flex-col px-4 sm:px-6">
@@ -125,7 +217,7 @@ const AuthPage = () => {
                     <Button
                       variant="outline"
                       className="w-full max-w-xs bg-tribbe-lime hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-lime border-0 h-12 sm:h-14 rounded-full text-sm font-normal transition-colors"
-                      onClick={() => setIsVerifying(true)}
+                      onClick={() => setIsEmailFlow(true)}
                     >
                       <Mail className="mr-2 h-4 w-4" />
                       Continue with email
@@ -170,7 +262,10 @@ const AuthPage = () => {
                     </p>
                     
                     <p className="text-white/80 text-xs">
-                      Already member? <Button variant="link" className="text-white p-0 hover:text-tribbe-aqua text-xs">Login</Button>
+                      Already member? <Button variant="link" className="text-white p-0 hover:text-tribbe-aqua text-xs" onClick={() => {
+                        setIsEmailFlow(true);
+                        setIsLogin(true);
+                      }}>Login</Button>
                     </p>
                   </div>
                 </div>
