@@ -13,18 +13,19 @@ const AuthPage = () => {
   const [loading, setLoading] = useState(false);
   const [isEmailFlow, setIsEmailFlow] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
-  const [isLogin, setIsLogin] = useState(false); // Add this line to manage login state
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (isVerifying) {
-        if (/^[0-9]$/.test(event.key) && verificationCode.length < 4) {
+        if (/^[0-9]$/.test(event.key) && verificationCode.length < 6) {
           setVerificationCode(prev => prev + event.key);
         }
         if (event.key === 'Backspace') {
           setVerificationCode(prev => prev.slice(0, -1));
         }
-        if (event.key === 'Enter' && verificationCode.length === 4) {
+        if (event.key === 'Enter' && verificationCode.length === 6) {
           handleVerificationSubmit();
         }
       }
@@ -73,14 +74,19 @@ const AuthPage = () => {
     }
   };
 
-  const handlePhoneSubmit = async () => {
+  const handlePhoneSubmit = async (phone: string) => {
     setLoading(true);
+    setPhoneNumber(phone);
 
     try {
-      const code = "1234";
+      const { error } = await supabase.auth.signInWithOtp({
+        phone,
+      });
+      
+      if (error) throw error;
       
       toast({
-        description: `Verification code: ${code}`,
+        description: "Verification code sent to your phone",
       });
       
       setIsVerifying(true);
@@ -100,14 +106,18 @@ const AuthPage = () => {
     setLoading(true);
 
     try {
-      if (verificationCode === "1234") {
-        toast({
-          description: "Verification successful",
-        });
-        navigate("/flami");
-      } else {
-        throw new Error("Invalid verification code");
-      }
+      const { error } = await supabase.auth.verifyOtp({
+        phone: phoneNumber,
+        token: verificationCode,
+        type: 'sms',
+      });
+
+      if (error) throw error;
+
+      toast({
+        description: "Phone number verified successfully!",
+      });
+      navigate("/flami");
     } catch (error: any) {
       console.error('Error during verification:', error);
       toast({
@@ -121,7 +131,7 @@ const AuthPage = () => {
   };
 
   const handleNumberClick = (number: string) => {
-    if (verificationCode.length < 4) {
+    if (verificationCode.length < 6) {
       setVerificationCode(prev => prev + number);
     }
   };
@@ -153,6 +163,7 @@ const AuthPage = () => {
           onNumberClick={handleNumberClick}
           onDelete={handleDelete}
           onSubmit={handleVerificationSubmit}
+          loading={loading}
         />
       )}
     </div>
