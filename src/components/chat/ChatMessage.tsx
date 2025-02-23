@@ -8,27 +8,37 @@ interface ChatMessageProps {
 
 export function ChatMessage({ message }: ChatMessageProps) {
   return (
-    <div className="flex w-full">
-      <div className="flex-shrink-0 mr-4">
+    <div className={cn(
+      "flex w-full", 
+      message.role === "user" ? "justify-end" : "justify-start"
+    )}>
+      <div className={cn(
+        "flex items-start gap-2 max-w-[85%]",
+        message.role === "user" ? "flex-row-reverse" : "flex-row"
+      )}>
         {message.role === "assistant" ? (
           <img 
             src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
             alt="Assistant" 
-            className="h-6 w-6"
+            className="h-6 w-6 mt-1"
           />
         ) : (
           <img 
             src="/lovable-uploads/ecc713cc-73f6-4c89-9f3c-86ed3ab57613.png" 
             alt="User" 
-            className="h-6 w-6 rounded-full"
+            className="h-6 w-6 rounded-full mt-1"
           />
         )}
-      </div>
-      <div className={cn(
-        "prose dark:prose-invert flex-1 whitespace-pre-wrap",
-        message.role === "assistant" ? "" : "text-right"
-      )}>
-        <p className="text-sm">{message.content}</p>
+        <div
+          className={cn(
+            "rounded-2xl px-4 py-2 text-sm break-words",
+            message.role === "assistant" 
+              ? "bg-muted" 
+              : "bg-tribbe-lime text-black"
+          )}
+        >
+          {message.content}
+        </div>
       </div>
     </div>
   );
