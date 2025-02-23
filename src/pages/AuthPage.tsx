@@ -13,6 +13,7 @@ const AuthPage = () => {
   const [loading, setLoading] = useState(false);
   const [isEmailFlow, setIsEmailFlow] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
+  const [isLogin, setIsLogin] = useState(false); // Add this line to manage login state
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
