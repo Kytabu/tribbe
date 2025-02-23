@@ -45,7 +45,7 @@ export function FlamiTabs({
         </div>
       </div>
 
-      <TabsContent value="chat" className="flex-1 flex flex-col">
+      <TabsContent value="chat" className="flex-1 flex flex-col relative">
         <div className="flex-1 overflow-y-auto pb-20">
           <div className="max-w-2xl mx-auto px-4">
             <div className="flex flex-col-reverse space-y-4 space-y-reverse">
@@ -70,14 +70,27 @@ export function FlamiTabs({
         </div>
       </TabsContent>
 
-      <TabsContent value="activity" className="flex-1 flex flex-col">
-        <ActivityTab 
-          messages={activityMessages}
-          input={activityInput}
-          isLoading={isLoading}
-          onInputChange={onActivityInputChange}
-          onSubmit={onActivitySubmit}
-        />
+      <TabsContent value="activity" className="flex-1 flex flex-col relative">
+        <div className="flex-1 overflow-y-auto pb-20">
+          <div className="max-w-2xl mx-auto px-4">
+            <div className="flex flex-col-reverse space-y-4 space-y-reverse">
+              {activityMessages.map((message) => (
+                <ChatMessage key={message.id} message={message} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="fixed bottom-0 left-0 right-0 w-full border-t bg-background/95 backdrop-blur">
+          <div className="max-w-2xl mx-auto px-2 md:px-4 py-2">
+            <ChatInput 
+              input={activityInput}
+              isLoading={isLoading}
+              onInputChange={onActivityInputChange}
+              onSubmit={onActivitySubmit}
+            />
+          </div>
+        </div>
       </TabsContent>
     </Tabs>
   );
