@@ -13,20 +13,20 @@ export function ChatMessage({ message }: ChatMessageProps) {
       message.role === "user" ? "justify-end" : "justify-start"
     )}>
       <div className={cn(
-        "flex items-start gap-2 max-w-[85%]",
+        "flex items-start gap-2 max-w-[80%]",
         message.role === "user" ? "flex-row-reverse" : "flex-row"
       )}>
         {message.role === "assistant" ? (
           <img 
             src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
             alt="Assistant" 
-            className="h-6 w-6 mt-1"
+            className="h-6 w-6 mt-1 flex-shrink-0"
           />
         ) : (
           <img 
             src="/lovable-uploads/ecc713cc-73f6-4c89-9f3c-86ed3ab57613.png" 
             alt="User" 
-            className="h-6 w-6 rounded-full mt-1"
+            className="h-6 w-6 rounded-full mt-1 flex-shrink-0"
           />
         )}
         <div
