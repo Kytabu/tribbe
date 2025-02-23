@@ -28,7 +28,7 @@ export function ChatInput({
   };
 
   return (
-    <form onSubmit={onSubmit} className="sticky bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t">
+    <form onSubmit={onSubmit} className="sticky bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="relative flex w-full flex-grow flex-col rounded-lg px-4 py-3">
         <Textarea
           value={input}
