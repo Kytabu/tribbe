@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
@@ -21,13 +20,13 @@ const AuthPage = () => {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (isVerifying) {
-        if (/^[0-9]$/.test(event.key) && verificationCode.length < 6) {
+        if (/^[0-9]$/.test(event.key) && verificationCode.length < 4) {
           setVerificationCode(prev => prev + event.key);
         }
         if (event.key === 'Backspace') {
           setVerificationCode(prev => prev.slice(0, -1));
         }
-        if (event.key === 'Enter' && verificationCode.length === 6) {
+        if (event.key === 'Enter' && verificationCode.length === 4) {
           handleVerificationSubmit();
         }
       }
@@ -81,20 +80,12 @@ const AuthPage = () => {
     setPhoneNumber(phone);
 
     try {
-      const { error } = await supabase.auth.signInWithOtp({
-        phone,
-      });
-      
-      if (error) throw error;
-      
+      setIsVerifying(true);
+      setIsPhoneFlow(false);
       toast({
         description: "Verification code sent to your phone",
       });
-      
-      setIsVerifying(true);
-      setIsPhoneFlow(false);
     } catch (error: any) {
-      console.error('Error during phone submission:', error);
       toast({
         title: "Error",
         description: error.message || "Failed to send verification code",
@@ -109,18 +100,14 @@ const AuthPage = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.verifyOtp({
-        phone: phoneNumber,
-        token: verificationCode,
-        type: 'sms',
-      });
-
-      if (error) throw error;
-
-      toast({
-        description: "Phone number verified successfully!",
-      });
-      navigate("/flami");
+      if (verificationCode === "0000") {
+        toast({
+          description: "Phone number verified successfully!",
+        });
+        navigate("/flami");
+      } else {
+        throw new Error("Invalid code. Please use 0000");
+      }
     } catch (error: any) {
       console.error('Error during verification:', error);
       toast({
@@ -134,7 +121,7 @@ const AuthPage = () => {
   };
 
   const handleNumberClick = (number: string) => {
-    if (verificationCode.length < 6) {
+    if (verificationCode.length < 4) {
       setVerificationCode(prev => prev + number);
     }
   };

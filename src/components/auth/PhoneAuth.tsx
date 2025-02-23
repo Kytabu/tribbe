@@ -50,13 +50,10 @@ export const PhoneAuth = ({ onBack, onSubmit, loading }: PhoneAuthProps) => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               type="tel"
-              placeholder="Phone number (e.g., +1234567890)"
+              placeholder="Phone number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               className="bg-[#1A1F2C] border-0 text-white placeholder:text-white/40"
-              required
-              pattern="^\+[0-9]{1,}$"
-              title="Please enter phone number with country code (e.g., +1234567890)"
             />
             <Button
               type="submit"

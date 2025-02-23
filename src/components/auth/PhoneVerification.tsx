@@ -21,11 +21,11 @@ export const PhoneVerification = ({
     <div className="w-full max-w-xs space-y-6 sm:space-y-8">
       <div className="text-center space-y-3 sm:space-y-4">
         <h1 className="text-lg sm:text-xl text-white font-normal">Enter verification code</h1>
-        <p className="text-sm text-white/60">We've sent a 6-digit code to your phone</p>
+        <p className="text-sm text-white/60">We've sent a 4-digit code to your phone</p>
       </div>
 
       <div className="flex justify-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
-        {[...Array(6)].map((_, index) => (
+        {[...Array(4)].map((_, index) => (
           <div
             key={index}
             className={`w-3 h-3 rounded-full border-2 ${
@@ -63,12 +63,12 @@ export const PhoneVerification = ({
         </button>
       </div>
 
-      <div className="flex justify-center mt-6">
+      <div className="flex flex-col items-center gap-4">
         <Button
           onClick={onSubmit}
-          disabled={verificationCode.length !== 6 || loading}
+          disabled={verificationCode.length !== 4 || loading}
           className={`w-24 h-10 rounded-full transition-colors ${
-            verificationCode.length === 6 && !loading
+            verificationCode.length === 4 && !loading
               ? "bg-tribbe-lime hover:bg-tribbe-lime/90 text-black" 
               : "bg-gray-600 text-gray-400"
           }`}
@@ -82,6 +82,7 @@ export const PhoneVerification = ({
             </>
           )}
         </Button>
+        <p className="text-white/60 text-sm">use the code 0000</p>
       </div>
     </div>
   );
