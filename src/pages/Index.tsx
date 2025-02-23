@@ -57,7 +57,7 @@ const Index = () => {
         className="w-48 sm:w-80 mx-auto mt-16 sm:mt-20"
       />
       <div 
-        className={`flex-1 flex flex-col items-center justify-center w-full max-w-sm sm:max-w-2xl transition-opacity duration-300 ${
+        className={`flex-1 flex flex-col items-center justify-center -mt-8 w-full max-w-sm sm:max-w-2xl transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
