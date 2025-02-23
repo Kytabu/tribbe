@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { EmailAuth } from "@/components/auth/EmailAuth";
+import { PhoneAuth } from "@/components/auth/PhoneAuth";
 import { PhoneVerification } from "@/components/auth/PhoneVerification";
 import { AuthOptions } from "@/components/auth/AuthOptions";
 
@@ -12,6 +13,7 @@ const AuthPage = () => {
   const [isVerifying, setIsVerifying] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isEmailFlow, setIsEmailFlow] = useState(false);
+  const [isPhoneFlow, setIsPhoneFlow] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isLogin, setIsLogin] = useState(false);
@@ -90,6 +92,7 @@ const AuthPage = () => {
       });
       
       setIsVerifying(true);
+      setIsPhoneFlow(false);
     } catch (error: any) {
       console.error('Error during phone submission:', error);
       toast({
@@ -148,22 +151,28 @@ const AuthPage = () => {
           onSubmit={handleEmailAuth}
           loading={loading}
         />
-      ) : !isVerifying ? (
-        <AuthOptions
-          onEmailClick={() => setIsEmailFlow(true)}
-          onPhoneClick={handlePhoneSubmit}
-          onLoginClick={() => {
-            setIsEmailFlow(true);
-            setIsLogin(true);
-          }}
+      ) : isPhoneFlow ? (
+        <PhoneAuth
+          onBack={() => setIsPhoneFlow(false)}
+          onSubmit={handlePhoneSubmit}
+          loading={loading}
         />
-      ) : (
+      ) : isVerifying ? (
         <PhoneVerification
           verificationCode={verificationCode}
           onNumberClick={handleNumberClick}
           onDelete={handleDelete}
           onSubmit={handleVerificationSubmit}
           loading={loading}
+        />
+      ) : (
+        <AuthOptions
+          onEmailClick={() => setIsEmailFlow(true)}
+          onPhoneClick={() => setIsPhoneFlow(true)}
+          onLoginClick={() => {
+            setIsEmailFlow(true);
+            setIsLogin(true);
+          }}
         />
       )}
     </div>

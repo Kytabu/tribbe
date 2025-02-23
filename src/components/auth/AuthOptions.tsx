@@ -4,20 +4,11 @@ import { Mail, Phone, Apple, Facebook } from "lucide-react";
 
 interface AuthOptionsProps {
   onEmailClick: () => void;
-  onPhoneClick: (phone: string) => void;  // Updated to accept phone parameter
+  onPhoneClick: () => void;
   onLoginClick: () => void;
 }
 
 export const AuthOptions = ({ onEmailClick, onPhoneClick, onLoginClick }: AuthOptionsProps) => {
-  const handlePhoneClick = () => {
-    // Since this is just a button click, we'll start with a default phone input
-    // You might want to add a proper phone input field later
-    const phoneNumber = prompt("Please enter your phone number (include country code, e.g., +1234567890):");
-    if (phoneNumber) {
-      onPhoneClick(phoneNumber);
-    }
-  };
-
   return (
     <>
       <img 
@@ -41,7 +32,7 @@ export const AuthOptions = ({ onEmailClick, onPhoneClick, onLoginClick }: AuthOp
                 <Button
                   variant="secondary"
                   className="w-full max-w-xs bg-tribbe-aqua hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-aqua h-12 sm:h-14 rounded-full text-sm font-normal transition-colors"
-                  onClick={handlePhoneClick}
+                  onClick={onPhoneClick}
                 >
                   <Phone className="mr-2 h-4 w-4" />
                   Continue with number
@@ -63,7 +54,7 @@ export const AuthOptions = ({ onEmailClick, onPhoneClick, onLoginClick }: AuthOp
                   variant="outline"
                   size="icon"
                   className="rounded-full w-10 h-10 sm:w-12 sm:h-12 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
-                  onClick={handlePhoneClick}
+                  onClick={onPhoneClick}
                 >
                   <svg className="h-4 w-4" viewBox="0 0 48 48">
                     <path fill="currentColor" className="text-tribbe-lime group-hover:text-black transition-colors" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
@@ -76,7 +67,7 @@ export const AuthOptions = ({ onEmailClick, onPhoneClick, onLoginClick }: AuthOp
                   variant="outline"
                   size="icon"
                   className="rounded-full w-10 h-10 sm:w-12 sm:h-12 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
-                  onClick={handlePhoneClick}
+                  onClick={onPhoneClick}
                 >
                   <Apple className="h-4 w-4 text-tribbe-lime group-hover:text-black transition-colors" />
                 </Button>
@@ -84,7 +75,7 @@ export const AuthOptions = ({ onEmailClick, onPhoneClick, onLoginClick }: AuthOp
                   variant="outline"
                   size="icon"
                   className="rounded-full w-10 h-10 sm:w-12 sm:h-12 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
-                  onClick={handlePhoneClick}
+                  onClick={onPhoneClick}
                 >
                   <Facebook className="h-4 w-4 text-tribbe-lime group-hover:text-black transition-colors" />
                 </Button>
