@@ -100,23 +100,25 @@ const AuthPage = () => {
   return (
     <div className="min-h-screen bg-tribbe-grey flex flex-col items-center px-4 sm:px-6">
       {!isVerifying ? (
-        <div className="w-full max-w-md space-y-6 sm:space-y-8">
+        <div className="w-full max-w-md mx-auto space-y-6 sm:space-y-8">
           <div className="space-y-6">
-            <div className="text-center space-y-4 sm:space-y-6">
+            <div className="text-center">
               <img 
                 src="/lovable-uploads/24576fa2-343c-42db-b26e-e56b0aa76cc8.png" 
                 alt="Tribbe" 
                 className="w-40 sm:w-64 mx-auto mt-12 sm:mt-16"
               />
-              <img 
-                src="/lovable-uploads/5a9bef54-1771-4c06-8d31-2140f23f1388.png" 
-                alt="Network Illustration" 
-                className="w-56 sm:w-80 mx-auto -mt-2"
-              />
+              <div className="mt-8 sm:mt-10">
+                <img 
+                  src="/lovable-uploads/5a9bef54-1771-4c06-8d31-2140f23f1388.png" 
+                  alt="Network Illustration" 
+                  className="w-56 sm:w-80 mx-auto"
+                />
+              </div>
             </div>
 
-            <div className="space-y-3 sm:space-y-4 mt-4">
-              <div className="flex justify-center">
+            <div className="space-y-3 sm:space-y-4 mt-8">
+              <div className="flex justify-center px-4 sm:px-6">
                 <Button
                   variant="secondary"
                   className="w-full max-w-xs bg-tribbe-aqua hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-aqua h-12 sm:h-14 rounded-full text-sm font-normal transition-colors"
@@ -126,7 +128,7 @@ const AuthPage = () => {
                   Continue with number
                 </Button>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center px-4 sm:px-6">
                 <Button
                   variant="outline"
                   className="w-full max-w-xs bg-tribbe-lime hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-lime border-0 h-12 sm:h-14 rounded-full text-sm font-normal transition-colors"
@@ -137,7 +139,7 @@ const AuthPage = () => {
                 </Button>
               </div>
               
-              <div className="flex justify-center gap-4 mt-4">
+              <div className="flex justify-center gap-4 mt-6">
                 <Button
                   variant="outline"
                   size="icon"
@@ -169,11 +171,11 @@ const AuthPage = () => {
                 </Button>
               </div>
               
-              <p className="text-center text-xs text-white/60 mt-4">
-                by signing up, you accept our Terms and Conditions.
-              </p>
-              
-              <div className="text-center mt-4">
+              <div className="text-center mt-6 space-y-4">
+                <p className="text-center text-xs text-white/60">
+                  by signing up, you accept our Terms and Conditions.
+                </p>
+                
                 <p className="text-white/80 text-xs">
                   Already member? <Button variant="link" className="text-white p-0 hover:text-tribbe-aqua text-xs">Login</Button>
                 </p>
