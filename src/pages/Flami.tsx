@@ -162,11 +162,11 @@ export default function Flami() {
 
   return (
     <SidebarProvider defaultOpen={false}>
-      <div className="flex h-screen w-full">
+      <div className="flex min-h-screen w-full">
         <AppSidebar />
-        <div className="flex-1 flex flex-col h-screen bg-background">
+        <div className="flex-1 flex flex-col bg-background">
           <FlamiHeader currentLevelColor={currentLevel.color} />
-          <div className="flex-1 flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
+          <div className="flex-1 flex flex-col">
             <FlamiTabs
               messages={messages}
               activityMessages={activityMessages}
