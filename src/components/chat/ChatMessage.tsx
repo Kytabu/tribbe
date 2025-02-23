@@ -31,10 +31,10 @@ export function ChatMessage({ message }: ChatMessageProps) {
         )}
         <div
           className={cn(
-            "px-4 py-2 text-sm break-words",
+            "text-sm break-words px-4 py-2",
             message.role === "assistant" 
-              ? "bg-muted/30" 
-              : "bg-[#A9FF22]/30"
+              ? "bg-transparent" 
+              : "bg-transparent"
           )}
         >
           {message.content}
