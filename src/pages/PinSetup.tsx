@@ -28,29 +28,28 @@ const PinSetup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 relative">
-      {/* Back Button */}
+    <div className="min-h-screen bg-background flex flex-col items-center justify-start p-4 sm:p-6 relative">
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-4 left-4"
+        className="absolute top-2 left-2 sm:top-4 sm:left-4"
         onClick={() => navigate(-1)}
       >
-        <ArrowLeft className="h-6 w-6" />
+        <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
       </Button>
 
-      <div className="w-full max-w-md space-y-12">
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl text-foreground font-normal">
+      <div className="w-full max-w-xs sm:max-w-md space-y-8 sm:space-y-12 mt-12 sm:mt-16">
+        <div className="text-center space-y-3 sm:space-y-4">
+          <h1 className="text-xl sm:text-2xl text-foreground font-normal">
             your pin please
           </h1>
         </div>
 
-        <div className="flex justify-center space-x-4 mb-12">
+        <div className="flex justify-center space-x-3 sm:space-x-4 mb-8 sm:mb-12">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}
-              className={`w-4 h-4 rounded-full border-2 ${
+              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 ${
                 pin.length > index
                   ? "bg-primary border-primary"
                   : "border-foreground/50"
@@ -59,12 +58,12 @@ const PinSetup = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-3 gap-4 sm:gap-8">
           {[...Array(9)].map((_, i) => (
             <button
               key={i + 1}
               onClick={() => handleNumberClick((i + 1).toString())}
-              className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
+              className="text-primary text-2xl sm:text-3xl font-medium hover:opacity-80 transition-opacity h-12 sm:h-16"
             >
               {i + 1}
             </button>
@@ -72,24 +71,23 @@ const PinSetup = () => {
           <div className="w-full" />
           <button
             onClick={() => handleNumberClick("0")}
-            className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
+            className="text-primary text-2xl sm:text-3xl font-medium hover:opacity-80 transition-opacity h-12 sm:h-16"
           >
             0
           </button>
           <button
             onClick={handleDelete}
-            className="text-primary text-lg hover:opacity-80 transition-opacity"
+            className="text-primary text-base sm:text-lg hover:opacity-80 transition-opacity h-12 sm:h-16"
           >
             Delete
           </button>
         </div>
 
-        {/* Done Button - Show when PIN is complete */}
         {pin.length === 4 && (
-          <div className="mt-8 flex justify-center">
+          <div className="mt-6 sm:mt-8 flex justify-center">
             <Button 
               onClick={handlePinSubmit}
-              className="w-32 bg-tribbe-lime hover:bg-tribbe-lime/90 text-slate-900 font-medium"
+              className="w-28 sm:w-32 h-10 sm:h-12 bg-tribbe-lime hover:bg-tribbe-lime/90 text-slate-900 font-medium rounded-full"
             >
               Done
             </Button>

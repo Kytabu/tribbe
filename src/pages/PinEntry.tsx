@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
@@ -108,49 +109,49 @@ const PinEntry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
-      <div className="w-full max-w-md space-y-12">
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold text-foreground">Your account is secured.</h1>
-          <p className="text-foreground/90 text-lg">Type your PIN to unlock it.</p>
+    <div className="min-h-screen bg-background flex flex-col items-center justify-start p-4 sm:p-6">
+      <div className="w-full max-w-xs sm:max-w-md space-y-6 sm:space-y-12 mt-12 sm:mt-16">
+        <div className="text-center space-y-2 sm:space-y-4">
+          <h1 className="text-xl sm:text-2xl font-bold text-foreground">Your account is secured.</h1>
+          <p className="text-sm sm:text-lg text-foreground/90">Type your PIN to unlock it.</p>
         </div>
 
-        <div className="flex justify-center space-x-4 mb-12">
+        <div className="flex justify-center space-x-3 sm:space-x-4 mb-6 sm:mb-12">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}
-              className={`w-4 h-4 rounded-full border-2 ${
+              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 ${
                 pin.length > index ? "bg-primary border-primary" : "border-foreground/50"
               }`}
             />
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-3 gap-4 sm:gap-8">
           {[...Array(9)].map((_, i) => (
             <button
               key={i + 1}
               onClick={() => handleNumberClick((i + 1).toString())}
-              className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
+              className="text-primary text-2xl sm:text-3xl font-medium hover:opacity-80 transition-opacity h-12 sm:h-16"
             >
               {i + 1}
             </button>
           ))}
           <button
             onClick={handleLogout}
-            className="text-primary text-lg hover:opacity-80 transition-opacity"
+            className="text-primary text-sm sm:text-lg hover:opacity-80 transition-opacity h-12 sm:h-16"
           >
             Log out
           </button>
           <button
             onClick={() => handleNumberClick("0")}
-            className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
+            className="text-primary text-2xl sm:text-3xl font-medium hover:opacity-80 transition-opacity h-12 sm:h-16"
           >
             0
           </button>
           <button
             onClick={handleDelete}
-            className="text-primary text-lg hover:opacity-80 transition-opacity"
+            className="text-primary text-sm sm:text-lg hover:opacity-80 transition-opacity h-12 sm:h-16"
           >
             Delete
           </button>
