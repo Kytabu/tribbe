@@ -48,7 +48,7 @@ export function FlamiTabs({
       <TabsContent value="chat" className="flex-1 flex flex-col mt-0 h-full">
         <div className="flex-1 overflow-y-auto">
           <div className="max-w-2xl mx-auto px-4">
-            <div className="flex flex-col-reverse space-y-reverse space-y-4">
+            <div className="flex flex-col-reverse gap-4">
               {messages.map((message) => (
                 <ChatMessage key={message.id} message={message} />
               ))}
