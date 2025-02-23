@@ -87,16 +87,18 @@ export function ChatMessage({ message }: ChatMessageProps) {
         message.role === "user" ? "flex-row-reverse" : "flex-row"
       )}>
         {message.role === "assistant" ? (
-          <img 
-            src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
-            alt="Assistant" 
-            className="h-6 w-6 mt-1 flex-shrink-0"
-          />
+          <div className="w-6 h-6 mt-1 flex-shrink-0">
+            <img 
+              src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
+              alt="Assistant" 
+              className="w-full h-full object-contain"
+            />
+          </div>
         ) : (
           <img 
-            src="/lovable-uploads/ecc713cc-73f6-4c89-9f3c-86ed3ab57613.png" 
+            src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
             alt="User" 
-            className="h-6 w-6 rounded-full mt-1 flex-shrink-0"
+            className="h-6 w-6 rounded-full mt-1 flex-shrink-0 object-cover"
           />
         )}
         <div
