@@ -15,7 +15,7 @@ function LayoutContent({ children }: AppLayoutProps) {
   return (
     <div className="min-h-screen flex w-full bg-tribbe-sand">
       <AppSidebar />
-      <main className="flex-1 p-6 animate-fade-in">
+      <main className="flex-1 animate-fade-in">
         <Button
           variant="ghost"
           size="icon"
@@ -24,7 +24,7 @@ function LayoutContent({ children }: AppLayoutProps) {
         >
           <MenuIcon className="h-6 w-6 text-tribbe-lime hover:text-tribbe-black" />
         </Button>
-        <div className="max-w-7xl mx-auto">{children}</div>
+        <div>{children}</div>
       </main>
     </div>
   );

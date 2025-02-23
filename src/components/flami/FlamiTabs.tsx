@@ -1,6 +1,5 @@
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { MessageSquare } from "lucide-react";
 import { ChatTab } from "./ChatTab";
 import { ActivityTab } from "./ActivityTab";
 import { Message } from "@/types/chat";
@@ -32,22 +31,20 @@ export function FlamiTabs({
 }: FlamiTabsProps) {
   return (
     <Tabs defaultValue="chat" className="flex-1 flex flex-col">
-      <div className="border-b">
+      <div className="bg-background">
         <div className="max-w-2xl mx-auto w-full">
-          <TabsList className="w-full flex justify-center gap-2 py-2">
-            <TabsTrigger value="chat" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
-              <MessageSquare className="w-4 h-4 mr-2" />
+          <TabsList className="w-full flex justify-start gap-4 p-2">
+            <TabsTrigger value="chat" className="px-1 py-1 text-sm data-[state=active]:text-tribbe-lime data-[state=active]:bg-transparent data-[state=active]:underline data-[state=active]:underline-offset-8 rounded-none">
               Chat
             </TabsTrigger>
-            <TabsTrigger value="activity" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
-              <MessageSquare className="w-4 h-4 mr-2" />
-              Activity
+            <TabsTrigger value="activity" className="px-1 py-1 text-sm data-[state=active]:text-tribbe-lime data-[state=active]:bg-transparent data-[state=active]:underline data-[state=active]:underline-offset-8 rounded-none">
+              Recent Activity
             </TabsTrigger>
           </TabsList>
         </div>
       </div>
 
-      <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden">
+      <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden mt-0">
         <ChatTab 
           messages={messages}
           input={chatInput}
@@ -58,7 +55,7 @@ export function FlamiTabs({
         />
       </TabsContent>
 
-      <TabsContent value="activity" className="flex-1 flex flex-col overflow-hidden">
+      <TabsContent value="activity" className="flex-1 flex flex-col overflow-hidden mt-0">
         <ActivityTab 
           messages={activityMessages}
           input={activityInput}
