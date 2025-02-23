@@ -21,7 +21,7 @@ export const EmailAuth = ({ onBack, onSubmit, loading }: EmailAuthProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-tribbe-grey flex flex-col px-4 sm:px-6">
+    <div className="min-h-screen bg-tribbe-grey flex flex-col items-center px-4 sm:px-6">
       <div className="flex items-center justify-between w-full pt-4">
         <Button
           variant="ghost"
@@ -45,8 +45,8 @@ export const EmailAuth = ({ onBack, onSubmit, loading }: EmailAuthProps) => {
         className="w-40 mx-auto mt-8 mb-4"
       />
 
-      <div className="flex-1 flex items-center justify-center">
-        <div className="w-full max-w-md space-y-6">
+      <div className="flex-1 flex items-center justify-center w-full max-w-md">
+        <div className="w-full space-y-6">
           <div className="text-center">
             <h1 className="text-2xl font-semibold text-white mb-2">
               {isLogin ? "Welcome back!" : "Create your account"}
