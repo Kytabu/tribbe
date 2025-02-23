@@ -1,3 +1,4 @@
+
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { FlamiHeader } from "@/components/flami/FlamiHeader";
 import { FlamiTabs } from "@/components/flami/FlamiTabs";
@@ -163,9 +164,9 @@ export default function Flami() {
     <SidebarProvider defaultOpen={false}>
       <div className="flex h-screen w-full">
         <AppSidebar />
-        <div className="flex-1 flex flex-col min-h-screen bg-background">
+        <div className="flex-1 flex flex-col h-screen bg-background">
           <FlamiHeader currentLevelColor={currentLevel.color} />
-          <div className="flex-1 flex flex-col relative overflow-hidden max-w-3xl mx-auto w-full">
+          <div className="flex-1 flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
             <FlamiTabs
               messages={messages}
               activityMessages={activityMessages}
