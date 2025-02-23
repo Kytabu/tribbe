@@ -32,7 +32,7 @@ export function FlamiTabs({
   onSuggestionClick
 }: FlamiTabsProps) {
   return (
-    <div className="fixed inset-0 flex flex-col">
+    <div className="absolute inset-0 flex flex-col">
       <Tabs defaultValue="chat" className="flex-1 flex flex-col">
         <div className="bg-background border-b">
           <div className="max-w-2xl mx-auto w-full">
