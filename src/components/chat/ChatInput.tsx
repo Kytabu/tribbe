@@ -11,7 +11,13 @@ interface ChatInputProps {
   placeholder?: string;
 }
 
-export function ChatInput({ input, isLoading, onInputChange, onSubmit, placeholder = "Shall we grow your wealth today?" }: ChatInputProps) {
+export function ChatInput({ 
+  input, 
+  isLoading, 
+  onInputChange, 
+  onSubmit, 
+  placeholder = "Shall we grow your wealth today?" 
+}: ChatInputProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -22,24 +28,24 @@ export function ChatInput({ input, isLoading, onInputChange, onSubmit, placehold
   };
 
   return (
-    <form onSubmit={onSubmit} className="mt-4">
-      <div className="relative">
-        <Textarea
-          value={input}
-          onChange={(e) => onInputChange(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
-          className="min-h-[50px] max-h-[200px] pr-12"
-          disabled={isLoading}
-        />
-        <Button 
-          type="submit" 
-          disabled={isLoading || !input.trim()}
-          className="bg-tribbe-lime hover:bg-black hover:text-tribbe-lime transition-all duration-300 rounded-full p-0 w-8 h-8 absolute right-2 bottom-2"
-        >
-          <ArrowUp className="h-4 w-4 text-black hover:text-tribbe-lime" />
-        </Button>
-      </div>
+    <form onSubmit={onSubmit} className="relative flex w-full flex-grow flex-col rounded-xl border bg-background px-4 py-3">
+      <Textarea
+        value={input}
+        onChange={(e) => onInputChange(e.target.value)}
+        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        rows={1}
+        className="min-h-[20px] w-full resize-none bg-transparent px-0 py-0 border-0 focus-visible:ring-0"
+        disabled={isLoading}
+      />
+      <Button 
+        type="submit" 
+        size="icon"
+        disabled={isLoading || !input.trim()}
+        className="absolute bottom-2.5 right-2 h-8 w-8 bg-tribbe-lime hover:bg-black hover:text-tribbe-lime transition-all duration-300 rounded-lg"
+      >
+        <ArrowUp className="h-4 w-4" />
+      </Button>
     </form>
   );
 }

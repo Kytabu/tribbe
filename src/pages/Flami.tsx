@@ -160,9 +160,9 @@ export default function Flami() {
   const currentLevel = getCurrentLevel(creditScore);
 
   return (
-    <AppLayout>
-      <div className="h-[100dvh] flex flex-col bg-background overflow-hidden">
-        <FlamiHeader currentLevelColor={currentLevel.color} />
+    <div className="relative h-[100dvh] overflow-hidden">
+      <FlamiHeader currentLevelColor={currentLevel.color} />
+      <div className="flex h-[calc(100dvh-57px)] flex-col overflow-hidden bg-background">
         <FlamiTabs
           messages={messages}
           activityMessages={activityMessages}
@@ -176,6 +176,6 @@ export default function Flami() {
           onSuggestionClick={handleSuggestionClick}
         />
       </div>
-    </AppLayout>
+    </div>
   );
 }
