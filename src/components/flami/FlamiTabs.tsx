@@ -3,6 +3,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ChatTab } from "./ChatTab";
 import { ActivityTab } from "./ActivityTab";
 import { Message } from "@/types/chat";
+import { ChatMessage } from "@/components/chat/ChatMessage"; // Add this import
 
 interface FlamiTabsProps {
   messages: Message[];
