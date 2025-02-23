@@ -1,13 +1,15 @@
+
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { FlamiHeader } from "@/components/flami/FlamiHeader";
 import { FlamiTabs } from "@/components/flami/FlamiTabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Message } from "@/types/chat";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [activityMessages, setActivityMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
+  const [chatInput, setChatInput] = useState("");
   const [activityInput, setActivityInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   
@@ -61,18 +63,18 @@ export default function Flami() {
       .find(level => score >= level.minScore) || streetCredLevels[0];
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleChatSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!chatInput.trim()) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      content: input,
+      content: chatInput,
       role: "user",
       timestamp: new Date()
     };
     setMessages(prev => [...prev, userMessage]);
-    setInput("");
+    setChatInput("");
     setIsLoading(true);
 
     try {
@@ -145,7 +147,7 @@ export default function Flami() {
     }
   };
 
-  const handleSuggestionClick = (text: string, points: number) => {
+  const handleSuggestionClick = (text: string) => {
     const userMessage: Message = {
       id: Date.now().toString(),
       content: text,
@@ -164,12 +166,12 @@ export default function Flami() {
         <FlamiTabs
           messages={messages}
           activityMessages={activityMessages}
-          chatInput={input}
+          chatInput={chatInput}
           activityInput={activityInput}
           isLoading={isLoading}
-          onChatInputChange={setInput}
+          onChatInputChange={setChatInput}
           onActivityInputChange={setActivityInput}
-          onChatSubmit={handleSubmit}
+          onChatSubmit={handleChatSubmit}
           onActivitySubmit={handleActivitySubmit}
           onSuggestionClick={handleSuggestionClick}
         />
