@@ -1,10 +1,8 @@
-
-import { AppLayout } from "@/components/layout/AppLayout";
-import { Message } from "@/types/chat";
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { FlamiHeader } from "@/components/flami/FlamiHeader";
 import { FlamiTabs } from "@/components/flami/FlamiTabs";
+import { useState } from "react";
+import { Message } from "@/types/chat";
 
 export default function Flami() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -160,9 +158,9 @@ export default function Flami() {
   const currentLevel = getCurrentLevel(creditScore);
 
   return (
-    <div className="relative h-[100dvh] overflow-hidden">
-      <FlamiHeader currentLevelColor={currentLevel.color} />
-      <div className="flex h-[calc(100dvh-57px)] flex-col overflow-hidden bg-background">
+    <SidebarProvider defaultOpen={false}>
+      <div className="min-h-screen flex flex-col bg-background">
+        <FlamiHeader currentLevelColor={currentLevel.color} />
         <FlamiTabs
           messages={messages}
           activityMessages={activityMessages}
@@ -176,6 +174,6 @@ export default function Flami() {
           onSuggestionClick={handleSuggestionClick}
         />
       </div>
-    </div>
+    </SidebarProvider>
   );
 }
