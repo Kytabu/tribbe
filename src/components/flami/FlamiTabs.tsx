@@ -1,3 +1,4 @@
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ChatTab } from "./ChatTab";
 import { ActivityTab } from "./ActivityTab";
@@ -48,10 +49,10 @@ export function FlamiTabs({
       </div>
 
       <div className="pt-24">
-        <TabsContent value="chat" className="flex-1 flex flex-col relative">
-          <div className="flex-1 overflow-y-auto pb-20 flex flex-col justify-end">
-            <div className="max-w-2xl mx-auto px-4 w-full">
-              <div className="flex flex-col-reverse gap-4">
+        <TabsContent value="chat" className="flex-1 flex flex-col relative h-[calc(100vh-9rem)]">
+          <div className="flex-1 overflow-y-auto">
+            <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col justify-end">
+              <div className="flex flex-col gap-4">
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
@@ -73,10 +74,10 @@ export function FlamiTabs({
           </div>
         </TabsContent>
 
-        <TabsContent value="activity" className="flex-1 flex flex-col relative">
-          <div className="flex-1 overflow-y-auto pb-20 flex flex-col justify-end">
-            <div className="max-w-2xl mx-auto px-4 w-full">
-              <div className="flex flex-col-reverse gap-4">
+        <TabsContent value="activity" className="flex-1 flex flex-col relative h-[calc(100vh-9rem)]">
+          <div className="flex-1 overflow-y-auto">
+            <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col justify-end">
+              <div className="flex flex-col gap-4">
                 {activityMessages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
