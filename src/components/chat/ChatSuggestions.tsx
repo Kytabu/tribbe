@@ -33,8 +33,8 @@ export function ChatSuggestions({ onSuggestionClick }: ChatSuggestionsProps) {
         {suggestions.map((suggestion, index) => (
           <Button
             key={index}
-            variant="outline"
-            className="shrink-0 h-auto py-2 px-3 hover:bg-tribbe-lime hover:text-black flex items-center gap-2 group transition-all duration-300 animate-fade-in rounded-xl"
+            variant="ghost"
+            className="shrink-0 h-auto py-2 px-3 hover:bg-muted/50 flex items-center gap-2 group transition-all duration-300 animate-fade-in rounded-xl text-muted-foreground hover:text-foreground"
             onClick={() => onSuggestionClick(suggestion.text, 0)}
           >
             {suggestion.icon}
