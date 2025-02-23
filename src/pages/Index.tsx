@@ -69,7 +69,7 @@ const Index = () => {
               className="w-64 sm:w-[27rem] mx-auto"
             />
           </div>
-          <h2 className="text-2xl sm:text-4xl font-righteous font-normal text-primary mx-auto max-w-[16rem] sm:max-w-[27rem]">
+          <h2 className="text-xl sm:text-3xl font-righteous font-normal text-primary">
             the new way to do money
           </h2>
           <Progress value={progress} className="w-64 sm:w-[27rem] mx-auto h-1.5 sm:h-2" />
