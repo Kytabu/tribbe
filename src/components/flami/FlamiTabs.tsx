@@ -48,13 +48,9 @@ export function FlamiTabs({
       <TabsContent value="chat" className="flex-1 flex flex-col mt-0">
         <div className="flex flex-col h-full justify-end">
           <div className="flex-1 overflow-y-auto mb-4">
-            <div className="flex flex-col-reverse w-full max-w-2xl mx-auto px-4">
+            <div className="max-w-2xl mx-auto space-y-4 px-4">
               {messages.map((message) => (
-                <div key={message.id} className="w-full">
-                  <div className="relative flex gap-4 py-4 text-base">
-                    <ChatMessage message={message} />
-                  </div>
-                </div>
+                <ChatMessage key={message.id} message={message} />
               ))}
             </div>
           </div>
