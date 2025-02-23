@@ -50,7 +50,7 @@ const Index = () => {
   }, [isVisible, shouldNavigate, navigate]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center px-4 sm:px-6 pt-12 sm:pt-20">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 sm:px-6">
       <div 
         className={`space-y-6 sm:space-y-8 text-center mx-auto w-full max-w-sm sm:max-w-2xl transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
@@ -69,7 +69,7 @@ const Index = () => {
               className="w-64 sm:w-[27rem] mx-auto"
             />
           </div>
-          <h2 className="text-2xl sm:text-4xl font-righteous text-primary mx-auto max-w-[16rem] sm:max-w-[27rem]">
+          <h2 className="text-2xl sm:text-4xl font-normal text-primary mx-auto max-w-[16rem] sm:max-w-[27rem]">
             the new way to do money
           </h2>
           <Progress value={progress} className="w-64 sm:w-[27rem] mx-auto h-1.5 sm:h-2" />
