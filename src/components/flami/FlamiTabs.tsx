@@ -1,4 +1,3 @@
-
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ChatTab } from "./ChatTab";
 import { ActivityTab } from "./ActivityTab";
@@ -33,7 +32,7 @@ export function FlamiTabs({
 }: FlamiTabsProps) {
   return (
     <Tabs defaultValue="chat" className="flex flex-col flex-1">
-      <div className="bg-background fixed top-0 left-0 right-0 z-20 border-b">
+      <div className="bg-background fixed top-14 left-0 right-0 z-20 border-b">
         <div className="max-w-2xl mx-auto w-full">
           <TabsList className="w-full flex justify-start gap-4 p-2">
             <TabsTrigger value="chat" className="px-1 py-1 text-sm data-[state=active]:text-tribbe-lime data-[state=active]:bg-transparent data-[state=active]:underline data-[state=active]:underline-offset-8 rounded-none flex items-center gap-2">
@@ -48,7 +47,7 @@ export function FlamiTabs({
         </div>
       </div>
 
-      <div className="pt-12"> {/* Add padding to account for fixed header */}
+      <div className="pt-24">
         <TabsContent value="chat" className="flex-1 flex flex-col relative">
           <div className="flex-1 overflow-y-auto pb-20 flex flex-col justify-end">
             <div className="max-w-2xl mx-auto px-4 w-full">
