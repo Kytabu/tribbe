@@ -23,11 +23,13 @@ export function ChatTab({
 }: ChatTabProps) {
   return (
     <>
-      <div className="flex-1 overflow-y-auto pb-4 px-4 max-w-2xl mx-auto w-full">
-        <div className="space-y-4 min-h-full">
-          {messages.map((message) => (
-            <ChatMessage key={message.id} message={message} />
-          ))}
+      <div className="flex-1 overflow-y-auto pb-4">
+        <div className="max-w-2xl mx-auto w-full px-4">
+          <div className="space-y-4 min-h-full">
+            {messages.map((message) => (
+              <ChatMessage key={message.id} message={message} />
+            ))}
+          </div>
         </div>
       </div>
       <div className="pt-2 border-t bg-background">

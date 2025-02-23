@@ -33,16 +33,18 @@ export function FlamiTabs({
   return (
     <Tabs defaultValue="chat" className="flex-1 flex flex-col">
       <div className="border-b">
-        <TabsList className="w-full flex justify-center gap-2 py-2">
-          <TabsTrigger value="chat" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
-            <MessageSquare className="w-4 h-4 mr-2" />
-            Chat
-          </TabsTrigger>
-          <TabsTrigger value="activity" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
-            <MessageSquare className="w-4 h-4 mr-2" />
-            Activity
-          </TabsTrigger>
-        </TabsList>
+        <div className="max-w-2xl mx-auto w-full">
+          <TabsList className="w-full flex justify-center gap-2 py-2">
+            <TabsTrigger value="chat" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
+              <MessageSquare className="w-4 h-4 mr-2" />
+              Chat
+            </TabsTrigger>
+            <TabsTrigger value="activity" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
+              <MessageSquare className="w-4 h-4 mr-2" />
+              Activity
+            </TabsTrigger>
+          </TabsList>
+        </div>
       </div>
 
       <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden">
