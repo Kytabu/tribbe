@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -14,7 +15,6 @@ const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-
   const [phoneNumber, setPhoneNumber] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
 
@@ -117,6 +117,17 @@ const AuthPage = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Add the missing functions
+  const handleNumberClick = (number: string) => {
+    if (verificationCode.length < 4) {
+      setVerificationCode(prev => prev + number);
+    }
+  };
+
+  const handleDelete = () => {
+    setVerificationCode(prev => prev.slice(0, -1));
   };
 
   if (isEmailFlow) {
