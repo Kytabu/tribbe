@@ -22,9 +22,9 @@ export const PhoneVerification = ({
       <img 
         src="/lovable-uploads/2e96dadf-c241-4700-b74e-72f155818e87.png" 
         alt="Tribbe Logo" 
-        className="w-40 mx-auto mt-8 mb-4"
+        className="w-40 mx-auto mt-8"
       />
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-start justify-center mt-8">
         <div className="w-full max-w-xs space-y-6 sm:space-y-8">
           <div className="text-center space-y-3 sm:space-y-4">
             <h1 className="text-lg sm:text-xl text-white font-normal">Enter verification code</h1>
