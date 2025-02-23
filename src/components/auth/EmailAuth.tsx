@@ -45,7 +45,7 @@ export const EmailAuth = ({ onBack, onSubmit, loading }: EmailAuthProps) => {
         className="w-40 mx-auto mt-8 mb-4"
       />
 
-      <div className="flex-1 flex items-center justify-center w-full max-w-md">
+      <div className="w-full max-w-md mt-4">
         <div className="w-full space-y-6">
           <div className="text-center">
             <h1 className="text-2xl font-semibold text-white mb-2">
