@@ -70,7 +70,11 @@ export const EmailAuth = ({ onBack, onSubmit, loading }: EmailAuthProps) => {
             />
             <Button
               type="submit"
-              className="w-full bg-tribbe-aqua hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-aqua h-12 rounded-full transition-colors"
+              className={`w-full h-12 rounded-full transition-colors ${
+                isLogin 
+                  ? "bg-tribbe-aqua hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-aqua"
+                  : "bg-[#A9FF22] hover:bg-[#98E51F] text-black"
+              }`}
               disabled={loading}
             >
               {loading ? "Loading..." : isLogin ? "Sign in" : "Sign up"}
