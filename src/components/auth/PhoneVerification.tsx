@@ -26,9 +26,8 @@ export const PhoneVerification = ({
       />
       <div className="flex-1 flex items-start justify-center mt-8">
         <div className="w-full max-w-xs space-y-6 sm:space-y-8">
-          <div className="text-center space-y-3 sm:space-y-4">
+          <div className="text-center">
             <h1 className="text-lg sm:text-xl text-white font-normal">Enter verification code</h1>
-            <p className="text-sm text-white/60">We've sent a 4-digit code to your phone</p>
           </div>
 
           <div className="flex justify-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
@@ -89,9 +88,12 @@ export const PhoneVerification = ({
                 </>
               )}
             </Button>
-            <p className="text-white/60 text-sm">use the code 0000</p>
           </div>
         </div>
+      </div>
+      <div className="text-center pb-8">
+        <p className="text-sm text-white/60">We've sent a 4-digit code to your phone</p>
+        <p className="text-white/60 text-sm mt-2">use the code 0000</p>
       </div>
     </div>
   );
