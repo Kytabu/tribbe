@@ -50,29 +50,29 @@ const Index = () => {
   }, [isVisible, shouldNavigate, navigate]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center px-6 pt-20">
+    <div className="min-h-screen bg-background flex flex-col items-center px-4 sm:px-6 pt-12 sm:pt-20">
       <div 
-        className={`space-y-8 text-center mx-auto max-w-2xl w-full transition-opacity duration-300 ${
+        className={`space-y-6 sm:space-y-8 text-center mx-auto w-full max-w-sm sm:max-w-2xl transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           <img 
             src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
             alt="Tribbe Logo"
-            className="w-[20rem] mx-auto"
+            className="w-48 sm:w-80 mx-auto"
           />
-          <div className="pt-5">
+          <div className="pt-3 sm:pt-5">
             <img 
               src="/lovable-uploads/7d875948-ce43-436a-a356-9bce6f1a1226.png"
               alt="AI and Finance Illustration"
-              className="w-[27rem] mx-auto"
+              className="w-64 sm:w-[27rem] mx-auto"
             />
           </div>
-          <h2 className="text-4xl font-righteous text-primary mx-auto" style={{ width: '27rem' }}>
+          <h2 className="text-2xl sm:text-4xl font-righteous text-primary mx-auto max-w-[16rem] sm:max-w-[27rem]">
             the new way to do money
           </h2>
-          <Progress value={progress} className="w-[27rem] mx-auto h-2" />
+          <Progress value={progress} className="w-64 sm:w-[27rem] mx-auto h-1.5 sm:h-2" />
         </div>
       </div>
     </div>
