@@ -22,6 +22,15 @@ export default function Flami() {
     { name: "The Legend", color: "#C699FF", minScore: 800 }
   ];
 
+  const getCurrentLevel = (score: number) => {
+    return streetCredLevels
+      .slice()
+      .reverse()
+      .find(level => score >= level.minScore) || streetCredLevels[0];
+  };
+
+  const currentLevel = getCurrentLevel(creditScore);
+
   useEffect(() => {
     const welcomeMessage: Message = {
       id: "welcome",
@@ -55,13 +64,6 @@ export default function Flami() {
     };
     setActivityMessages([welcomeMessage]);
   }, []);
-
-  const getCurrentLevel = (score: number) => {
-    return streetCredLevels
-      .slice()
-      .reverse()
-      .find(level => score >= level.minScore) || streetCredLevels[0];
-  };
 
   const handleChatSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,11 +159,9 @@ export default function Flami() {
     setMessages(prev => [...prev, userMessage]);
   };
 
-  const currentLevel = getCurrentLevel(creditScore);
-
   return (
-    <SidebarProvider defaultOpen={false}>
-      <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background">
+      <SidebarProvider defaultOpen={false}>
         <FlamiHeader currentLevelColor={currentLevel.color} />
         <FlamiTabs
           messages={messages}
@@ -175,7 +175,7 @@ export default function Flami() {
           onActivitySubmit={handleActivitySubmit}
           onSuggestionClick={handleSuggestionClick}
         />
-      </div>
-    </SidebarProvider>
+      </SidebarProvider>
+    </div>
   );
 }
