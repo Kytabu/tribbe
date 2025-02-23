@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -194,11 +195,11 @@ export default function Flami() {
         <Tabs defaultValue="chat" className="flex-1 flex flex-col">
           <div className="border-b">
             <TabsList className="w-full flex justify-center gap-2 py-2">
-              <TabsTrigger value="chat" className="px-4 py-1.5 text-sm rounded-full">
+              <TabsTrigger value="chat" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
                 <MessageSquare className="w-4 h-4 mr-2" />
                 Chat
               </TabsTrigger>
-              <TabsTrigger value="activity" className="px-4 py-1.5 text-sm rounded-full">
+              <TabsTrigger value="activity" className="px-6 py-1.5 text-sm rounded-full min-w-[100px]">
                 <MessageSquare className="w-4 h-4 mr-2" />
                 Activity
               </TabsTrigger>
@@ -207,9 +208,9 @@ export default function Flami() {
 
           <TabsContent 
             value="chat" 
-            className="flex-1 flex flex-col px-4 overflow-hidden"
+            className="flex-1 flex flex-col overflow-hidden"
           >
-            <div className="flex-1 overflow-y-auto pb-4">
+            <div className="flex-1 overflow-y-auto pb-4 px-4 max-w-2xl mx-auto w-full">
               <div className="space-y-4 min-h-full">
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
@@ -217,21 +218,23 @@ export default function Flami() {
               </div>
             </div>
             <div className="pt-2 border-t bg-background">
-              <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
-              <ChatInput 
-                input={input}
-                isLoading={isLoading}
-                onInputChange={(value) => setInput(value)}
-                onSubmit={handleSubmit}
-              />
+              <div className="max-w-2xl mx-auto px-4 w-full">
+                <ChatSuggestions onSuggestionClick={handleSuggestionClick} />
+                <ChatInput 
+                  input={input}
+                  isLoading={isLoading}
+                  onInputChange={(value) => setInput(value)}
+                  onSubmit={handleSubmit}
+                />
+              </div>
             </div>
           </TabsContent>
 
           <TabsContent 
             value="activity" 
-            className="flex-1 flex flex-col px-4 overflow-hidden"
+            className="flex-1 flex flex-col overflow-hidden"
           >
-            <div className="flex-1 overflow-y-auto pb-4">
+            <div className="flex-1 overflow-y-auto pb-4 px-4 max-w-2xl mx-auto w-full">
               <div className="space-y-4">
                 {activityMessages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
@@ -239,13 +242,15 @@ export default function Flami() {
               </div>
             </div>
             <div className="pt-2 border-t bg-background">
-              <ChatInput 
-                input={activityInput}
-                isLoading={isLoading}
-                onInputChange={(value) => setActivityInput(value)}
-                onSubmit={handleActivitySubmit}
-                placeholder="What would you like?"
-              />
+              <div className="max-w-2xl mx-auto px-4 w-full">
+                <ChatInput 
+                  input={activityInput}
+                  isLoading={isLoading}
+                  onInputChange={(value) => setActivityInput(value)}
+                  onSubmit={handleActivitySubmit}
+                  placeholder="What would you like?"
+                />
+              </div>
             </div>
           </TabsContent>
         </Tabs>
