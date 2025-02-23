@@ -32,7 +32,7 @@ export function FlamiTabs({
   onSuggestionClick
 }: FlamiTabsProps) {
   return (
-    <Tabs defaultValue="chat" className="flex flex-col flex-1">
+    <Tabs defaultValue="chat" className="flex flex-col h-[calc(100vh-3.5rem)]"> {/* Account for header height */}
       <div className="bg-background fixed top-14 left-0 right-0 z-20 border-b">
         <div className="max-w-2xl mx-auto w-full">
           <TabsList className="w-full flex justify-start gap-4 p-2">
@@ -48,12 +48,12 @@ export function FlamiTabs({
         </div>
       </div>
 
-      <div className="pt-24">
-        <TabsContent value="chat" className="flex-1 flex flex-col relative h-[calc(100vh-9rem)]">
+      <div className="pt-14">
+        <TabsContent value="chat" className="flex flex-col h-[calc(100vh-8.5rem)]"> {/* Account for both headers and input area */}
           <div className="flex-1 overflow-y-auto">
             <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col">
-              <div className="flex-1" /> {/* Spacer to push content to bottom */}
-              <div className="flex flex-col-reverse gap-4">
+              <div className="flex-1" />
+              <div className="flex flex-col-reverse gap-4 pb-20"> {/* Add padding to prevent messages from being hidden behind input */}
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
@@ -75,11 +75,11 @@ export function FlamiTabs({
           </div>
         </TabsContent>
 
-        <TabsContent value="activity" className="flex-1 flex flex-col relative h-[calc(100vh-9rem)]">
+        <TabsContent value="activity" className="flex flex-col h-[calc(100vh-8.5rem)]"> {/* Match chat tab height */}
           <div className="flex-1 overflow-y-auto">
             <div className="max-w-2xl mx-auto px-4 w-full h-full flex flex-col">
-              <div className="flex-1" /> {/* Spacer to push content to bottom */}
-              <div className="flex flex-col-reverse gap-4">
+              <div className="flex-1" />
+              <div className="flex flex-col-reverse gap-4 pb-20"> {/* Add padding to prevent messages from being hidden behind input */}
                 {activityMessages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
