@@ -161,7 +161,7 @@ export default function Flami() {
 
   return (
     <AppLayout>
-      <div className="h-[100dvh] flex flex-col bg-background">
+      <div className="h-[100dvh] flex flex-col bg-background overflow-hidden">
         <FlamiHeader currentLevelColor={currentLevel.color} />
         <FlamiTabs
           messages={messages}

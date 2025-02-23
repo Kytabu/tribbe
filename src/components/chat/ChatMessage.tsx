@@ -14,8 +14,8 @@ export function ChatMessage({ message }: ChatMessageProps) {
       )}
     >
       <div className={cn(
-        "flex flex-col",
-        message.role === "assistant" ? "w-[70%]" : "max-w-[80%]"
+        "flex flex-col max-w-[85%]",
+        message.role === "assistant" && "w-full md:w-[70%]"
       )}>
         {message.role === "assistant" ? (
           <div className="mb-1">
@@ -36,7 +36,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
         )}
         <div
           className={cn(
-            "rounded-lg p-3",
+            "rounded-lg p-3 break-words",
             message.role === "user"
               ? "bg-tribbe-lime text-black ml-4 animate-fade-in"
               : "bg-muted animate-slide-in w-full"

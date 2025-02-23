@@ -23,7 +23,7 @@ export function ChatTab({
 }: ChatTabProps) {
   return (
     <>
-      <div className="flex-1 overflow-y-auto pb-4">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden pb-4">
         <div className="max-w-2xl mx-auto w-full px-4">
           <div className="space-y-4 min-h-full">
             {messages.map((message) => (
@@ -32,9 +32,11 @@ export function ChatTab({
           </div>
         </div>
       </div>
-      <div className="pt-2 border-t bg-background">
-        <div className="max-w-2xl mx-auto px-4 w-full">
-          <ChatSuggestions onSuggestionClick={onSuggestionClick} />
+      <div className="pt-2 border-t bg-background w-full">
+        <div className="max-w-2xl mx-auto w-full px-4">
+          <div className="overflow-hidden">
+            <ChatSuggestions onSuggestionClick={onSuggestionClick} />
+          </div>
           <ChatInput 
             input={input}
             isLoading={isLoading}
