@@ -32,9 +32,8 @@ export function FlamiTabs({
   onSuggestionClick
 }: FlamiTabsProps) {
   return (
-    <Tabs defaultValue="chat" className="flex flex-col min-h-0 h-[100dvh]">
-      {/* Fixed header */}
-      <div className="bg-background sticky top-0 z-20 border-b">
+    <Tabs defaultValue="chat" className="h-screen flex flex-col">
+      <div className="bg-background border-b">
         <div className="max-w-2xl mx-auto w-full">
           <TabsList className="w-full flex justify-start gap-4 p-2">
             <TabsTrigger value="chat" className="px-1 py-1 text-sm data-[state=active]:text-tribbe-lime data-[state=active]:bg-transparent data-[state=active]:underline data-[state=active]:underline-offset-8 rounded-none flex items-center gap-2">
@@ -49,22 +48,18 @@ export function FlamiTabs({
         </div>
       </div>
 
-      {/* Chat tab content */}
-      <TabsContent 
-        value="chat" 
-        className="flex-1 flex flex-col min-h-0"
-      >
-        <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-y-auto">
-            <div className="flex flex-col-reverse h-full">
+      <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-2xl mx-auto px-4">
+            <div className="space-y-4 flex flex-col-reverse">
               {messages.map((message) => (
                 <ChatMessage key={message.id} message={message} />
               ))}
             </div>
           </div>
         </div>
-
-        <div className="mt-auto border-t bg-background/95 backdrop-blur p-2">
+        
+        <div className="border-t bg-background/95 backdrop-blur p-2">
           <div className="max-w-2xl mx-auto">
             <ChatTab 
               messages={messages}
@@ -78,14 +73,10 @@ export function FlamiTabs({
         </div>
       </TabsContent>
 
-      {/* Activity tab content */}
-      <TabsContent 
-        value="activity" 
-        className="flex-1 flex flex-col min-h-0"
-      >
-        <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-y-auto">
-            <div className="flex flex-col-reverse h-full">
+      <TabsContent value="activity" className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-2xl mx-auto px-4">
+            <div className="space-y-4 flex flex-col-reverse">
               {activityMessages.map((message) => (
                 <ChatMessage key={message.id} message={message} />
               ))}
@@ -93,7 +84,7 @@ export function FlamiTabs({
           </div>
         </div>
 
-        <div className="mt-auto border-t bg-background/95 backdrop-blur p-2">
+        <div className="border-t bg-background/95 backdrop-blur p-2">
           <div className="max-w-2xl mx-auto">
             <ChatTab 
               messages={activityMessages}
