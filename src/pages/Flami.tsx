@@ -1,8 +1,7 @@
 import { AppLayout } from "@/components/layout/AppLayout";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowLeft, MessageSquare } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ChatInput } from "@/components/chat/ChatInput";
 import { ChatMessage } from "@/components/chat/ChatMessage";
@@ -169,47 +168,42 @@ export default function Flami() {
     <AppLayout>
       <div className="h-[100dvh] flex flex-col bg-background">
         <div className="flex items-center justify-between px-4 py-3 border-b">
-          <div className="flex items-center gap-2">
+          <div className="flex-1" />
+          <h2 className="flex-1 text-xl font-righteous text-tribbe-lime text-center">Flami</h2>
+          <div className="flex-1 flex justify-end">
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => navigate("/wallet")}
-              className="hover:bg-tribbe-lime/20"
+              onClick={() => navigate("/street-cred")}
+              className="hover:bg-tribbe-lime/20 relative group"
             >
-              <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
+              <div 
+                className="p-0.5 rounded-full transition-transform duration-200 group-hover:scale-105"
+                style={{ backgroundColor: currentLevel.color }}
+              >
+                <img 
+                  src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
+                  alt="Profile" 
+                  className="w-8 h-8 rounded-full object-cover border border-background"
+                />
+              </div>
             </Button>
-            <h2 className="text-xl font-righteous text-tribbe-lime">Flami</h2>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => navigate("/street-cred")}
-            className="hover:bg-tribbe-lime/20 relative group"
-          >
-            <div 
-              className="p-0.5 rounded-full transition-transform duration-200 group-hover:scale-105"
-              style={{ backgroundColor: currentLevel.color }}
-            >
-              <img 
-                src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
-                alt="Profile" 
-                className="w-8 h-8 rounded-full object-cover border border-background"
-              />
-            </div>
-          </Button>
         </div>
 
         <Tabs defaultValue="chat" className="flex-1 flex flex-col">
-          <TabsList className="grid w-full grid-cols-2 px-2 py-1">
-            <TabsTrigger value="chat" className="text-sm">
-              <MessageSquare className="w-4 h-4 mr-2" />
-              Chat with Flami
-            </TabsTrigger>
-            <TabsTrigger value="activity" className="text-sm">
-              <MessageSquare className="w-4 h-4 mr-2" />
-              Recent Activity
-            </TabsTrigger>
-          </TabsList>
+          <div className="border-b">
+            <TabsList className="w-full flex justify-center gap-2 py-2">
+              <TabsTrigger value="chat" className="px-4 py-1.5 text-sm rounded-full">
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Chat
+              </TabsTrigger>
+              <TabsTrigger value="activity" className="px-4 py-1.5 text-sm rounded-full">
+                <MessageSquare className="w-4 h-4 mr-2" />
+                Activity
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent 
             value="chat" 
