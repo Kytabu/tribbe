@@ -28,24 +28,24 @@ export function ChatInput({
   };
 
   return (
-    <form onSubmit={onSubmit} className="sticky bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="relative flex w-full flex-grow flex-col rounded-lg px-4 py-3">
+    <form onSubmit={onSubmit} className="relative w-full">
+      <div className="relative flex w-full flex-col rounded-lg bg-background/95 backdrop-blur">
         <Textarea
           value={input}
           onChange={(e) => onInputChange(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           rows={1}
-          className="min-h-[20px] w-full resize-none bg-transparent px-0 py-0 border-0 focus-visible:ring-0"
+          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[14px] pr-14 focus-visible:ring-0 focus-visible:ring-offset-0 border-2 border-muted rounded-lg"
           disabled={isLoading}
         />
         <Button 
           type="submit" 
           size="icon"
           disabled={isLoading || !input.trim()}
-          className="absolute bottom-2.5 right-6 h-8 w-8 bg-tribbe-lime hover:bg-black hover:text-tribbe-lime transition-all duration-300 rounded-lg"
+          className="absolute bottom-2 right-2 h-10 w-10 bg-tribbe-lime hover:bg-black hover:text-tribbe-lime transition-all duration-300 rounded-lg"
         >
-          <ArrowUp className="h-4 w-4" />
+          <ArrowUp className="h-5 w-5" />
         </Button>
       </div>
     </form>
