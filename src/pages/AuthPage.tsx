@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -48,6 +47,10 @@ const AuthPage = () => {
           password,
         });
         if (error) throw error;
+        toast({
+          description: "Successfully logged in!",
+          className: "bg-tribbe-lime text-black",
+        });
         navigate("/flami");
       } else {
         const { error } = await supabase.auth.signUp({
@@ -56,8 +59,10 @@ const AuthPage = () => {
         });
         if (error) throw error;
         toast({
-          description: "Check your email for the confirmation link!",
+          description: "Account created successfully! Check your email for confirmation.",
+          className: "bg-tribbe-lime text-black",
         });
+        navigate("/flami");
       }
     } catch (error: any) {
       console.error('Error during email auth:', error);
@@ -119,7 +124,6 @@ const AuthPage = () => {
     }
   };
 
-  // Add the missing functions
   const handleNumberClick = (number: string) => {
     if (verificationCode.length < 4) {
       setVerificationCode(prev => prev + number);
