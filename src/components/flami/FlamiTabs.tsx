@@ -45,14 +45,34 @@ export function FlamiTabs({
       </div>
 
       <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden mt-0">
-        <ChatTab 
-          messages={messages}
-          input={chatInput}
-          isLoading={isLoading}
-          onInputChange={onChatInputChange}
-          onSubmit={onChatSubmit}
-          onSuggestionClick={onSuggestionClick}
-        />
+        <div className="relative flex h-full flex-col-reverse overflow-hidden">
+          <div className="absolute bottom-0 left-0 w-full border-t bg-gradient-to-t from-background pt-2">
+            <div className="stretch mx-2 flex flex-row gap-3 last:mb-2 md:mx-4 md:last:mb-6 lg:mx-auto lg:max-w-2xl xl:max-w-3xl">
+              <div className="relative flex h-full flex-1 flex-col">
+                <ChatTab 
+                  messages={messages}
+                  input={chatInput}
+                  isLoading={isLoading}
+                  onInputChange={onChatInputChange}
+                  onSubmit={onChatSubmit}
+                  onSuggestionClick={onSuggestionClick}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="h-32 md:h-48 flex-shrink-0" />
+          <div className="flex-1 overflow-y-auto">
+            <div className="flex flex-col-reverse items-center">
+              {messages.map((message) => (
+                <div key={message.id} className="w-full">
+                  <div className="relative m-auto flex gap-4 p-4 text-base md:max-w-2xl md:gap-6 md:py-6 lg:max-w-2xl xl:max-w-3xl">
+                    <ChatMessage message={message} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </TabsContent>
 
       <TabsContent value="activity" className="flex-1 flex flex-col overflow-hidden mt-0">
