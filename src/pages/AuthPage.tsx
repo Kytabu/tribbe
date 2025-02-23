@@ -98,53 +98,53 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-tribbe-grey flex flex-col items-center px-6 pt-20">
+    <div className="min-h-screen bg-tribbe-grey flex flex-col items-center px-4 sm:px-6 pt-8 sm:pt-20">
       {!isVerifying ? (
-        <div className="w-full max-w-xl space-y-16">
-          <div className="space-y-12">
-            <div className="text-center space-y-9">
+        <div className="w-full max-w-md space-y-8 sm:space-y-16">
+          <div className="space-y-6 sm:space-y-12">
+            <div className="text-center space-y-6 sm:space-y-9">
               <img 
                 src="/lovable-uploads/24576fa2-343c-42db-b26e-e56b0aa76cc8.png" 
                 alt="Tribbe" 
-                className="w-72 mx-auto"
+                className="w-48 sm:w-72 mx-auto"
               />
               <img 
                 src="/lovable-uploads/5a9bef54-1771-4c06-8d31-2140f23f1388.png" 
                 alt="Network Illustration" 
-                className="w-96 mx-auto"
+                className="w-64 sm:w-96 mx-auto"
               />
             </div>
 
-            <div className="space-y-6 mt-48">
+            <div className="space-y-4 sm:space-y-6 mt-8 sm:mt-48">
               <div className="flex justify-center">
                 <Button
                   variant="secondary"
-                  className="w-96 bg-tribbe-aqua hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-aqua h-18 rounded-full text-base font-normal transition-colors"
+                  className="w-full max-w-xs sm:max-w-md bg-tribbe-aqua hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-aqua h-14 sm:h-18 rounded-full text-sm sm:text-base font-normal transition-colors"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <Phone className="mr-3 h-5 w-5" />
+                  <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Continue with number
                 </Button>
               </div>
               <div className="flex justify-center">
                 <Button
                   variant="outline"
-                  className="w-96 bg-tribbe-lime hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-lime border-0 h-18 rounded-full text-base font-normal transition-colors"
+                  className="w-full max-w-xs sm:max-w-md bg-tribbe-lime hover:bg-[#1A1F2C] text-tribbe-black hover:text-tribbe-lime border-0 h-14 sm:h-18 rounded-full text-sm sm:text-base font-normal transition-colors"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <Mail className="mr-3 h-5 w-5" />
+                  <Mail className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Continue with email
                 </Button>
               </div>
               
-              <div className="flex justify-center gap-6 mt-6">
+              <div className="flex justify-center gap-4 sm:gap-6 mt-4 sm:mt-6">
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-16 h-16 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
+                  className="rounded-full w-12 h-12 sm:w-16 sm:h-16 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <svg className="h-5 w-5" viewBox="0 0 48 48">
+                  <svg className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 48 48">
                     <path fill="currentColor" className="text-tribbe-lime group-hover:text-black transition-colors" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
                     <path fill="currentColor" className="text-tribbe-lime group-hover:text-black transition-colors" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
                     <path fill="currentColor" className="text-tribbe-lime group-hover:text-black transition-colors" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
@@ -154,56 +154,56 @@ const AuthPage = () => {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-16 h-16 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
+                  className="rounded-full w-12 h-12 sm:w-16 sm:h-16 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <Apple className="h-5 w-5 text-tribbe-lime group-hover:text-black transition-colors" />
+                  <Apple className="h-4 w-4 sm:h-5 sm:w-5 text-tribbe-lime group-hover:text-black transition-colors" />
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="rounded-full w-16 h-16 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
+                  className="rounded-full w-12 h-12 sm:w-16 sm:h-16 bg-[#1A1F2C] hover:bg-tribbe-lime border-0 transition-colors group"
                   onClick={() => setIsVerifying(true)}
                 >
-                  <Facebook className="h-5 w-5 text-tribbe-lime group-hover:text-black transition-colors" />
+                  <Facebook className="h-4 w-4 sm:h-5 sm:w-5 text-tribbe-lime group-hover:text-black transition-colors" />
                 </Button>
               </div>
               
-              <p className="text-center text-sm text-white/60 mt-4">
+              <p className="text-center text-xs sm:text-sm text-white/60 mt-4">
                 by signing up, you accept our Terms and Conditions.
               </p>
               
-              <div className="text-center mt-8">
-                <p className="text-white/80 text-sm">
-                  Already member? <Button variant="link" className="text-white p-0 hover:text-tribbe-aqua">Login</Button>
+              <div className="text-center mt-6 sm:mt-8">
+                <p className="text-white/80 text-xs sm:text-sm">
+                  Already member? <Button variant="link" className="text-white p-0 hover:text-tribbe-aqua text-xs sm:text-sm">Login</Button>
                 </p>
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-md space-y-12">
-          <div className="text-center space-y-4">
-            <h1 className="text-2xl text-white font-normal">Enter verification code</h1>
+        <div className="w-full max-w-xs sm:max-w-md space-y-8 sm:space-y-12">
+          <div className="text-center space-y-3 sm:space-y-4">
+            <h1 className="text-xl sm:text-2xl text-white font-normal">Enter verification code</h1>
           </div>
 
-          <div className="flex justify-center space-x-4 mb-12">
+          <div className="flex justify-center space-x-3 sm:space-x-4 mb-8 sm:mb-12">
             {[...Array(4)].map((_, index) => (
               <div
                 key={index}
-                className={`w-4 h-4 rounded-full border-2 ${
+                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 ${
                   verificationCode.length > index ? "bg-primary border-primary" : "border-foreground/50"
                 }`}
               />
             ))}
           </div>
 
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-3 gap-4 sm:gap-8">
             {[...Array(9)].map((_, i) => (
               <button
                 key={i + 1}
                 onClick={() => handleNumberClick((i + 1).toString())}
-                className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
+                className="text-primary text-xl sm:text-3xl font-medium hover:opacity-80 transition-opacity"
               >
                 {i + 1}
               </button>
@@ -211,29 +211,29 @@ const AuthPage = () => {
             <div className="w-full" />
             <button
               onClick={() => handleNumberClick("0")}
-              className="text-primary text-3xl font-medium hover:opacity-80 transition-opacity"
+              className="text-primary text-xl sm:text-3xl font-medium hover:opacity-80 transition-opacity"
             >
               0
             </button>
             <button
               onClick={handleDelete}
-              className="text-primary text-lg hover:opacity-80 transition-opacity"
+              className="text-primary text-base sm:text-lg hover:opacity-80 transition-opacity"
             >
               Delete
             </button>
           </div>
 
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-6 sm:mt-8">
             <Button
               onClick={handleVerificationSubmit}
               disabled={verificationCode.length !== 4}
-              className={`w-32 h-12 rounded-full transition-colors ${
+              className={`w-24 sm:w-32 h-10 sm:h-12 rounded-full transition-colors ${
                 verificationCode.length === 4 
                 ? "bg-tribbe-lime hover:bg-tribbe-lime/90 text-black" 
                 : "bg-gray-600 text-gray-400"
               }`}
             >
-              <Check className="mr-2 h-5 w-5" />
+              <Check className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
               Done
             </Button>
           </div>
