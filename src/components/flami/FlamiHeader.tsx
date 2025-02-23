@@ -3,14 +3,23 @@ import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FlamiHeaderProps {
   currentLevelColor: string;
 }
 
 export function FlamiHeader({ currentLevelColor }: FlamiHeaderProps) {
-  const { open, setOpen } = useSidebar();
+  const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
   const navigate = useNavigate();
+
+  const handleMenuClick = () => {
+    if (isMobile) {
+      setOpenMobile(!openMobile);
+    } else {
+      setOpen(!open);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -20,7 +29,7 @@ export function FlamiHeader({ currentLevelColor }: FlamiHeaderProps) {
             variant="ghost"
             size="icon"
             className="hover:bg-background/80"
-            onClick={() => setOpen(!open)}
+            onClick={handleMenuClick}
           >
             <MenuIcon className="h-5 w-5 text-tribbe-lime" />
           </Button>
