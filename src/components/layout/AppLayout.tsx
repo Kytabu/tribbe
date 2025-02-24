@@ -19,7 +19,7 @@ function LayoutContent({ children }: AppLayoutProps) {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <LayoutContent>{children}</LayoutContent>
     </SidebarProvider>
   );
