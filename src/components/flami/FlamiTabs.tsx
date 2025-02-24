@@ -22,9 +22,12 @@ export function FlamiTabs({
   messages,
   activityMessages,
   chatInput,
+  activityInput,
   isLoading,
   onChatInputChange,
+  onActivityInputChange,
   onChatSubmit,
+  onActivitySubmit,
   onSuggestionClick
 }: FlamiTabsProps) {
   return (
@@ -62,38 +65,20 @@ export function FlamiTabs({
               <div className="border-b p-4 flex-shrink-0">
                 <h2 className="text-lg font-semibold">Recent Activity</h2>
               </div>
-              <div className="flex-1 overflow-y-auto px-4 py-4">
-                {activityMessages.map((message) => (
-                  <div key={message.id} className="mb-4">
-                    <div className={`flex items-start gap-2 ${
-                      message.role === "assistant" ? "flex-row" : "flex-row-reverse"
-                    }`}>
-                      {message.role === "assistant" && (
-                        <div className="w-6 h-6 mt-1 flex-shrink-0">
-                          <img 
-                            src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
-                            alt="Assistant" 
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                      )}
-                      <div className={`text-sm break-words px-4 py-2 rounded-lg ${
-                        message.role === "assistant" 
-                          ? "bg-muted/50" 
-                          : "bg-tribbe-lime text-black"
-                      }`}>
-                        {message.content}
-                      </div>
-                      {message.role === "user" && (
-                        <img 
-                          src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
-                          alt="User" 
-                          className="h-6 w-6 rounded-full mt-1 flex-shrink-0 object-cover"
-                        />
-                      )}
-                    </div>
+              <div className="flex-1 overflow-hidden">
+                <div className="h-full flex flex-col">
+                  <div className="flex-1 overflow-y-auto">
+                    <MessagesTab 
+                      messages={activityMessages}
+                      input={activityInput}
+                      isLoading={isLoading}
+                      onInputChange={onActivityInputChange}
+                      onSubmit={onActivitySubmit}
+                      placeholder="What would you like?"
+                      variant="activity"
+                    />
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </SheetContent>
