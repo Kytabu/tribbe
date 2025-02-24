@@ -65,25 +65,23 @@ export default function TribbeRequests() {
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-xs font-medium text-white mb-0.5">{request.name}</h3>
+                    <h3 className="text-xs font-medium text-white mb-0.5">{request.name}</h3>
+                    <div className="flex items-center">
                       <div className="flex items-center">
-                        <div className="flex items-center">
-                          {[...Array(5)].map((_, index) => (
-                            <Star
-                              key={index}
-                              className={`w-2 h-2 ${
-                                index < Math.floor(request.rating)
-                                  ? "fill-yellow-400 text-yellow-400"
-                                  : "text-gray-400"
-                              }`}
-                            />
-                          ))}
-                        </div>
-                        <span className="text-[10px] text-gray-400 ml-1">
-                          {request.rating.toFixed(1)}
-                        </span>
+                        {[...Array(5)].map((_, index) => (
+                          <Star
+                            key={index}
+                            className={`w-2 h-2 ${
+                              index < Math.floor(request.rating)
+                                ? "fill-yellow-400 text-yellow-400"
+                                : "text-gray-400"
+                            }`}
+                          />
+                        ))}
                       </div>
+                      <span className="text-[10px] text-gray-400 ml-1">
+                        {request.rating.toFixed(1)}
+                      </span>
                     </div>
                   </div>
                   <div className="flex gap-1 mt-2">
