@@ -35,8 +35,8 @@ const AccountContent = () => {
       <PageHeader 
         title="Account"
         titleClassName="text-xl text-tribbe-lime"
-        rightIcon={<ChevronLeft className="h-5 w-5" />}
-        onRightIconClick={() => navigate(-1)}
+        leftIcon={<ChevronLeft className="h-5 w-5" />}
+        onLeftIconClick={() => navigate(-1)}
       />
 
       <div className="flex justify-center mb-6 mt-6">
