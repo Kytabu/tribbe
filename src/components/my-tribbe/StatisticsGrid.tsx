@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, Wallet } from "lucide-react";
 
@@ -13,7 +14,7 @@ interface StatisticsGridProps {
 
 export function StatisticsGrid({ stats }: StatisticsGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+    <div className="grid grid-cols-2 gap-2">
       <Card className="bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300">
         <CardContent className="p-3">
           <div className="flex items-start gap-2">
