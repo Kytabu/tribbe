@@ -23,8 +23,11 @@ export function CreditFactors({ factors }: CreditFactorsProps) {
           className="p-4 bg-tribbe-grey/50 hover:bg-tribbe-grey transition-colors duration-300"
         >
           <div className="flex items-start gap-3">
-            <div className={`p-2 rounded-full bg-black/20 ${factor.color}`}>
-              <factor.icon className="w-4 h-4" />
+            <div 
+              className="p-2 rounded-full"
+              style={{ backgroundColor: factor.color.replace('text-', '') }}
+            >
+              <factor.icon className="w-4 h-4 text-black" />
             </div>
             <div className="flex-1">
               <div className="flex justify-between items-center mb-1">
