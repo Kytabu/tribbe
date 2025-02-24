@@ -1,6 +1,6 @@
 
 import { Card } from "@/components/ui/card";
-import { Star, User } from "lucide-react";
+import { Star } from "lucide-react";
 
 interface StreetCredLevel {
   name: string;
@@ -33,17 +33,7 @@ export function CreditScoreCard({
     <Card className="p-6 bg-gradient-to-br from-background to-muted">
       <div className="space-y-4">
         <div className="grid grid-cols-3 items-center gap-2">
-          <div className="flex items-center gap-2">
-            <div 
-              className="p-0.5 rounded-full"
-              style={{ backgroundColor: currentLevel.color }}
-            >
-              <img 
-                src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png"
-                alt="Profile"
-                className="w-12 h-12 rounded-full object-cover border-2 border-background"
-              />
-            </div>
+          <div className="flex items-center">
             <span 
               className="text-sm font-medium"
               style={{ color: currentLevel.color }}
@@ -53,7 +43,7 @@ export function CreditScoreCard({
           </div>
 
           <div className="flex flex-col items-center justify-center">
-            <h3 className="text-sm text-gray-400 mb-1">Your Credit Score</h3>
+            <h3 className="text-sm text-gray-400 mb-1">Street Cred</h3>
             <div 
               className="text-4xl font-bold" 
               style={{ color: currentLevel.color }}

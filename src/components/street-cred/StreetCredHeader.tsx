@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MenuIcon } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export function StreetCredHeader() {
@@ -30,7 +30,11 @@ export function StreetCredHeader() {
             onClick={() => navigate("/flami")}
             className="hover:bg-tribbe-lime/20"
           >
-            <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
+            <img 
+              src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png"
+              alt="Profile"
+              className="w-8 h-8 rounded-full object-cover"
+            />
           </Button>
         </div>
       </div>
