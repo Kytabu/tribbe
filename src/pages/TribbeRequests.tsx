@@ -1,9 +1,7 @@
-
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Star } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
 
 // Mock data for tribbe requests
 const tribbeRequests = [
@@ -44,20 +42,21 @@ export default function TribbeRequests() {
             <div key={request.id} className="bg-tribbe-grey/50 p-3 rounded-lg">
               <div className="flex items-start gap-3">
                 <div className="relative">
-                  <img
-                    src={request.image}
-                    alt={request.name}
-                    className="w-8 h-8 rounded-full"
-                  />
-                  <div className="absolute inset-0 rounded-full border-2 border-transparent">
-                    <div 
-                      className="absolute inset-0 rounded-full border-2"
-                      style={{
-                        borderColor: `hsl(${request.creditScore / 850 * 120}, 100%, 50%)`,
-                        borderImage: `linear-gradient(to right, hsl(${request.creditScore / 850 * 120}, 100%, 50%), transparent) 1`
-                      }}
+                  <div className="w-8 h-8 rounded-full overflow-hidden relative">
+                    <img
+                      src={request.image}
+                      alt={request.name}
+                      className="w-full h-full object-cover"
                     />
                   </div>
+                  <div 
+                    className="absolute inset-[-2px] rounded-full"
+                    style={{
+                      background: `linear-gradient(90deg, hsl(${request.creditScore / 850 * 120}, 100%, 50%) 0%, hsl(${request.creditScore / 850 * 120}, 100%, 50%) 50%, transparent 50%, transparent 100%)`,
+                      transform: 'rotate(-45deg)',
+                      opacity: 0.8
+                    }}
+                  />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
@@ -80,12 +79,6 @@ export default function TribbeRequests() {
                           {request.rating.toFixed(1)}
                         </span>
                       </div>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xs font-medium" style={{ color: `hsl(${request.creditScore / 850 * 120}, 100%, 50%)` }}>
-                        {request.creditScore}
-                      </span>
-                      <div className="text-[10px] text-gray-400">Credit Score</div>
                     </div>
                   </div>
                   <div className="flex gap-1 mt-2">
