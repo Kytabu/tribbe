@@ -22,9 +22,9 @@ export function StatisticsGrid({ stats }: StatisticsGridProps) {
               <Users className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm text-gray-400">My Total Tribbes</h3>
+              <h3 className="text-sm text-gray-400">Total Circles</h3>
               <p className="text-lg font-bold text-white">{5}</p>
-              <p className="text-xs text-gray-400">Active memberships</p>
+              <p className="text-xs text-gray-400">I am active</p>
             </div>
           </div>
         </CardContent>
@@ -101,7 +101,7 @@ export function StatisticsGrid({ stats }: StatisticsGridProps) {
               <Wallet className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm text-gray-400">Total Transactions</h3>
+              <h3 className="text-sm text-gray-400">All Tribbes</h3>
               <p className="text-lg font-bold text-white">24</p>
               <p className="text-xs text-gray-400">All time</p>
             </div>
