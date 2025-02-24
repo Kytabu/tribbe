@@ -51,12 +51,11 @@ function TribbeContent() {
   };
 
   return (
-    <div className="container max-w-2xl mx-auto">
+    <div className="w-full">
       <PageHeader 
         title="My Tribbe"
         rightIcon={<UserPlus className="h-5 w-5 text-tribbe-lime" />}
         onRightIconClick={() => setShowContactList(true)}
-        titleClassName="text-2xl"
       />
 
       <div className="px-4 space-y-[15px]">
