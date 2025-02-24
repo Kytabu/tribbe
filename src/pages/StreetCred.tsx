@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { BadgeCheck, CreditCard, Shield, ChartLine, User } from "lucide-react";
@@ -115,7 +116,7 @@ export default function StreetCred() {
   return (
     <AppLayout>
       <div className="flex flex-col min-h-screen">
-        <PageHeader title="My Street Cred" />
+        <PageHeader title="Street Cred" />
         <div className="container max-w-4xl mx-auto p-4 space-y-6">
           <CreditScoreCard
             creditScore={creditScore}

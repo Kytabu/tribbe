@@ -43,7 +43,7 @@ export const navigationItems: NavigationItem[] = [
   },
   {
     icon: Star,
-    label: "My Street Cred",
+    label: "Street Cred",
     href: "/street-cred",
   },
 ];
