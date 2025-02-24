@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -34,7 +33,6 @@ const AccountContent = () => {
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => navigate("/profile")}
     >
       <ChevronLeft className="h-5 w-5" />
     </Button>
