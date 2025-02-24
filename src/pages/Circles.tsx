@@ -103,7 +103,8 @@ const CircleItem = ({ circle }: { circle: CircleType }) => {
   );
 };
 
-const Circles = () => {
+// Separate component for the circles content that uses the sidebar
+function CirclesContent() {
   const navigate = useNavigate();
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
@@ -117,63 +118,70 @@ const Circles = () => {
   };
 
   return (
-    <AppLayout>
-      <div className="space-y-6">
-        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b">
-          <div className="max-w-3xl mx-auto w-full px-4">
-            <div className="flex h-14 items-center justify-between">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hover:bg-background/80"
-                onClick={handleMenuClick}
+    <div className="space-y-6">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b">
+        <div className="max-w-3xl mx-auto w-full px-4">
+          <div className="flex h-14 items-center justify-between">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:bg-background/80"
+              onClick={handleMenuClick}
+            >
+              <MenuIcon className="h-5 w-5 text-tribbe-lime" />
+            </Button>
+            <h2 className="text-2xl font-righteous text-tribbe-lime">My Circles</h2>
+            <div className="flex items-center gap-2">
+              <div 
+                className={`relative transition-all duration-300 ease-in-out ${
+                  isSearchExpanded ? 'w-64' : 'w-10'
+                }`}
               >
-                <MenuIcon className="h-5 w-5 text-tribbe-lime" />
-              </Button>
-              <h2 className="text-2xl font-righteous text-tribbe-lime">My Circles</h2>
-              <div className="flex items-center gap-2">
-                <div 
-                  className={`relative transition-all duration-300 ease-in-out ${
-                    isSearchExpanded ? 'w-64' : 'w-10'
-                  }`}
-                >
-                  <Button 
-                    variant="ghost" 
-                    size="icon"
-                    className={`absolute left-0 top-1/2 -translate-y-1/2 hover:bg-background/80 ${
-                      isSearchExpanded ? 'bg-transparent' : ''
-                    }`}
-                    onClick={() => setIsSearchExpanded(!isSearchExpanded)}
-                  >
-                    <Search className="h-5 w-5 text-tribbe-lime" />
-                  </Button>
-                  <Input 
-                    type="text" 
-                    placeholder="Search circles" 
-                    className={`pl-10 bg-tribbe-grey/50 border-none text-white placeholder:text-gray-400 transition-all duration-300 ${
-                      isSearchExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'
-                    }`}
-                  />
-                </div>
                 <Button 
                   variant="ghost" 
                   size="icon"
-                  onClick={() => console.log("Create new circle")}
-                  className="hover:bg-tribbe-lime/20"
+                  className={`absolute left-0 top-1/2 -translate-y-1/2 hover:bg-background/80 ${
+                    isSearchExpanded ? 'bg-transparent' : ''
+                  }`}
+                  onClick={() => setIsSearchExpanded(!isSearchExpanded)}
                 >
-                  <CirclePlus className="h-5 w-5 text-tribbe-lime" />
+                  <Search className="h-5 w-5 text-tribbe-lime" />
                 </Button>
+                <Input 
+                  type="text" 
+                  placeholder="Search circles" 
+                  className={`pl-10 bg-tribbe-grey/50 border-none text-white placeholder:text-gray-400 transition-all duration-300 ${
+                    isSearchExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  }`}
+                />
               </div>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => console.log("Create new circle")}
+                className="hover:bg-tribbe-lime/20"
+              >
+                <CirclePlus className="h-5 w-5 text-tribbe-lime" />
+              </Button>
             </div>
           </div>
         </div>
-
-        <div className="px-4 space-y-3">
-          {circles.map((circle) => (
-            <CircleItem key={circle.id} circle={circle} />
-          ))}
-        </div>
       </div>
+
+      <div className="px-4 space-y-3">
+        {circles.map((circle) => (
+          <CircleItem key={circle.id} circle={circle} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Main Circles component that provides the layout
+const Circles = () => {
+  return (
+    <AppLayout>
+      <CirclesContent />
     </AppLayout>
   );
 };
