@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { MenuIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useSidebar } from "@/components/ui/sidebar";
 
 const getColorForScore = (score: number): string => {
   if (score >= 800) return "#C699FF"; // Legend
@@ -13,12 +14,14 @@ const getColorForScore = (score: number): string => {
 
 export function StreetCredHeader() {
   const navigate = useNavigate();
+  const { setOpenMobile, isMobile } = useSidebar();
   const score = 720; // This matches the score from StreetCred.tsx
   const borderColor = getColorForScore(score);
   
   const handleMenuClick = () => {
-    // The menu button functionality will be handled by AppLayout
-    // AppLayout already has the sidebar context and will manage the state
+    if (isMobile) {
+      setOpenMobile(true);
+    }
   };
 
   return (
