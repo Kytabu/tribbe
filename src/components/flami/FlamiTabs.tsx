@@ -50,7 +50,7 @@ export function FlamiTabs({
           <SheetTrigger asChild>
             <Button
               size="icon"
-              className="fixed bottom-20 right-4 h-12 w-12 rounded-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-black shadow-lg hover:shadow-xl transition-all duration-300"
+              className="fixed bottom-[45%] right-4 h-12 w-12 rounded-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-black shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <Activity className="h-6 w-6" />
               {activityMessages.length > 0 && (
@@ -60,21 +60,25 @@ export function FlamiTabs({
               )}
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-full sm:max-w-lg p-0">
-            <div className="h-full flex flex-col">
-              <div className="border-b p-4">
+          <SheetContent side="right" className="w-full sm:max-w-lg p-0 flex flex-col h-full">
+            <div className="flex flex-col h-full">
+              <div className="border-b p-4 flex-shrink-0">
                 <h2 className="text-lg font-semibold">Recent Activity</h2>
               </div>
               <div className="flex-1 overflow-hidden">
-                <MessagesTab 
-                  messages={activityMessages}
-                  input={activityInput}
-                  isLoading={isLoading}
-                  onInputChange={onActivityInputChange}
-                  onSubmit={onActivitySubmit}
-                  placeholder="What would you like?"
-                  variant="activity"
-                />
+                <div className="h-full flex flex-col">
+                  <div className="flex-1 overflow-y-auto">
+                    <MessagesTab 
+                      messages={activityMessages}
+                      input={activityInput}
+                      isLoading={isLoading}
+                      onInputChange={onActivityInputChange}
+                      onSubmit={onActivitySubmit}
+                      placeholder="What would you like?"
+                      variant="activity"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </SheetContent>
