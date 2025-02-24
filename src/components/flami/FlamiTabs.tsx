@@ -1,8 +1,9 @@
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Message } from "@/types/chat";
-import { MessageSquare, Activity } from "lucide-react";
 import { MessagesTab } from "./MessagesTab";
+import { Activity } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
 interface FlamiTabsProps {
   messages: Message[];
@@ -31,48 +32,52 @@ export function FlamiTabs({
 }: FlamiTabsProps) {
   return (
     <div className="absolute inset-0 flex flex-col">
-      <Tabs defaultValue="chat" className="flex-1 flex flex-col">
-        <div className="bg-background border-b">
-          <div className="max-w-2xl mx-auto w-full">
-            <TabsList className="w-full flex justify-start gap-4 p-2">
-              <TabsTrigger value="chat" className="px-1 py-1 text-sm data-[state=active]:text-tribbe-lime data-[state=active]:bg-transparent data-[state=active]:underline data-[state=active]:underline-offset-8 rounded-none flex items-center gap-2">
-                <MessageSquare className="h-4 w-4" />
-                <span>Chat</span>
-              </TabsTrigger>
-              <TabsTrigger value="activity" className="px-1 py-1 text-sm data-[state=active]:text-tribbe-lime data-[state=active]:bg-transparent data-[state=active]:underline data-[state=active]:underline-offset-8 rounded-none flex items-center gap-2">
-                <Activity className="h-4 w-4" />
-                <span>Recent Activity</span>
-              </TabsTrigger>
-            </TabsList>
-          </div>
-        </div>
+      <div className="flex-1 flex flex-col relative">
+        <MessagesTab 
+          messages={messages}
+          input={chatInput}
+          isLoading={isLoading}
+          onInputChange={onChatInputChange}
+          onSubmit={onChatSubmit}
+          onSuggestionClick={onSuggestionClick}
+          showSuggestions={true}
+          placeholder="Shall we grow your wealth today?"
+          variant="chat"
+        />
 
-        <TabsContent value="chat" className="flex-1 overflow-hidden flex flex-col">
-          <MessagesTab 
-            messages={messages}
-            input={chatInput}
-            isLoading={isLoading}
-            onInputChange={onChatInputChange}
-            onSubmit={onChatSubmit}
-            onSuggestionClick={onSuggestionClick}
-            showSuggestions={true}
-            placeholder="Shall we grow your wealth today?"
-            variant="chat"
-          />
-        </TabsContent>
-
-        <TabsContent value="activity" className="flex-1 overflow-hidden flex flex-col">
-          <MessagesTab 
-            messages={activityMessages}
-            input={activityInput}
-            isLoading={isLoading}
-            onInputChange={onActivityInputChange}
-            onSubmit={onActivitySubmit}
-            placeholder="What would you like?"
-            variant="activity"
-          />
-        </TabsContent>
-      </Tabs>
+        {/* Floating Activity Button */}
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              size="icon"
+              className="fixed bottom-20 right-4 h-12 w-12 rounded-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-black shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <Activity className="h-6 w-6" />
+              {activityMessages.length > 0 && (
+                <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">
+                  {activityMessages.length}
+                </span>
+              )}
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-full sm:max-w-lg p-0 flex flex-col">
+            <div className="flex-1 flex flex-col">
+              <div className="border-b p-4">
+                <h2 className="text-lg font-semibold">Recent Activity</h2>
+              </div>
+              <MessagesTab 
+                messages={activityMessages}
+                input={activityInput}
+                isLoading={isLoading}
+                onInputChange={onActivityInputChange}
+                onSubmit={onActivitySubmit}
+                placeholder="What would you like?"
+                variant="activity"
+              />
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
     </div>
   );
 }
