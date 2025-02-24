@@ -31,6 +31,14 @@ export function FlamiTabs({
   onActivitySubmit,
   onSuggestionClick
 }: FlamiTabsProps) {
+  const formatMessageContent = (content: string) => {
+    return content.split('\n').map((line, index) => (
+      <span key={index} className="block leading-relaxed">
+        {line}
+      </span>
+    ));
+  };
+
   return (
     <div className="absolute inset-0 flex flex-col">
       <div className="flex-1 flex flex-col relative">
@@ -83,12 +91,12 @@ export function FlamiTabs({
                               />
                             </div>
                           )}
-                          <div className={`text-sm break-words px-5 py-3 rounded-lg max-w-[85%] ${
+                          <div className={`text-sm break-words px-5 py-3 rounded-lg max-w-[85%] space-y-2 ${
                             message.role === "assistant" 
                               ? "bg-background border border-border text-foreground font-medium" 
                               : "bg-tribbe-lime text-black font-medium shadow-sm"
                           }`}>
-                            {message.content}
+                            {formatMessageContent(message.content)}
                           </div>
                           {message.role === "user" && (
                             <div className="w-8 h-8 mt-0.5 flex-shrink-0">
