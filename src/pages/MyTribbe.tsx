@@ -25,11 +25,13 @@ import {
   ChevronRight,
   X,
   Search,
-  Check
+  Check,
+  MenuIcon,
 } from "lucide-react";
 import { useState, useRef } from "react";
+import { useSidebar } from "@/components/ui/sidebar";
 
-export default function MyTribbe() {
+function TribbeContent() {
   const navigate = useNavigate();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -38,6 +40,15 @@ export default function MyTribbe() {
   const [showContactList, setShowContactList] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
+  const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
+
+  const handleMenuClick = () => {
+    if (isMobile) {
+      setOpenMobile(!openMobile);
+    } else {
+      setOpen(!open);
+    }
+  };
 
   const contacts = [
     { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
@@ -114,10 +125,26 @@ export default function MyTribbe() {
   };
 
   return (
-    <AppLayout>
-      <div className="container max-w-4xl mx-auto space-y-6 py-6">
+    <div className="container max-w-4xl mx-auto space-y-6 py-6">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b -mt-6 mb-6">
+        <div className="max-w-3xl mx-auto w-full px-4">
+          <div className="flex h-14 items-center justify-between">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:bg-background/80"
+              onClick={handleMenuClick}
+            >
+              <MenuIcon className="h-5 w-5 text-tribbe-lime" />
+            </Button>
+            <h2 className="text-2xl font-righteous text-tribbe-lime">My Tribbe</h2>
+            <div className="w-10" />
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-white">My Tribbe</h1>
           <Button 
             onClick={() => setShowContactList(true)}
             className="bg-tribbe-lime hover:bg-tribbe-lime/90 text-black"
@@ -396,6 +423,14 @@ export default function MyTribbe() {
           </SheetContent>
         </Sheet>
       </div>
+    </div>
+  );
+}
+
+export default function MyTribbe() {
+  return (
+    <AppLayout>
+      <TribbeContent />
     </AppLayout>
   );
 }
