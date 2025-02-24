@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -60,8 +61,8 @@ function TribbeContent() {
   };
 
   return (
-    <div className="container max-w-2xl mx-auto space-y-3 py-3">
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b -mt-3 mb-3">
+    <div className="container max-w-2xl mx-auto py-3">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b -mt-3 mb-6">
         <div className="max-w-xl mx-auto w-full px-2">
           <div className="flex h-8 items-center justify-between">
             <Button
@@ -85,7 +86,7 @@ function TribbeContent() {
         </div>
       </div>
 
-      <div className="px-2">
+      <div className="px-2 space-y-8">
         <StatsCard stats={stats} />
 
         <NetworkGrid
