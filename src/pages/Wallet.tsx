@@ -9,8 +9,6 @@ import { WalletActions } from "@/components/wallet/WalletActions";
 import { TransactionHistory } from "@/components/wallet/TransactionHistory";
 import { Transaction } from "@/types/wallet";
 import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export type SupportedCurrency = 'GBP' | 'USD' | 'KES' | 'EUR';
@@ -151,16 +149,7 @@ export default function Wallet() {
         <Card className="p-6 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
-              <div className="flex items-center gap-3">
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  onClick={() => navigate("/flami")}
-                >
-                  <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
-                </Button>
-                <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">My Wallet</h2>
-              </div>
+              <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">My Wallet</h2>
               <CurrencyTabs
                 selectedCurrency={selectedCurrency}
                 onCurrencyChange={setSelectedCurrency}
