@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -47,7 +48,7 @@ export default function TribbeRequests() {
           <h2 className="text-lg font-righteous text-tribbe-lime">Tribbe Requests</h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 px-2">
+        <div className="flex flex-col gap-2 px-2">
           {tribbeRequests.map((request) => (
             <div key={request.id} className="bg-tribbe-grey/50 p-3 rounded-lg">
               <div className="flex items-start gap-3">
