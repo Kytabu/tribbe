@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,18 +16,18 @@ export default function SnapToPay() {
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+        <div className="grid grid-cols-2 gap-3 mt-8">
           <Card className="group border-0 hover:bg-tribbe-lime/5 transition-colors duration-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <QrCode className="h-5 w-5 text-tribbe-lime" />
+            <CardHeader className="pb-1">
+              <CardTitle className="text-base flex items-center gap-2">
+                <QrCode className="h-4 w-4 text-tribbe-lime" />
                 Scan QR Code
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-24 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
+                className="w-full h-20 border-tribbe-lime/50 group-hover:border-tribbe-lime group-hover:bg-tribbe-lime/5"
               >
                 <QrCode className="h-8 w-8 text-tribbe-lime" />
               </Button>
@@ -34,16 +35,16 @@ export default function SnapToPay() {
           </Card>
 
           <Card className="group border-0 hover:bg-tribbe-lilac/5 transition-colors duration-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Smartphone className="h-5 w-5 text-tribbe-lilac" />
+            <CardHeader className="pb-1">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Smartphone className="h-4 w-4 text-tribbe-lilac" />
                 Show My Code
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-24 border-tribbe-lilac/50 group-hover:border-tribbe-lilac group-hover:bg-tribbe-lilac/5"
+                className="w-full h-20 border-tribbe-lilac/50 group-hover:border-tribbe-lilac group-hover:bg-tribbe-lilac/5"
               >
                 <Smartphone className="h-8 w-8 text-tribbe-lilac" />
               </Button>
@@ -51,16 +52,16 @@ export default function SnapToPay() {
           </Card>
 
           <Card className="group border-0 hover:bg-tribbe-aqua/5 transition-colors duration-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-tribbe-aqua" />
+            <CardHeader className="pb-1">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Building2 className="h-4 w-4 text-tribbe-aqua" />
                 Snap Till Number
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-24 border-tribbe-aqua/50 group-hover:border-tribbe-aqua group-hover:bg-tribbe-aqua/5"
+                className="w-full h-20 border-tribbe-aqua/50 group-hover:border-tribbe-aqua group-hover:bg-tribbe-aqua/5"
               >
                 <Building2 className="h-8 w-8 text-tribbe-aqua" />
               </Button>
@@ -68,16 +69,16 @@ export default function SnapToPay() {
           </Card>
 
           <Card className="group border-0 hover:bg-tribbe-yellow/5 transition-colors duration-200">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Receipt className="h-5 w-5 text-tribbe-yellow" />
+            <CardHeader className="pb-1">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Receipt className="h-4 w-4 text-tribbe-yellow" />
                 Snap Paybill Number
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Button
                 variant="outline"
-                className="w-full h-24 border-tribbe-yellow/50 group-hover:border-tribbe-yellow group-hover:bg-tribbe-yellow/5"
+                className="w-full h-20 border-tribbe-yellow/50 group-hover:border-tribbe-yellow group-hover:bg-tribbe-yellow/5"
               >
                 <Receipt className="h-8 w-8 text-tribbe-yellow" />
               </Button>
