@@ -19,6 +19,7 @@ import StreetCred from "@/pages/StreetCred";
 import MyTribbe from "@/pages/MyTribbe";
 import Profile from "@/pages/Profile";
 import Premium from "@/pages/Premium";
+import TribbeRequests from "@/pages/TribbeRequests";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/snap-to-pay" element={<SnapToPay />} />
         <Route path="/street-cred" element={<StreetCred />} />
         <Route path="/my-tribbe" element={<MyTribbe />} />
+        <Route path="/tribbe-requests" element={<TribbeRequests />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
