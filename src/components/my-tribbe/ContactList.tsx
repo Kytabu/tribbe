@@ -46,11 +46,12 @@ export function ContactList({
     .sort((a, b) => a.name.localeCompare(b.name));
 
   const toggleContactSelection = (contactId: string) => {
-    setSelectedContacts(prev => 
-      prev.includes(contactId) 
-        ? prev.filter(id => id !== contactId)
-        : [...prev, contactId]
-    );
+    // Create new array instead of using a state updater function
+    if (selectedContacts.includes(contactId)) {
+      setSelectedContacts(selectedContacts.filter(id => id !== contactId));
+    } else {
+      setSelectedContacts([...selectedContacts, contactId]);
+    }
   };
 
   return (
