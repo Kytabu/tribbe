@@ -67,7 +67,7 @@ export function FlamiTabs({
               </div>
               <div className="flex-1 overflow-hidden">
                 <div className="h-full flex flex-col">
-                  <div className="flex-1 overflow-y-auto">
+                  <div className="flex-1 overflow-y-auto pt-4">
                     <MessagesTab 
                       messages={activityMessages}
                       input={activityInput}
@@ -76,7 +76,19 @@ export function FlamiTabs({
                       onSubmit={onActivitySubmit}
                       placeholder="What would you like?"
                       variant="activity"
+                      className="h-full"
                     />
+                  </div>
+                  <div className="border-t bg-background/95 backdrop-blur p-4 flex-shrink-0">
+                    <div className="relative">
+                      <ChatInput 
+                        input={activityInput}
+                        isLoading={isLoading}
+                        onInputChange={onActivityInputChange}
+                        onSubmit={onActivitySubmit}
+                        placeholder="What would you like?"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
