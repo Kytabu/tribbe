@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -76,22 +75,19 @@ function TribbeContent() {
               <MenuIcon className="h-5 w-5 text-tribbe-lime" />
             </Button>
             <h2 className="text-2xl font-righteous text-tribbe-lime">My Tribbe</h2>
-            <div className="w-10" />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:bg-background/80"
+              onClick={() => setShowContactList(true)}
+            >
+              <UserPlus className="h-5 w-5 text-tribbe-lime" />
+            </Button>
           </div>
         </div>
       </div>
 
       <div className="px-4">
-        <div className="flex justify-between items-center">
-          <Button 
-            onClick={() => setShowContactList(true)}
-            className="bg-tribbe-lime hover:bg-tribbe-lime/90 text-black"
-          >
-            <UserPlus className="w-4 h-4 mr-2" />
-            Grow Network
-          </Button>
-        </div>
-
         <StatsCard stats={stats} />
 
         <NetworkGrid
