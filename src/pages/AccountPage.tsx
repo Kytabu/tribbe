@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { ChevronLeft } from "lucide-react";
 
 interface Profile {
   full_name: string;
@@ -13,6 +15,7 @@ interface Profile {
 }
 
 const AccountPage = () => {
+  const navigate = useNavigate();
   const [profile] = useState<Profile>({
     full_name: "Tonee Ndungu",
     username: "@tonee",
@@ -28,9 +31,14 @@ const AccountPage = () => {
 
   return (
     <div className="min-h-screen bg-background p-6">
-      <h1 className="text-2xl font-bold mb-6">Account</h1>
+      <PageHeader 
+        title="Account"
+        titleClassName="text-xl text-tribbe-lime"
+        rightIcon={<ChevronLeft className="h-5 w-5" />}
+        onRightIconClick={() => navigate(-1)}
+      />
 
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-6 mt-6">
         <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary">
           <img 
             src="/lovable-uploads/4a593a53-ec2e-4ab3-a500-c2147809af06.png"
