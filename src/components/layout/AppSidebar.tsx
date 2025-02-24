@@ -93,13 +93,13 @@ export function AppSidebar() {
     {
       icon: () => (
         <div 
-          className="p-0.5 rounded-full"
+          className="p-[0.25px] rounded-full"
           style={{ backgroundColor: currentLevel.color }}
         >
           <img 
             src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
             alt="Profile" 
-            className="w-5 h-5 object-cover rounded-full border border-background"
+            className="w-5 h-5 rounded-full object-cover"
           />
         </div>
       ),
