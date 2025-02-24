@@ -13,7 +13,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
       <Button
         variant="outline"
         size="lg"
-        className="h-auto py-6 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted border-tribbe-lime"
+        className="h-auto py-4 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted border-tribbe-lime"
       >
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
@@ -24,7 +24,6 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
           </div>
           <div className="text-left">
             <div className="font-bold text-tribbe-lime">Connect M-Pesa</div>
-            <div className="text-sm text-white font-normal">Link M-Pesa to grow your street cred</div>
           </div>
         </div>
       </Button>
@@ -32,7 +31,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
       <Button
         variant="outline"
         size="lg"
-        className="h-auto py-6 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted border-tribbe-aqua"
+        className="h-auto py-4 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted border-tribbe-aqua"
       >
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
@@ -43,7 +42,6 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
           </div>
           <div className="text-left">
             <div className="font-bold text-tribbe-lime">Connect Cards</div>
-            <div className="text-sm text-white font-normal">Link cards to grow your street cred</div>
           </div>
         </div>
       </Button>
