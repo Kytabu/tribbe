@@ -11,7 +11,7 @@ function LayoutContent({ children }: AppLayoutProps) {
     <div className="min-h-screen flex w-full bg-tribbe-sand">
       <AppSidebar />
       <main className="flex-1 animate-fade-in">
-        <div>{children}</div>
+        {children}
       </main>
     </div>
   );
@@ -20,7 +20,9 @@ function LayoutContent({ children }: AppLayoutProps) {
 export function AppLayout({ children }: AppLayoutProps) {
   return (
     <SidebarProvider defaultOpen={false}>
-      <LayoutContent>{children}</LayoutContent>
+      <div className="min-h-screen flex w-full">
+        <LayoutContent>{children}</LayoutContent>
+      </div>
     </SidebarProvider>
   );
 }
