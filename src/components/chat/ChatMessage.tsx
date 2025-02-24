@@ -8,9 +8,10 @@ import { Button } from "../ui/button";
 
 interface ChatMessageProps {
   message: Message;
+  variant?: 'chat' | 'activity';
 }
 
-export function ChatMessage({ message }: ChatMessageProps) {
+export function ChatMessage({ message, variant = 'chat' }: ChatMessageProps) {
   const [copied, setCopied] = useState(false);
 
   // Function to handle code copying
@@ -104,8 +105,12 @@ export function ChatMessage({ message }: ChatMessageProps) {
         <div
           className={cn(
             "text-sm break-words px-4 py-2 rounded-lg",
-            message.role === "assistant" 
-              ? "bg-muted/50" 
+            variant === 'activity' 
+              ? message.role === "assistant"
+                ? "bg-muted/80 border border-muted" 
+                : "bg-tribbe-lime/90 text-black"
+              : message.role === "assistant"
+              ? "bg-muted/50"
               : "bg-tribbe-lime text-black"
           )}
         >

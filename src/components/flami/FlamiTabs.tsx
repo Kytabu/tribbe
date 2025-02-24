@@ -1,10 +1,8 @@
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ChatTab } from "./ChatTab";
-import { ActivityTab } from "./ActivityTab";
 import { Message } from "@/types/chat";
-import { ChatMessage } from "@/components/chat/ChatMessage";
 import { MessageSquare, Activity } from "lucide-react";
+import { MessagesTab } from "./MessagesTab";
 
 interface FlamiTabsProps {
   messages: Message[];
@@ -50,53 +48,29 @@ export function FlamiTabs({
         </div>
 
         <TabsContent value="chat" className="flex-1 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 flex flex-col min-h-full">
-              <div className="mt-auto py-4 space-y-4">
-                {messages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          <div className="border-t bg-background/95 backdrop-blur p-2">
-            <div className="max-w-2xl mx-auto">
-              <ChatTab 
-                messages={messages}
-                input={chatInput}
-                isLoading={isLoading}
-                onInputChange={onChatInputChange}
-                onSubmit={onChatSubmit}
-                onSuggestionClick={onSuggestionClick}
-              />
-            </div>
-          </div>
+          <MessagesTab 
+            messages={messages}
+            input={chatInput}
+            isLoading={isLoading}
+            onInputChange={onChatInputChange}
+            onSubmit={onChatSubmit}
+            onSuggestionClick={onSuggestionClick}
+            showSuggestions={true}
+            placeholder="Shall we grow your wealth today?"
+            variant="chat"
+          />
         </TabsContent>
 
         <TabsContent value="activity" className="flex-1 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-y-auto">
-            <div className="max-w-2xl mx-auto px-4 flex flex-col min-h-full">
-              <div className="mt-auto py-4 space-y-4">
-                {activityMessages.map((message) => (
-                  <ChatMessage key={message.id} message={message} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t bg-background/95 backdrop-blur p-2">
-            <div className="max-w-2xl mx-auto">
-              <ChatTab 
-                messages={activityMessages}
-                input={activityInput}
-                isLoading={isLoading}
-                onInputChange={onActivityInputChange}
-                onSubmit={onActivitySubmit}
-                onSuggestionClick={onSuggestionClick}
-              />
-            </div>
-          </div>
+          <MessagesTab 
+            messages={activityMessages}
+            input={activityInput}
+            isLoading={isLoading}
+            onInputChange={onActivityInputChange}
+            onSubmit={onActivitySubmit}
+            placeholder="What would you like?"
+            variant="activity"
+          />
         </TabsContent>
       </Tabs>
     </div>
