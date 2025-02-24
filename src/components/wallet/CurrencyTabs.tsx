@@ -1,6 +1,5 @@
-
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SupportedCurrency } from "@/pages/Wallet";
+import { SupportedCurrency } from "@/features/wallet/constants";
 
 interface CurrencyTabsProps {
   selectedCurrency: SupportedCurrency;

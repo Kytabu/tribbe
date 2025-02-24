@@ -1,6 +1,7 @@
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { SupportedCurrency } from "@/pages/Wallet";
+import { SupportedCurrency } from "@/features/wallet/constants";
 import { TribbeButton } from "./components/TribbeButton";
 
 interface RequestViewProps {

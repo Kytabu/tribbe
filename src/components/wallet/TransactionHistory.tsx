@@ -2,7 +2,7 @@
 import { Card } from "@/components/ui/card";
 import { History, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { format } from "date-fns";
-import { SupportedCurrency } from "@/pages/Wallet";
+import { SupportedCurrency } from "@/features/wallet/constants";
 import { Transaction } from "@/types/wallet";
 
 interface TransactionHistoryProps {

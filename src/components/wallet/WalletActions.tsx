@@ -1,7 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { Smartphone, CreditCard } from "lucide-react";
-import { SupportedCurrency } from "@/pages/Wallet";
+import { SupportedCurrency } from "@/features/wallet/constants";
 
 interface WalletActionsProps {
   selectedCurrency: SupportedCurrency;

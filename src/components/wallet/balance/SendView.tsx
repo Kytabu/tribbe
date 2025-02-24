@@ -1,8 +1,9 @@
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
-import { SupportedCurrency } from "@/pages/Wallet";
+import { SupportedCurrency } from "@/features/wallet/constants";
 import { TribbeButton } from "./components/TribbeButton";
 
 interface SendViewProps {

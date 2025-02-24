@@ -1,6 +1,6 @@
 
 import { PiggyBank, Gem, Trophy } from "lucide-react";
-import { SupportedCurrency } from "@/pages/Wallet";
+import { SupportedCurrency } from "@/features/wallet/constants";
 import { BalanceCard } from "./components/BalanceCard";
 
 interface BalanceViewProps {
