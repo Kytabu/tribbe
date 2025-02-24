@@ -5,7 +5,6 @@ import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, Shield, ChartLine, BadgeCheck, CreditCard, User, Star, MenuIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useSidebar } from "@/components/ui/sidebar";
 
 interface StreetCredLevel {
   name: string;
@@ -18,14 +17,10 @@ export default function StreetCred() {
   const [creditScore] = useState(720);
   const maxScore = 850;
   const minScore = 300;
-  const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
 
   const handleMenuClick = () => {
-    if (isMobile) {
-      setOpenMobile(!openMobile);
-    } else {
-      setOpen(!open);
-    }
+    // The menu button functionality will be handled by AppLayout
+    // AppLayout already has the sidebar context and will manage the state
   };
   
   const streetCredLevels: StreetCredLevel[] = [
