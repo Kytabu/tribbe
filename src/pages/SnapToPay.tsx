@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,14 +8,14 @@ export default function SnapToPay() {
   return (
     <AppLayout>
       <div className="max-w-4xl mx-auto p-4 space-y-6">
-        <div className="flex items-center justify-between px-2">
+        <div className="flex items-center justify-between px-2 relative pb-8">
           <FlamiHeader currentLevelColor="#00ff00" />
-          <h1 className="text-2xl font-medium text-tribbe-lime font-righteous absolute left-1/2 top-4 -translate-x-1/2">
+          <h1 className="text-2xl font-medium text-tribbe-lime font-righteous absolute left-1/2 -translate-x-1/2">
             Snap to Pay
           </h1>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 mt-8">
+        <div className="grid grid-cols-2 gap-3">
           <Card className="group border-0 hover:bg-tribbe-lime/5 transition-colors duration-200">
             <CardHeader className="pb-1">
               <CardTitle className="text-base flex items-center gap-2">
