@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -145,11 +146,15 @@ export default function Wallet() {
 
   return (
     <AppLayout>
+      <div className="sticky top-0 z-10 bg-background w-full text-center py-2 border-b">
+        <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">
+          My Wallet
+        </h2>
+      </div>
       <div className="container px-3 mx-auto space-y-3 py-3">
         <Card className="p-3 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300">
           <div className="space-y-3">
             <div className="flex flex-col space-y-3">
-              <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">My Wallet</h2>
               <div className="w-full overflow-x-auto -mx-2 px-2">
                 <CurrencyTabs
                   selectedCurrency={selectedCurrency}
