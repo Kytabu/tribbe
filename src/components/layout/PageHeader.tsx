@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import { MenuIcon } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
@@ -52,7 +53,7 @@ export function PageHeader({
               {rightIcon}
             </Button>
           ) : (
-            <div className="w-10" /> {/* Spacer for alignment */}
+            <div className="w-10" /> 
           )}
         </div>
       </div>
