@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { UserPlus } from "lucide-react";
@@ -57,19 +58,25 @@ function TribbeContent() {
         onRightIconClick={() => setShowContactList(true)}
       />
 
-      <div className="px-4 py-6 space-y-8">
-        <StatsCard stats={stats} />
+      <div className="px-4 space-y-6">
+        <div className="pt-6">
+          <StatsCard stats={stats} />
+        </div>
 
-        <NetworkGrid
-          networkMembers={networkMembers}
-          onViewAllClick={() => {}}
-          scrollContainerRef={scrollContainerRef}
-          canScrollLeft={canScrollLeft}
-          canScrollRight={canScrollRight}
-          onScroll={handleScroll}
-        />
+        <div>
+          <NetworkGrid
+            networkMembers={networkMembers}
+            onViewAllClick={() => {}}
+            scrollContainerRef={scrollContainerRef}
+            canScrollLeft={canScrollLeft}
+            canScrollRight={canScrollRight}
+            onScroll={handleScroll}
+          />
+        </div>
 
-        <StatisticsGrid stats={stats} />
+        <div>
+          <StatisticsGrid stats={stats} />
+        </div>
 
         <ContactList
           showContactList={showContactList}
