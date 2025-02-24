@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,6 @@ import { UserPlus, MenuIcon } from "lucide-react";
 import { useState, useRef } from "react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { ContactList } from "@/components/my-tribbe/ContactList";
-import { NetworkMembers } from "@/components/my-tribbe/NetworkMembers";
 import { NetworkGrid } from "@/components/my-tribbe/NetworkGrid";
 import { StatsCard } from "@/components/my-tribbe/StatsCard";
 import { StatisticsGrid } from "@/components/my-tribbe/StatisticsGrid";
@@ -39,7 +37,6 @@ function TribbeContent() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [showAllMembers, setShowAllMembers] = useState(false);
   const [showContactList, setShowContactList] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
   const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
@@ -93,7 +90,7 @@ function TribbeContent() {
 
         <NetworkGrid
           networkMembers={networkMembers}
-          onViewAllClick={() => setShowAllMembers(true)}
+          onViewAllClick={() => {}}
           scrollContainerRef={scrollContainerRef}
           canScrollLeft={canScrollLeft}
           canScrollRight={canScrollRight}
@@ -101,12 +98,6 @@ function TribbeContent() {
         />
 
         <StatisticsGrid stats={stats} />
-
-        <NetworkMembers
-          showAllMembers={showAllMembers}
-          setShowAllMembers={setShowAllMembers}
-          networkMembers={networkMembers}
-        />
 
         <ContactList
           showContactList={showContactList}

@@ -1,7 +1,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
+import { MoreHorizontal, ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 interface NetworkGridProps {
   networkMembers: Array<{
@@ -24,10 +25,12 @@ export function NetworkGrid({
   canScrollRight,
   onScroll
 }: NetworkGridProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
-      const scrollAmount = 100; // Reduced from 200
+      const scrollAmount = 100;
       const newScrollLeft = direction === 'left' 
         ? container.scrollLeft - scrollAmount 
         : container.scrollLeft + scrollAmount;
@@ -47,49 +50,71 @@ export function NetworkGrid({
           <Button 
             variant="ghost" 
             size="sm"
-            onClick={onViewAllClick}
+            onClick={() => setIsExpanded(!isExpanded)}
             className="text-gray-400 hover:text-white h-6 px-2 text-xs"
           >
-            View All <MoreHorizontal className="w-3 h-3 ml-1" />
+            {isExpanded ? (
+              <>Collapse <ChevronUp className="w-3 h-3 ml-1" /></>
+            ) : (
+              <>View All <ChevronDown className="w-3 h-3 ml-1" /></>
+            )}
           </Button>
         </div>
-        <div className="relative">
-          <div 
-            className="flex gap-2 overflow-x-auto scrollbar-hide scroll-smooth"
-            ref={scrollContainerRef}
-            onScroll={onScroll}
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
+        
+        {!isExpanded && (
+          <div className="relative">
+            <div 
+              className="flex gap-2 overflow-x-auto scrollbar-hide scroll-smooth"
+              ref={scrollContainerRef}
+              onScroll={onScroll}
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {networkMembers.map((member) => (
+                <img
+                  key={member.id}
+                  src={member.image}
+                  alt={member.name}
+                  className="w-6 h-6 flex-shrink-0"
+                />
+              ))}
+            </div>
+            {canScrollLeft && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 h-4 w-4"
+                onClick={() => scroll('left')}
+              >
+                <ChevronLeft className="h-2 w-2" />
+              </Button>
+            )}
+            {canScrollRight && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 h-4 w-4"
+                onClick={() => scroll('right')}
+              >
+                <ChevronRight className="h-2 w-2" />
+              </Button>
+            )}
+          </div>
+        )}
+
+        {isExpanded && (
+          <div className="grid grid-cols-6 gap-2">
             {networkMembers.map((member) => (
-              <img
-                key={member.id}
-                src={member.image}
-                alt={member.name}
-                className="w-6 h-6 flex-shrink-0"
-              />
+              <div key={member.id} className="flex flex-col items-center gap-1">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-6 h-6"
+                />
+                <span className="text-[10px] text-gray-400">{member.name}</span>
+              </div>
             ))}
           </div>
-          {canScrollLeft && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 h-4 w-4"
-              onClick={() => scroll('left')}
-            >
-              <ChevronLeft className="h-2 w-2" />
-            </Button>
-          )}
-          {canScrollRight && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 h-4 w-4"
-              onClick={() => scroll('right')}
-            >
-              <ChevronRight className="h-2 w-2" />
-            </Button>
-          )}
-        </div>
+        )}
       </div>
     </Card>
   );
