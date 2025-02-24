@@ -1,3 +1,4 @@
+
 import { PiggyBank, Gem, Trophy } from "lucide-react";
 import { SupportedCurrency } from "@/pages/Wallet";
 import { BalanceCard } from "./components/BalanceCard";
@@ -23,13 +24,13 @@ export function BalanceView({
   lendingStats,
 }: BalanceViewProps) {
   return (
-    <div className="space-y-4 animate-fade-in">
-      <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
+    <div className="space-y-2">
+      <div className="text-2xl sm:text-3xl font-bold transition-all duration-300 hover:scale-105">
         {isLoading ? (
           <span className="text-tribbe-sage animate-pulse">Loading...</span>
         ) : (
           <div className="flex items-center gap-2">
-            <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-sm text-black font-bold">
+            <span className="w-6 h-6 rounded-full bg-gradient-to-br from-[#A9FF22] to-[#79CFFF] flex items-center justify-center text-xs text-black font-bold">
               {selectedCurrency.substring(0, 1)}
             </span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]">
@@ -39,21 +40,21 @@ export function BalanceView({
         )}
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <BalanceCard
-          icon={<PiggyBank className="w-5 h-5 text-[#A9FF22]" />}
+          icon={<PiggyBank className="w-4 h-4 text-[#A9FF22]" />}
           label="Amount In"
           amount={availableBalance}
           currencySymbol={currencySymbols[selectedCurrency]}
         />
         <BalanceCard
-          icon={<Gem className="w-5 h-5 text-[#FF6B6B]" />}
+          icon={<Gem className="w-4 h-4 text-[#FF6B6B]" />}
           label="Amount Out"
           amount={lendingStats.total_lent}
           currencySymbol={currencySymbols[selectedCurrency]}
         />
         <BalanceCard
-          icon={<Trophy className="w-5 h-5 text-[#4ECDC4]" />}
+          icon={<Trophy className="w-4 h-4 text-[#4ECDC4]" />}
           label="Expected Interest"
           amount={lendingStats.total_expected_interest}
           prefix="+"

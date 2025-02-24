@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -146,11 +145,11 @@ export default function Wallet() {
 
   return (
     <AppLayout>
-      <div className="container px-4 sm:px-6 mx-auto space-y-4 sm:space-y-6 py-4">
-        <Card className="p-4 sm:p-6 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300">
-          <div className="space-y-4">
-            <div className="flex flex-col space-y-4">
-              <h2 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">My Wallet</h2>
+      <div className="container px-3 mx-auto space-y-3 py-3">
+        <Card className="p-3 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="space-y-3">
+            <div className="flex flex-col space-y-3">
+              <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF] animate-fade-in">My Wallet</h2>
               <div className="w-full overflow-x-auto -mx-2 px-2">
                 <CurrencyTabs
                   selectedCurrency={selectedCurrency}
@@ -173,44 +172,43 @@ export default function Wallet() {
           </div>
         </Card>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-          <div className="p-3 sm:p-4 rounded-lg border bg-background">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div className="p-2 rounded-lg border bg-background">
             <div className="flex items-center justify-between">
-              <div className="text-sm sm:text-base font-medium">Automate Lending</div>
+              <div className="text-xs font-medium">Automate Lending</div>
               <Switch
                 checked={autoLend}
                 onCheckedChange={setAutoLend}
-                className="data-[state=checked]:bg-tribbe-lime scale-90 sm:scale-100"
+                className="data-[state=checked]:bg-tribbe-lime scale-75"
               />
             </div>
           </div>
 
-          <div className="p-3 sm:p-4 rounded-lg border bg-background">
+          <div className="p-2 rounded-lg border bg-background">
             <div className="flex items-center justify-between">
-              <div className="text-sm sm:text-base font-medium">Automate Borrowing</div>
+              <div className="text-xs font-medium">Automate Borrowing</div>
               <Switch
                 checked={autoBorrow}
                 onCheckedChange={setAutoBorrow}
-                className="data-[state=checked]:bg-tribbe-lime scale-90 sm:scale-100"
+                className="data-[state=checked]:bg-tribbe-lime scale-75"
               />
             </div>
           </div>
 
-          <div className="p-3 sm:p-4 rounded-lg border bg-background">
+          <div className="p-2 rounded-lg border bg-background">
             <div className="flex items-center justify-between">
-              <div className="text-sm sm:text-base font-medium">Automate Repayment</div>
+              <div className="text-xs font-medium">Automate Repayment</div>
               <Switch
                 checked={autoInterest}
                 onCheckedChange={setAutoInterest}
-                className="data-[state=checked]:bg-tribbe-lime scale-90 sm:scale-100"
+                className="data-[state=checked]:bg-tribbe-lime scale-75"
               />
             </div>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <WalletActions selectedCurrency={selectedCurrency} />
-
           <TransactionHistory
             transactions={transactionHistory}
             selectedCurrency={selectedCurrency}

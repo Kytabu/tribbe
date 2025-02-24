@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Wallet, Plus, Send, MessageSquare } from "lucide-react";
@@ -77,42 +76,38 @@ export function BalanceDisplay({
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
+    <div className="space-y-3">
+      <div className="flex items-center gap-1.5">
         <Button
-          className={`border-0 ${activeView === 'balance' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
+          className={`border-0 text-xs px-2.5 py-1 h-8 ${activeView === 'balance' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
           variant={activeView === 'balance' ? "default" : "ghost"}
-          size="sm"
           onClick={() => setActiveView('balance')}
         >
-          <Wallet className="h-4 w-4 mr-1" />
+          <Wallet className="h-3.5 w-3.5 mr-1" />
           Balance
         </Button>
         <Button
-          className={`border-0 ${activeView === 'add' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
+          className={`border-0 text-xs px-2.5 py-1 h-8 ${activeView === 'add' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
           variant={activeView === 'add' ? "default" : "ghost"}
-          size="sm"
           onClick={() => setActiveView('add')}
         >
-          <Plus className="h-4 w-4 mr-1" />
+          <Plus className="h-3.5 w-3.5 mr-1" />
           Add Money
         </Button>
         <Button
-          className={`border-0 ${activeView === 'request' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
+          className={`border-0 text-xs px-2.5 py-1 h-8 ${activeView === 'request' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
           variant={activeView === 'request' ? "default" : "ghost"}
-          size="sm"
           onClick={() => setActiveView('request')}
         >
-          <MessageSquare className="h-4 w-4 mr-1" />
+          <MessageSquare className="h-3.5 w-3.5 mr-1" />
           Request
         </Button>
         <Button
-          className={`border-0 ${activeView === 'send' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
+          className={`border-0 text-xs px-2.5 py-1 h-8 ${activeView === 'send' ? 'bg-tribbe-lime text-black hover:bg-tribbe-lime/90' : 'hover:bg-background/50'}`}
           variant={activeView === 'send' ? "default" : "ghost"}
-          size="sm"
           onClick={() => setActiveView('send')}
         >
-          <Send className="h-4 w-4 mr-1" />
+          <Send className="h-3.5 w-3.5 mr-1" />
           Send
         </Button>
       </div>

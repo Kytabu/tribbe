@@ -11,13 +11,13 @@ interface BalanceCardProps {
 
 export function BalanceCard({ icon, label, amount, currencySymbol, prefix = "" }: BalanceCardProps) {
   return (
-    <div className="w-full h-[60px] px-4 rounded-lg bg-muted text-card-foreground">
+    <div className="w-full h-[45px] px-3 rounded-lg bg-muted text-card-foreground">
       <div className="flex justify-between items-center w-full h-full">
         <div className="flex items-center gap-2">
           {icon}
-          <span className="text-tribbe-sage">{label}</span>
+          <span className="text-tribbe-sage text-sm">{label}</span>
         </div>
-        <span className="font-medium text-tribbe-lime">
+        <span className="font-medium text-tribbe-lime text-sm">
           {prefix}{currencySymbol} {amount.toFixed(2)}
         </span>
       </div>
