@@ -36,7 +36,7 @@ const AccountContent = () => {
         title="Account"
         titleClassName="text-xl text-tribbe-lime"
         leftIcon={<ChevronLeft className="h-5 w-5" />}
-        onLeftIconClick={() => navigate(-1)}
+        onLeftIconClick={() => navigate("/profile")}
       />
 
       <div className="flex justify-center mb-6 mt-6">
