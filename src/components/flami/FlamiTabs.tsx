@@ -68,14 +68,14 @@ export function FlamiTabs({
               </div>
               <div className="flex-1 overflow-hidden">
                 <div className="h-full flex flex-col">
-                  <div className="flex-1 overflow-y-auto p-4">
+                  <div className="flex-1 overflow-y-auto p-4 space-y-6">
                     {activityMessages.map((message) => (
-                      <div key={message.id} className="mb-4">
-                        <div className={`flex items-start gap-2 ${
+                      <div key={message.id}>
+                        <div className={`flex items-start gap-3 ${
                           message.role === "assistant" ? "flex-row" : "flex-row-reverse"
                         }`}>
                           {message.role === "assistant" && (
-                            <div className="w-6 h-6 mt-1 flex-shrink-0">
+                            <div className="w-8 h-8 mt-0.5 flex-shrink-0">
                               <img 
                                 src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
                                 alt="Assistant" 
@@ -83,7 +83,7 @@ export function FlamiTabs({
                               />
                             </div>
                           )}
-                          <div className={`text-sm break-words px-4 py-2 rounded-lg ${
+                          <div className={`text-sm break-words px-5 py-3 rounded-lg max-w-[85%] ${
                             message.role === "assistant" 
                               ? "bg-background border border-border text-foreground font-medium" 
                               : "bg-tribbe-lime text-black font-medium shadow-sm"
@@ -91,11 +91,13 @@ export function FlamiTabs({
                             {message.content}
                           </div>
                           {message.role === "user" && (
-                            <img 
-                              src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
-                              alt="User" 
-                              className="h-6 w-6 rounded-full mt-1 flex-shrink-0 object-cover"
-                            />
+                            <div className="w-8 h-8 mt-0.5 flex-shrink-0">
+                              <img 
+                                src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
+                                alt="User" 
+                                className="h-full w-full rounded-full object-cover"
+                              />
+                            </div>
                           )}
                         </div>
                       </div>
