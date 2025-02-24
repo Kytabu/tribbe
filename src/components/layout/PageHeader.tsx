@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { MenuIcon } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
@@ -17,7 +17,7 @@ export function PageHeader({
   rightIcon, 
   onRightIconClick,
   titleClassName 
-}: PageHeaderProps) {
+}: PageHeaderProps): React.JSX.Element {
   const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
 
   const handleMenuClick = () => {
@@ -53,7 +53,7 @@ export function PageHeader({
               {rightIcon}
             </Button>
           ) : (
-            <div className="w-10" /> 
+            <div className="w-10" />
           )}
         </div>
       </div>
