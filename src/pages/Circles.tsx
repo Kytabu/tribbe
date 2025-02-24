@@ -3,9 +3,11 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { CirclePlus, Search, ChevronRight, ArrowLeft } from "lucide-react";
+import { CirclePlus, Search, ChevronRight, MenuIcon } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useSidebar } from "@/components/ui/sidebar";
 
 interface CircleType {
   id: string;
@@ -103,43 +105,70 @@ const CircleItem = ({ circle }: { circle: CircleType }) => {
 
 const Circles = () => {
   const navigate = useNavigate();
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
+
+  const handleMenuClick = () => {
+    if (isMobile) {
+      setOpenMobile(!openMobile);
+    } else {
+      setOpen(!open);
+    }
+  };
 
   return (
     <AppLayout>
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => navigate("/flami")}
-              className="hover:bg-tribbe-lime/20"
-            >
-              <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
-            </Button>
-            <h2 className="text-2xl font-righteous text-tribbe-lime">My Circles</h2>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="relative w-64">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <Input 
-                type="text" 
-                placeholder="Search circles" 
-                className="pl-10 bg-tribbe-grey/50 border-none text-white placeholder:text-gray-400"
-              />
+        <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b">
+          <div className="max-w-3xl mx-auto w-full px-4">
+            <div className="flex h-14 items-center justify-between">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-background/80"
+                onClick={handleMenuClick}
+              >
+                <MenuIcon className="h-5 w-5 text-tribbe-lime" />
+              </Button>
+              <h2 className="text-2xl font-righteous text-tribbe-lime">My Circles</h2>
+              <div className="flex items-center gap-2">
+                <div 
+                  className={`relative transition-all duration-300 ease-in-out ${
+                    isSearchExpanded ? 'w-64' : 'w-10'
+                  }`}
+                >
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 hover:bg-background/80 ${
+                      isSearchExpanded ? 'bg-transparent' : ''
+                    }`}
+                    onClick={() => setIsSearchExpanded(!isSearchExpanded)}
+                  >
+                    <Search className="h-5 w-5 text-tribbe-lime" />
+                  </Button>
+                  <Input 
+                    type="text" 
+                    placeholder="Search circles" 
+                    className={`pl-10 bg-tribbe-grey/50 border-none text-white placeholder:text-gray-400 transition-all duration-300 ${
+                      isSearchExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    }`}
+                  />
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => console.log("Create new circle")}
+                  className="hover:bg-tribbe-lime/20"
+                >
+                  <CirclePlus className="h-5 w-5 text-tribbe-lime" />
+                </Button>
+              </div>
             </div>
-            <Button 
-              variant="ghost" 
-              size="icon"
-              onClick={() => console.log("Create new circle")}
-              className="hover:bg-tribbe-lime/20"
-            >
-              <CirclePlus className="h-5 w-5 text-tribbe-lime" />
-            </Button>
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="px-4 space-y-3">
           {circles.map((circle) => (
             <CircleItem key={circle.id} circle={circle} />
           ))}
