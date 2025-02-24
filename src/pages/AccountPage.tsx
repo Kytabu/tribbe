@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -29,25 +30,20 @@ const AccountContent = () => {
     });
   };
 
-  const BackButton = (
-    <Button
-      variant="ghost"
-      size="icon"
-    >
-      <ChevronLeft className="h-5 w-5" />
-    </Button>
-  );
-
   return (
     <div className="min-h-screen bg-background p-6">
-      <PageHeader 
-        title="Account"
-        titleClassName="text-xl text-tribbe-lime"
-        rightIcon={BackButton}
-        onRightIconClick={() => navigate("/profile")}
-      />
+      <div className="flex items-center gap-4 mb-8">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/profile")}
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </Button>
+        <h1 className="text-xl text-tribbe-lime">Account</h1>
+      </div>
 
-      <div className="flex justify-center mb-6 mt-6">
+      <div className="flex justify-center mb-6">
         <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary">
           <img 
             src="/lovable-uploads/4a593a53-ec2e-4ab3-a500-c2147809af06.png"
