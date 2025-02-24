@@ -85,8 +85,8 @@ export function FlamiTabs({
                           )}
                           <div className={`text-sm break-words px-4 py-2 rounded-lg ${
                             message.role === "assistant" 
-                              ? "bg-muted/80 border border-muted" 
-                              : "bg-tribbe-lime/90 text-black"
+                              ? "bg-background border border-border text-foreground font-medium" 
+                              : "bg-tribbe-lime text-black font-medium shadow-sm"
                           }`}>
                             {message.content}
                           </div>
