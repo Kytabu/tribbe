@@ -1,11 +1,9 @@
-
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   User,
   Crown,
   ChevronRight,
-  ArrowLeft,
   Mail,
   Phone,
   LogOut
@@ -13,6 +11,7 @@ import {
 import { AppLayout } from "@/components/layout/AppLayout";
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 interface ProfileData {
   full_name: string;
@@ -66,16 +65,7 @@ const Profile = () => {
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto py-8">
-        <div className="flex items-center gap-4 mb-8">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeft className="h-6 w-6" />
-          </Button>
-          <h1 className="text-2xl font-bold">Profile</h1>
-        </div>
+        <PageHeader title="Profile" titleClassName="text-2xl font-bold" />
         
         {/* Profile Summary */}
         <div className="bg-card rounded-lg p-6 mb-6">

@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { ChevronLeft } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
 
 interface Profile {
@@ -31,10 +30,16 @@ const AccountContent = () => {
 
   return (
     <div className="min-h-screen bg-background p-6">
-      <PageHeader 
-        title="Account"
-        titleClassName="text-xl text-tribbe-lime"
-      />
+      <div className="flex items-center gap-4 mb-8">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/profile")}
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </Button>
+        <h1 className="text-xl text-tribbe-lime">Account</h1>
+      </div>
 
       <div className="flex justify-center mb-6">
         <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary">
