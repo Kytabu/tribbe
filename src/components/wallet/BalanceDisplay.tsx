@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Wallet, Plus, Send, MessageSquare } from "lucide-react";
-import { SupportedCurrency } from "@/pages/Wallet";
+import { SupportedCurrency } from "@/features/wallet/constants";
 import { Transaction } from "@/types/wallet";
 import { BalanceView } from "./balance/BalanceView";
 import { AddMoneyView } from "./balance/AddMoneyView";
