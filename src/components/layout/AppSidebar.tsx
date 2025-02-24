@@ -7,102 +7,23 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import {
-  MessageCircle,
-  Wallet,
-  Users,
-  Circle,
-  Star,
-  Settings,
-  Camera,
-  LucideIcon,
-} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-
-interface NavigationItem {
-  icon: LucideIcon;
-  label: string;
-  href: string;
-  activeRoutes?: string[];
-}
-
-interface FooterItem {
-  icon: LucideIcon | (() => JSX.Element);
-  label: string;
-  href: string;
-}
-
-const navigationItems: NavigationItem[] = [
-  {
-    icon: MessageCircle,
-    label: "Flami",
-    href: "/flami",
-  },
-  {
-    icon: Wallet,
-    label: "Wallet",
-    href: "/wallet",
-  },
-  {
-    icon: Circle,
-    label: "My Circles",
-    href: "/circles",
-  },
-  {
-    icon: Users,
-    label: "My Tribbe",
-    href: "/my-tribbe",
-    activeRoutes: ['/my-tribbe', '/tribbe-requests'],
-  },
-  {
-    icon: Camera,
-    label: "Snap to Pay",
-    href: "/snap-to-pay",
-  },
-  {
-    icon: Star,
-    label: "My Street Cred",
-    href: "/street-cred",
-  },
-];
+import { Settings } from "lucide-react";
+import { navigationItems } from "./sidebar/navigationConfig";
+import { getCurrentLevel } from "./sidebar/streetCredUtils";
+import { ProfileButton } from "./sidebar/ProfileButton";
+import type { FooterItem } from "./sidebar/navigationConfig";
 
 export function AppSidebar() {
   const location = useLocation();
   const { isMobile, open, openMobile } = useSidebar();
 
-  // Use the same credit score logic
   const creditScore = 720;
-  const streetCredLevels = [
-    { name: "The Newbie", color: "#FFCA99", minScore: 300 },
-    { name: "The Builder", color: "#F9FE03", minScore: 580 },
-    { name: "The Trailblazer", color: "#88D3FE", minScore: 670 },
-    { name: "The Innovator", color: "#A9FF22", minScore: 740 },
-    { name: "The Legend", color: "#C699FF", minScore: 800 }
-  ];
-
-  const getCurrentLevel = (score: number) => {
-    return streetCredLevels
-      .slice()
-      .reverse()
-      .find(level => score >= level.minScore) || streetCredLevels[0];
-  };
-
   const currentLevel = getCurrentLevel(creditScore);
 
   const footerItems: FooterItem[] = [
     {
-      icon: () => (
-        <div 
-          className="p-[0.25px] rounded-full"
-          style={{ backgroundColor: currentLevel.color }}
-        >
-          <img 
-            src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
-            alt="Profile" 
-            className="w-5 h-5 rounded-full object-cover"
-          />
-        </div>
-      ),
+      icon: () => <ProfileButton currentLevel={currentLevel} />,
       label: "Profile",
       href: "/profile",
     },
@@ -115,7 +36,7 @@ export function AppSidebar() {
 
   const isOpen = isMobile ? openMobile : open;
 
-  const isRouteActive = (item: NavigationItem) => {
+  const isRouteActive = (item: { href: string; activeRoutes?: string[] }) => {
     if (item.activeRoutes) {
       return item.activeRoutes.includes(location.pathname);
     }
