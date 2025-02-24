@@ -1,4 +1,3 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -103,7 +102,6 @@ const CircleItem = ({ circle }: { circle: CircleType }) => {
   );
 };
 
-// Separate component for the circles content that uses the sidebar
 function CirclesContent() {
   const navigate = useNavigate();
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -131,7 +129,7 @@ function CirclesContent() {
               <MenuIcon className="h-5 w-5 text-tribbe-lime" />
             </Button>
             <h2 
-              className={`text-2xl font-righteous text-tribbe-lime transition-all duration-300 ${
+              className={`text-xl font-righteous text-tribbe-lime transition-all duration-300 ${
                 isSearchExpanded ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'
               }`}
             >
@@ -184,7 +182,6 @@ function CirclesContent() {
   );
 }
 
-// Main Circles component that provides the layout
 const Circles = () => {
   return (
     <AppLayout>
