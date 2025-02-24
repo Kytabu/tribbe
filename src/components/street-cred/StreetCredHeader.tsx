@@ -32,8 +32,8 @@ export function StreetCredHeader() {
           alt="Profile"
           className="w-8 h-8 rounded-full object-cover"
         />
-      </Button>
-    </div>
+      </div>
+    </Button>
   );
 
   return (
