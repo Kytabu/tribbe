@@ -30,13 +30,23 @@ const AccountContent = () => {
     });
   };
 
+  const BackButton = (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => navigate("/profile")}
+    >
+      <ChevronLeft className="h-5 w-5" />
+    </Button>
+  );
+
   return (
     <div className="min-h-screen bg-background p-6">
       <PageHeader 
         title="Account"
         titleClassName="text-xl text-tribbe-lime"
-        leftIcon={<ChevronLeft className="h-5 w-5" />}
-        onLeftIconClick={() => navigate("/profile")}
+        rightIcon={BackButton}
+        onRightIconClick={() => navigate("/profile")}
       />
 
       <div className="flex justify-center mb-6 mt-6">
