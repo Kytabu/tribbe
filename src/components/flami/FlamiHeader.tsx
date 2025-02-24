@@ -3,7 +3,6 @@ import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FlamiHeaderProps {
   currentLevelColor: string;

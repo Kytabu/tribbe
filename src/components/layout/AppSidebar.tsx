@@ -1,3 +1,4 @@
+
 import {
   Sidebar,
   SidebarContent,
@@ -65,7 +66,7 @@ const navigationItems: NavigationItem[] = [
 
 export function AppSidebar() {
   const location = useLocation();
-  const { open } = useSidebar();
+  const { isMobile, open, openMobile } = useSidebar();
 
   // Use the same credit score logic
   const creditScore = 720;
@@ -110,11 +111,13 @@ export function AppSidebar() {
     },
   ];
 
+  const isOpen = isMobile ? openMobile : open;
+
   return (
     <Sidebar
       className={cn(
         "transition-transform duration-300 transform fixed h-full",
-        open ? "translate-x-0" : "-translate-x-full"
+        isOpen ? "translate-x-0" : "-translate-x-full"
       )}
     >
       <SidebarHeader className="p-4 pt-16">
