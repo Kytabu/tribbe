@@ -15,7 +15,8 @@ import { Button } from "@/components/ui/button";
 import { MenuIcon } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 
-export default function Wallet() {
+// Separate component for the wallet content that uses the sidebar
+function WalletContent() {
   const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>('KES');
   const [userId, setUserId] = useState<string | null>(null);
   const [autoLend, setAutoLend] = useState(false);
@@ -50,7 +51,7 @@ export default function Wallet() {
   };
 
   return (
-    <AppLayout>
+    <>
       <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b">
         <div className="max-w-3xl mx-auto w-full px-4">
           <div className="flex h-14 items-center justify-between">
@@ -113,6 +114,15 @@ export default function Wallet() {
           />
         </div>
       </div>
+    </>
+  );
+}
+
+// Main Wallet component that provides the layout
+export default function Wallet() {
+  return (
+    <AppLayout>
+      <WalletContent />
     </AppLayout>
   );
 }
