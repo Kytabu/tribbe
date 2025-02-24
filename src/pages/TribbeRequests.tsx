@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -33,19 +32,18 @@ const tribbeRequests = [
 
 export default function TribbeRequests() {
   const navigate = useNavigate();
-  const [removedRequests, setRemovedRequests] = useState<{[key: number]: 'left' | 'right'}>({});
+  const [removedRequests, setRemovedRequests] = useState<number[]>([]);
+  const [slidingRequests, setSlidingRequests] = useState<{[key: number]: 'left' | 'right'}>({});
 
   const handleAction = (id: number, direction: 'left' | 'right') => {
-    setRemovedRequests(prev => ({...prev, [id]: direction}));
+    setSlidingRequests(prev => ({...prev, [id]: direction}));
     // Remove the request from the DOM after animation completes
     setTimeout(() => {
-      setRemovedRequests(prev => {
-        const newState = {...prev};
-        delete newState[id];
-        return newState;
-      });
+      setRemovedRequests(prev => [...prev, id]);
     }, 300);
   };
+
+  const filteredRequests = tribbeRequests.filter(request => !removedRequests.includes(request.id));
 
   return (
     <AppLayout>
@@ -63,137 +61,73 @@ export default function TribbeRequests() {
         </div>
 
         <div className="flex flex-col gap-2 px-2">
-          {tribbeRequests.map((request) => {
-            if (removedRequests[request.id]) {
-              const translateClass = removedRequests[request.id] === 'right' 
-                ? 'translate-x-full' 
-                : '-translate-x-full';
-              return (
-                <div 
-                  key={request.id} 
-                  className={`bg-tribbe-grey/50 p-3 rounded-lg transform transition-transform duration-300 ${translateClass}`}
-                >
-                  {/* ... same content as below ... */}
-                  <div className="flex items-start gap-3">
-                    <div className="relative">
-                      <div 
-                        className="p-0.5 rounded-full"
-                        style={{ backgroundColor: getCreditScoreColor(request.creditScore) }}
-                      >
-                        <img 
-                          src={request.image} 
-                          alt={request.name} 
-                          className="w-8 h-8 object-cover rounded-full border border-background"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start">
-                        <h3 className="text-xs font-medium text-white mb-0.5">{request.name}</h3>
-                        <div className="flex items-center">
-                          <div className="flex items-center">
-                            {[...Array(5)].map((_, index) => (
-                              <Star
-                                key={index}
-                                className={`w-2 h-2 ${
-                                  index < Math.floor(request.rating)
-                                    ? "fill-yellow-400 text-yellow-400"
-                                    : "text-gray-400"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                          <span className="text-[10px] text-gray-400 ml-1">
-                            {request.rating.toFixed(1)}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex gap-1 mt-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="h-6 text-[10px] flex-1 border-tribbe-lime text-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-                          onClick={() => handleAction(request.id, 'right')}
-                        >
-                          Accept
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-6 text-[10px] flex-1 text-gray-400 hover:text-white"
-                          onClick={() => handleAction(request.id, 'left')}
-                        >
-                          Decline
-                        </Button>
-                      </div>
-                    </div>
+          {filteredRequests.map((request) => (
+            <div 
+              key={request.id} 
+              className={`bg-tribbe-grey/50 p-3 rounded-lg transform transition-all duration-300 ${
+                slidingRequests[request.id] === 'right' 
+                  ? 'translate-x-full opacity-0' 
+                  : slidingRequests[request.id] === 'left'
+                  ? '-translate-x-full opacity-0'
+                  : 'translate-x-0'
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                <div className="relative">
+                  <div 
+                    className="p-0.5 rounded-full"
+                    style={{ backgroundColor: getCreditScoreColor(request.creditScore) }}
+                  >
+                    <img 
+                      src={request.image} 
+                      alt={request.name} 
+                      className="w-8 h-8 object-cover rounded-full border border-background"
+                    />
                   </div>
                 </div>
-              );
-            }
-
-            return (
-              <div 
-                key={request.id} 
-                className="bg-tribbe-grey/50 p-3 rounded-lg transform transition-transform duration-300"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="relative">
-                    <div 
-                      className="p-0.5 rounded-full"
-                      style={{ backgroundColor: getCreditScoreColor(request.creditScore) }}
-                    >
-                      <img 
-                        src={request.image} 
-                        alt={request.name} 
-                        className="w-8 h-8 object-cover rounded-full border border-background"
-                      />
+                <div className="flex-1">
+                  <div className="flex justify-between items-start">
+                    <h3 className="text-xs font-medium text-white mb-0.5">{request.name}</h3>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, index) => (
+                          <Star
+                            key={index}
+                            className={`w-2 h-2 ${
+                              index < Math.floor(request.rating)
+                                ? "fill-yellow-400 text-yellow-400"
+                                : "text-gray-400"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-[10px] text-gray-400 ml-1">
+                        {request.rating.toFixed(1)}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex-1">
-                    <div className="flex justify-between items-start">
-                      <h3 className="text-xs font-medium text-white mb-0.5">{request.name}</h3>
-                      <div className="flex items-center">
-                        <div className="flex items-center">
-                          {[...Array(5)].map((_, index) => (
-                            <Star
-                              key={index}
-                              className={`w-2 h-2 ${
-                                index < Math.floor(request.rating)
-                                  ? "fill-yellow-400 text-yellow-400"
-                                  : "text-gray-400"
-                              }`}
-                            />
-                          ))}
-                        </div>
-                        <span className="text-[10px] text-gray-400 ml-1">
-                          {request.rating.toFixed(1)}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex gap-1 mt-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="h-6 text-[10px] flex-1 border-tribbe-lime text-tribbe-lime hover:bg-tribbe-lime hover:text-black"
-                        onClick={() => handleAction(request.id, 'right')}
-                      >
-                        Accept
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 text-[10px] flex-1 text-gray-400 hover:text-white"
-                        onClick={() => handleAction(request.id, 'left')}
-                      >
-                        Decline
-                      </Button>
-                    </div>
+                  <div className="flex gap-1 mt-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-6 text-[10px] flex-1 border-tribbe-lime text-tribbe-lime hover:bg-tribbe-lime hover:text-black"
+                      onClick={() => handleAction(request.id, 'right')}
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-6 text-[10px] flex-1 text-gray-400 hover:text-white"
+                      onClick={() => handleAction(request.id, 'left')}
+                    >
+                      Decline
+                    </Button>
                   </div>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </AppLayout>
