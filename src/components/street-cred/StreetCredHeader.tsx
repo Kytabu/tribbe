@@ -6,13 +6,13 @@ import { useSidebar } from "@/components/ui/sidebar";
 
 export function StreetCredHeader() {
   const navigate = useNavigate();
-  const { setOpenMobile, isMobile, setOpen } = useSidebar();
+  const { setOpenMobile, isMobile, open, setOpen } = useSidebar();
   
   const handleMenuClick = () => {
     if (isMobile) {
       setOpenMobile(true);
     } else {
-      setOpen(prev => !prev);
+      setOpen(!open); // Direct boolean value instead of a function
     }
   };
 
