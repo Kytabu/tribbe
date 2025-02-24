@@ -13,13 +13,11 @@ export function FlamiHeader({ currentLevelColor }: FlamiHeaderProps) {
   const navigate = useNavigate();
 
   const MenuButton = (
-    <div className="flex items-center">
-      <SidebarTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Menu className="h-6 w-6 text-foreground" />
-        </Button>
-      </SidebarTrigger>
-    </div>
+    <SidebarTrigger asChild>
+      <Button variant="ghost" size="icon">
+        <Menu className="h-6 w-6 text-foreground" />
+      </Button>
+    </SidebarTrigger>
   );
 
   const ProfileButton = (
