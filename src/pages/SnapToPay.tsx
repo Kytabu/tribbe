@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,19 +8,19 @@ import { FlamiHeader } from "@/components/flami/FlamiHeader";
 export default function SnapToPay() {
   return (
     <AppLayout>
-      <div className="max-w-4xl mx-auto p-4 space-y-6">
-        <div className="flex items-center justify-between px-2 relative pb-8">
+      <div className="max-w-4xl mx-auto p-4 space-y-4">
+        <div className="flex items-center justify-between px-2 relative pb-4">
           <FlamiHeader currentLevelColor="#00ff00" />
-          <h1 className="text-2xl font-medium text-tribbe-lime font-righteous absolute left-1/2 -translate-x-1/2">
+          <h1 className="text-xl font-medium text-tribbe-lime font-righteous absolute left-1/2 -translate-x-1/2">
             Snap to Pay
           </h1>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2">
           <Card className="group border-0 hover:bg-tribbe-lime/5 transition-colors duration-200">
-            <CardHeader className="pb-1">
-              <CardTitle className="text-base flex items-center gap-2">
-                <QrCode className="h-4 w-4 text-tribbe-lime" />
+            <CardHeader className="pb-0.5">
+              <CardTitle className="text-sm flex items-center gap-2">
+                <QrCode className="h-3.5 w-3.5 text-tribbe-lime" />
                 Scan QR Code
               </CardTitle>
             </CardHeader>
@@ -34,9 +35,9 @@ export default function SnapToPay() {
           </Card>
 
           <Card className="group border-0 hover:bg-tribbe-lilac/5 transition-colors duration-200">
-            <CardHeader className="pb-1">
-              <CardTitle className="text-base flex items-center gap-2">
-                <Smartphone className="h-4 w-4 text-tribbe-lilac" />
+            <CardHeader className="pb-0.5">
+              <CardTitle className="text-sm flex items-center gap-2">
+                <Smartphone className="h-3.5 w-3.5 text-tribbe-lilac" />
                 Show My Code
               </CardTitle>
             </CardHeader>
@@ -51,9 +52,9 @@ export default function SnapToPay() {
           </Card>
 
           <Card className="group border-0 hover:bg-tribbe-aqua/5 transition-colors duration-200">
-            <CardHeader className="pb-1">
-              <CardTitle className="text-base flex items-center gap-2">
-                <Building2 className="h-4 w-4 text-tribbe-aqua" />
+            <CardHeader className="pb-0.5">
+              <CardTitle className="text-sm flex items-center gap-2">
+                <Building2 className="h-3.5 w-3.5 text-tribbe-aqua" />
                 Snap Till Number
               </CardTitle>
             </CardHeader>
@@ -68,9 +69,9 @@ export default function SnapToPay() {
           </Card>
 
           <Card className="group border-0 hover:bg-tribbe-yellow/5 transition-colors duration-200">
-            <CardHeader className="pb-1">
-              <CardTitle className="text-base flex items-center gap-2">
-                <Receipt className="h-4 w-4 text-tribbe-yellow" />
+            <CardHeader className="pb-0.5">
+              <CardTitle className="text-sm flex items-center gap-2">
+                <Receipt className="h-3.5 w-3.5 text-tribbe-yellow" />
                 Snap Paybill Number
               </CardTitle>
             </CardHeader>
