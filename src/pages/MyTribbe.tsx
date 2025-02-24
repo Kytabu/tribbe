@@ -58,8 +58,8 @@ function TribbeContent() {
         onRightIconClick={() => setShowContactList(true)}
       />
 
-      <div className="px-4 space-y-6">
-        <div className="pt-6">
+      <div className="px-4 space-y-[15px]">
+        <div className="pt-[15px]">
           <StatsCard stats={stats} />
         </div>
 
