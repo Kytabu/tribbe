@@ -130,7 +130,13 @@ function CirclesContent() {
             >
               <MenuIcon className="h-5 w-5 text-tribbe-lime" />
             </Button>
-            <h2 className="text-2xl font-righteous text-tribbe-lime">My Circles</h2>
+            <h2 
+              className={`text-2xl font-righteous text-tribbe-lime transition-all duration-300 ${
+                isSearchExpanded ? 'opacity-0 scale-95 absolute' : 'opacity-100 scale-100'
+              }`}
+            >
+              My Circles
+            </h2>
             <div className="flex items-center gap-2">
               <div 
                 className={`relative transition-all duration-300 ease-in-out ${
@@ -153,6 +159,7 @@ function CirclesContent() {
                   className={`pl-10 bg-tribbe-grey/50 border-none text-white placeholder:text-gray-400 transition-all duration-300 ${
                     isSearchExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'
                   }`}
+                  onBlur={() => setIsSearchExpanded(false)}
                 />
               </div>
               <Button 
