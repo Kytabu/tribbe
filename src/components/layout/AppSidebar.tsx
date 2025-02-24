@@ -23,6 +23,7 @@ interface NavigationItem {
   icon: LucideIcon;
   label: string;
   href: string;
+  activeRoutes?: string[];
 }
 
 interface FooterItem {
@@ -51,6 +52,7 @@ const navigationItems: NavigationItem[] = [
     icon: Users,
     label: "My Tribbe",
     href: "/my-tribbe",
+    activeRoutes: ['/my-tribbe', '/tribbe-requests'],
   },
   {
     icon: Camera,
@@ -113,6 +115,13 @@ export function AppSidebar() {
 
   const isOpen = isMobile ? openMobile : open;
 
+  const isRouteActive = (item: NavigationItem) => {
+    if (item.activeRoutes) {
+      return item.activeRoutes.includes(location.pathname);
+    }
+    return location.pathname === item.href;
+  };
+
   return (
     <Sidebar
       className={cn(
@@ -133,20 +142,21 @@ export function AppSidebar() {
         <nav className="space-y-2">
           {navigationItems.map((item) => {
             const Icon = item.icon;
+            const isActive = isRouteActive(item);
             return (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
                   "flex items-center gap-3 px-3 py-2 rounded-lg text-tribbe-sage hover:bg-tribbe-charcoal/5 transition-colors",
-                  location.pathname === item.href &&
+                  isActive &&
                     "bg-tribbe-charcoal/10 text-tribbe-charcoal font-medium"
                 )}
               >
                 <Icon 
                   className={cn(
                     "w-5 h-5",
-                    location.pathname === item.href ? "text-tribbe-aqua" : "text-tribbe-lime"
+                    isActive ? "text-tribbe-aqua" : "text-tribbe-lime"
                   )}
                 />
                 <span>{item.label}</span>
@@ -159,13 +169,14 @@ export function AppSidebar() {
         <nav className="space-y-2">
           {footerItems.map((item) => {
             const Icon = typeof item.icon === 'function' ? item.icon : item.icon;
+            const isActive = location.pathname === item.href;
             return (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
                   "flex items-center gap-3 px-3 py-2 rounded-lg text-tribbe-sage hover:bg-tribbe-charcoal/5 transition-colors",
-                  location.pathname === item.href &&
+                  isActive &&
                     "bg-tribbe-charcoal/10 text-tribbe-charcoal font-medium"
                 )}
               >
@@ -175,7 +186,7 @@ export function AppSidebar() {
                   <Icon 
                     className={cn(
                       "w-5 h-5",
-                      location.pathname === item.href ? "text-tribbe-aqua" : "text-tribbe-lime"
+                      isActive ? "text-tribbe-aqua" : "text-tribbe-lime"
                     )}
                   />
                 )}
