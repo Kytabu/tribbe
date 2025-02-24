@@ -1,12 +1,13 @@
 
 import { AppLayout } from "@/components/layout/AppLayout";
-import { Users, Search } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { Users, Search, ChevronLeft } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const CircleMembers = () => {
   const { id: circleId } = useParams();
+  const navigate = useNavigate();
 
   // Generate mock member data with names and profile pictures
   const mockMembers = [
@@ -40,7 +41,16 @@ const CircleMembers = () => {
   return (
     <AppLayout>
       <div className="space-y-6 p-4">
-        <h1 className="text-xl font-righteous text-white">Jemo's Graduation</h1>
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate(`/circles/${circleId}`)}
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </Button>
+          <h1 className="text-xl font-righteous text-white">Jemo's Graduation</h1>
+        </div>
 
         {/* Target Amount and Progress */}
         <div className="space-y-4">
