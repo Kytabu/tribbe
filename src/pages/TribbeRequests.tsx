@@ -1,8 +1,17 @@
-
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Star } from "lucide-react";
+
+// Credit score color mapping
+const getCreditScoreColor = (score: number): string => {
+  if (score >= 800) return "#C699FF"; // Purple for excellent
+  if (score >= 740) return "#A9FF22"; // Lime for very good
+  if (score >= 670) return "#79CFFF"; // Blue for good
+  if (score >= 580) return "#F6D83E"; // Yellow for fair
+  if (score >= 500) return "#F97316"; // Orange for poor
+  return "#ea384c"; // Red for very poor
+};
 
 // Mock data for tribbe requests
 const tribbeRequests = [
@@ -45,7 +54,7 @@ export default function TribbeRequests() {
                 <div className="relative">
                   <div 
                     className="p-0.5 rounded-full"
-                    style={{ backgroundColor: `hsl(${request.creditScore / 850 * 120}, 100%, 50%)` }}
+                    style={{ backgroundColor: getCreditScoreColor(request.creditScore) }}
                   >
                     <img 
                       src={request.image} 
