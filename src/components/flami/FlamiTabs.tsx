@@ -60,20 +60,22 @@ export function FlamiTabs({
               )}
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-full sm:max-w-lg p-0 flex flex-col">
-            <div className="flex-1 flex flex-col">
+          <SheetContent side="right" className="w-full sm:max-w-lg p-0">
+            <div className="h-full flex flex-col">
               <div className="border-b p-4">
                 <h2 className="text-lg font-semibold">Recent Activity</h2>
               </div>
-              <MessagesTab 
-                messages={activityMessages}
-                input={activityInput}
-                isLoading={isLoading}
-                onInputChange={onActivityInputChange}
-                onSubmit={onActivitySubmit}
-                placeholder="What would you like?"
-                variant="activity"
-              />
+              <div className="flex-1 overflow-hidden">
+                <MessagesTab 
+                  messages={activityMessages}
+                  input={activityInput}
+                  isLoading={isLoading}
+                  onInputChange={onActivityInputChange}
+                  onSubmit={onActivitySubmit}
+                  placeholder="What would you like?"
+                  variant="activity"
+                />
+              </div>
             </div>
           </SheetContent>
         </Sheet>
