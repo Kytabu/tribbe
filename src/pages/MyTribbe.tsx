@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -62,32 +63,32 @@ function TribbeContent() {
   };
 
   return (
-    <div className="container max-w-4xl mx-auto space-y-6 py-6">
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b -mt-6 mb-6">
-        <div className="max-w-3xl mx-auto w-full px-4">
-          <div className="flex h-14 items-center justify-between">
+    <div className="container max-w-2xl mx-auto space-y-3 py-3">
+      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b -mt-3 mb-3">
+        <div className="max-w-xl mx-auto w-full px-2">
+          <div className="flex h-8 items-center justify-between">
             <Button
               variant="ghost"
               size="icon"
-              className="hover:bg-background/80"
+              className="hover:bg-background/80 h-6 w-6"
               onClick={handleMenuClick}
             >
-              <MenuIcon className="h-5 w-5 text-tribbe-lime" />
+              <MenuIcon className="h-3 w-3 text-tribbe-lime" />
             </Button>
-            <h2 className="text-2xl font-righteous text-tribbe-lime">My Tribbe</h2>
+            <h2 className="text-lg font-righteous text-tribbe-lime">My Tribbe</h2>
             <Button
               variant="ghost"
               size="icon"
-              className="hover:bg-background/80"
+              className="hover:bg-background/80 h-6 w-6"
               onClick={() => setShowContactList(true)}
             >
-              <UserPlus className="h-5 w-5 text-tribbe-lime" />
+              <UserPlus className="h-3 w-3 text-tribbe-lime" />
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="px-4">
+      <div className="px-2">
         <StatsCard stats={stats} />
 
         <NetworkGrid

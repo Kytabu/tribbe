@@ -1,9 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { MoreHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
 
 interface NetworkGridProps {
   networkMembers: Array<{
@@ -29,7 +27,7 @@ export function NetworkGrid({
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
-      const scrollAmount = 200;
+      const scrollAmount = 100; // Reduced from 200
       const newScrollLeft = direction === 'left' 
         ? container.scrollLeft - scrollAmount 
         : container.scrollLeft + scrollAmount;
@@ -43,21 +41,21 @@ export function NetworkGrid({
 
   return (
     <Card className="bg-tribbe-grey/50">
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-medium text-white">Your Network</h2>
+      <div className="p-3">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-base font-medium text-white">Your Network</h2>
           <Button 
             variant="ghost" 
             size="sm"
             onClick={onViewAllClick}
-            className="text-gray-400 hover:text-white"
+            className="text-gray-400 hover:text-white h-6 px-2 text-xs"
           >
-            View All <MoreHorizontal className="w-4 h-4 ml-2" />
+            View All <MoreHorizontal className="w-3 h-3 ml-1" />
           </Button>
         </div>
         <div className="relative">
           <div 
-            className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
+            className="flex gap-2 overflow-x-auto scrollbar-hide scroll-smooth"
             ref={scrollContainerRef}
             onScroll={onScroll}
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -67,7 +65,7 @@ export function NetworkGrid({
                 key={member.id}
                 src={member.image}
                 alt={member.name}
-                className="w-12 h-12 flex-shrink-0"
+                className="w-6 h-6 flex-shrink-0"
               />
             ))}
           </div>
@@ -75,20 +73,20 @@ export function NetworkGrid({
             <Button
               variant="ghost"
               size="icon"
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70"
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 h-4 w-4"
               onClick={() => scroll('left')}
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-2 w-2" />
             </Button>
           )}
           {canScrollRight && (
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70"
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 h-4 w-4"
               onClick={() => scroll('right')}
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-2 w-2" />
             </Button>
           )}
         </div>

@@ -15,15 +15,15 @@ interface StatsCardProps {
 export function StatsCard({ stats }: StatsCardProps) {
   return (
     <Card className="bg-tribbe-grey/50">
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="space-y-1">
-            <h2 className="text-lg font-medium text-white">Trust Score</h2>
-            <p className="text-sm text-gray-400">Based on your Tribbe activity</p>
+      <CardContent className="p-3">
+        <div className="flex items-center justify-between mb-2">
+          <div className="space-y-0.5">
+            <h2 className="text-base font-medium text-white">Trust Score</h2>
+            <p className="text-xs text-gray-400">Based on your Tribbe activity</p>
           </div>
-          <div className="text-3xl font-bold text-tribbe-lime">{stats.trustScore}%</div>
+          <div className="text-xl font-bold text-tribbe-lime">{stats.trustScore}%</div>
         </div>
-        <Progress value={stats.trustScore} className="h-2" />
+        <Progress value={stats.trustScore} className="h-1" />
       </CardContent>
     </Card>
   );
