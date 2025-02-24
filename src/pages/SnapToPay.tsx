@@ -1,38 +1,21 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { QrCode, CreditCard, MenuIcon, Smartphone, Building2, Receipt } from "lucide-react";
-import { useSidebar } from "@/components/ui/sidebar";
+import { QrCode, CreditCard, Smartphone, Building2, Receipt } from "lucide-react";
+import { FlamiHeader } from "@/components/flami/FlamiHeader";
 
 export default function SnapToPay() {
-  const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
-
-  const handleMenuClick = () => {
-    if (isMobile) {
-      setOpenMobile(!openMobile);
-    } else {
-      setOpen(!open);
-    }
-  };
-
   return (
     <AppLayout>
       <div className="max-w-4xl mx-auto p-4 space-y-6">
         <div className="flex items-center justify-between px-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="hover:bg-background/80 h-6 w-6"
-            onClick={handleMenuClick}
-          >
-            <MenuIcon className="h-3 w-3 text-tribbe-lime" />
-          </Button>
-          <h1 className="text-2xl font-medium text-tribbe-lime font-righteous">Snap to Pay</h1>
-          <div className="w-6" /> {/* Spacer for centering */}
+          <FlamiHeader currentLevelColor="#00ff00" />
+          <h1 className="text-2xl font-medium text-tribbe-lime font-righteous absolute left-1/2 top-4 -translate-x-1/2">
+            Snap to Pay
+          </h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
           <Card className="group border-0 hover:bg-tribbe-lime/5 transition-colors duration-200">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg flex items-center gap-2">
