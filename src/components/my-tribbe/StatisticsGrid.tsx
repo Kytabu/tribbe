@@ -22,7 +22,7 @@ export function StatisticsGrid({ stats }: StatisticsGridProps) {
               <Users className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm text-gray-400">Total Circles</h3>
+              <h3 className="text-sm text-gray-400">My Circles</h3>
               <p className="text-lg font-bold text-white">{5}</p>
               <p className="text-xs text-gray-400">I am active</p>
             </div>
