@@ -38,7 +38,7 @@ export function StreetCredHeader() {
           </Button>
           <h2 className="text-lg font-righteous text-tribbe-lime">My Street Cred</h2>
           <div 
-            className="p-[2px] rounded-full"
+            className="p-[1px] rounded-full"
             style={{ backgroundColor: borderColor }}
           >
             <Button 
