@@ -70,7 +70,7 @@ const Profile = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => navigate("/flami")}
+            onClick={() => navigate(-1)}
           >
             <ArrowLeft className="h-6 w-6" />
           </Button>
