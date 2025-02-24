@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
@@ -42,21 +43,16 @@ export default function TribbeRequests() {
             <div key={request.id} className="bg-tribbe-grey/50 p-3 rounded-lg">
               <div className="flex items-start gap-3">
                 <div className="relative">
-                  <div className="w-8 h-8 rounded-full overflow-hidden relative">
-                    <img
-                      src={request.image}
-                      alt={request.name}
-                      className="w-full h-full object-cover"
+                  <div 
+                    className="p-0.5 rounded-full"
+                    style={{ backgroundColor: `hsl(${request.creditScore / 850 * 120}, 100%, 50%)` }}
+                  >
+                    <img 
+                      src={request.image} 
+                      alt={request.name} 
+                      className="w-8 h-8 object-cover rounded-full border border-background"
                     />
                   </div>
-                  <div 
-                    className="absolute inset-[-2px] rounded-full"
-                    style={{
-                      background: `linear-gradient(90deg, hsl(${request.creditScore / 850 * 120}, 100%, 50%) 0%, hsl(${request.creditScore / 850 * 120}, 100%, 50%) 50%, transparent 50%, transparent 100%)`,
-                      transform: 'rotate(-45deg)',
-                      opacity: 0.8
-                    }}
-                  />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
