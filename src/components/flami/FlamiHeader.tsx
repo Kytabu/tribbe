@@ -14,7 +14,7 @@ export function FlamiHeader({ currentLevelColor }: FlamiHeaderProps) {
 
   const MenuButton = (
     <SidebarTrigger>
-      <Menu className="h-5 w-5" />
+      <Menu className="h-6 w-6 text-foreground" />
     </SidebarTrigger>
   );
 
