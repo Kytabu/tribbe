@@ -4,6 +4,7 @@ import { MessagesTab } from "./MessagesTab";
 import { Activity } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { ChatInput } from "@/components/chat/ChatInput";
 
 interface FlamiTabsProps {
   messages: Message[];
@@ -76,7 +77,6 @@ export function FlamiTabs({
                       onSubmit={onActivitySubmit}
                       placeholder="What would you like?"
                       variant="activity"
-                      className="h-full"
                     />
                   </div>
                   <div className="border-t bg-background/95 backdrop-blur p-4 flex-shrink-0">
