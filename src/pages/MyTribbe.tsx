@@ -1,14 +1,12 @@
-
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { Button } from "@/components/ui/button";
-import { UserPlus, MenuIcon } from "lucide-react";
+import { UserPlus } from "lucide-react";
 import { useState, useRef } from "react";
-import { useSidebar } from "@/components/ui/sidebar";
 import { ContactList } from "@/components/my-tribbe/ContactList";
 import { NetworkGrid } from "@/components/my-tribbe/NetworkGrid";
 import { StatsCard } from "@/components/my-tribbe/StatsCard";
 import { StatisticsGrid } from "@/components/my-tribbe/StatisticsGrid";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 const networkMembers = [
   { id: 1, name: "Sarah", image: "/lovable-uploads/237ca64a-021e-4578-9f08-b9fb2245f01e.png" },
@@ -40,15 +38,6 @@ function TribbeContent() {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [showContactList, setShowContactList] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
-  const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
-
-  const handleMenuClick = () => {
-    if (isMobile) {
-      setOpenMobile(!openMobile);
-    } else {
-      setOpen(!open);
-    }
-  };
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -61,32 +50,14 @@ function TribbeContent() {
   };
 
   return (
-    <div className="container max-w-2xl mx-auto py-3">
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b -mt-3 mb-6">
-        <div className="max-w-xl mx-auto w-full px-2">
-          <div className="flex h-8 items-center justify-between">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hover:bg-background/80 h-6 w-6"
-              onClick={handleMenuClick}
-            >
-              <MenuIcon className="h-3 w-3 text-tribbe-lime" />
-            </Button>
-            <h2 className="text-lg font-righteous text-tribbe-lime">My Tribbe</h2>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hover:bg-background/80 h-6 w-6"
-              onClick={() => setShowContactList(true)}
-            >
-              <UserPlus className="h-3 w-3 text-tribbe-lime" />
-            </Button>
-          </div>
-        </div>
-      </div>
+    <div className="container max-w-2xl mx-auto">
+      <PageHeader 
+        title="My Tribbe"
+        rightIcon={<UserPlus className="h-5 w-5 text-tribbe-lime" />}
+        onRightIconClick={() => setShowContactList(true)}
+      />
 
-      <div className="px-2 space-y-8">
+      <div className="px-4 py-6 space-y-8">
         <StatsCard stats={stats} />
 
         <NetworkGrid

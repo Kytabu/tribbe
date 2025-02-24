@@ -1,12 +1,11 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Card } from "@/components/ui/card";
 import { BadgeCheck, CreditCard, Shield, ChartLine, User } from "lucide-react";
 import { useState } from "react";
-import { StreetCredHeader } from "@/components/street-cred/StreetCredHeader";
 import { CreditScoreCard } from "@/components/street-cred/CreditScoreCard";
 import { CreditLevels } from "@/components/street-cred/CreditLevels";
 import { CreditFactors } from "@/components/street-cred/CreditFactors";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 interface StreetCredLevel {
   name: string;
@@ -116,9 +115,8 @@ export default function StreetCred() {
   return (
     <AppLayout>
       <div className="flex flex-col min-h-screen">
-        <StreetCredHeader />
-        
-        <div className="container max-w-4xl mx-auto p-4 space-y-4">
+        <PageHeader title="My Street Cred" />
+        <div className="container max-w-4xl mx-auto p-4 space-y-6">
           <CreditScoreCard
             creditScore={creditScore}
             currentLevel={currentLevel}
