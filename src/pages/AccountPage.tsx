@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ChevronLeft } from "lucide-react";
+import { AppLayout } from "@/components/layout/AppLayout";
 
 interface Profile {
   full_name: string;
@@ -14,7 +15,7 @@ interface Profile {
   id_number: string;
 }
 
-const AccountPage = () => {
+const AccountContent = () => {
   const navigate = useNavigate();
   const [profile] = useState<Profile>({
     full_name: "Tonee Ndungu",
@@ -110,6 +111,14 @@ const AccountPage = () => {
         </Button>
       </div>
     </div>
+  );
+};
+
+const AccountPage = () => {
+  return (
+    <AppLayout>
+      <AccountContent />
+    </AppLayout>
   );
 };
 
