@@ -13,7 +13,7 @@ const Premium = () => {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/profile")}
         >
           <ArrowLeft className="h-6 w-6" />
         </Button>
