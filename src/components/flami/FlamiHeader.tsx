@@ -2,6 +2,8 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Menu } from "lucide-react";
 
 interface FlamiHeaderProps {
   currentLevelColor: string;
@@ -9,6 +11,12 @@ interface FlamiHeaderProps {
 
 export function FlamiHeader({ currentLevelColor }: FlamiHeaderProps) {
   const navigate = useNavigate();
+
+  const MenuButton = (
+    <SidebarTrigger>
+      <Menu className="h-5 w-5" />
+    </SidebarTrigger>
+  );
 
   const ProfileButton = (
     <Button
@@ -33,6 +41,7 @@ export function FlamiHeader({ currentLevelColor }: FlamiHeaderProps) {
   return (
     <PageHeader 
       title="Flami"
+      leftIcon={MenuButton}
       rightIcon={ProfileButton}
       titleClassName="text-xl"
     />
