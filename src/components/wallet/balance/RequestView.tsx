@@ -5,7 +5,7 @@ import { TribbeButton } from "./components/TribbeButton";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { toast } from "@/hooks/use-toast";
-import { ThumbsUp, UserPlus } from "lucide-react";
+import { Check, ThumbsUp, UserPlus } from "lucide-react";
 
 interface RequestViewProps {
   amount: string;
@@ -28,6 +28,7 @@ export function RequestView({
 }: RequestViewProps) {
   const [isNewCircleOpen, setIsNewCircleOpen] = useState(false);
   const [isContactsOpen, setIsContactsOpen] = useState(false);
+  const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
 
   const friends: Friend[] = [
     { 
@@ -70,6 +71,14 @@ export function RequestView({
     if (score >= 670) return 'from-blue-400 to-blue-600';
     if (score >= 580) return 'from-yellow-400 to-yellow-600';
     return 'from-orange-400 to-orange-600';
+  };
+
+  const toggleFriendSelection = (friendName: string) => {
+    setSelectedFriends(prev => 
+      prev.includes(friendName) 
+        ? prev.filter(name => name !== friendName)
+        : [...prev, friendName]
+    );
   };
 
   return (
@@ -168,8 +177,20 @@ export function RequestView({
                   </div>
                   <span className="font-medium">{friend.name}</span>
                 </div>
-                <Button variant="ghost" size="sm">
-                  Select
+                <Button
+                  variant={selectedFriends.includes(friend.name) ? "default" : "outline"}
+                  size="sm"
+                  className="min-w-[100px] transition-all duration-300"
+                  onClick={() => toggleFriendSelection(friend.name)}
+                >
+                  {selectedFriends.includes(friend.name) ? (
+                    <>
+                      <Check className="mr-2 h-4 w-4" />
+                      Selected
+                    </>
+                  ) : (
+                    "Select"
+                  )}
                 </Button>
               </div>
             ))}
