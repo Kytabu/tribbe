@@ -43,19 +43,19 @@ export function BalanceView({
       <div className="space-y-1.5">
         <BalanceCard
           icon={<PiggyBank className="w-4 h-4 text-[#A9FF22]" />}
-          label="Amount In"
+          label="Tips Received"
           amount={availableBalance}
           currencySymbol={currencySymbols[selectedCurrency]}
         />
         <BalanceCard
           icon={<Gem className="w-4 h-4 text-[#FF6B6B]" />}
-          label="Amount Out"
+          label="Tips Paid"
           amount={lendingStats.total_lent}
           currencySymbol={currencySymbols[selectedCurrency]}
         />
         <BalanceCard
           icon={<Trophy className="w-4 h-4 text-[#4ECDC4]" />}
-          label="Expected Interest"
+          label="Tips Expected"
           amount={lendingStats.total_expected_interest}
           prefix="+"
           currencySymbol={currencySymbols[selectedCurrency]}
