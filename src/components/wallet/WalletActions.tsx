@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Smartphone, CreditCard } from "lucide-react";
 import { SupportedCurrency } from "@/features/wallet/constants";
 import { useState } from "react";
-import { MPesaVerification } from "./MPesaVerification";
-import { CardConnection } from "./CardConnection";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
 
 interface WalletActionsProps {
   selectedCurrency: SupportedCurrency;
@@ -12,7 +14,39 @@ interface WalletActionsProps {
 
 export function WalletActions({ selectedCurrency }: WalletActionsProps) {
   const [isMPesaVerificationOpen, setIsMPesaVerificationOpen] = useState(false);
-  const [isCardConnectionOpen, setIsCardConnectionOpen] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handlePhoneSubmit = async () => {
+    if (!phoneNumber) {
+      toast({
+        title: "Phone number required",
+        description: "Please enter your phone number",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      // Simulate sending verification code
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      toast({
+        title: "Success",
+        description: "Phone number connected successfully",
+      });
+      setIsMPesaVerificationOpen(false);
+      setPhoneNumber("");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to connect phone number",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -39,7 +73,6 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
         variant="outline"
         size="sm"
         className="py-1.5 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted border-tribbe-aqua"
-        onClick={() => setIsCardConnectionOpen(true)}
       >
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
@@ -54,14 +87,41 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
         </div>
       </Button>
 
-      <MPesaVerification
-        isOpen={isMPesaVerificationOpen}
-        onClose={() => setIsMPesaVerificationOpen(false)}
-      />
-      <CardConnection
-        isOpen={isCardConnectionOpen}
-        onClose={() => setIsCardConnectionOpen(false)}
-      />
+      <Sheet open={isMPesaVerificationOpen} onOpenChange={setIsMPesaVerificationOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Connect M-Pesa</SheetTitle>
+          </SheetHeader>
+          
+          <div className="space-y-6 mt-6">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Input
+                  type="tel"
+                  placeholder="Enter phone number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="bg-background"
+                />
+                <p className="text-sm text-muted-foreground">
+                  Enter your M-Pesa registered phone number
+                </p>
+              </div>
+              <Button
+                className="w-full"
+                onClick={handlePhoneSubmit}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  'Connect'
+                )}
+              </Button>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
