@@ -29,7 +29,7 @@ export function AutomationSwitches({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="text-sm font-medium">Tip Rate</div>
-            <div className="bg-tribbe-lime/10 px-2 py-1 rounded text-tribbe-lime text-sm font-medium">
+            <div className="bg-tribbe-aqua/10 px-2 py-1 rounded text-tribbe-aqua text-sm font-medium">
               {interestRate}%
             </div>
           </div>
@@ -39,7 +39,7 @@ export function AutomationSwitches({
             step={1}
             value={interestRate}
             onValueChange={setInterestRate}
-            className="w-full"
+            className="w-full [&_[role=slider]]:bg-tribbe-aqua [&_[role=slider]]:border-tribbe-aqua [&_[class*=range]]:bg-tribbe-aqua"
           />
         </div>
       </div>
