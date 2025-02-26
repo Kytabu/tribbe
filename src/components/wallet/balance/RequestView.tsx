@@ -3,6 +3,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SupportedCurrency } from "@/features/wallet/constants";
 import { TribbeButton } from "./components/TribbeButton";
+import { useState } from "react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { toast } from "@/hooks/use-toast";
+import { ThumbsUp, UserPlus } from "lucide-react";
 
 interface RequestViewProps {
   amount: string;
@@ -17,6 +21,16 @@ export function RequestView({
   selectedCurrency,
   currencySymbols,
 }: RequestViewProps) {
+  const [isNewCircleOpen, setIsNewCircleOpen] = useState(false);
+  const [isContactsOpen, setIsContactsOpen] = useState(false);
+
+  const handleTribbeClick = () => {
+    toast({
+      title: "Done. Give it a sec...",
+      action: <ThumbsUp className="h-4 w-4" />,
+    });
+  };
+
   return (
     <div className="space-y-4 animate-fade-in">
       <div className="text-4xl font-bold transition-all duration-300 hover:scale-105">
@@ -46,21 +60,75 @@ export function RequestView({
 
       <div className="space-y-2">
         <TribbeButton
-          imagePath="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png"
-          label="Close Friends"
-          info="kinda quick"
+          imagePath="/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png"
+          label="My Tribbe"
+          info="Instant"
+          onClick={handleTribbeClick}
         />
         <TribbeButton
           imagePath="/lovable-uploads/db93bdb2-b924-4cd9-ba73-27b77b8358d3.png"
           label="My Circle"
           info="should be fast"
+          onClick={() => setIsNewCircleOpen(true)}
         />
         <TribbeButton
-          imagePath="/lovable-uploads/24f8c963-ad65-4096-be33-ccfa37f896eb.png"
-          label="My Tribbe"
-          info="Instant"
+          imagePath="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png"
+          label="Close Friends"
+          info="kinda quick"
+          onClick={() => setIsContactsOpen(true)}
         />
       </div>
+
+      {/* New Circle Sheet */}
+      <Sheet open={isNewCircleOpen} onOpenChange={setIsNewCircleOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Create New Circle</SheetTitle>
+          </SheetHeader>
+          <div className="space-y-4 pt-4">
+            <Input
+              type="text"
+              placeholder="Circle name"
+              className="bg-background"
+            />
+            <Button 
+              className="w-full"
+              onClick={() => setIsNewCircleOpen(false)}
+            >
+              <UserPlus className="mr-2 h-4 w-4" />
+              Add Members
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Friends List Sheet */}
+      <Sheet open={isContactsOpen} onOpenChange={setIsContactsOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Your Friends</SheetTitle>
+          </SheetHeader>
+          <div className="space-y-4 pt-4">
+            {[
+              "Sarah Johnson",
+              "Michael Smith",
+              "Emma Davis",
+              "James Wilson",
+              "Sophia Brown",
+            ].map((friend) => (
+              <div
+                key={friend}
+                className="flex items-center justify-between p-3 rounded-lg border hover:bg-accent"
+              >
+                <span>{friend}</span>
+                <Button variant="ghost" size="sm">
+                  Select
+                </Button>
+              </div>
+            ))}
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
