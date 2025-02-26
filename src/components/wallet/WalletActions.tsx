@@ -1,12 +1,11 @@
 
 import { Button } from "@/components/ui/button";
-import { Smartphone, CreditCard } from "lucide-react";
+import { Smartphone, CreditCard, Loader2, Check } from "lucide-react";
 import { SupportedCurrency } from "@/features/wallet/constants";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
 
 interface WalletActionsProps {
   selectedCurrency: SupportedCurrency;
@@ -14,7 +13,11 @@ interface WalletActionsProps {
 
 export function WalletActions({ selectedCurrency }: WalletActionsProps) {
   const [isMPesaVerificationOpen, setIsMPesaVerificationOpen] = useState(false);
+  const [isCardConnectionOpen, setIsCardConnectionOpen] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvv, setCvv] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePhoneSubmit = async () => {
@@ -29,7 +32,6 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
 
     setIsLoading(true);
     try {
-      // Simulate sending verification code
       await new Promise(resolve => setTimeout(resolve, 1000));
       toast({
         title: "Success",
@@ -46,6 +48,52 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleCardSubmit = async () => {
+    if (!cardNumber || !expiryDate || !cvv) {
+      toast({
+        title: "Missing information",
+        description: "Please fill in all card details",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      toast({
+        title: "Success",
+        description: "Card connected successfully",
+      });
+      setIsCardConnectionOpen(false);
+      setCardNumber("");
+      setExpiryDate("");
+      setCvv("");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to connect card",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const formatCardNumber = (value: string) => {
+    const digits = value.replace(/\D/g, '');
+    const groups = digits.match(/.{1,4}/g) || [];
+    return groups.join(' ').substr(0, 19);
+  };
+
+  const formatExpiryDate = (value: string) => {
+    const digits = value.replace(/\D/g, '');
+    if (digits.length >= 2) {
+      return `${digits.slice(0, 2)}/${digits.slice(2, 4)}`;
+    }
+    return digits;
   };
 
   return (
@@ -73,6 +121,7 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
         variant="outline"
         size="sm"
         className="py-1.5 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted border-tribbe-aqua"
+        onClick={() => setIsCardConnectionOpen(true)}
       >
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
@@ -116,6 +165,61 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
                   'Connect'
+                )}
+              </Button>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      <Sheet open={isCardConnectionOpen} onOpenChange={setIsCardConnectionOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Connect Card</SheetTitle>
+          </SheetHeader>
+          <div className="space-y-6 mt-6">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Input
+                  type="text"
+                  placeholder="Card number"
+                  value={cardNumber}
+                  onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
+                  maxLength={19}
+                  className="bg-background text-lg tracking-wider"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Input
+                    type="text"
+                    placeholder="MM/YY"
+                    value={expiryDate}
+                    onChange={(e) => setExpiryDate(formatExpiryDate(e.target.value))}
+                    maxLength={5}
+                    className="bg-background"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Input
+                    type="password"
+                    placeholder="CVV"
+                    value={cvv}
+                    onChange={(e) => setCvv(e.target.value.slice(0, 3))}
+                    maxLength={3}
+                    className="bg-background"
+                  />
+                </div>
+              </div>
+              <Button
+                className="w-full"
+                onClick={handleCardSubmit}
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  'Connect Card'
                 )}
               </Button>
             </div>
