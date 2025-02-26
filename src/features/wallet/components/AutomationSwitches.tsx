@@ -28,7 +28,7 @@ export function AutomationSwitches({
       <div className="p-4 rounded-lg border bg-background">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-medium">Tip Rate</div>
+            <div className="text-sm font-medium text-tribbe-aqua">My Tip Rate</div>
             <div className="bg-tribbe-aqua/10 px-2 py-1 rounded text-tribbe-aqua text-sm font-medium">
               {interestRate}%
             </div>
