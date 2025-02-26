@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { UserPlus, ThumbsUp } from "lucide-react";
@@ -41,11 +42,17 @@ function TribbeContent() {
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
 
   useEffect(() => {
-    toast({
-      title: "Done. Give it a sec...",
-      description: "",
-      action: <ThumbsUp className="w-4 h-4" />,
-    });
+    // Show toast immediately when component mounts
+    const showToast = () => {
+      toast({
+        title: "Done. Give it a sec...",
+        description: "",
+        action: <ThumbsUp className="w-4 h-4" />,
+      });
+    };
+    
+    // Small delay to ensure toast system is ready
+    setTimeout(showToast, 100);
   }, []);
 
   const handleScroll = () => {
