@@ -8,12 +8,15 @@ export function useWalletData(userId: string | null, selectedCurrency: Supported
   const queryClient = useQueryClient();
 
   const { data: wallets = [], isLoading } = useQuery({
-    queryKey: ['wallets'],
+    queryKey: ['wallets', userId],
     queryFn: async () => {
       console.log('Fetching wallets for user:', userId);
+      if (!userId) return [];
+      
       const { data, error } = await supabase
         .from('wallets')
         .select('*')
+        .eq('user_id', userId)
         .order('currency');
       
       if (error) {
