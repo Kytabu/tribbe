@@ -8,13 +8,15 @@ interface TribbeButtonProps {
   info?: string;
   endIcon?: ReactNode;
   endContent?: ReactNode;
+  onClick?: () => void;  // Added onClick prop
 }
 
-export function TribbeButton({ imagePath, label, info, endIcon, endContent }: TribbeButtonProps) {
+export function TribbeButton({ imagePath, label, info, endIcon, endContent, onClick }: TribbeButtonProps) {
   return (
     <Button
       variant="ghost"
       className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group"
+      onClick={onClick}  // Added onClick handler
     >
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center gap-2">
