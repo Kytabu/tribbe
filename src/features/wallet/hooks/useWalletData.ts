@@ -10,14 +10,20 @@ export function useWalletData(userId: string | null, selectedCurrency: Supported
   const { data: wallets = [], isLoading } = useQuery({
     queryKey: ['wallets'],
     queryFn: async () => {
+      console.log('Fetching wallets for user:', userId);
       const { data, error } = await supabase
         .from('wallets')
         .select('*')
         .order('currency');
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching wallets:', error);
+        throw error;
+      }
+      console.log('Fetched wallets:', data);
       return data || [];
-    }
+    },
+    enabled: !!userId
   });
 
   const { data: lendingStats = { total_lent: 0, total_expected_interest: 0 }, isLoading: isLoadingStats } = useQuery({
@@ -65,12 +71,13 @@ export function useWalletData(userId: string | null, selectedCurrency: Supported
         {
           event: '*',
           schema: 'public',
-          table: 'loans',
-          filter: `lender_id=eq.${userId}`
+          table: 'wallets',
+          filter: `user_id=eq.${userId}`
         },
-        () => {
-          queryClient.invalidateQueries({ queryKey: ['lending-stats'] });
+        (payload) => {
+          console.log('Wallet update received:', payload);
           queryClient.invalidateQueries({ queryKey: ['wallets'] });
+          queryClient.invalidateQueries({ queryKey: ['lending-stats'] });
         }
       )
       .subscribe();
@@ -81,6 +88,7 @@ export function useWalletData(userId: string | null, selectedCurrency: Supported
   }, [userId, queryClient]);
 
   const currentWallet = wallets.find(w => w.currency === selectedCurrency);
+  console.log('Current wallet:', currentWallet);
   const currentBalance = currentWallet?.balance || 0;
   const availableBalance = currentBalance - (lendingStats.total_lent || 0);
 
