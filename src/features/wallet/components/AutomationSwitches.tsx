@@ -39,7 +39,6 @@ export function AutomationSwitches({
             step={1}
             value={interestRate}
             onValueChange={setInterestRate}
-            className="w-full [&_[role=slider]]:bg-tribbe-aqua [&_[role=slider]]:border-tribbe-aqua [&_[class*=range]]:bg-tribbe-aqua [&_[class*=track]]:!bg-tribbe-aqua"
           />
         </div>
       </div>
