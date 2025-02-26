@@ -26,15 +26,15 @@ export const navigationItems: NavigationItem[] = [
     href: "/wallet",
   },
   {
-    icon: Circle,
-    label: "My Circles",
-    href: "/circles",
-  },
-  {
     icon: Users,
     label: "My Tribbe",
     href: "/my-tribbe",
     activeRoutes: ['/my-tribbe', '/tribbe-requests'],
+  },
+  {
+    icon: Circle,
+    label: "Close Friends",
+    href: "/circles",
   },
   {
     icon: Camera,

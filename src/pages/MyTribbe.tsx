@@ -1,13 +1,13 @@
-
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { UserPlus } from "lucide-react";
-import { useState, useRef } from "react";
+import { UserPlus, ThumbsUp } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import { ContactList } from "@/components/my-tribbe/ContactList";
 import { NetworkGrid } from "@/components/my-tribbe/NetworkGrid";
 import { StatsCard } from "@/components/my-tribbe/StatsCard";
 import { StatisticsGrid } from "@/components/my-tribbe/StatisticsGrid";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { toast } from "@/hooks/use-toast";
 
 const networkMembers = [
   { id: 1, name: "Sarah", image: "/lovable-uploads/237ca64a-021e-4578-9f08-b9fb2245f01e.png" },
@@ -39,6 +39,14 @@ function TribbeContent() {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [showContactList, setShowContactList] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
+
+  useEffect(() => {
+    toast({
+      title: "Done. Give it a sec...",
+      description: "",
+      action: <ThumbsUp className="w-4 h-4" />,
+    });
+  }, []);
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
