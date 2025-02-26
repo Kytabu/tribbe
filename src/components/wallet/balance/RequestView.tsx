@@ -1,3 +1,4 @@
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SupportedCurrency } from "@/features/wallet/constants";
@@ -178,10 +179,10 @@ export function RequestView({
                 <Button
                   variant={selectedFriends.includes(friend.name) ? "default" : "outline"}
                   size="icon"
-                  className="h-8 w-8 rounded-full transition-all duration-300"
+                  className="h-6 w-6 rounded-full transition-all duration-300"
                   onClick={() => toggleFriendSelection(friend.name)}
                 >
-                  <Check className={`h-4 w-4 ${selectedFriends.includes(friend.name) ? 'opacity-100' : 'opacity-0'}`} />
+                  <Check className={`h-3 w-3 ${selectedFriends.includes(friend.name) ? 'opacity-100' : 'opacity-0'}`} />
                 </Button>
               </div>
             ))}
