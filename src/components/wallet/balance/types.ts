@@ -24,3 +24,13 @@ export interface RequestListItemProps {
   slidingDirection?: 'left' | 'right';
   currencySymbol: string;
 }
+
+export interface Circle {
+  id: string;
+  name: string;
+  type: "Fundraiser" | "Investment" | "Activity" | "Event";
+  daysLeft: number;
+  amount: number | "Free" | "Chip in";
+  progress: number;
+  image: string;
+}
