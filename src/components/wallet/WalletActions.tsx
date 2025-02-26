@@ -1,18 +1,24 @@
+
 import { Button } from "@/components/ui/button";
 import { Smartphone, CreditCard } from "lucide-react";
 import { SupportedCurrency } from "@/features/wallet/constants";
+import { useState } from "react";
+import { MPesaVerification } from "./MPesaVerification";
 
 interface WalletActionsProps {
   selectedCurrency: SupportedCurrency;
 }
 
 export function WalletActions({ selectedCurrency }: WalletActionsProps) {
+  const [isMPesaVerificationOpen, setIsMPesaVerificationOpen] = useState(false);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       <Button
         variant="outline"
         size="sm"
         className="py-1.5 hover:bg-tribbe-lime hover:text-black hover:scale-105 transition-all duration-300 bg-gradient-to-r from-background to-muted border-tribbe-lime"
+        onClick={() => setIsMPesaVerificationOpen(true)}
       >
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
@@ -44,6 +50,11 @@ export function WalletActions({ selectedCurrency }: WalletActionsProps) {
           </div>
         </div>
       </Button>
+
+      <MPesaVerification
+        isOpen={isMPesaVerificationOpen}
+        onClose={() => setIsMPesaVerificationOpen(false)}
+      />
     </div>
   );
 }
