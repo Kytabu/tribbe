@@ -129,7 +129,6 @@ export function RequestView({
         />
       </div>
 
-      {/* New Circle Sheet */}
       <Sheet open={isNewCircleOpen} onOpenChange={setIsNewCircleOpen}>
         <SheetContent>
           <SheetHeader>
@@ -152,7 +151,6 @@ export function RequestView({
         </SheetContent>
       </Sheet>
 
-      {/* Friends List Sheet */}
       <Sheet open={isContactsOpen} onOpenChange={setIsContactsOpen}>
         <SheetContent>
           <SheetHeader>
@@ -179,18 +177,11 @@ export function RequestView({
                 </div>
                 <Button
                   variant={selectedFriends.includes(friend.name) ? "default" : "outline"}
-                  size="sm"
-                  className="min-w-[100px] transition-all duration-300"
+                  size="icon"
+                  className="h-8 w-8 rounded-full transition-all duration-300"
                   onClick={() => toggleFriendSelection(friend.name)}
                 >
-                  {selectedFriends.includes(friend.name) ? (
-                    <>
-                      <Check className="mr-2 h-4 w-4" />
-                      Selected
-                    </>
-                  ) : (
-                    "Select"
-                  )}
+                  <Check className={`h-4 w-4 ${selectedFriends.includes(friend.name) ? 'opacity-100' : 'opacity-0'}`} />
                 </Button>
               </div>
             ))}
