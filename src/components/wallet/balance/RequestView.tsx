@@ -1,4 +1,3 @@
-
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SupportedCurrency } from "@/features/wallet/constants";
@@ -15,6 +14,12 @@ interface RequestViewProps {
   currencySymbols: Record<SupportedCurrency, string>;
 }
 
+interface Friend {
+  name: string;
+  image: string;
+  creditScore: number;
+}
+
 export function RequestView({
   amount,
   setAmount,
@@ -24,11 +29,47 @@ export function RequestView({
   const [isNewCircleOpen, setIsNewCircleOpen] = useState(false);
   const [isContactsOpen, setIsContactsOpen] = useState(false);
 
+  const friends: Friend[] = [
+    { 
+      name: "Sarah Johnson",
+      image: "/lovable-uploads/237ca64a-021e-4578-9f08-b9fb2245f01e.png",
+      creditScore: 850
+    },
+    { 
+      name: "Michael Smith",
+      image: "/lovable-uploads/02bff5e9-ea21-4298-ad23-9d9ce111b691.png",
+      creditScore: 780
+    },
+    { 
+      name: "Emma Davis",
+      image: "/lovable-uploads/e25c10fb-ede6-40a6-be94-ae27ae122714.png",
+      creditScore: 720
+    },
+    { 
+      name: "James Wilson",
+      image: "/lovable-uploads/bc82d70e-eb04-4dc9-82d5-a9f4e4c0c0e8.png",
+      creditScore: 690
+    },
+    { 
+      name: "Sophia Brown",
+      image: "/lovable-uploads/c3603a81-6764-4f8a-bf9a-f8fa6f277493.png",
+      creditScore: 800
+    }
+  ];
+
   const handleTribbeClick = () => {
     toast({
       title: "Done. Give it a sec...",
       action: <ThumbsUp className="h-4 w-4" />,
     });
+  };
+
+  const getCreditScoreColor = (score: number) => {
+    if (score >= 800) return 'from-purple-400 to-purple-600';
+    if (score >= 740) return 'from-green-400 to-green-600';
+    if (score >= 670) return 'from-blue-400 to-blue-600';
+    if (score >= 580) return 'from-yellow-400 to-yellow-600';
+    return 'from-orange-400 to-orange-600';
   };
 
   return (
@@ -109,18 +150,24 @@ export function RequestView({
             <SheetTitle>Your Friends</SheetTitle>
           </SheetHeader>
           <div className="space-y-4 pt-4">
-            {[
-              "Sarah Johnson",
-              "Michael Smith",
-              "Emma Davis",
-              "James Wilson",
-              "Sophia Brown",
-            ].map((friend) => (
+            {friends.map((friend) => (
               <div
-                key={friend}
+                key={friend.name}
                 className="flex items-center justify-between p-3 rounded-lg border hover:bg-accent"
               >
-                <span>{friend}</span>
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getCreditScoreColor(friend.creditScore)} blur-[1px]`} />
+                    <div className="relative w-10 h-10 rounded-full border-2 border-transparent bg-clip-padding">
+                      <img
+                        src={friend.image}
+                        alt={friend.name}
+                        className="w-full h-full rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <span className="font-medium">{friend.name}</span>
+                </div>
                 <Button variant="ghost" size="sm">
                   Select
                 </Button>
