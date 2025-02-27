@@ -16,7 +16,7 @@ interface FlamiTabsProps {
   onActivityInputChange: (value: string) => void;
   onChatSubmit: (e: React.FormEvent) => void;
   onActivitySubmit: (e: React.FormEvent) => void;
-  onSuggestionClick: (text: string, points: number) => void;
+  onSuggestionClick: (text: string) => void;
 }
 
 export function FlamiTabs({
