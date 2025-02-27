@@ -34,7 +34,7 @@ export default function Flami() {
   useEffect(() => {
     const chatWelcomeMessage: Message = {
       id: "welcome-chat",
-      content: "👋 Hi there! I'm Flami, your AI financial assistant.\n\n" +
+      content: "👋 Hi there! I'm Flami, your AI financial assistant from Tribbe.\n\n" +
               "I can help you manage money, join circles, send payments, and build your Street Cred score.\n\n" +
               "What would you like to do today? Try asking me to:\n" +
               "• Send money to someone\n" +
