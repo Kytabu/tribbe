@@ -12,23 +12,11 @@ export function useChat(initialMessages: Message[] = []) {
     setInput(value);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: input,
-      role: "user",
-      timestamp: new Date()
-    };
-    setMessages(prev => [...prev, userMessage]);
-    setInput("");
+  const sendMessageToAPI = async (allMessages: Message[]) => {
     setIsLoading(true);
-
     try {
       const { data, error } = await supabase.functions.invoke('chat', {
-        body: { messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })) }
+        body: { messages: allMessages.map(m => ({ role: m.role, content: m.content })) }
       });
 
       if (error) throw error;
@@ -54,14 +42,37 @@ export function useChat(initialMessages: Message[] = []) {
     }
   };
 
-  const handleSuggestionClick = (text: string) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content: input,
+      role: "user",
+      timestamp: new Date()
+    };
+    
+    setMessages(prev => [...prev, userMessage]);
+    setInput("");
+    
+    const updatedMessages = [...messages, userMessage];
+    await sendMessageToAPI(updatedMessages);
+  };
+
+  const handleSuggestionClick = async (text: string) => {
     const userMessage: Message = {
       id: Date.now().toString(),
       content: text,
       role: "user",
       timestamp: new Date()
     };
-    setMessages(prev => [...prev, userMessage]);
+    
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
+    
+    // Send the message to the API after updating the UI
+    await sendMessageToAPI(updatedMessages);
   };
 
   return {
