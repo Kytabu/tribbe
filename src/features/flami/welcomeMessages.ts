@@ -7,7 +7,7 @@ export function getWelcomeMessages(): { chat: Message, activity: Message } {
   const chatWelcomeMessage: Message = {
     id: "welcome-chat",
     content: "👋 Hi there! I'm Flami, your AI financial assistant from Tribbe Nation.\n\n" +
-            "I can help you automate your borrowing (in seconds 🥳), lending (make a little interest 🤭) manage your money within groups (no more whatsapp 🤨), join circles for shared money for events and activities, send payments globally, and build up your Street Cred score (because everyone will love you!).\n\n" +
+            "I can help you automate your borrowing (in seconds 🥳), automate your lending (& make a little interest 🤭) manage your money within groups (no more whatsapp 🤨), join circles for shared money for events and activities, send payments globally, and build up your Street Cred score (because everyone will love you!).\n\n" +
             "What would you like to do today? Try asking me to:\n\n" +
             "Send money to someone (pass the spoon 🥄)\n" +
             "Create a new circle (kill those whatsapp ones 😏)\n" +
