@@ -1,5 +1,6 @@
 
 import { Message } from "@/types/chat";
+import { Menu } from "lucide-react";
 
 export function getWelcomeMessages(): { chat: Message, activity: Message } {
   // Main chat welcome message
@@ -11,7 +12,8 @@ export function getWelcomeMessages(): { chat: Message, activity: Message } {
             "Send money to someone (pass the spoon 🥄)\n" +
             "Create a new circle (kill those whatsapp ones 😏)\n" +
             "Check your balance (you got moneeeyy! 😛)\n" +
-            "Grow your Tribbe (this is really important 🤩)",
+            "Grow your Tribbe (this is really important 🤩)\n\n" +
+            "Click on the menu (≡) to see more of Tribbe. Welcome home 🤗",
     role: "assistant",
     timestamp: new Date()
   };
