@@ -112,6 +112,7 @@ export function SendView({
         setAmount={setAmount}
         selectedCurrency={selectedCurrency}
         currencySymbol={currencySymbols[selectedCurrency]}
+        onSend={toMyselfFlow.handleSend}
       />
     </div>
   );

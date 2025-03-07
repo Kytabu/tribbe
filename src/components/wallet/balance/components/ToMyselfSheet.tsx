@@ -11,6 +11,7 @@ interface ToMyselfSheetProps {
   setAmount: (amount: string) => void;
   selectedCurrency: SupportedCurrency;
   currencySymbol: string;
+  onSend: () => void;
 }
 
 export function ToMyselfSheet({
@@ -19,7 +20,8 @@ export function ToMyselfSheet({
   amount,
   setAmount,
   selectedCurrency,
-  currencySymbol
+  currencySymbol,
+  onSend
 }: ToMyselfSheetProps) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -43,6 +45,8 @@ export function ToMyselfSheet({
           <Button 
             className="w-full" 
             variant="default"
+            onClick={onSend}
+            disabled={!amount || amount === '0'}
           >
             Send
           </Button>

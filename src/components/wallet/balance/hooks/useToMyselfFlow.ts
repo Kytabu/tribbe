@@ -26,7 +26,34 @@ export function useToMyselfFlow({
     setShowToMyselfSheet(true);
   };
 
+  // Handle send button click
+  const handleSend = () => {
+    console.log("Sending to myself: ", amount, selectedCurrency);
+    
+    if (!amount || parseFloat(amount) <= 0) {
+      toast({
+        title: "Invalid amount",
+        description: "Please enter a valid amount to send",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // For now, just close the sheet and show a success message
+    toast({
+      title: "Money sent!",
+      description: `${currencySymbols[selectedCurrency]}${amount} has been sent to your account`,
+    });
+    
+    // Close the sheet
+    setShowToMyselfSheet(false);
+    
+    // Reset amount
+    setAmount("");
+  };
+
   return {
-    handleToMyselfClick
+    handleToMyselfClick,
+    handleSend
   };
 }
