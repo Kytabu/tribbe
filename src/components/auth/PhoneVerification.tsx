@@ -22,9 +22,9 @@ export const PhoneVerification = ({
       <img 
         src="/lovable-uploads/2e96dadf-c241-4700-b74e-72f155818e87.png" 
         alt="Tribbe Logo" 
-        className="w-40 mx-auto mt-8"
+        className="w-40 mx-auto mt-8 mb-12"
       />
-      <div className="flex-1 flex items-center justify-center -mt-6">
+      <div className="flex-1 flex items-start justify-center">
         <div className="w-full max-w-md space-y-8 px-4">
           <div className="text-center">
             <h1 className="text-2xl text-tribbe-lime font-medium mb-2">Enter verification code</h1>
@@ -42,28 +42,33 @@ export const PhoneVerification = ({
             ))}
           </div>
 
-          <div className="grid grid-cols-3 gap-x-10 gap-y-8 mb-8">
+          <div className="grid grid-cols-3 gap-8 mb-8">
             {[...Array(9)].map((_, i) => (
               <button
                 key={i + 1}
                 onClick={() => onNumberClick((i + 1).toString())}
-                className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center"
+                className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
                 disabled={loading}
               >
                 {i + 1}
               </button>
             ))}
-            <div className="w-full" />
+            <button
+              className="opacity-0"
+              disabled={true}
+            >
+              &nbsp;
+            </button>
             <button
               onClick={() => onNumberClick("0")}
-              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity flex items-center justify-center"
+              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
               disabled={loading}
             >
               0
             </button>
             <button
               onClick={onDelete}
-              className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity flex items-center justify-center"
+              className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
               disabled={loading}
             >
               Delete
