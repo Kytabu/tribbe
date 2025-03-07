@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ContactListView } from "./ContactListView";
 import { PhoneEntryView } from "./PhoneEntryView";
@@ -115,6 +116,10 @@ export function ContactList({
         onOpenChange={setShowSendConfirmation}
         recipientName={selectedContactDetails?.name || ""}
         amount={amount || "0"}
+        setAmount={(value) => {
+          // This is a pass-through since the ContactList doesn't control the amount directly
+          // The parent component is responsible for updating the amount
+        }}
         currencySymbol={currencySymbol || "KSh"}
         onCancel={handleCancelTransfer}
         onConfirm={handleConfirmTransfer}

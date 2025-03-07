@@ -39,6 +39,7 @@ interface SendActionsProps {
   autoTribbe: boolean;
   setAutoTribbe: (value: boolean) => void;
   amount: string;
+  setAmount: (amount: string) => void;
   currencySymbol: string;
   filteredRequests: MoneyRequest[];
   slidingRequests: {[key: number]: 'left' | 'right'};
@@ -81,6 +82,7 @@ export function SendActions({
   autoTribbe,
   setAutoTribbe,
   amount,
+  setAmount,
   currencySymbol,
   filteredRequests,
   slidingRequests,
@@ -134,6 +136,7 @@ export function SendActions({
         onOpenChange={setShowSendConfirmation}
         recipientName={recipientName}
         amount={amount}
+        setAmount={setAmount}
         currencySymbol={currencySymbol}
         onCancel={handleCancelSend}
         onConfirm={handleConfirmSend}
