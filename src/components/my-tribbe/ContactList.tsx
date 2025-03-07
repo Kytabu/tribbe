@@ -59,11 +59,9 @@ export function ContactList({
     }
   };
 
-  const handleConfirm = () => {
-    if (onConfirm) {
-      onConfirm();
-    } else {
-      setShowContactList(false);
+  const handleContinueToPin = () => {
+    if (selectedContacts.length > 0) {
+      setShowPinEntry(true);
     }
   };
 
@@ -95,10 +93,10 @@ export function ContactList({
 
   const handlePinSubmit = () => {
     if (pinCode.length === 4) {
-      const manualContactId = `manual-${Date.now()}`;
-      const displayName = manualContactName.trim() || `+${phoneNumber}`;
-      
-      setSelectedContacts([manualContactId]);
+      if (showPhoneEntry && phoneNumber.length > 0) {
+        const manualContactId = `manual-${Date.now()}`;
+        setSelectedContacts([manualContactId]);
+      }
       
       setShowPinEntry(false);
       setShowPhoneEntry(false);
@@ -175,21 +173,26 @@ export function ContactList({
                 }`}
               >
                 {selectedContacts.includes(contact.id) && (
-                  <Check className="w-4 w-4 text-black" />
+                  <Check className="w-4 h-4 text-black" />
                 )}
               </div>
             </button>
           ))}
         </div>
-        <div className="border-t border-tribbe-grey p-4 bg-background">
-          <Button 
-            onClick={handleConfirm}
-            className="w-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-black"
-            disabled={selectedContacts.length === 0}
-          >
-            Add Selected Contacts ({selectedContacts.length})
-          </Button>
-        </div>
+        
+        {selectedContacts.length > 0 && (
+          <div className="fixed bottom-0 left-0 right-0 p-4 bg-background border-t border-tribbe-grey sm:max-w-md sm:mx-auto">
+            <Button 
+              onClick={handleContinueToPin}
+              className="w-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-black py-6 rounded-full relative group"
+            >
+              <span className="mr-6">CONTINUE</span>
+              <span className="absolute right-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                <ArrowRight className="h-5 w-5" />
+              </span>
+            </Button>
+          </div>
+        )}
       </>
     );
   };
@@ -360,4 +363,3 @@ export function ContactList({
     </Sheet>
   );
 }
-
