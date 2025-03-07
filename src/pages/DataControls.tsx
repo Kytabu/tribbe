@@ -75,10 +75,6 @@ const DataControls = () => {
         
         {/* Chat Controls */}
         <div className="bg-tribbe-grey/50 rounded-lg overflow-hidden border border-tribbe-lime/20 mb-6">
-          <button className="w-full px-4 py-3.5 text-left text-tribbe-white text-lg">
-            Archive All Chats
-          </button>
-          <Separator className="bg-tribbe-lime/10" />
           <button className="w-full px-4 py-3.5 text-left text-red-500 text-lg">
             Delete All Chats
           </button>
