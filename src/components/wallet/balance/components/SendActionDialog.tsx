@@ -1,6 +1,7 @@
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { QrCode, Users } from "lucide-react";
 
 interface SendActionDialogProps {
   open: boolean;
@@ -19,24 +20,26 @@ export function SendActionDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>How would you like to send?</DialogTitle>
+          <DialogTitle className="text-center">How would you like to send?</DialogTitle>
         </DialogHeader>
         
         <div className="space-y-4 py-4">
           <Button 
-            className="w-full" 
+            className="w-full flex items-center justify-center gap-2" 
             variant="default"
             onClick={onTapToSend}
           >
-            Tap to send
+            <QrCode className="h-5 w-5" />
+            <span>QR Code to send</span>
           </Button>
           
           <Button 
-            className="w-full" 
+            className="w-full flex items-center justify-center gap-2" 
             variant="outline"
             onClick={onContacts}
           >
-            Contacts
+            <Users className="h-5 w-5" />
+            <span>Contacts</span>
           </Button>
         </div>
       </DialogContent>
