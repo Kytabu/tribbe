@@ -1,7 +1,8 @@
+
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, X, Check, Phone, ArrowLeft, ArrowRight, Delete, ThumbsUp } from "lucide-react";
+import { Search, X, Check, Phone, ArrowLeft, ArrowRight, Delete, ThumbsUp, User } from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
@@ -35,6 +36,8 @@ export function ContactList({
   const [showPinEntry, setShowPinEntry] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [showTransferConfirmation, setShowTransferConfirmation] = useState(false);
+  const [selectedContactDetails, setSelectedContactDetails] = useState<{name: string, phone: string} | null>(null);
 
   const contacts = [
     { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
@@ -62,10 +65,39 @@ export function ContactList({
     }
   };
 
-  const handleContinueToPin = () => {
+  const handleContinueToConfirmation = () => {
     if (selectedContacts.length > 0) {
-      setShowPinEntry(true);
+      // Find the contact details for the selected contact
+      const selectedContact = contacts.find(contact => contact.id === selectedContacts[0]);
+      if (selectedContact) {
+        setSelectedContactDetails({
+          name: selectedContact.name,
+          phone: selectedContact.phone
+        });
+      } else if (phoneNumber) {
+        setSelectedContactDetails({
+          name: manualContactName || "Phone Contact",
+          phone: phoneNumber
+        });
+      }
+      
+      // Show transfer confirmation dialog
+      setShowTransferConfirmation(true);
     }
+  };
+
+  const handleConfirmTransfer = () => {
+    // Close transfer confirmation dialog
+    setShowTransferConfirmation(false);
+    
+    // Open PIN entry screen
+    setTimeout(() => {
+      setShowPinEntry(true);
+    }, 300);
+  };
+
+  const handleCancelTransfer = () => {
+    setShowTransferConfirmation(false);
   };
 
   const handlePhoneNumberInput = (digit: string) => {
@@ -80,7 +112,11 @@ export function ContactList({
 
   const handlePhoneNumberSubmit = () => {
     if (phoneNumber.length > 0) {
-      setShowPinEntry(true);
+      setSelectedContactDetails({
+        name: manualContactName || "Phone Contact",
+        phone: phoneNumber
+      });
+      setShowTransferConfirmation(true);
     }
   };
 
@@ -180,7 +216,7 @@ export function ContactList({
         {selectedContacts.length > 0 && (
           <div className="fixed bottom-0 left-0 right-0 p-4 bg-background border-t border-tribbe-grey sm:max-w-md sm:mx-auto">
             <Button 
-              onClick={handleContinueToPin}
+              onClick={handleContinueToConfirmation}
               className="w-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-black py-6 rounded-full relative group"
             >
               <span className="mr-6">CONTINUE</span>
@@ -350,6 +386,55 @@ export function ContactList({
     );
   };
 
+  const renderTransferConfirmationDialog = () => {
+    return (
+      <Dialog open={showTransferConfirmation} onOpenChange={setShowTransferConfirmation}>
+        <DialogContent className="sm:max-w-md">
+          <div className="flex flex-col items-center justify-center py-4">
+            <h2 className="text-xl font-bold mb-4">Confirm Transfer</h2>
+            <p className="text-center text-sm text-muted-foreground mb-6">
+              Confirm money transfer details
+            </p>
+            
+            {selectedContactDetails && (
+              <>
+                <div className="flex items-center space-x-4 w-full mb-4">
+                  <div className="w-12 h-12 rounded-full bg-tribbe-lime/20 flex items-center justify-center">
+                    <User className="w-6 h-6 text-tribbe-lime" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium">{selectedContactDetails.name}</h3>
+                    <p className="text-sm text-muted-foreground">Recipient</p>
+                  </div>
+                </div>
+                <div className="p-4 rounded-lg bg-background border w-full mb-6">
+                  <p className="text-sm text-muted-foreground">Amount</p>
+                  <p className="text-2xl font-bold">KSh 1,000</p>
+                </div>
+              </>
+            )}
+            
+            <div className="w-full flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
+              <Button 
+                variant="outline" 
+                onClick={handleCancelTransfer}
+                className="w-full sm:w-auto"
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleConfirmTransfer}
+                className="w-full sm:w-auto"
+              >
+                Confirm
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
   const renderSuccessDialog = () => {
     return (
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
@@ -402,7 +487,9 @@ export function ContactList({
          showPhoneEntry ? renderPhoneEntry() : 
          renderContactList()}
       </SheetContent>
+      {renderTransferConfirmationDialog()}
       {renderSuccessDialog()}
     </Sheet>
   );
 }
+
