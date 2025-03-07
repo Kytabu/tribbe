@@ -8,7 +8,8 @@ import {
   HelpCircle,
   Moon,
   ChevronRight,
-  KeyRound
+  KeyRound,
+  ArrowLeft
 } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Switch } from "@/components/ui/switch";
@@ -21,7 +22,17 @@ const Setup = () => {
   return (
     <AppLayout>
       <div className="container max-w-4xl mx-auto py-8">
-        <h1 className="text-2xl font-bold mb-2">Settings</h1>
+        <div className="flex items-center mb-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate(-1)}
+            className="mr-2"
+          >
+            <ArrowLeft className="h-5 w-5 text-primary" />
+          </Button>
+          <h1 className="text-2xl font-bold">Settings</h1>
+        </div>
         <p className="text-muted-foreground mb-8">Configure your app preferences</p>
         
         <div className="space-y-4">
@@ -109,4 +120,3 @@ const Setup = () => {
 };
 
 export default Setup;
-
