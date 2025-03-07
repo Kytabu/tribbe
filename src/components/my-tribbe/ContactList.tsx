@@ -2,7 +2,7 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, X, Check, Phone } from "lucide-react";
+import { Search, X, Check, Phone, ArrowLeft, ArrowRight, Delete } from "lucide-react";
 import { useState } from "react";
 
 interface Contact {
@@ -17,7 +17,7 @@ interface ContactListProps {
   setShowContactList: (show: boolean) => void;
   selectedContacts: string[];
   setSelectedContacts: (contacts: string[]) => void;
-  onConfirm?: () => void; // Add onConfirm prop
+  onConfirm?: () => void;
 }
 
 export function ContactList({ 
@@ -28,6 +28,9 @@ export function ContactList({
   onConfirm 
 }: ContactListProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showPhoneEntry, setShowPhoneEntry] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [manualContactName, setManualContactName] = useState("");
 
   const contacts = [
     { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
@@ -48,7 +51,6 @@ export function ContactList({
     .sort((a, b) => a.name.localeCompare(b.name));
 
   const toggleContactSelection = (contactId: string) => {
-    // Create new array instead of using a state updater function
     if (selectedContacts.includes(contactId)) {
       setSelectedContacts(selectedContacts.filter(id => id !== contactId));
     } else {
@@ -64,9 +66,42 @@ export function ContactList({
     }
   };
 
-  return (
-    <Sheet open={showContactList} onOpenChange={setShowContactList}>
-      <SheetContent className="w-full sm:max-w-md p-0">
+  const handlePhoneNumberInput = (digit: string) => {
+    if (phoneNumber.length < 12) {
+      setPhoneNumber(prev => prev + digit);
+    }
+  };
+
+  const handleDeleteDigit = () => {
+    setPhoneNumber(prev => prev.slice(0, -1));
+  };
+
+  const handlePhoneNumberSubmit = () => {
+    if (phoneNumber.length > 0) {
+      // Create a temporary contact for the manual phone number
+      const manualContactId = `manual-${Date.now()}`;
+      const displayName = manualContactName.trim() || `+${phoneNumber}`;
+      
+      // Select this contact
+      setSelectedContacts([manualContactId]);
+      
+      // Return to contact list view before confirming
+      setShowPhoneEntry(false);
+      
+      // Wait a moment before confirming to show selection
+      setTimeout(() => {
+        if (onConfirm) {
+          onConfirm();
+        } else {
+          setShowContactList(false);
+        }
+      }, 300);
+    }
+  };
+
+  const renderContactList = () => {
+    return (
+      <>
         <SheetHeader className="p-6 border-b border-tribbe-grey">
           <div className="flex items-center justify-between">
             <SheetTitle className="text-xl font-bold text-white">Contacts</SheetTitle>
@@ -93,6 +128,7 @@ export function ContactList({
         <div className="px-4 py-3 border-b border-tribbe-grey">
           <button
             className="w-full flex items-center gap-4 py-2"
+            onClick={() => setShowPhoneEntry(true)}
           >
             <div className="p-2 rounded-full bg-[#0EA5E9] flex items-center justify-center">
               <Phone className="h-5 w-5 text-white" />
@@ -139,6 +175,98 @@ export function ContactList({
             Add Selected Contacts ({selectedContacts.length})
           </Button>
         </div>
+      </>
+    );
+  };
+
+  const renderPhoneEntry = () => {
+    return (
+      <>
+        <div className="p-6 border-b border-tribbe-grey flex items-center">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setShowPhoneEntry(false)}
+            className="mr-2 text-gray-400 hover:text-white"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <h2 className="text-xl font-bold text-white">Send Money</h2>
+        </div>
+        
+        <div className="flex flex-col items-center justify-between h-[calc(100vh-8rem)]">
+          <div className="w-full px-6 pt-12 pb-6">
+            <div className="relative border-b-2 border-tribbe-grey/50 pb-2 mb-6">
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-tribbe-lime"></div>
+              <Input
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
+                className="bg-transparent border-0 text-xl text-white pl-4 focus-visible:ring-0 focus-visible:ring-offset-0"
+                placeholder="Enter phone number"
+                type="tel"
+              />
+            </div>
+            
+            <Input
+              value={manualContactName}
+              onChange={(e) => setManualContactName(e.target.value)}
+              className="bg-tribbe-grey/30 border-tribbe-grey text-white mt-4"
+              placeholder="Contact name (optional)"
+            />
+          </div>
+          
+          <div className="w-full px-4 mb-4">
+            <Button
+              onClick={handlePhoneNumberSubmit}
+              disabled={phoneNumber.length === 0}
+              className="w-full bg-background border border-tribbe-grey/50 text-white hover:bg-tribbe-grey/30 py-6 rounded-full relative group"
+            >
+              <span className="mr-6">CONTINUE</span>
+              <span className="absolute right-6 opacity-70 group-hover:opacity-100 transition-opacity">
+                <ArrowRight className="h-5 w-5" />
+              </span>
+            </Button>
+          </div>
+          
+          <div className="w-full px-4 pb-6">
+            <div className="grid grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => handlePhoneNumberInput(num.toString())}
+                  className="flex items-center justify-center h-14 text-2xl font-medium text-white hover:bg-tribbe-grey/30 rounded-md transition-colors"
+                >
+                  {num}
+                </button>
+              ))}
+              <button
+                className="flex items-center justify-center h-14 text-2xl font-medium text-white hover:bg-tribbe-grey/30 rounded-md transition-colors"
+              >
+                {/* Empty space */}
+              </button>
+              <button
+                onClick={() => handlePhoneNumberInput("0")}
+                className="flex items-center justify-center h-14 text-2xl font-medium text-white hover:bg-tribbe-grey/30 rounded-md transition-colors"
+              >
+                0
+              </button>
+              <button
+                onClick={handleDeleteDigit}
+                className="flex items-center justify-center h-14 text-2xl font-medium text-white hover:bg-tribbe-grey/30 rounded-md transition-colors"
+              >
+                <Delete className="h-6 w-6" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  return (
+    <Sheet open={showContactList} onOpenChange={setShowContactList}>
+      <SheetContent className="w-full sm:max-w-md p-0">
+        {showPhoneEntry ? renderPhoneEntry() : renderContactList()}
       </SheetContent>
     </Sheet>
   );

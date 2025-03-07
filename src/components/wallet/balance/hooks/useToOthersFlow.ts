@@ -128,22 +128,28 @@ export function useToOthersFlow({
       { id: "8", name: "Henry Wilson" }
     ];
     
-    const selectedContact = contacts.find(contact => contact.id === selectedContacts[0]);
-    if (selectedContact) {
-      setRecipientName(selectedContact.name);
-      setShowContacts(false);
-      
-      // Use setTimeout to ensure smooth transition
-      setTimeout(() => {
-        setShowSendConfirmation(true);
-      }, 300);
+    // Check if this is a manual contact (entered via phone)
+    const isManualContact = selectedContacts[0].startsWith('manual-');
+    
+    if (isManualContact) {
+      // For manual contacts, we can extract the phone number from the ID or use a generic name
+      setRecipientName(recipientName || "Phone Contact");
     } else {
-      toast({
-        title: "Contact not found",
-        description: "Selected contact could not be found",
-        variant: "destructive",
-      });
+      // For existing contacts, look up their name
+      const selectedContact = contacts.find(contact => contact.id === selectedContacts[0]);
+      if (selectedContact) {
+        setRecipientName(selectedContact.name);
+      } else {
+        setRecipientName("Contact");
+      }
     }
+    
+    setShowContacts(false);
+    
+    // Use setTimeout to ensure smooth transition
+    setTimeout(() => {
+      setShowSendConfirmation(true);
+    }, 300);
   };
 
   const handleConfirmSend = () => {
