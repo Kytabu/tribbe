@@ -1,7 +1,6 @@
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
+import { ConfirmationDialog } from "./ConfirmationDialog";
 
 interface SendConfirmationDialogProps {
   open: boolean;
@@ -23,16 +22,18 @@ export function SendConfirmationDialog({
   onConfirm
 }: SendConfirmationDialogProps) {
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Confirm Transfer</DialogTitle>
-          <DialogDescription>
-            Confirm money transfer details
-          </DialogDescription>
-        </DialogHeader>
-        <div className="space-y-4 py-4">
-          <div className="flex items-center space-x-4">
+    <ConfirmationDialog
+      open={open}
+      onOpenChange={onOpenChange}
+      title="Confirm Transfer"
+      description="Confirm money transfer details"
+      primaryActionLabel="Confirm"
+      secondaryActionLabel="Cancel"
+      onPrimaryAction={onConfirm}
+      onSecondaryAction={onCancel}
+      content={
+        <>
+          <div className="flex items-center space-x-4 w-full mb-4">
             <div className="w-12 h-12 rounded-full bg-tribbe-lime/20 flex items-center justify-center">
               <User className="w-6 h-6 text-tribbe-lime" />
             </div>
@@ -41,27 +42,12 @@ export function SendConfirmationDialog({
               <p className="text-sm text-muted-foreground">Recipient</p>
             </div>
           </div>
-          <div className="p-4 rounded-lg bg-background border">
+          <div className="p-4 rounded-lg bg-background border w-full">
             <p className="text-sm text-muted-foreground">Amount</p>
             <p className="text-2xl font-bold">{currencySymbol}{amount}</p>
           </div>
-        </div>
-        <DialogFooter className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
-          <Button 
-            variant="outline" 
-            onClick={onCancel}
-            className="w-full sm:w-auto"
-          >
-            Cancel
-          </Button>
-          <Button 
-            onClick={onConfirm}
-            className="w-full sm:w-auto"
-          >
-            Confirm
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </>
+      }
+    />
   );
 }

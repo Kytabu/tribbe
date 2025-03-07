@@ -1,7 +1,6 @@
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
+import { ConfirmationDialog } from "./ConfirmationDialog";
 
 interface TransferConfirmationDialogProps {
   open: boolean;
@@ -20,33 +19,27 @@ export function TransferConfirmationDialog({
   selectedPaymentMethod,
   onDone
 }: TransferConfirmationDialogProps) {
+  const destination = selectedPaymentMethod === 'phone' ? 'phone' : 'card';
+  
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Transfer Complete</DialogTitle>
-          <DialogDescription>
-            Transfer confirmation details
-          </DialogDescription>
-        </DialogHeader>
-        <div className="flex flex-col items-center justify-center py-4">
-          <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
-            <ThumbsUp className="w-8 h-8 text-green-500" />
-          </div>
+    <ConfirmationDialog
+      open={open}
+      onOpenChange={onOpenChange}
+      title="Transfer Complete"
+      description="Transfer confirmation details"
+      icon={<ThumbsUp className="w-8 h-8 text-green-500" />}
+      primaryActionLabel="Done"
+      onPrimaryAction={onDone}
+      content={
+        <>
           <p className="text-center text-lg font-medium mb-2">
             Sent you cash
           </p>
           <p className="text-center text-muted-foreground mb-4">
-            {currencySymbol}{amount} has been transferred to your {selectedPaymentMethod === 'phone' ? 'phone' : 'card'}.
+            {currencySymbol}{amount} has been transferred to your {destination}.
           </p>
-          <Button 
-            onClick={onDone}
-            className="w-full"
-          >
-            Done
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+        </>
+      }
+    />
   );
 }
