@@ -1,7 +1,6 @@
 
 import { toast } from "@/hooks/use-toast";
 import { SupportedCurrency } from "@/features/wallet/constants";
-import { useState } from "react";
 
 type ToOthersFlowProps = {
   amount: string;
@@ -29,28 +28,7 @@ export function useToOthersFlow({
   setRecipientName
 }: ToOthersFlowProps) {
   
-  const [showToOthersSheet, setShowToOthersSheet] = useState(false);
-  const [showAmountInput, setShowAmountInput] = useState(false);
-  
   const handleToOthersClick = () => {
-    setShowToOthersSheet(true);
-  };
-  
-  const handleTapToSendClick = () => {
-    setShowToOthersSheet(false);
-    setTimeout(() => {
-      setShowAmountInput(true);
-    }, 300);
-  };
-  
-  const handleSendClick = () => {
-    setShowToOthersSheet(false);
-    setTimeout(() => {
-      setShowAmountInput(true);
-    }, 300);
-  };
-
-  const handleAmountContinue = () => {
     if (!amount || parseFloat(amount) <= 0) {
       toast({
         title: "Enter an amount",
@@ -58,7 +36,6 @@ export function useToOthersFlow({
       });
       return;
     }
-    setShowAmountInput(false);
     setShowContacts(true);
   };
 
@@ -121,14 +98,7 @@ export function useToOthersFlow({
   };
 
   return {
-    showToOthersSheet,
-    setShowToOthersSheet,
-    showAmountInput,
-    setShowAmountInput,
     handleToOthersClick,
-    handleTapToSendClick,
-    handleSendClick,
-    handleAmountContinue,
     handleContactSelection,
     handleConfirmSend,
     handleCancelSend
