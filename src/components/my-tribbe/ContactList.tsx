@@ -1,4 +1,3 @@
-
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,7 +66,6 @@ export function ContactList({
 
   const handleContinueToConfirmation = () => {
     if (selectedContacts.length > 0) {
-      // Find the contact details for the selected contact
       const selectedContact = contacts.find(contact => contact.id === selectedContacts[0]);
       if (selectedContact) {
         setSelectedContactDetails({
@@ -81,16 +79,12 @@ export function ContactList({
         });
       }
       
-      // Show transfer confirmation dialog
       setShowTransferConfirmation(true);
     }
   };
 
   const handleConfirmTransfer = () => {
-    // Close transfer confirmation dialog
     setShowTransferConfirmation(false);
-    
-    // Open PIN entry screen
     setTimeout(() => {
       setShowPinEntry(true);
     }, 300);
@@ -140,7 +134,7 @@ export function ContactList({
       setShowPinEntry(false);
       setShowPhoneEntry(false);
       setPinCode("");
-      
+      setShowTransferConfirmation(false);
       setShowSuccessDialog(true);
     }
   };
@@ -467,6 +461,7 @@ export function ContactList({
 
   const handleTransactionComplete = () => {
     setShowSuccessDialog(false);
+    setShowTransferConfirmation(false);
     
     toast({
       title: "Transaction complete",
