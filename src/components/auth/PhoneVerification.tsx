@@ -24,29 +24,30 @@ export const PhoneVerification = ({
         alt="Tribbe Logo" 
         className="w-40 mx-auto mt-8"
       />
-      <div className="flex-1 flex items-start justify-center mt-8">
-        <div className="w-full max-w-xs space-y-6 sm:space-y-8">
+      <div className="flex-1 flex items-center justify-center -mt-6">
+        <div className="w-full max-w-md space-y-8 px-4">
           <div className="text-center">
-            <h1 className="text-lg sm:text-xl text-white font-normal">Enter verification code</h1>
+            <h1 className="text-2xl text-tribbe-lime font-medium mb-2">Enter verification code</h1>
+            <p className="text-white/60 text-sm">We've sent a 4-digit code to your phone</p>
           </div>
 
-          <div className="flex justify-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
+          <div className="flex justify-center space-x-6 mb-8">
             {[...Array(4)].map((_, index) => (
               <div
                 key={index}
-                className={`w-3 h-3 rounded-full border-2 ${
-                  verificationCode.length > index ? "bg-primary border-primary" : "border-foreground/50"
+                className={`w-6 h-6 rounded-full border-2 ${
+                  verificationCode.length > index ? "bg-tribbe-lime border-tribbe-lime" : "border-tribbe-lime"
                 }`}
               />
             ))}
           </div>
 
-          <div className="grid grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-3 gap-x-10 gap-y-8 mb-8">
             {[...Array(9)].map((_, i) => (
               <button
                 key={i + 1}
                 onClick={() => onNumberClick((i + 1).toString())}
-                className="text-primary text-lg sm:text-xl font-medium hover:opacity-80 transition-opacity"
+                className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center"
                 disabled={loading}
               >
                 {i + 1}
@@ -55,14 +56,14 @@ export const PhoneVerification = ({
             <div className="w-full" />
             <button
               onClick={() => onNumberClick("0")}
-              className="text-primary text-lg sm:text-xl font-medium hover:opacity-80 transition-opacity"
+              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity flex items-center justify-center"
               disabled={loading}
             >
               0
             </button>
             <button
               onClick={onDelete}
-              className="text-primary text-base sm:text-lg hover:opacity-80 transition-opacity"
+              className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity flex items-center justify-center"
               disabled={loading}
             >
               Delete
@@ -73,7 +74,7 @@ export const PhoneVerification = ({
             <Button
               onClick={onSubmit}
               disabled={verificationCode.length !== 4 || loading}
-              className={`w-24 h-10 rounded-full transition-colors ${
+              className={`w-full max-w-xs h-12 rounded-full transition-colors ${
                 verificationCode.length === 4 && !loading
                   ? "bg-tribbe-lime hover:bg-tribbe-lime/90 text-black" 
                   : "bg-gray-600 text-gray-400"
@@ -83,17 +84,14 @@ export const PhoneVerification = ({
                 "Verifying..."
               ) : (
                 <>
-                  <Check className="mr-2 h-4 w-4" />
+                  <Check className="mr-2 h-5 w-5" />
                   Done
                 </>
               )}
             </Button>
+            <p className="text-white/60 text-sm mt-2">use the code 0000</p>
           </div>
         </div>
-      </div>
-      <div className="text-center pb-8">
-        <p className="text-sm text-white/60">We've sent a 4-digit code to your phone</p>
-        <p className="text-white/60 text-sm mt-2">use the code 0000</p>
       </div>
     </div>
   );
