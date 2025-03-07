@@ -31,7 +31,7 @@ export const AboutSection = () => {
       <SettingItem 
         icon={<Info className="w-5 h-5" />} 
         label="Tribbe App" 
-        value="v1.0.0" 
+        value="v1.1634.099 (101288739)" 
         isLast
       />
     </SettingSection>
