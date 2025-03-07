@@ -91,10 +91,10 @@ export const PhoneVerification = ({
             </button>
             <button
               onClick={onGoBack}
-              className="text-tribbe-lime text-sm hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
+              className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
               disabled={loading}
             >
-              Go back
+              Back
             </button>
             <button
               onClick={() => onNumberClick("0")}
