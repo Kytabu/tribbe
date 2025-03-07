@@ -1,3 +1,4 @@
+
 import { SendViewProps } from "./types";
 import { AmountInput } from "./components/AmountInput";
 import { useMoneyRequests } from "./hooks/useMoneyRequests";
@@ -7,6 +8,7 @@ import { useToOthersFlow } from "./hooks/useToOthersFlow";
 import { SendActions } from "./components/SendActions";
 import { ToMyselfSheet } from "./components/ToMyselfSheet";
 import { ToMyselfPaymentMethodSheet } from "./components/ToMyselfPaymentMethodSheet";
+import { TransferConfirmationDialog } from "./components/TransferConfirmationDialog";
 
 export function SendView({
   amount,
@@ -37,7 +39,9 @@ export function SendView({
     selectedCurrency,
     currencySymbols,
     setShowToMyselfSheet: ui.setShowToMyselfSheet,
-    setShowToMyselfPaymentMethods: ui.setShowToMyselfPaymentMethods
+    setShowToMyselfPaymentMethods: ui.setShowToMyselfPaymentMethods,
+    setShowToMyselfConfirmation: ui.setShowToMyselfConfirmation,
+    setSelectedPaymentMethod: ui.setSelectedPaymentMethod
   });
 
   // "To others" flow handlers
@@ -121,6 +125,16 @@ export function SendView({
         open={ui.showToMyselfPaymentMethods}
         onOpenChange={ui.setShowToMyselfPaymentMethods}
         onMethodSelect={toMyselfFlow.handlePaymentMethodSelect}
+      />
+
+      {/* To Myself - Step 3: Confirmation Dialog */}
+      <TransferConfirmationDialog
+        open={ui.showToMyselfConfirmation}
+        onOpenChange={ui.setShowToMyselfConfirmation}
+        amount={amount}
+        currencySymbol={currencySymbols[selectedCurrency]}
+        selectedPaymentMethod={ui.selectedPaymentMethod}
+        onDone={toMyselfFlow.handleConfirmationDone}
       />
     </div>
   );

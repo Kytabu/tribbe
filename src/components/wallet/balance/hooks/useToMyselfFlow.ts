@@ -10,6 +10,8 @@ type ToMyselfFlowProps = {
   currencySymbols: Record<SupportedCurrency, string>;
   setShowToMyselfSheet: (show: boolean) => void;
   setShowToMyselfPaymentMethods: (show: boolean) => void;
+  setShowToMyselfConfirmation: (show: boolean) => void;
+  setSelectedPaymentMethod: (method: string | null) => void;
 };
 
 export function useToMyselfFlow({
@@ -18,7 +20,9 @@ export function useToMyselfFlow({
   selectedCurrency,
   currencySymbols,
   setShowToMyselfSheet,
-  setShowToMyselfPaymentMethods
+  setShowToMyselfPaymentMethods,
+  setShowToMyselfConfirmation,
+  setSelectedPaymentMethod
 }: ToMyselfFlowProps) {
   
   // Handle initial click on "To myself" button
@@ -57,19 +61,35 @@ export function useToMyselfFlow({
     // Close the payment method sheet
     setShowToMyselfPaymentMethods(false);
     
+    // Save the selected payment method
+    setSelectedPaymentMethod(method);
+    
+    // Show confirmation dialog
+    setTimeout(() => {
+      setShowToMyselfConfirmation(true);
+    }, 300);
+  };
+  
+  // Handle confirmation dialog done button
+  const handleConfirmationDone = () => {
+    // Close the confirmation dialog
+    setShowToMyselfConfirmation(false);
+    
     // Show success message
     toast({
-      title: "Money sent!",
-      description: `${currencySymbols[selectedCurrency]}${amount} has been sent to your ${method === 'phone' ? 'phone' : 'card'}`,
+      title: "Transfer Complete",
+      description: `${currencySymbols[selectedCurrency]}${amount} has been sent successfully`,
     });
     
-    // Reset amount
+    // Reset amount and selected payment method
     setAmount("");
+    setSelectedPaymentMethod(null);
   };
 
   return {
     handleToMyselfClick,
     handleSend,
-    handlePaymentMethodSelect
+    handlePaymentMethodSelect,
+    handleConfirmationDone
   };
 }
