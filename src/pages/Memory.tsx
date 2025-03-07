@@ -12,27 +12,27 @@ const Memory = () => {
   const memories = [
     {
       id: 1,
-      content: "Maya works as a UI/UX designer at a tech startup in San Francisco. She has been with the company for 3 years and is passionate about creating intuitive user experiences.",
+      content: "Tonee works as a UI/UX designer at a tech startup in San Francisco. She has been with the company for 3 years and is passionate about creating intuitive user experiences.",
     },
     {
       id: 2,
-      content: "Maya enjoys hiking on weekends and has completed several trails in Yosemite National Park last month. She mentioned wanting to try the Half Dome hike next summer.",
+      content: "Tonee enjoys hiking on weekends and has completed several trails in Yosemite National Park last month. She mentioned wanting to try the Half Dome hike next summer.",
     },
     {
       id: 3,
-      content: "Maya is planning to launch a side project, an app called 'TrailMates' that helps hikers find companions for group hikes. She's looking for a developer partner and considering using React Native for the mobile app.",
+      content: "Tonee is planning to launch a side project, an app called 'TrailMates' that helps hikers find companions for group hikes. She's looking for a developer partner and considering using React Native for the mobile app.",
     },
     {
       id: 4,
-      content: "Maya has a rescue dog named Pixel, a 3-year-old Border Collie mix. She adopted him last year from a local shelter and often takes him along on her hiking trips.",
+      content: "Tonee has a rescue dog named Pixel, a 3-year-old Border Collie mix. She adopted him last year from a local shelter and often takes him along on her hiking trips.",
     },
     {
       id: 5,
-      content: "Maya is learning Spanish in preparation for a trip to Mexico City next spring. She practices daily using language apps and wants to be conversationally fluent before her trip.",
+      content: "Tonee is learning Spanish in preparation for a trip to Mexico City next spring. She practices daily using language apps and wants to be conversationally fluent before her trip.",
     },
     {
       id: 6,
-      content: "Maya recently started exploring cryptocurrency investments. She's particularly interested in Ethereum and has asked for resources to understand blockchain technology better.",
+      content: "Tonee recently started exploring cryptocurrency investments. She's particularly interested in Ethereum and has asked for resources to understand blockchain technology better.",
     }
   ];
 
