@@ -1,6 +1,7 @@
 
 import { TribbeButton } from "./TribbeButton";
 import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 interface SendActionButtonsProps {
   autoTribbe: boolean;
@@ -38,8 +39,11 @@ export function SendActionButtons({
         onClick={onRequestsClick}
         endContent={
           <div className="flex items-center gap-2">
-            <span className="text-tribbe-sage group-hover:text-tribbe-lime">Automate</span>
+            <Label htmlFor="auto-tribbe" className="text-tribbe-sage group-hover:text-tribbe-lime cursor-pointer">
+              Automate
+            </Label>
             <Switch
+              id="auto-tribbe"
               checked={autoTribbe}
               onCheckedChange={setAutoTribbe}
               className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border border-tribbe-lime"

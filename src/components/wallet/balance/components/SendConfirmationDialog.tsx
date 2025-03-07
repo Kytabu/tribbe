@@ -43,17 +43,17 @@ export function SendConfirmationDialog({
             <p className="text-2xl font-bold">{currencySymbol}{amount}</p>
           </div>
         </div>
-        <DialogFooter>
+        <DialogFooter className="flex space-x-2 sm:space-x-0">
           <Button 
             variant="outline" 
             onClick={onCancel}
-            className="w-full sm:w-auto"
+            className="flex-1 sm:flex-none"
           >
             Cancel
           </Button>
           <Button 
             onClick={onConfirm}
-            className="w-full sm:w-auto"
+            className="flex-1 sm:flex-none"
           >
             Confirm
           </Button>

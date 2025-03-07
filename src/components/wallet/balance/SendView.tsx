@@ -65,6 +65,10 @@ export function SendView({
 
   const handleConfirmationDone = () => {
     setShowConfirmation(false);
+    toast({
+      title: "Transfer complete",
+      description: `${currencySymbols[selectedCurrency]}${amount} has been transferred to your ${selectedPaymentMethod === 'phone' ? 'phone' : 'card'}.`,
+    });
     setAmount('');
     setSelectedPaymentMethod(null);
   };
@@ -72,7 +76,7 @@ export function SendView({
   const handleConfirmSend = () => {
     toast({
       title: "Transaction complete",
-      description: `${currencySymbols[selectedCurrency]}${amount} has been sent successfully`,
+      description: `${currencySymbols[selectedCurrency]}${amount} has been sent to ${recipientName}`,
     });
     setShowSendConfirmation(false);
     setAmount('');
@@ -95,10 +99,21 @@ export function SendView({
       const selectedContact = contacts.find(contact => contact.id === selectedContacts[0]);
       if (selectedContact) {
         setRecipientName(selectedContact.name);
+        setShowContacts(false);
+        setShowSendConfirmation(true);
+      } else {
+        toast({
+          title: "Contact not found",
+          description: "Selected contact could not be found",
+          variant: "destructive",
+        });
       }
-      
-      setShowContacts(false);
-      setShowSendConfirmation(true);
+    } else {
+      toast({
+        title: "No contact selected",
+        description: "Please select a contact to send money",
+        variant: "destructive",
+      });
     }
   };
 
@@ -147,6 +162,7 @@ export function SendView({
         onConfirm={handleConfirmSend}
       />
 
+      {/* Contact List for selecting recipients */}
       <ContactList
         showContactList={showContacts}
         setShowContactList={setShowContacts}
@@ -155,6 +171,7 @@ export function SendView({
         onConfirm={handleContactSelection}
       />
 
+      {/* Money Requests Sheet */}
       <RequestsSheet
         open={showRequests}
         onOpenChange={setShowRequests}
