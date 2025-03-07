@@ -1,6 +1,7 @@
 
 import { ArrowLeft, Delete } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface PinEntryViewProps {
   pinCode: string;
@@ -22,6 +23,21 @@ export function PinEntryView({
     }, 500);
   }
   
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Clear the current PIN
+    for (let i = 0; i < pinCode.length; i++) {
+      onDeleteClick();
+    }
+    
+    // Add each digit of the new value
+    for (let i = 0; i < value.length && i < 4; i++) {
+      if (/^\d$/.test(value[i])) {
+        onDigitClick(value[i]);
+      }
+    }
+  };
+  
   return (
     <div className="fixed inset-0 z-50 bg-background flex flex-col">
       <div className="flex-1 flex flex-col items-center justify-center p-4">
@@ -31,7 +47,7 @@ export function PinEntryView({
         </p>
         
         {/* PIN display */}
-        <div className="flex space-x-4 mb-12">
+        <div className="flex space-x-4 mb-6">
           {[0, 1, 2, 3].map((i) => (
             <div 
               key={i}
@@ -40,6 +56,20 @@ export function PinEntryView({
               }`}
             />
           ))}
+        </div>
+        
+        {/* Direct PIN input (invisible but functional) */}
+        <div className="mb-6 w-full max-w-xs">
+          <Input
+            type="number"
+            value={pinCode}
+            onChange={handleInputChange}
+            maxLength={4}
+            placeholder="Enter PIN"
+            className="text-center"
+            pattern="[0-9]*"
+            inputMode="numeric"
+          />
         </div>
         
         {/* PIN pad */}

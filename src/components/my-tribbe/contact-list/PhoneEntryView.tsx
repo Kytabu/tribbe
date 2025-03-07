@@ -55,6 +55,7 @@ export function PhoneEntryView({
               className="bg-transparent border-0 text-xl text-white pl-4 focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder="0700 000 000"
               type="tel"
+              inputMode="numeric"
             />
           </div>
           
