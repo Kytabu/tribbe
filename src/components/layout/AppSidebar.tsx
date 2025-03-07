@@ -24,7 +24,7 @@ export function AppSidebar() {
   const footerItems: FooterItem[] = [
     {
       icon: () => <ProfileButton currentLevel={currentLevel} />,
-      label: "Profile",
+      label: "Tonee Ndungu",
       href: "/profile",
     },
     {
