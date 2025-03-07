@@ -68,6 +68,7 @@ export function useContactList({
     manualContactName,
     setPinCode,
     setShowPhoneEntry,
+    showPhoneEntry, // Pass showPhoneEntry to fix the error
     setShowPinEntry,
     onConfirm,
     setShowContactList

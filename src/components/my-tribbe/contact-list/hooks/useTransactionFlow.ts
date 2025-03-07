@@ -18,6 +18,7 @@ interface TransactionFlowProps {
   manualContactName: string;
   setPinCode: (code: string) => void;
   setShowPhoneEntry: (show: boolean) => void;
+  showPhoneEntry: boolean; // Added this prop to fix the error
   setShowPinEntry: (show: boolean) => void;
   onConfirm?: () => void;
   setShowContactList: (show: boolean) => void;
@@ -31,6 +32,7 @@ export function useTransactionFlow({
   manualContactName,
   setPinCode,
   setShowPhoneEntry,
+  showPhoneEntry, // Make sure to include it in destructuring
   setShowPinEntry,
   onConfirm,
   setShowContactList
