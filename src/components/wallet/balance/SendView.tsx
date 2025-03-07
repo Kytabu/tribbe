@@ -34,9 +34,8 @@ export function SendView({
   // Hook for managing money requests
   const { filteredRequests, slidingRequests, handleAction } = useMoneyRequests();
 
-  // Reset state when amount changes
+  // Reset state when amount changes or dialogs close
   useEffect(() => {
-    // Only reset if amount is empty and we were previously showing a confirmation dialog
     if (!amount && (showConfirmation || showSendConfirmation)) {
       setShowConfirmation(false);
       setShowSendConfirmation(false);
@@ -54,6 +53,8 @@ export function SendView({
       });
       return;
     }
+    
+    // Show payment method sheet when "To myself" is clicked
     setShowPaymentMethods(true);
   };
 
@@ -72,7 +73,7 @@ export function SendView({
     setSelectedPaymentMethod(method);
     setShowPaymentMethods(false);
     
-    // Use setTimeout to avoid UI conflicts
+    // Use setTimeout to avoid UI conflicts and ensure smooth transition
     setTimeout(() => {
       setShowConfirmation(true);
     }, 300);

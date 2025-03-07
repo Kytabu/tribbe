@@ -2,6 +2,7 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Smartphone, CreditCard } from "lucide-react";
 import { PaymentMethodButton } from "./PaymentMethodButton";
+import { Button } from "@/components/ui/button";
 
 interface PaymentMethodSheetProps {
   open: boolean;
@@ -33,6 +34,15 @@ export function PaymentMethodSheet({
             info="•••• 4832"
             onClick={() => onMethodSelect('card')}
           />
+          <div className="pt-4">
+            <Button 
+              onClick={() => onOpenChange(false)} 
+              variant="outline" 
+              className="w-full"
+            >
+              Cancel
+            </Button>
+          </div>
         </div>
       </SheetContent>
     </Sheet>
