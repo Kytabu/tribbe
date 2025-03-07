@@ -21,7 +21,7 @@ export function SendActionButtons({
   return (
     <div className="space-y-2">
       <TribbeButton
-        imagePath="/lovable-uploads/c1c23c5c-90f5-4baa-a4b9-25ac8900c468.png"
+        imagePath="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png"
         label="To Me"
         info="Instant"
         onClick={onToMyselfClick}
