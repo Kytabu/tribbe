@@ -109,8 +109,8 @@ export function ContactListView({
                 <p className="text-sm text-muted-foreground">{contact.phone}</p>
               </div>
               {selectedContacts.includes(contact.id) && (
-                <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground text-xs">✓</span>
+                <div className="w-6 h-6 rounded-full bg-tribbe-lime flex items-center justify-center">
+                  <span className="text-black text-xs">✓</span>
                 </div>
               )}
             </div>
