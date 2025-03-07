@@ -22,7 +22,7 @@ export function SendActionButtons({
     <div className="space-y-2">
       <TribbeButton
         imagePath="/lovable-uploads/c1c23c5c-90f5-4baa-a4b9-25ac8900c468.png"
-        label="To myself"
+        label="To Me"
         info="Instant"
         onClick={onToMyselfClick}
       />

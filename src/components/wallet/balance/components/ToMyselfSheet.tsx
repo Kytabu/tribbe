@@ -27,7 +27,7 @@ export function ToMyselfSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full sm:max-w-md">
         <SheetHeader className="mb-4">
-          <SheetTitle>Send to myself</SheetTitle>
+          <SheetTitle>Send to Me</SheetTitle>
         </SheetHeader>
         
         <div className="space-y-6">
