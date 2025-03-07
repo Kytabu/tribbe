@@ -25,9 +25,9 @@ export function PinEntryView({
   return (
     <div className="fixed inset-0 z-50 bg-background flex flex-col">
       <div className="flex-1 flex flex-col items-center justify-center p-4">
-        <h1 className="text-2xl font-bold mb-2">Enter PIN</h1>
-        <p className="text-muted-foreground text-center mb-8">
-          Enter your 4-digit PIN to complete the transaction
+        <h1 className="text-2xl font-bold mb-2 text-tribbe-white">PIN</h1>
+        <p className="text-tribbe-grey/70 text-center mb-8">
+          Complete your transaction with a 4-digit PIN
         </p>
         
         {/* PIN display */}
@@ -36,7 +36,7 @@ export function PinEntryView({
             <div 
               key={i}
               className={`w-4 h-4 rounded-full ${
-                i < pinCode.length ? "bg-primary" : "border-2 border-muted-foreground"
+                i < pinCode.length ? "bg-tribbe-lime" : "border-2 border-tribbe-grey/50"
               }`}
             />
           ))}
