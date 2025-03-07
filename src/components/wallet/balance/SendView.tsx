@@ -9,6 +9,8 @@ import { SendActions } from "./components/SendActions";
 import { ToMyselfSheet } from "./components/ToMyselfSheet";
 import { ToMyselfPaymentMethodSheet } from "./components/ToMyselfPaymentMethodSheet";
 import { TransferConfirmationDialog } from "./components/TransferConfirmationDialog";
+import { ToOthersSheet } from "./components/ToOthersSheet";
+import { AmountInputSheet } from "./components/AmountInputSheet";
 
 export function SendView({
   amount,
@@ -135,6 +137,25 @@ export function SendView({
         currencySymbol={currencySymbols[selectedCurrency]}
         selectedPaymentMethod={ui.selectedPaymentMethod}
         onDone={toMyselfFlow.handleConfirmationDone}
+      />
+
+      {/* To Others - Step 1: Initial Selection */}
+      <ToOthersSheet
+        open={toOthersFlow.showToOthersSheet}
+        onOpenChange={toOthersFlow.setShowToOthersSheet}
+        onTapToSendClick={toOthersFlow.handleTapToSendClick}
+        onSendClick={toOthersFlow.handleSendClick}
+      />
+
+      {/* To Others - Step 2: Amount Input */}
+      <AmountInputSheet
+        open={toOthersFlow.showAmountInput}
+        onOpenChange={toOthersFlow.setShowAmountInput}
+        amount={amount}
+        setAmount={setAmount}
+        selectedCurrency={selectedCurrency}
+        currencySymbol={currencySymbols[selectedCurrency]}
+        onContinue={toOthersFlow.handleAmountContinue}
       />
     </div>
   );
