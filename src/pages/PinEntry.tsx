@@ -111,42 +111,42 @@ const PinEntry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-between p-6">
-      {/* Tribbe Logo */}
-      <div className="mt-12 w-full flex justify-center">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-between p-4">
+      {/* Top Section with Logo */}
+      <div className="w-full flex justify-center pt-12 pb-8">
         <img 
           src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
           alt="Tribbe Logo"
-          className="w-32"
+          className="h-12"
         />
       </div>
       
-      {/* Content Container */}
-      <div className="w-full max-w-xs flex flex-col items-center">
-        <div className="text-center space-y-4 mb-12">
-          <h1 className="text-xl font-medium text-tribbe-lime">Your Tribbe account secured.</h1>
+      {/* Middle Section with Content */}
+      <div className="flex flex-col items-center w-full max-w-sm">
+        <div className="text-center mb-10">
+          <h1 className="text-2xl font-medium text-tribbe-lime mb-2">Your Tribbe account secured.</h1>
           <p className="text-lg text-tribbe-lime">Type your pin to unlock it.</p>
         </div>
 
         {/* PIN Dots */}
-        <div className="flex justify-center space-x-6 mb-16">
+        <div className="flex justify-center gap-6 mb-12">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}
-              className={`w-4 h-4 rounded-full border-2 ${
-                pin.length > index ? "bg-tribbe-lime border-tribbe-lime" : "border-tribbe-lime/70"
+              className={`w-6 h-6 rounded-full border-2 ${
+                pin.length > index ? "bg-tribbe-lime border-tribbe-lime" : "border-tribbe-lime"
               }`}
             />
           ))}
         </div>
 
         {/* Number Pad */}
-        <div className="grid grid-cols-3 gap-x-12 gap-y-8 mb-12">
+        <div className="grid grid-cols-3 gap-x-10 gap-y-8 mb-8">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
               key={num}
               onClick={() => handleNumberClick(num.toString())}
-              className="text-tribbe-lime text-2xl font-medium hover:opacity-80 transition-opacity w-12 h-12 flex items-center justify-center"
+              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center"
             >
               {num}
             </button>
@@ -155,19 +155,19 @@ const PinEntry = () => {
           {/* Bottom Row */}
           <button
             onClick={handleLogout}
-            className="text-tribbe-lime text-sm hover:opacity-80 transition-opacity flex items-center justify-center"
+            className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity flex items-center justify-center"
           >
             Log out
           </button>
           <button
             onClick={() => handleNumberClick("0")}
-            className="text-tribbe-lime text-2xl font-medium hover:opacity-80 transition-opacity flex items-center justify-center"
+            className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity flex items-center justify-center"
           >
             0
           </button>
           <button
             onClick={handleDelete}
-            className="text-tribbe-lime text-sm hover:opacity-80 transition-opacity flex items-center justify-center"
+            className="text-tribbe-lime text-lg hover:opacity-80 transition-opacity flex items-center justify-center"
           >
             Delete
           </button>
@@ -175,7 +175,7 @@ const PinEntry = () => {
       </div>
       
       {/* Bottom Spacer */}
-      <div className="h-8"></div>
+      <div className="h-16"></div>
     </div>
   );
 };
