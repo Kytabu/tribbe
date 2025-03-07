@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Camera } from "@capacitor/camera";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -18,7 +17,6 @@ export function QRCodeScanner({ open, onOpenChange, onScanComplete }: QRCodeScan
   const streamRef = useRef<MediaStream | null>(null);
 
   useEffect(() => {
-    // Request camera permissions when the component mounts
     const checkPermissions = async () => {
       try {
         const permissionState = await Camera.checkPermissions();
@@ -42,7 +40,6 @@ export function QRCodeScanner({ open, onOpenChange, onScanComplete }: QRCodeScan
     }
 
     return () => {
-      // Clean up on unmount
       if (streamRef.current) {
         streamRef.current.getTracks().forEach(track => track.stop());
         streamRef.current = null;
@@ -54,26 +51,19 @@ export function QRCodeScanner({ open, onOpenChange, onScanComplete }: QRCodeScan
     const startCamera = async () => {
       if (hasPermission && videoRef.current) {
         try {
-          // Get user media for camera
           const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: 'environment' } // Use back camera on mobile
+            video: { facingMode: 'environment' }
           });
           
           streamRef.current = stream;
           videoRef.current.srcObject = stream;
           
-          // Start video playback
           await videoRef.current.play();
           
-          // Here you would typically implement QR code detection logic
-          // This would require a library like jsQR or a similar QR code detector
-          // For now, we'll simulate a successful scan after 5 seconds
           setTimeout(() => {
-            // Simulate finding a QR code with payment data
             onScanComplete("user123:amount100:currencyKES");
             onOpenChange(false);
           }, 5000);
-          
         } catch (error) {
           console.error("Error accessing camera:", error);
           setErrorMessage("Failed to access camera");
@@ -103,7 +93,7 @@ export function QRCodeScanner({ open, onOpenChange, onScanComplete }: QRCodeScan
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden">
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden" closeButton={false}>
         <DialogHeader className="p-4 relative">
           <DialogTitle className="text-center">Scan QR Code</DialogTitle>
           <Button 
@@ -141,7 +131,6 @@ export function QRCodeScanner({ open, onOpenChange, onScanComplete }: QRCodeScan
             </div>
           )}
           
-          {/* QR code frame overlay */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="border-2 border-tribbe-lime w-64 h-64 rounded-lg opacity-80"></div>
           </div>
