@@ -26,7 +26,7 @@ export function SendActionDialog({
         <div className="space-y-4 py-4">
           <Button 
             className="w-full flex items-center justify-center gap-2" 
-            variant="default"
+            variant="outline"
             onClick={onTapToSend}
           >
             <QrCode className="h-5 w-5" />
