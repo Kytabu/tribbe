@@ -15,14 +15,23 @@ export function SuccessDialog({
   onDone
 }: SuccessDialogProps) {
   const handleDone = () => {
-    // Using setTimeout to ensure clean animation
-    setTimeout(() => {
-      onDone();
-    }, 100);
+    // Call onDone directly, let it handle the timing of state changes
+    onDone();
+  };
+
+  // Prevent Dialog from closing itself on Escape key or clicking outside
+  const handleOpenChange = (newOpen: boolean) => {
+    if (newOpen === false) {
+      // User is trying to close the dialog, use our custom flow instead
+      handleDone();
+    } else {
+      // Only allow opening via the state prop
+      onOpenChange(newOpen);
+    }
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogTitle className="sr-only">Transaction Complete</DialogTitle>
         <div className="flex flex-col items-center justify-center py-6">

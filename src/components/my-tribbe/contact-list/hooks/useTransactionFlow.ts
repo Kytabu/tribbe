@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "@/hooks/use-toast";
 import { unformatPhoneNumber } from "../utils/phoneFormatter";
@@ -41,6 +40,7 @@ export function useTransactionFlow({
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [selectedContactDetails, setSelectedContactDetails] = useState<{name: string, phone: string} | null>(null);
   const [isTransactionCompleting, setIsTransactionCompleting] = useState(false);
+  const [isCleaningUp, setIsCleaningUp] = useState(false);
 
   useEffect(() => {
     if (showSuccessDialog) {
@@ -104,11 +104,7 @@ export function useTransactionFlow({
     }
     
     setShowPinEntry(false);
-    setShowPhoneEntry(false);
-    setPinCode("");
-    setShowSendConfirmation(false);
     
-    // Small delay to ensure transitions are smooth
     setTimeout(() => {
       setShowSuccessDialog(true);
       setIsTransactionCompleting(false);
@@ -116,31 +112,31 @@ export function useTransactionFlow({
   };
 
   const handleTransactionComplete = () => {
-    // Use a small delay before closing everything to prevent flashing
+    setIsCleaningUp(true);
+    
+    setShowSuccessDialog(false);
+    
     setTimeout(() => {
-      setShowSuccessDialog(false);
+      setShowSendConfirmation(false);
+      setShowPhoneEntry(false);
+      setPinCode("");
+      setSelectedContactDetails(null);
+      setSelectedContacts([]);
       
-      // Reset all states
+      toast({
+        title: "Transaction complete",
+        description: "Your money has been sent successfully",
+      });
+      
       setTimeout(() => {
-        setShowSendConfirmation(false);
-        setShowPinEntry(false);
-        setShowPhoneEntry(false);
-        setPinCode("");
-        setSelectedContactDetails(null);
-        setSelectedContacts([]);
-        
-        toast({
-          title: "Transaction complete",
-          description: "Your money has been sent successfully",
-        });
-        
         if (onConfirm) {
           onConfirm();
         } else {
           setShowContactList(false);
         }
+        setIsCleaningUp(false);
       }, 100);
-    }, 100);
+    }, 300);
   };
 
   return {
@@ -150,6 +146,7 @@ export function useTransactionFlow({
     setShowSuccessDialog,
     selectedContactDetails,
     isTransactionCompleting,
+    isCleaningUp,
     handleContinueToConfirmation,
     handleConfirmTransfer,
     handleCancelTransfer,

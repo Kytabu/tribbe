@@ -47,6 +47,7 @@ export function ContactList({
     showSendConfirmation,
     setShowSendConfirmation,
     selectedContactDetails,
+    isCleaningUp,
     
     // Handlers
     toggleContactSelection,
@@ -69,7 +70,8 @@ export function ContactList({
     currencySymbol
   });
 
-  if (!showContactList) return null;
+  // If we're in the cleanup phase or not showing the contact list, don't render anything
+  if (isCleaningUp || !showContactList) return null;
 
   if (showPhoneEntry) {
     return (

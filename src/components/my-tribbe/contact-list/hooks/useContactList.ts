@@ -54,6 +54,8 @@ export function useContactList({
     showSuccessDialog,
     setShowSuccessDialog,
     selectedContactDetails,
+    isTransactionCompleting,
+    isCleaningUp,
     handleContinueToConfirmation,
     handleConfirmTransfer,
     handleCancelTransfer,
@@ -68,7 +70,7 @@ export function useContactList({
     manualContactName,
     setPinCode,
     setShowPhoneEntry,
-    showPhoneEntry, // Pass showPhoneEntry to fix the error
+    showPhoneEntry,
     setShowPinEntry,
     onConfirm,
     setShowContactList
@@ -95,6 +97,8 @@ export function useContactList({
     showSendConfirmation,
     setShowSendConfirmation,
     selectedContactDetails,
+    isTransactionCompleting,
+    isCleaningUp,
     
     // Actions from all hooks
     toggleContactSelection,
