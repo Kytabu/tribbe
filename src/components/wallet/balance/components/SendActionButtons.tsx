@@ -25,6 +25,7 @@ export function SendActionButtons({
         label="To Me"
         info="Instant"
         onClick={onToMyselfClick}
+        showProfileCircle={true}
       />
       <TribbeButton
         imagePath="/lovable-uploads/c8a61242-9472-4c27-a50d-adbc2e7a24b0.png"
