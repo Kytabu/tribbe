@@ -26,18 +26,19 @@ export function TransferConfirmationDialog({
       open={open}
       onOpenChange={onOpenChange}
       title="Transfer Complete"
-      icon={<ThumbsUp className="w-8 h-8 text-green-500" />}
+      icon={<ThumbsUp className="w-6 h-6 text-tribbe-lime" />}
+      iconBackground="bg-muted"
       primaryActionLabel="Done"
       onPrimaryAction={onDone}
       content={
-        <>
-          <p className="text-center text-lg font-medium mb-2">
+        <div className="w-full px-2">
+          <p className="text-center text-base font-medium mb-1">
             Sent you cash
           </p>
-          <p className="text-center text-muted-foreground mb-4">
+          <p className="text-center text-sm text-muted-foreground">
             {currencySymbol}{amount} has been transferred to your {destination}.
           </p>
-        </>
+        </div>
       }
     />
   );
