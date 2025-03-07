@@ -71,6 +71,7 @@ export function useToOthersFlow({
   const handleQRScanComplete = (data: string) => {
     console.log("QR code scanned:", data);
     setScannedQRData(data);
+    setShowQRScanner(false);
     
     // Parse QR data (example format: "userID:amount:currency")
     try {
@@ -89,6 +90,11 @@ export function useToOthersFlow({
         description: "The scanned QR code is not in the expected format",
         variant: "destructive",
       });
+      
+      // Show send action dialog again after error
+      setTimeout(() => {
+        setShowSendActionDialog(true);
+      }, 300);
     }
   };
 

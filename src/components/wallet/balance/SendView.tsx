@@ -66,6 +66,17 @@ export function SendView({
     setScannedQRData: ui.setScannedQRData
   });
 
+  // Handler for QR Scanner close event
+  const handleQRCodeScannerOpenChange = (open: boolean) => {
+    ui.setShowQRScanner(open);
+    if (!open) {
+      // When the QR scanner is closed, show the send action dialog again
+      setTimeout(() => {
+        ui.setShowSendActionDialog(true);
+      }, 300);
+    }
+  };
+
   return (
     <div className="space-y-4 animate-fade-in">
       <AmountInput
@@ -150,7 +161,7 @@ export function SendView({
       {/* QR Code Scanner - For scanning payment QR codes */}
       <QRCodeScanner
         open={ui.showQRScanner}
-        onOpenChange={ui.setShowQRScanner}
+        onOpenChange={handleQRCodeScannerOpenChange}
         onScanComplete={toOthersFlow.handleQRScanComplete}
       />
 
