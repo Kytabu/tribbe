@@ -31,7 +31,7 @@ export function TribbeButton({
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center gap-2">
           {showProfileCircle ? (
-            <div className="p-[0.25px] rounded-full" style={{ backgroundColor: "#0EA5E9" }}>
+            <div className="p-[2px] rounded-full" style={{ backgroundColor: "#0EA5E9" }}>
               <img 
                 src={imagePath}
                 alt={`${label} Icon`}
