@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import { Mail, Phone, Crown, RotateCcw, UserCog, Bell, Database, ArchiveIcon } from "lucide-react";
+import { Mail, Phone, Crown, RotateCcw, UserCog, Bell, Database } from "lucide-react";
 import { SettingItem } from "./SettingItem";
 import { SettingSection } from "./SettingSection";
 
@@ -49,12 +49,6 @@ export const AccountSection = () => {
         icon={<Database className="w-5 h-5" />} 
         label="Data Controls" 
         onClick={() => navigate("/data-controls")} 
-      />
-      
-      <SettingItem 
-        icon={<ArchiveIcon className="w-5 h-5" />} 
-        label="Archived Chats" 
-        onClick={() => {}} 
         isLast
       />
     </SettingSection>
