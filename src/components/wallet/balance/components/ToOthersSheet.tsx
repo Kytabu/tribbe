@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Send, Tap } from "lucide-react";
+import { Send, Smartphone } from "lucide-react";
 
 interface ToOthersSheetProps {
   open: boolean;
@@ -34,7 +34,7 @@ export function ToOthersSheet({
               className="h-16 justify-start gap-3"
               onClick={onTapToSendClick}
             >
-              <Tap className="h-5 w-5 text-tribbe-lime" />
+              <Smartphone className="h-5 w-5 text-tribbe-lime" />
               <div className="flex flex-col items-start">
                 <span>Tap to Send</span>
                 <span className="text-xs text-muted-foreground">Send to nearby devices</span>
