@@ -109,54 +109,71 @@ const PinEntry = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-start p-4 sm:p-6">
-      <div className="w-full max-w-xs sm:max-w-md space-y-6 sm:space-y-12 mt-12 sm:mt-16">
-        <div className="text-center space-y-2 sm:space-y-4">
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground">Your account is secured.</h1>
-          <p className="text-sm sm:text-lg text-foreground/90">Type your PIN to unlock it.</p>
+    <div className="min-h-screen bg-background flex flex-col items-center justify-between p-6">
+      {/* Tribbe Logo */}
+      <div className="mt-12 w-full flex justify-center">
+        <img 
+          src="/lovable-uploads/4fd95257-7ac3-44c8-9189-c0b116e26623.png"
+          alt="Tribbe Logo"
+          className="w-32"
+        />
+      </div>
+      
+      {/* Content Container */}
+      <div className="w-full max-w-xs flex flex-col items-center">
+        <div className="text-center space-y-3 mb-10">
+          <h1 className="text-xl font-medium text-tribbe-lime">Your Tribbe account secured.</h1>
+          <p className="text-lg text-tribbe-lime">Type your pin to unlock it.</p>
         </div>
 
-        <div className="flex justify-center space-x-3 sm:space-x-4 mb-6 sm:mb-12">
+        {/* PIN Dots */}
+        <div className="flex justify-center space-x-4 mb-16">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}
-              className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 ${
-                pin.length > index ? "bg-primary border-primary" : "border-foreground/50"
+              className={`w-3 h-3 rounded-full border ${
+                pin.length > index ? "bg-tribbe-lime border-tribbe-lime" : "border-tribbe-lime/70"
               }`}
             />
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-4 sm:gap-8">
-          {[...Array(9)].map((_, i) => (
+        {/* Number Pad */}
+        <div className="grid grid-cols-3 gap-x-12 gap-y-10 mb-12">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
-              key={i + 1}
-              onClick={() => handleNumberClick((i + 1).toString())}
-              className="text-primary text-2xl sm:text-3xl font-medium hover:opacity-80 transition-opacity h-12 sm:h-16"
+              key={num}
+              onClick={() => handleNumberClick(num.toString())}
+              className="text-tribbe-lime text-2xl font-medium hover:opacity-80 transition-opacity w-10 h-10 flex items-center justify-center"
             >
-              {i + 1}
+              {num}
             </button>
           ))}
+          
+          {/* Bottom Row */}
           <button
             onClick={handleLogout}
-            className="text-primary text-sm sm:text-lg hover:opacity-80 transition-opacity h-12 sm:h-16"
+            className="text-tribbe-lime text-sm hover:opacity-80 transition-opacity flex items-center justify-center"
           >
             Log out
           </button>
           <button
             onClick={() => handleNumberClick("0")}
-            className="text-primary text-2xl sm:text-3xl font-medium hover:opacity-80 transition-opacity h-12 sm:h-16"
+            className="text-tribbe-lime text-2xl font-medium hover:opacity-80 transition-opacity flex items-center justify-center"
           >
             0
           </button>
           <button
             onClick={handleDelete}
-            className="text-primary text-sm sm:text-lg hover:opacity-80 transition-opacity h-12 sm:h-16"
+            className="text-tribbe-lime text-sm hover:opacity-80 transition-opacity flex items-center justify-center"
           >
             Delete
           </button>
         </div>
       </div>
+      
+      {/* Bottom Spacer */}
+      <div className="h-8"></div>
     </div>
   );
 };
