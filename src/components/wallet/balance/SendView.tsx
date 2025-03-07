@@ -1,18 +1,10 @@
 
 import { SendViewProps } from "./types";
-import { AmountInput } from "./components/AmountInput";
-import { useMoneyRequests } from "./hooks/useMoneyRequests";
+import { SendViewContent } from "./components/SendViewContent";
+import { SendDialogs } from "./components/SendDialogs";
 import { useSendViewUI } from "./hooks/useSendViewUI";
 import { useToMyselfFlow } from "./hooks/useToMyselfFlow";
 import { useToOthersFlow } from "./hooks/useToOthersFlow";
-import { SendActions } from "./components/SendActions";
-import { ToMyselfSheet } from "./components/ToMyselfSheet";
-import { ToOthersSheet } from "./components/ToOthersSheet";
-import { ToMyselfPaymentMethodSheet } from "./components/ToMyselfPaymentMethodSheet";
-import { TransferConfirmationDialog } from "./components/TransferConfirmationDialog";
-import { SendActionDialog } from "./components/SendActionDialog";
-import { QRCodeScanner } from "./components/QRCodeScanner";
-import { SendConfirmationDialog } from "./components/SendConfirmationDialog";
 
 export function SendView({
   amount,
@@ -25,17 +17,6 @@ export function SendView({
   // Get UI state from custom hook
   const ui = useSendViewUI(amount);
   
-  // Hook for managing money requests with loading and error states
-  const { 
-    filteredRequests, 
-    slidingRequests, 
-    handleAction, 
-    isLoading, 
-    error, 
-    retryFetchRequests,
-    isEmpty
-  } = useMoneyRequests();
-
   // "To myself" flow handlers
   const toMyselfFlow = useToMyselfFlow({
     amount,
@@ -79,122 +60,54 @@ export function SendView({
   };
 
   return (
-    <div className="space-y-4 animate-fade-in">
-      <AmountInput
+    <>
+      <SendViewContent
         amount={amount}
         setAmount={setAmount}
         selectedCurrency={selectedCurrency}
-        currencySymbol={currencySymbols[selectedCurrency]}
-      />
-
-      <SendActions
-        // UI state
-        showPaymentMethods={ui.showPaymentMethods}
-        setShowPaymentMethods={ui.setShowPaymentMethods}
-        showConfirmation={ui.showConfirmation}
-        setShowConfirmation={ui.setShowConfirmation}
-        showContacts={ui.showContacts}
-        setShowContacts={ui.setShowContacts}
-        showSendConfirmation={ui.showSendConfirmation}
-        setShowSendConfirmation={ui.setShowSendConfirmation}
-        showRequests={ui.showRequests}
-        setShowRequests={ui.setShowRequests}
-        
-        // Data state
-        selectedContacts={ui.selectedContacts}
-        setSelectedContacts={ui.setSelectedContacts}
-        selectedPaymentMethod={ui.selectedPaymentMethod}
-        recipientName={ui.recipientName}
-        
-        // Action handlers
-        handleToMyselfClick={toMyselfFlow.handleToMyselfClick}
-        handleToOthersClick={toOthersFlow.handleToOthersClick}
-        handlePaymentMethodSelect={() => {}}
-        handleConfirmationDone={() => {}}
-        handleContactSelection={toOthersFlow.handleContactSelection}
-        handleCancelSend={toOthersFlow.handleCancelSend}
-        handleConfirmSend={toOthersFlow.handleConfirmSend}
-        
-        // Money requests props with loading and error states
+        currencySymbols={currencySymbols}
         autoTribbe={autoTribbe}
         setAutoTribbe={setAutoTribbe}
-        amount={amount}
-        setAmount={setAmount}
-        currencySymbol={currencySymbols[selectedCurrency]}
-        filteredRequests={filteredRequests}
-        slidingRequests={slidingRequests}
-        handleAction={handleAction}
-        isLoading={isLoading}
-        error={error}
-        retryFetchRequests={retryFetchRequests}
-        isEmpty={isEmpty}
       />
-
-      {/* To Myself Sheet - Step 1: Amount Input */}
-      <ToMyselfSheet 
-        open={ui.showToMyselfSheet}
-        onOpenChange={ui.setShowToMyselfSheet}
-        amount={amount}
-        setAmount={setAmount}
-        selectedCurrency={selectedCurrency}
-        currencySymbol={currencySymbols[selectedCurrency]}
-        onSend={toMyselfFlow.handleSend}
-      />
-
-      {/* To Others Sheet - Step 1: Amount Input */}
-      <ToOthersSheet 
-        open={ui.showToOthersSheet}
-        onOpenChange={ui.setShowToOthersSheet}
+      
+      <SendDialogs
+        // UI states
+        showToMyselfSheet={ui.showToMyselfSheet}
+        setShowToMyselfSheet={ui.setShowToMyselfSheet}
+        showToOthersSheet={ui.showToOthersSheet}
+        setShowToOthersSheet={ui.setShowToOthersSheet}
+        showToMyselfPaymentMethods={ui.showToMyselfPaymentMethods}
+        setShowToMyselfPaymentMethods={ui.setShowToMyselfPaymentMethods}
+        showToMyselfConfirmation={ui.showToMyselfConfirmation}
+        setShowToMyselfConfirmation={ui.setShowToMyselfConfirmation}
+        showSendActionDialog={ui.showSendActionDialog}
+        setShowSendActionDialog={ui.setShowSendActionDialog}
+        showQRScanner={ui.showQRScanner}
+        setShowQRScanner={ui.setShowQRScanner}
+        showSendConfirmation={ui.showSendConfirmation}
+        setShowSendConfirmation={ui.setShowSendConfirmation}
+        
+        // Data
         amount={amount}
         setAmount={setAmount}
         selectedCurrency={selectedCurrency}
-        currencySymbol={currencySymbols[selectedCurrency]}
-        onSend={toOthersFlow.handleToOthersSheetConfirm}
-      />
-
-      {/* Send Action Dialog - Step 2: Choose send method */}
-      <SendActionDialog
-        open={ui.showSendActionDialog}
-        onOpenChange={ui.setShowSendActionDialog}
-        onTapToSend={toOthersFlow.handleTapToSend}
-        onContacts={toOthersFlow.handleOpenContacts}
-      />
-
-      {/* QR Code Scanner - For scanning payment QR codes */}
-      <QRCodeScanner
-        open={ui.showQRScanner}
-        onOpenChange={handleQRCodeScannerOpenChange}
-        onScanComplete={toOthersFlow.handleQRScanComplete}
-      />
-
-      {/* To Myself Sheet - Step 2: Payment Method Selection */}
-      <ToMyselfPaymentMethodSheet 
-        open={ui.showToMyselfPaymentMethods}
-        onOpenChange={ui.setShowToMyselfPaymentMethods}
-        onMethodSelect={toMyselfFlow.handlePaymentMethodSelect}
-      />
-
-      {/* To Myself - Step 3: Confirmation Dialog */}
-      <TransferConfirmationDialog
-        open={ui.showToMyselfConfirmation}
-        onOpenChange={ui.setShowToMyselfConfirmation}
-        amount={amount}
         currencySymbol={currencySymbols[selectedCurrency]}
         selectedPaymentMethod={ui.selectedPaymentMethod}
-        onDone={toMyselfFlow.handleConfirmationDone}
-      />
-
-      {/* Send Confirmation Dialog */}
-      <SendConfirmationDialog
-        open={ui.showSendConfirmation}
-        onOpenChange={ui.setShowSendConfirmation}
         recipientName={ui.recipientName}
-        amount={amount}
-        setAmount={setAmount}
-        currencySymbol={currencySymbols[selectedCurrency]}
-        onCancel={toOthersFlow.handleCancelSend}
-        onConfirm={toOthersFlow.handleConfirmSend}
+        scannedQRData={ui.scannedQRData}
+        
+        // Handlers
+        handleQRCodeScannerOpenChange={handleQRCodeScannerOpenChange}
+        handleToMyselfSend={toMyselfFlow.handleSend}
+        handlePaymentMethodSelect={toMyselfFlow.handlePaymentMethodSelect}
+        handleConfirmationDone={toMyselfFlow.handleConfirmationDone}
+        handleToOthersSheetConfirm={toOthersFlow.handleToOthersSheetConfirm}
+        handleTapToSend={toOthersFlow.handleTapToSend}
+        handleOpenContacts={toOthersFlow.handleOpenContacts}
+        handleQRScanComplete={toOthersFlow.handleQRScanComplete}
+        handleCancelSend={toOthersFlow.handleCancelSend}
+        handleConfirmSend={toOthersFlow.handleConfirmSend}
       />
-    </div>
+    </>
   );
 }
