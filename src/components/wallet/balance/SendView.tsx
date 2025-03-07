@@ -1,4 +1,3 @@
-
 import { SendViewProps } from "./types";
 import { AmountInput } from "./components/AmountInput";
 import { useMoneyRequests } from "./hooks/useMoneyRequests";
@@ -7,6 +6,7 @@ import { useToMyselfFlow } from "./hooks/useToMyselfFlow";
 import { useToOthersFlow } from "./hooks/useToOthersFlow";
 import { SendActions } from "./components/SendActions";
 import { ToMyselfSheet } from "./components/ToMyselfSheet";
+import { ToMyselfPaymentMethodSheet } from "./components/ToMyselfPaymentMethodSheet";
 
 export function SendView({
   amount,
@@ -36,7 +36,8 @@ export function SendView({
     setAmount,
     selectedCurrency,
     currencySymbols,
-    setShowToMyselfSheet: ui.setShowToMyselfSheet
+    setShowToMyselfSheet: ui.setShowToMyselfSheet,
+    setShowToMyselfPaymentMethods: ui.setShowToMyselfPaymentMethods
   });
 
   // "To others" flow handlers
@@ -104,7 +105,7 @@ export function SendView({
         isEmpty={isEmpty}
       />
 
-      {/* To Myself Sheet - Step 1 */}
+      {/* To Myself Sheet - Step 1: Amount Input */}
       <ToMyselfSheet 
         open={ui.showToMyselfSheet}
         onOpenChange={ui.setShowToMyselfSheet}
@@ -113,6 +114,13 @@ export function SendView({
         selectedCurrency={selectedCurrency}
         currencySymbol={currencySymbols[selectedCurrency]}
         onSend={toMyselfFlow.handleSend}
+      />
+
+      {/* To Myself Sheet - Step 2: Payment Method Selection */}
+      <ToMyselfPaymentMethodSheet 
+        open={ui.showToMyselfPaymentMethods}
+        onOpenChange={ui.setShowToMyselfPaymentMethods}
+        onMethodSelect={toMyselfFlow.handlePaymentMethodSelect}
       />
     </div>
   );

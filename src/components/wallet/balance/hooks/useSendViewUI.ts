@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 
 export function useSendViewUI(amount: string) {
@@ -9,6 +8,7 @@ export function useSendViewUI(amount: string) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showSendConfirmation, setShowSendConfirmation] = useState(false);
   const [showToMyselfSheet, setShowToMyselfSheet] = useState(false);
+  const [showToMyselfPaymentMethods, setShowToMyselfPaymentMethods] = useState(false);
   
   // Data state
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
@@ -39,6 +39,8 @@ export function useSendViewUI(amount: string) {
     setShowSendConfirmation,
     showToMyselfSheet,
     setShowToMyselfSheet,
+    showToMyselfPaymentMethods,
+    setShowToMyselfPaymentMethods,
     
     // Data states
     selectedContacts,
