@@ -121,17 +121,17 @@ const PinEntry = () => {
       
       {/* Content Container */}
       <div className="w-full max-w-xs flex flex-col items-center">
-        <div className="text-center space-y-3 mb-10">
+        <div className="text-center space-y-4 mb-12">
           <h1 className="text-xl font-medium text-tribbe-lime">Your Tribbe account secured.</h1>
           <p className="text-lg text-tribbe-lime">Type your pin to unlock it.</p>
         </div>
 
         {/* PIN Dots */}
-        <div className="flex justify-center space-x-4 mb-16">
+        <div className="flex justify-center space-x-6 mb-16">
           {[...Array(4)].map((_, index) => (
             <div
               key={index}
-              className={`w-3 h-3 rounded-full border ${
+              className={`w-4 h-4 rounded-full border-2 ${
                 pin.length > index ? "bg-tribbe-lime border-tribbe-lime" : "border-tribbe-lime/70"
               }`}
             />
@@ -139,12 +139,12 @@ const PinEntry = () => {
         </div>
 
         {/* Number Pad */}
-        <div className="grid grid-cols-3 gap-x-12 gap-y-10 mb-12">
+        <div className="grid grid-cols-3 gap-x-12 gap-y-8 mb-12">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
               key={num}
               onClick={() => handleNumberClick(num.toString())}
-              className="text-tribbe-lime text-2xl font-medium hover:opacity-80 transition-opacity w-10 h-10 flex items-center justify-center"
+              className="text-tribbe-lime text-2xl font-medium hover:opacity-80 transition-opacity w-12 h-12 flex items-center justify-center"
             >
               {num}
             </button>
