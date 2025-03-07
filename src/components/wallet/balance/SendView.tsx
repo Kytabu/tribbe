@@ -12,6 +12,7 @@ import { ToMyselfPaymentMethodSheet } from "./components/ToMyselfPaymentMethodSh
 import { TransferConfirmationDialog } from "./components/TransferConfirmationDialog";
 import { SendActionDialog } from "./components/SendActionDialog";
 import { QRCodeScanner } from "./components/QRCodeScanner";
+import { SendConfirmationDialog } from "./components/SendConfirmationDialog";
 
 export function SendView({
   amount,
@@ -180,6 +181,18 @@ export function SendView({
         currencySymbol={currencySymbols[selectedCurrency]}
         selectedPaymentMethod={ui.selectedPaymentMethod}
         onDone={toMyselfFlow.handleConfirmationDone}
+      />
+
+      {/* Send Confirmation Dialog */}
+      <SendConfirmationDialog
+        open={ui.showSendConfirmation}
+        onOpenChange={ui.setShowSendConfirmation}
+        recipientName={ui.recipientName}
+        amount={amount}
+        setAmount={setAmount}
+        currencySymbol={currencySymbols[selectedCurrency]}
+        onCancel={toOthersFlow.handleCancelSend}
+        onConfirm={toOthersFlow.handleConfirmSend}
       />
     </div>
   );
