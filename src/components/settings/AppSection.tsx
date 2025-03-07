@@ -15,6 +15,7 @@ export const AppSection = () => {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [language, setLanguage] = useState("English");
   const [colorScheme, setColorScheme] = useState("System");
+  const [mapProvider, setMapProvider] = useState("Google Maps");
   
   // Set the initial color scheme value on mount
   useEffect(() => {
@@ -158,13 +159,53 @@ export const AppSection = () => {
         onCheckedChange={() => {}}
       />
       
-      <SettingItem 
-        icon={<Map className="w-5 h-5" />} 
-        label="Map Provider" 
-        value="Google Maps" 
-        onClick={() => {}} 
-        isLast
-      />
+      <div className="px-4 py-3.5 flex items-center justify-between border-b border-tribbe-lime/10">
+        <div className="flex items-center gap-3">
+          <div className="text-tribbe-lime">
+            <Map className="w-5 h-5" />
+          </div>
+          <span className="text-tribbe-white">Map Provider</span>
+        </div>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex items-center text-sm text-tribbe-white/70">
+              {mapProvider}
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="16" 
+                height="16" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="ml-1"
+              >
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent 
+            align="end" 
+            className="bg-tribbe-grey border border-tribbe-lime/20 text-tribbe-white min-w-[150px]"
+          >
+            <DropdownMenuItem 
+              className="hover:bg-tribbe-lime/10 cursor-pointer focus:bg-tribbe-lime/20 focus:text-tribbe-lime" 
+              onClick={() => setMapProvider("Google Maps")}
+            >
+              Google Maps
+            </DropdownMenuItem>
+            <DropdownMenuItem 
+              className="hover:bg-tribbe-lime/10 cursor-pointer focus:bg-tribbe-lime/20 focus:text-tribbe-lime" 
+              onClick={() => setMapProvider("Apple Maps")}
+            >
+              Apple Maps
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </SettingSection>
   );
 };
