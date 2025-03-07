@@ -24,13 +24,13 @@ export function PinEntryView({
   }
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
     // Clear the current PIN
     for (let i = 0; i < pinCode.length; i++) {
       onDeleteClick();
     }
     
     // Add each digit of the new value
+    const value = e.target.value;
     for (let i = 0; i < value.length && i < 4; i++) {
       if (/^\d$/.test(value[i])) {
         onDigitClick(value[i]);
@@ -61,14 +61,14 @@ export function PinEntryView({
         {/* Direct PIN input (invisible but functional) */}
         <div className="mb-6 w-full max-w-xs">
           <Input
-            type="number"
+            type="tel"
             value={pinCode}
             onChange={handleInputChange}
             maxLength={4}
             placeholder="Enter PIN"
-            className="text-center"
-            pattern="[0-9]*"
+            className="text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             inputMode="numeric"
+            autoComplete="off"
           />
         </div>
         
