@@ -1,3 +1,4 @@
+
 import { SendActionButtons } from "./SendActionButtons";
 import { PaymentMethodSheet } from "./PaymentMethodSheet";
 import { TransferConfirmationDialog } from "./TransferConfirmationDialog";
@@ -43,6 +44,10 @@ interface SendActionsProps {
   filteredRequests: MoneyRequest[];
   slidingRequests: {[key: number]: 'left' | 'right'};
   handleAction: (id: number, direction: 'left' | 'right') => void;
+  isLoading?: boolean;
+  error?: string | null;
+  retryFetchRequests?: () => void;
+  isEmpty?: boolean;
 }
 
 export function SendActions({
@@ -80,7 +85,11 @@ export function SendActions({
   currencySymbol,
   filteredRequests,
   slidingRequests,
-  handleAction
+  handleAction,
+  isLoading = false,
+  error = null,
+  retryFetchRequests,
+  isEmpty = false
 }: SendActionsProps) {
   return (
     <>
@@ -137,6 +146,10 @@ export function SendActions({
         onAction={handleAction}
         slidingRequests={slidingRequests}
         currencySymbol={currencySymbol}
+        isLoading={isLoading}
+        error={error}
+        onRetry={retryFetchRequests}
+        isEmpty={isEmpty}
       />
     </>
   );

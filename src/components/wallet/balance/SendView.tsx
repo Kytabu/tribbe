@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { SendViewProps } from "./types";
 import { AmountInput } from "./components/AmountInput";
@@ -18,8 +19,16 @@ export function SendView({
   // Get UI state from custom hook
   const ui = useSendViewUI(amount);
   
-  // Hook for managing money requests
-  const { filteredRequests, slidingRequests, handleAction } = useMoneyRequests();
+  // Hook for managing money requests with loading and error states
+  const { 
+    filteredRequests, 
+    slidingRequests, 
+    handleAction, 
+    isLoading, 
+    error, 
+    retryFetchRequests,
+    isEmpty
+  } = useMoneyRequests();
 
   // "To myself" flow handlers
   const toMyselfFlow = useToMyselfFlow({
@@ -84,7 +93,7 @@ export function SendView({
         handleCancelSend={toOthersFlow.handleCancelSend}
         handleConfirmSend={toOthersFlow.handleConfirmSend}
         
-        // Other props
+        // Money requests props with loading and error states
         autoTribbe={autoTribbe}
         setAutoTribbe={setAutoTribbe}
         amount={amount}
@@ -92,6 +101,10 @@ export function SendView({
         filteredRequests={filteredRequests}
         slidingRequests={slidingRequests}
         handleAction={handleAction}
+        isLoading={isLoading}
+        error={error}
+        retryFetchRequests={retryFetchRequests}
+        isEmpty={isEmpty}
       />
     </div>
   );

@@ -1,6 +1,7 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MoneyRequest } from "../types";
+import { toast } from "@/hooks/use-toast";
 
 // Sample data for money requests
 const sampleMoneyRequests: MoneyRequest[] = [
@@ -21,19 +22,108 @@ const sampleMoneyRequests: MoneyRequest[] = [
 export function useMoneyRequests() {
   const [removedRequests, setRemovedRequests] = useState<number[]>([]);
   const [slidingRequests, setSlidingRequests] = useState<{[key: number]: 'left' | 'right'}>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [requests, setRequests] = useState<MoneyRequest[]>([]);
+
+  // Fetch money requests
+  useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        
+        // Simulate API call
+        await new Promise((resolve) => setTimeout(resolve, 800));
+        
+        // In a real implementation, this would be an API call
+        // const response = await fetch('/api/money-requests');
+        // const data = await response.json();
+        // setRequests(data);
+        
+        setRequests(sampleMoneyRequests);
+      } catch (err) {
+        console.error("Failed to fetch money requests:", err);
+        setError("Failed to load money requests. Please try again later.");
+        toast({
+          title: "Error",
+          description: "Could not load money requests",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchRequests();
+  }, []);
 
   const handleAction = (id: number, direction: 'left' | 'right') => {
-    setSlidingRequests(prev => ({...prev, [id]: direction}));
-    setTimeout(() => {
-      setRemovedRequests(prev => [...prev, id]);
-    }, 300);
+    try {
+      // Update UI to show sliding animation
+      setSlidingRequests(prev => ({...prev, [id]: direction}));
+      
+      // In a real implementation, this would include an API call
+      // const response = await fetch(`/api/money-requests/${id}`, {
+      //   method: 'POST',
+      //   body: JSON.stringify({ action: direction === 'right' ? 'accept' : 'reject' })
+      // });
+      
+      // Remove the request after animation completes
+      setTimeout(() => {
+        setRemovedRequests(prev => [...prev, id]);
+        
+        // Show toast notification
+        const actionText = direction === 'right' ? 'accepted' : 'declined';
+        const request = requests.find(r => r.id === id);
+        
+        if (request) {
+          toast({
+            title: `Request ${actionText}`,
+            description: `You've ${actionText} ${request.name}'s request for ${request.amount}`,
+          });
+        }
+      }, 300);
+    } catch (err) {
+      console.error(`Failed to ${direction === 'right' ? 'accept' : 'reject'} request:`, err);
+      toast({
+        title: "Error",
+        description: `Could not ${direction === 'right' ? 'accept' : 'reject'} the request. Please try again.`,
+        variant: "destructive",
+      });
+      
+      // Remove from sliding state to reset the UI
+      setSlidingRequests(prev => {
+        const newState = {...prev};
+        delete newState[id];
+        return newState;
+      });
+    }
   };
 
-  const filteredRequests = sampleMoneyRequests.filter(request => !removedRequests.includes(request.id));
+  const retryFetchRequests = () => {
+    setRequests([]);
+    setRemovedRequests([]);
+    setSlidingRequests({});
+    setError(null);
+    setIsLoading(true);
+    
+    // Simulate refetching
+    setTimeout(() => {
+      setRequests(sampleMoneyRequests);
+      setIsLoading(false);
+    }, 800);
+  };
+
+  const filteredRequests = requests.filter(request => !removedRequests.includes(request.id));
 
   return {
     filteredRequests,
     slidingRequests,
-    handleAction
+    handleAction,
+    isLoading,
+    error,
+    retryFetchRequests,
+    isEmpty: !isLoading && filteredRequests.length === 0
   };
 }
