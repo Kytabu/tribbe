@@ -1,7 +1,7 @@
 
 /**
  * Formats a phone number as the user types
- * Format: +XXX XXX XXX XXX
+ * Format: XXXX XXX XXX
  */
 export function formatPhoneNumber(value: string): string {
   // Remove all non-digit characters
@@ -10,14 +10,12 @@ export function formatPhoneNumber(value: string): string {
   // Apply formatting based on length
   if (digits.length === 0) {
     return '';
-  } else if (digits.length <= 3) {
-    return `+${digits}`;
-  } else if (digits.length <= 6) {
-    return `+${digits.slice(0, 3)} ${digits.slice(3)}`;
-  } else if (digits.length <= 9) {
-    return `+${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`;
+  } else if (digits.length <= 4) {
+    return `${digits}`;
+  } else if (digits.length <= 7) {
+    return `${digits.slice(0, 4)} ${digits.slice(4)}`;
   } else {
-    return `+${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6, 9)} ${digits.slice(9, 12)}`;
+    return `${digits.slice(0, 4)} ${digits.slice(4, 7)} ${digits.slice(7, 10)}`;
   }
 }
 

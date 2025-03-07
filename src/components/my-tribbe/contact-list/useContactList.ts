@@ -36,7 +36,6 @@ export function useContactList({
   const [showSendConfirmation, setShowSendConfirmation] = useState(false);
   const [selectedContactDetails, setSelectedContactDetails] = useState<{name: string, phone: string} | null>(null);
 
-  // Effect to reset send confirmation when success dialog is shown
   useEffect(() => {
     if (showSuccessDialog) {
       setShowSendConfirmation(false);
@@ -100,15 +99,13 @@ export function useContactList({
   };
 
   const handlePhoneNumberInput = (digit: string) => {
-    // Format the phone number as digits are added
     const newRawValue = unformatPhoneNumber(phoneNumber) + digit;
-    if (newRawValue.length <= 12) { // Limit to 12 digits
+    if (newRawValue.length <= 10) {
       setPhoneNumber(formatPhoneNumber(newRawValue));
     }
   };
 
   const handleDeleteDigit = () => {
-    // Remove the last digit and reformat
     const rawValue = unformatPhoneNumber(phoneNumber);
     if (rawValue.length > 0) {
       const newRawValue = rawValue.slice(0, -1);
@@ -118,10 +115,10 @@ export function useContactList({
 
   const handlePhoneNumberSubmit = () => {
     const rawPhoneNumber = unformatPhoneNumber(phoneNumber);
-    if (rawPhoneNumber.length >= 9) { // Ensure at least 9 digits for a valid phone number
+    if (rawPhoneNumber.length >= 9) {
       setSelectedContactDetails({
         name: manualContactName || "Phone Contact",
-        phone: phoneNumber // Use the formatted phone number for display
+        phone: phoneNumber
       });
       setShowSendConfirmation(true);
     } else {
@@ -153,15 +150,12 @@ export function useContactList({
       setShowPinEntry(false);
       setShowPhoneEntry(false);
       setPinCode("");
-      // Make sure to clear the send confirmation state
       setShowSendConfirmation(false);
-      // Show success dialog after completing pin entry
       setShowSuccessDialog(true);
     }
   };
 
   const handleTransactionComplete = () => {
-    // Reset all states to prevent dialogs from reappearing
     setShowSuccessDialog(false);
     setShowSendConfirmation(false);
     setShowPinEntry(false);
@@ -185,7 +179,6 @@ export function useContactList({
   };
 
   return {
-    // State
     contacts,
     filteredContacts,
     searchQuery,
@@ -206,7 +199,6 @@ export function useContactList({
     setShowSendConfirmation,
     selectedContactDetails,
     
-    // Handlers
     toggleContactSelection,
     handleContinueToConfirmation,
     handleConfirmTransfer,

@@ -48,12 +48,12 @@ export function PhoneEntryView({
               onChange={(e) => {
                 // Extract just the digits and apply formatting
                 const rawValue = unformatPhoneNumber(e.target.value);
-                if (rawValue.length <= 12) { // Limit to 12 digits max
+                if (rawValue.length <= 10) { // Limit to 10 digits max for the XXXX XXX XXX format
                   setPhoneNumber(formatPhoneNumber(rawValue));
                 }
               }}
               className="bg-transparent border-0 text-xl text-white pl-4 focus-visible:ring-0 focus-visible:ring-offset-0"
-              placeholder="Enter phone number"
+              placeholder="0700 000 000"
               type="tel"
             />
           </div>
