@@ -18,7 +18,7 @@ interface TransactionFlowProps {
   manualContactName: string;
   setPinCode: (code: string) => void;
   setShowPhoneEntry: (show: boolean) => void;
-  showPhoneEntry: boolean; // Added this prop to fix the error
+  showPhoneEntry: boolean;
   setShowPinEntry: (show: boolean) => void;
   onConfirm?: () => void;
   setShowContactList: (show: boolean) => void;
@@ -32,7 +32,7 @@ export function useTransactionFlow({
   manualContactName,
   setPinCode,
   setShowPhoneEntry,
-  showPhoneEntry, // Make sure to include it in destructuring
+  showPhoneEntry,
   setShowPinEntry,
   onConfirm,
   setShowContactList
@@ -40,6 +40,7 @@ export function useTransactionFlow({
   const [showSendConfirmation, setShowSendConfirmation] = useState(false);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [selectedContactDetails, setSelectedContactDetails] = useState<{name: string, phone: string} | null>(null);
+  const [isTransactionCompleting, setIsTransactionCompleting] = useState(false);
 
   useEffect(() => {
     if (showSuccessDialog) {
@@ -95,6 +96,8 @@ export function useTransactionFlow({
   };
 
   const handlePinSubmit = () => {
+    setIsTransactionCompleting(true);
+    
     if (showPhoneEntry && unformatPhoneNumber(phoneNumber).length > 0) {
       const manualContactId = `manual-${Date.now()}`;
       setSelectedContacts([manualContactId]);
@@ -104,28 +107,40 @@ export function useTransactionFlow({
     setShowPhoneEntry(false);
     setPinCode("");
     setShowSendConfirmation(false);
-    setShowSuccessDialog(true);
+    
+    // Small delay to ensure transitions are smooth
+    setTimeout(() => {
+      setShowSuccessDialog(true);
+      setIsTransactionCompleting(false);
+    }, 200);
   };
 
   const handleTransactionComplete = () => {
-    setShowSuccessDialog(false);
-    setShowSendConfirmation(false);
-    setShowPinEntry(false);
-    setShowPhoneEntry(false);
-    setPinCode("");
-    setSelectedContactDetails(null);
-    setSelectedContacts([]);
-    
-    toast({
-      title: "Transaction complete",
-      description: "Your money has been sent successfully",
-    });
-    
-    if (onConfirm) {
-      onConfirm();
-    } else {
-      setShowContactList(false);
-    }
+    // Use a small delay before closing everything to prevent flashing
+    setTimeout(() => {
+      setShowSuccessDialog(false);
+      
+      // Reset all states
+      setTimeout(() => {
+        setShowSendConfirmation(false);
+        setShowPinEntry(false);
+        setShowPhoneEntry(false);
+        setPinCode("");
+        setSelectedContactDetails(null);
+        setSelectedContacts([]);
+        
+        toast({
+          title: "Transaction complete",
+          description: "Your money has been sent successfully",
+        });
+        
+        if (onConfirm) {
+          onConfirm();
+        } else {
+          setShowContactList(false);
+        }
+      }, 100);
+    }, 100);
   };
 
   return {
@@ -134,6 +149,7 @@ export function useTransactionFlow({
     showSuccessDialog,
     setShowSuccessDialog,
     selectedContactDetails,
+    isTransactionCompleting,
     handleContinueToConfirmation,
     handleConfirmTransfer,
     handleCancelTransfer,

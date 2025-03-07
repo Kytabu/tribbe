@@ -1,6 +1,6 @@
 
 import { ThumbsUp } from "lucide-react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 interface SuccessDialogProps {
@@ -14,9 +14,17 @@ export function SuccessDialog({
   onOpenChange,
   onDone
 }: SuccessDialogProps) {
+  const handleDone = () => {
+    // Using setTimeout to ensure clean animation
+    setTimeout(() => {
+      onDone();
+    }, 100);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
+        <DialogTitle className="sr-only">Transaction Complete</DialogTitle>
         <div className="flex flex-col items-center justify-center py-6">
           <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
             <ThumbsUp className="w-6 h-6 text-tribbe-lime" />
@@ -32,7 +40,7 @@ export function SuccessDialog({
           </p>
           
           <Button 
-            onClick={onDone}
+            onClick={handleDone}
             className="w-full max-w-xs bg-tribbe-lime hover:bg-tribbe-lime/90 text-black h-12 rounded-full"
           >
             Done
