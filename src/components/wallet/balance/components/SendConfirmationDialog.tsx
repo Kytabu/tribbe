@@ -73,6 +73,10 @@ export function SendConfirmationDialog({
                 value={localAmount}
                 onChange={handleAmountChange}
                 className="pl-8 text-2xl font-bold text-center h-16 border-0 border-b focus-visible:ring-0"
+                placeholder="0"
+                style={{ 
+                  caretColor: 'currentColor'
+                }}
               />
             </div>
           </div>
