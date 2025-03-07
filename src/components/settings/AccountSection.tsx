@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { Mail, Phone, Crown, RotateCcw, UserCog, Bell, Database, ArchiveIcon } from "lucide-react";
 import { SettingItem } from "./SettingItem";
+import { SettingSection } from "./SettingSection";
 
 export const AccountSection = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export const AccountSection = () => {
       <SettingItem 
         icon={<UserCog className="w-5 h-5" />} 
         label="Personalization" 
-        onClick={() => {}} 
+        onClick={() => navigate("/personalization")} 
       />
       
       <SettingItem 
@@ -59,5 +60,3 @@ export const AccountSection = () => {
     </SettingSection>
   );
 };
-
-import { SettingSection } from "./SettingSection";

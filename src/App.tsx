@@ -1,52 +1,41 @@
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Toaster } from "@/components/ui/toaster";
 import Index from "@/pages/Index";
-import Setup from "@/pages/Setup";
+import AuthPage from "@/pages/Auth";
+import Onboarding from "@/pages/Onboarding";
 import PinSetup from "@/pages/PinSetup";
 import PinEntry from "@/pages/PinEntry";
-import Flami from "@/pages/Flami";
-import AuthPage from "@/pages/AuthPage";
-import AccountPage from "@/pages/AccountPage";
 import NotFound from "@/pages/NotFound";
-import Wallet from "@/pages/Wallet";
-import AddMoney from "@/pages/AddMoney";
-import Circles from "@/pages/Circles";
-import CircleDetails from "@/pages/CircleDetails";
-import CircleMembers from "@/pages/CircleMembers";
-import SnapToPay from "@/pages/SnapToPay";
-import StreetCred from "@/pages/StreetCred";
-import MyTribbe from "@/pages/MyTribbe";
-import Profile from "@/pages/Profile";
-import Premium from "@/pages/Premium";
-import TribbeRequests from "@/pages/TribbeRequests";
+import Setup from "@/pages/Setup";
+import Personalization from "@/pages/Personalization";
+import NewChat from "@/pages/NewChat";
+import Chat from "@/pages/Chat";
+import Contacts from "@/pages/Contacts";
+import Notifications from "@/pages/Notifications";
 
 const App = () => {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
   return (
-    <Router>
+    <div className="App">
+      <Toaster />
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/setup" element={<Setup />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/pin-setup" element={<PinSetup />} />
         <Route path="/pin-entry" element={<PinEntry />} />
-        <Route path="/flami" element={<Flami />} />
-        <Route path="/account" element={<AccountPage />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/premium" element={<Premium />} />
-        <Route path="/wallet" element={<Wallet />} />
-        <Route path="/wallet/add-money" element={<AddMoney />} />
-        <Route path="/circles" element={<Circles />} />
-        <Route path="/circles/:id" element={<CircleDetails />} />
-        <Route path="/circles/:id/members" element={<CircleMembers />} />
-        <Route path="/snap-to-pay" element={<SnapToPay />} />
-        <Route path="/street-cred" element={<StreetCred />} />
-        <Route path="/my-tribbe" element={<MyTribbe />} />
-        <Route path="/tribbe-requests" element={<TribbeRequests />} />
+        <Route path="/new-chat" element={<NewChat />} />
+        <Route path="/chat/:chatId" element={<Chat />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/setup" element={<Setup />} />
+        <Route path="/personalization" element={<Personalization />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Toaster />
-    </Router>
+    </div>
   );
 };
 
