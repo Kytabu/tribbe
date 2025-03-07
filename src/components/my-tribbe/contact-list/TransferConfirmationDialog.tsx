@@ -12,6 +12,8 @@ interface TransferConfirmationDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   contactDetails: ContactDetails | null;
+  amount?: string;
+  currencySymbol?: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -20,6 +22,8 @@ export function TransferConfirmationDialog({
   open,
   onOpenChange,
   contactDetails,
+  amount = "1,000",
+  currencySymbol = "KSh",
   onConfirm,
   onCancel
 }: TransferConfirmationDialogProps) {
@@ -45,7 +49,7 @@ export function TransferConfirmationDialog({
           </div>
           <div className="p-4 rounded-lg bg-background border w-full mb-6">
             <p className="text-sm text-muted-foreground">Amount</p>
-            <p className="text-2xl font-bold">KSh 1,000</p>
+            <p className="text-2xl font-bold">{currencySymbol} {amount}</p>
           </div>
           
           <div className="w-full flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">

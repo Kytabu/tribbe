@@ -1,4 +1,3 @@
-
 import { SendActionButtons } from "./SendActionButtons";
 import { PaymentMethodSheet } from "./PaymentMethodSheet";
 import { TransferConfirmationDialog } from "./TransferConfirmationDialog";
@@ -125,6 +124,8 @@ export function SendActions({
         selectedContacts={selectedContacts}
         setSelectedContacts={setSelectedContacts}
         onConfirm={handleContactSelection}
+        amount={amount}
+        currencySymbol={currencySymbol}
       />
 
       {/* Confirmation Dialog for Sending to Others */}

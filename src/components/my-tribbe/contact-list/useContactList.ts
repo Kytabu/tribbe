@@ -15,13 +15,17 @@ export interface ContactListHookProps {
   setSelectedContacts: (contacts: string[]) => void;
   onConfirm?: () => void;
   setShowContactList: (show: boolean) => void;
+  amount?: string;
+  currencySymbol?: string;
 }
 
 export function useContactList({
   selectedContacts,
   setSelectedContacts,
   onConfirm,
-  setShowContactList
+  setShowContactList,
+  amount = "1,000",
+  currencySymbol = "KSh"
 }: ContactListHookProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showPhoneEntry, setShowPhoneEntry] = useState(false);
@@ -202,6 +206,8 @@ export function useContactList({
     showTransferConfirmation,
     setShowTransferConfirmation,
     selectedContactDetails,
+    amount,
+    currencySymbol,
     
     // Handlers
     toggleContactSelection,
