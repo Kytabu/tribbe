@@ -13,11 +13,13 @@ export function useSendViewUI(amount: string) {
   const [showToMyselfConfirmation, setShowToMyselfConfirmation] = useState(false);
   const [showToOthersSheet, setShowToOthersSheet] = useState(false);
   const [showSendActionDialog, setShowSendActionDialog] = useState(false);
+  const [showQRScanner, setShowQRScanner] = useState(false);
   
   // Data state
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null);
   const [recipientName, setRecipientName] = useState<string>('');
+  const [scannedQRData, setScannedQRData] = useState<string | null>(null);
   
   // Reset state when amount changes or dialogs close
   useEffect(() => {
@@ -51,6 +53,8 @@ export function useSendViewUI(amount: string) {
     setShowToOthersSheet,
     showSendActionDialog,
     setShowSendActionDialog,
+    showQRScanner,
+    setShowQRScanner,
     
     // Data states
     selectedContacts,
@@ -58,6 +62,8 @@ export function useSendViewUI(amount: string) {
     selectedPaymentMethod,
     setSelectedPaymentMethod,
     recipientName,
-    setRecipientName
+    setRecipientName,
+    scannedQRData,
+    setScannedQRData
   };
 }

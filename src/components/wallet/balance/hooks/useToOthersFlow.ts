@@ -15,6 +15,9 @@ type ToOthersFlowProps = {
   setRecipientName: (name: string) => void;
   setShowToOthersSheet: (show: boolean) => void;
   setShowSendActionDialog: (show: boolean) => void;
+  setShowQRScanner: (show: boolean) => void;
+  scannedQRData: string | null;
+  setScannedQRData: (data: string | null) => void;
 };
 
 export function useToOthersFlow({
@@ -29,7 +32,10 @@ export function useToOthersFlow({
   recipientName,
   setRecipientName,
   setShowToOthersSheet,
-  setShowSendActionDialog
+  setShowSendActionDialog,
+  setShowQRScanner,
+  scannedQRData,
+  setScannedQRData
 }: ToOthersFlowProps) {
   
   const handleToOthersClick = () => {
@@ -56,13 +62,34 @@ export function useToOthersFlow({
   const handleTapToSend = () => {
     setShowSendActionDialog(false);
     
-    // Set a default recipient
-    setRecipientName("Nearby recipient");
-    
-    // Show send confirmation dialog
+    // Open QR scanner dialog
     setTimeout(() => {
-      setShowSendConfirmation(true);
+      setShowQRScanner(true);
     }, 300);
+  };
+
+  const handleQRScanComplete = (data: string) => {
+    console.log("QR code scanned:", data);
+    setScannedQRData(data);
+    
+    // Parse QR data (example format: "userID:amount:currency")
+    try {
+      const [userId, qrAmount, qrCurrency] = data.split(":");
+      // Set recipient based on scanned data
+      setRecipientName("QR Recipient");
+      
+      // Show send confirmation dialog
+      setTimeout(() => {
+        setShowSendConfirmation(true);
+      }, 300);
+    } catch (error) {
+      console.error("Error parsing QR data:", error);
+      toast({
+        title: "Invalid QR Code",
+        description: "The scanned QR code is not in the expected format",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleOpenContacts = () => {
@@ -126,6 +153,7 @@ export function useToOthersFlow({
     setAmount('');
     setSelectedContacts([]);
     setRecipientName('');
+    setScannedQRData(null);
   };
 
   const handleCancelSend = () => {
@@ -139,6 +167,7 @@ export function useToOthersFlow({
     handleOpenContacts,
     handleContactSelection,
     handleConfirmSend,
-    handleCancelSend
+    handleCancelSend,
+    handleQRScanComplete
   };
 }

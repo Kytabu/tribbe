@@ -11,6 +11,7 @@ import { ToOthersSheet } from "./components/ToOthersSheet";
 import { ToMyselfPaymentMethodSheet } from "./components/ToMyselfPaymentMethodSheet";
 import { TransferConfirmationDialog } from "./components/TransferConfirmationDialog";
 import { SendActionDialog } from "./components/SendActionDialog";
+import { QRCodeScanner } from "./components/QRCodeScanner";
 
 export function SendView({
   amount,
@@ -59,7 +60,10 @@ export function SendView({
     recipientName: ui.recipientName,
     setRecipientName: ui.setRecipientName,
     setShowToOthersSheet: ui.setShowToOthersSheet,
-    setShowSendActionDialog: ui.setShowSendActionDialog
+    setShowSendActionDialog: ui.setShowSendActionDialog,
+    setShowQRScanner: ui.setShowQRScanner,
+    scannedQRData: ui.scannedQRData,
+    setScannedQRData: ui.setScannedQRData
   });
 
   return (
@@ -141,6 +145,13 @@ export function SendView({
         onOpenChange={ui.setShowSendActionDialog}
         onTapToSend={toOthersFlow.handleTapToSend}
         onContacts={toOthersFlow.handleOpenContacts}
+      />
+
+      {/* QR Code Scanner - For scanning payment QR codes */}
+      <QRCodeScanner
+        open={ui.showQRScanner}
+        onOpenChange={ui.setShowQRScanner}
+        onScanComplete={toOthersFlow.handleQRScanComplete}
       />
 
       {/* To Myself Sheet - Step 2: Payment Method Selection */}
