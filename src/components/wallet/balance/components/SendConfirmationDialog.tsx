@@ -2,7 +2,6 @@
 import { User } from "lucide-react";
 import { ConfirmationDialog } from "./ConfirmationDialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useState, useEffect } from "react";
 
 interface SendConfirmationDialogProps {
@@ -52,13 +51,13 @@ export function SendConfirmationDialog({
       onPrimaryAction={onConfirm}
       onSecondaryAction={onCancel}
       content={
-        <div className="flex flex-col items-center space-y-6 py-2 w-full">
-          <div className="w-12 h-12 rounded-full bg-tribbe-lime/20 flex items-center justify-center">
-            <User className="w-6 h-6 text-tribbe-lime" />
+        <div className="flex flex-col items-center space-y-8 py-4 w-full">
+          <div className="w-14 h-14 rounded-full bg-tribbe-lime/20 flex items-center justify-center">
+            <User className="w-7 h-7 text-tribbe-lime" />
           </div>
           
           <div className="text-center">
-            <h3 className="font-medium text-lg">{recipientName}</h3>
+            <h3 className="font-medium text-xl">{recipientName}</h3>
             <p className="text-sm text-muted-foreground">Recipient</p>
           </div>
           
@@ -73,7 +72,7 @@ export function SendConfirmationDialog({
                 inputMode="numeric"
                 value={localAmount}
                 onChange={handleAmountChange}
-                className="pl-8 text-2xl font-bold text-center h-14"
+                className="pl-8 text-2xl font-bold text-center h-16 border-0 border-b focus-visible:ring-0"
               />
             </div>
           </div>

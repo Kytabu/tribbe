@@ -42,7 +42,7 @@ export function ContactListView({
   return (
     <div className="bg-background fixed inset-0 z-50 flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b">
+      <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="icon" onClick={onClose}>
             <ArrowLeft className="h-5 w-5" />
@@ -52,12 +52,12 @@ export function ContactListView({
       </div>
 
       {/* Search Bar */}
-      <div className="p-4 border-b">
+      <div className="px-4 py-2">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={16} />
           <Input
             placeholder="Search contacts"
-            className="pl-10"
+            className="pl-10 border-0 bg-muted/50 focus-visible:ring-0 focus-visible:ring-offset-0"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -119,7 +119,7 @@ export function ContactListView({
       </div>
 
       {/* Continue Button */}
-      <div className="p-4 border-t">
+      <div className="p-4">
         <Button
           className="w-full"
           disabled={!selectedContacts.length}

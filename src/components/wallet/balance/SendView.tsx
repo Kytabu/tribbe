@@ -119,6 +119,7 @@ export function SendView({
         autoTribbe={autoTribbe}
         setAutoTribbe={setAutoTribbe}
         amount={amount}
+        setAmount={setAmount}
         currencySymbol={currencySymbols[selectedCurrency]}
         filteredRequests={filteredRequests}
         slidingRequests={slidingRequests}
