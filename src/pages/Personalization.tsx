@@ -73,7 +73,10 @@ const Personalization = () => {
         
         {/* Manage Memory Button */}
         <div className="bg-tribbe-grey/50 rounded-lg overflow-hidden border border-tribbe-lime/20 mb-8">
-          <div className="px-4 py-3.5 flex items-center justify-between cursor-pointer" onClick={() => {}}>
+          <div 
+            className="px-4 py-3.5 flex items-center justify-between cursor-pointer" 
+            onClick={() => navigate('/memory')}
+          >
             <span className="text-tribbe-white text-lg">Manage Memory</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-tribbe-white/70">
               <path d="M9 18l6-6-6-6"/>

@@ -11,6 +11,7 @@ import PinEntry from "@/pages/PinEntry";
 import NotFound from "@/pages/NotFound";
 import Setup from "@/pages/Setup";
 import Personalization from "@/pages/Personalization";
+import Memory from "@/pages/Memory";
 import Flami from "@/pages/Flami";
 import Wallet from "@/pages/Wallet";
 import Circles from "@/pages/Circles";
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/pin-entry" element={<PinEntry />} />
         <Route path="/setup" element={<Setup />} />
         <Route path="/personalization" element={<Personalization />} />
+        <Route path="/memory" element={<Memory />} />
         <Route path="/flami" element={<Flami />} />
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/circles" element={<Circles />} />
