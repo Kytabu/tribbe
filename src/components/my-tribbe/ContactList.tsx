@@ -17,13 +17,15 @@ interface ContactListProps {
   setShowContactList: (show: boolean) => void;
   selectedContacts: string[];
   setSelectedContacts: (contacts: string[]) => void;
+  onConfirm?: () => void; // Add onConfirm prop
 }
 
 export function ContactList({ 
   showContactList, 
   setShowContactList, 
   selectedContacts, 
-  setSelectedContacts 
+  setSelectedContacts,
+  onConfirm 
 }: ContactListProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -51,6 +53,14 @@ export function ContactList({
       setSelectedContacts(selectedContacts.filter(id => id !== contactId));
     } else {
       setSelectedContacts([...selectedContacts, contactId]);
+    }
+  };
+
+  const handleConfirm = () => {
+    if (onConfirm) {
+      onConfirm();
+    } else {
+      setShowContactList(false);
     }
   };
 
@@ -110,7 +120,7 @@ export function ContactList({
         </div>
         <div className="border-t border-tribbe-grey p-4 bg-background">
           <Button 
-            onClick={() => setShowContactList(false)}
+            onClick={handleConfirm}
             className="w-full bg-tribbe-lime hover:bg-tribbe-lime/90 text-black"
             disabled={selectedContacts.length === 0}
           >

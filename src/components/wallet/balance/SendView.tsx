@@ -253,6 +253,7 @@ export function SendView({
         setShowContactList={setShowContacts}
         selectedContacts={selectedContacts}
         setSelectedContacts={setSelectedContacts}
+        onConfirm={handleContactSelection}
       />
 
       <RequestsSheet
