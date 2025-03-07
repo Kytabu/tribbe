@@ -18,7 +18,7 @@ const Personalization = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => navigate("/flami")}
+            onClick={() => navigate("/setup")}
             className="mr-2"
           >
             <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
