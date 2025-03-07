@@ -19,6 +19,7 @@ import MyTribbe from "@/pages/MyTribbe";
 import SnapToPay from "@/pages/SnapToPay";
 import StreetCred from "@/pages/StreetCred";
 import Notifications from "@/pages/Notifications";
+import DataControls from "@/pages/DataControls";
 
 const App = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/snap-to-pay" element={<SnapToPay />} />
         <Route path="/street-cred" element={<StreetCred />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/data-controls" element={<DataControls />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

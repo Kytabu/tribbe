@@ -48,7 +48,7 @@ export const AccountSection = () => {
       <SettingItem 
         icon={<Database className="w-5 h-5" />} 
         label="Data Controls" 
-        onClick={() => {}} 
+        onClick={() => navigate("/data-controls")} 
       />
       
       <SettingItem 
