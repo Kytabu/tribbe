@@ -14,6 +14,7 @@ type ToOthersFlowProps = {
   recipientName: string;
   setRecipientName: (name: string) => void;
   setShowToOthersSheet: (show: boolean) => void;
+  setShowSendActionDialog: (show: boolean) => void;
 };
 
 export function useToOthersFlow({
@@ -27,7 +28,8 @@ export function useToOthersFlow({
   setSelectedContacts,
   recipientName,
   setRecipientName,
-  setShowToOthersSheet
+  setShowToOthersSheet,
+  setShowSendActionDialog
 }: ToOthersFlowProps) {
   
   const handleToOthersClick = () => {
@@ -45,7 +47,28 @@ export function useToOthersFlow({
     }
     setShowToOthersSheet(false);
     
-    // Open contacts sheet after amount is entered
+    // Open the action selection dialog instead of contacts directly
+    setTimeout(() => {
+      setShowSendActionDialog(true);
+    }, 300);
+  };
+
+  const handleTapToSend = () => {
+    setShowSendActionDialog(false);
+    
+    // Set a default recipient
+    setRecipientName("Nearby recipient");
+    
+    // Show send confirmation dialog
+    setTimeout(() => {
+      setShowSendConfirmation(true);
+    }, 300);
+  };
+
+  const handleOpenContacts = () => {
+    setShowSendActionDialog(false);
+    
+    // Open contacts sheet
     setTimeout(() => {
       setShowContacts(true);
     }, 300);
@@ -112,6 +135,8 @@ export function useToOthersFlow({
   return {
     handleToOthersClick,
     handleToOthersSheetConfirm,
+    handleTapToSend,
+    handleOpenContacts,
     handleContactSelection,
     handleConfirmSend,
     handleCancelSend

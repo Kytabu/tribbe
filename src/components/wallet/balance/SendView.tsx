@@ -10,6 +10,7 @@ import { ToMyselfSheet } from "./components/ToMyselfSheet";
 import { ToOthersSheet } from "./components/ToOthersSheet";
 import { ToMyselfPaymentMethodSheet } from "./components/ToMyselfPaymentMethodSheet";
 import { TransferConfirmationDialog } from "./components/TransferConfirmationDialog";
+import { SendActionDialog } from "./components/SendActionDialog";
 
 export function SendView({
   amount,
@@ -57,7 +58,8 @@ export function SendView({
     setSelectedContacts: ui.setSelectedContacts,
     recipientName: ui.recipientName,
     setRecipientName: ui.setRecipientName,
-    setShowToOthersSheet: ui.setShowToOthersSheet
+    setShowToOthersSheet: ui.setShowToOthersSheet,
+    setShowSendActionDialog: ui.setShowSendActionDialog
   });
 
   return (
@@ -131,6 +133,14 @@ export function SendView({
         selectedCurrency={selectedCurrency}
         currencySymbol={currencySymbols[selectedCurrency]}
         onSend={toOthersFlow.handleToOthersSheetConfirm}
+      />
+
+      {/* Send Action Dialog - Step 2: Choose send method */}
+      <SendActionDialog
+        open={ui.showSendActionDialog}
+        onOpenChange={ui.setShowSendActionDialog}
+        onTapToSend={toOthersFlow.handleTapToSend}
+        onContacts={toOthersFlow.handleOpenContacts}
       />
 
       {/* To Myself Sheet - Step 2: Payment Method Selection */}
