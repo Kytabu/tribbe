@@ -32,25 +32,32 @@ export function SendActionButtons({
         info="Fast"
         onClick={onToOthersClick}
       />
-      <TribbeButton
-        imagePath="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png"
-        label="Requests to me"
-        info="12"
-        onClick={onRequestsClick}
-        endContent={
-          <div className="flex items-center gap-2">
-            <Label htmlFor="auto-tribbe" className="text-tribbe-sage group-hover:text-tribbe-lime cursor-pointer">
-              Automate
-            </Label>
-            <Switch
-              id="auto-tribbe"
-              checked={autoTribbe}
-              onCheckedChange={setAutoTribbe}
-              className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border border-tribbe-lime"
+      <div className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group flex items-center">
+        <div className="flex justify-between items-center w-full" onClick={onRequestsClick}>
+          <div className="flex items-center gap-2 cursor-pointer">
+            <img 
+              src="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png"
+              alt="Requests Icon"
+              className="w-5 h-5 object-contain"
             />
+            <span className="text-tribbe-sage group-hover:text-tribbe-lime">Requests to me</span>
           </div>
-        }
-      />
+          <div className="flex items-center gap-2">
+            <span className="font-medium group-hover:text-tribbe-lime cursor-pointer" onClick={onRequestsClick}>12</span>
+            <div className="flex items-center gap-2 ml-4">
+              <Label htmlFor="auto-tribbe" className="text-tribbe-sage group-hover:text-tribbe-lime cursor-pointer">
+                Automate
+              </Label>
+              <Switch
+                id="auto-tribbe"
+                checked={autoTribbe}
+                onCheckedChange={setAutoTribbe}
+                className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border border-tribbe-lime"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
