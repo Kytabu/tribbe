@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "@/hooks/use-toast";
 import { formatPhoneNumber, unformatPhoneNumber } from "./utils/phoneFormatter";
 
@@ -32,6 +32,13 @@ export function useContactList({
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [showTransferConfirmation, setShowTransferConfirmation] = useState(false);
   const [selectedContactDetails, setSelectedContactDetails] = useState<{name: string, phone: string} | null>(null);
+
+  // Effect to reset transfer confirmation when success dialog is shown
+  useEffect(() => {
+    if (showSuccessDialog) {
+      setShowTransferConfirmation(false);
+    }
+  }, [showSuccessDialog]);
 
   const contacts = [
     { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
@@ -143,12 +150,15 @@ export function useContactList({
       setShowPinEntry(false);
       setShowPhoneEntry(false);
       setPinCode("");
+      // Make sure to clear the transfer confirmation state
       setShowTransferConfirmation(false);
+      // Show success dialog after completing pin entry
       setShowSuccessDialog(true);
     }
   };
 
   const handleTransactionComplete = () => {
+    // Reset all states to prevent dialogs from reappearing
     setShowSuccessDialog(false);
     setShowTransferConfirmation(false);
     setShowPinEntry(false);
