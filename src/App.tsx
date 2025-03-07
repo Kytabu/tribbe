@@ -11,6 +11,13 @@ import PinEntry from "@/pages/PinEntry";
 import NotFound from "@/pages/NotFound";
 import Setup from "@/pages/Setup";
 import Personalization from "@/pages/Personalization";
+import Flami from "@/pages/Flami";
+import Wallet from "@/pages/Wallet";
+import Circles from "@/pages/Circles";
+import MyTribbe from "@/pages/MyTribbe";
+import SnapToPay from "@/pages/SnapToPay";
+import StreetCred from "@/pages/StreetCred";
+import Notifications from "@/pages/Notifications";
 
 const App = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -26,6 +33,13 @@ const App = () => {
         <Route path="/pin-entry" element={<PinEntry />} />
         <Route path="/setup" element={<Setup />} />
         <Route path="/personalization" element={<Personalization />} />
+        <Route path="/flami" element={<Flami />} />
+        <Route path="/wallet" element={<Wallet />} />
+        <Route path="/circles" element={<Circles />} />
+        <Route path="/my-tribbe" element={<MyTribbe />} />
+        <Route path="/snap-to-pay" element={<SnapToPay />} />
+        <Route path="/street-cred" element={<StreetCred />} />
+        <Route path="/notifications" element={<Notifications />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

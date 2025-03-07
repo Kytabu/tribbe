@@ -7,6 +7,7 @@ import { AppSidebar } from "@/components/layout/AppSidebar";
 import { useChat } from "@/hooks/useChat";
 import { getCurrentLevel } from "@/features/creditScore/utils";
 import { getWelcomeMessages } from "@/features/flami/welcomeMessages";
+import { AppLayout } from "@/components/layout/AppLayout";
 
 export default function Flami() {
   // Credit score is hard-coded for now, in a real app would come from an API
@@ -40,27 +41,24 @@ export default function Flami() {
   }, [setMessages, setActivityMessages]);
 
   return (
-    <SidebarProvider defaultOpen={false}>
-      <div className="flex min-h-screen w-full">
-        <AppSidebar />
-        <div className="flex-1 flex flex-col h-screen bg-background">
-          <FlamiHeader currentLevelColor={currentLevel.color} />
-          <div className="flex-1 relative">
-            <FlamiTabs
-              messages={messages}
-              activityMessages={activityMessages}
-              chatInput={chatInput}
-              activityInput={activityInput}
-              isLoading={isLoading}
-              onChatInputChange={handleChatInputChange}
-              onActivityInputChange={handleActivityInputChange}
-              onChatSubmit={handleChatSubmit}
-              onActivitySubmit={handleActivitySubmit}
-              onSuggestionClick={handleSuggestionClick}
-            />
-          </div>
+    <AppLayout>
+      <div className="flex-1 flex flex-col h-screen bg-background">
+        <FlamiHeader currentLevelColor={currentLevel.color} />
+        <div className="flex-1 relative">
+          <FlamiTabs
+            messages={messages}
+            activityMessages={activityMessages}
+            chatInput={chatInput}
+            activityInput={activityInput}
+            isLoading={isLoading}
+            onChatInputChange={handleChatInputChange}
+            onActivityInputChange={handleActivityInputChange}
+            onChatSubmit={handleChatSubmit}
+            onActivitySubmit={handleActivitySubmit}
+            onSuggestionClick={handleSuggestionClick}
+          />
         </div>
       </div>
-    </SidebarProvider>
+    </AppLayout>
   );
 }
