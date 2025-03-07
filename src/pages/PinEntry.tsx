@@ -94,7 +94,9 @@ const PinEntry = () => {
     if (pin.length < 4) {
       setPin(prev => prev + number);
       if (pin.length === 3) {
-        verifyPin();
+        setTimeout(() => {
+          verifyPin();
+        }, 300); // Small delay to show the 4th dot filled
       }
     }
   };
