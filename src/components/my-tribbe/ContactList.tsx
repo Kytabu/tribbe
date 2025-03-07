@@ -462,6 +462,13 @@ export function ContactList({
   const handleTransactionComplete = () => {
     setShowSuccessDialog(false);
     setShowTransferConfirmation(false);
+    setShowPinEntry(false);
+    setShowPhoneEntry(false);
+    setPinCode("");
+    setPhoneNumber("");
+    setManualContactName("");
+    setSelectedContactDetails(null);
+    setSelectedContacts([]);
     
     toast({
       title: "Transaction complete",
@@ -487,4 +494,3 @@ export function ContactList({
     </Sheet>
   );
 }
-
