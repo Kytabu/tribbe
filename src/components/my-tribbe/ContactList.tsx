@@ -1,4 +1,3 @@
-
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,6 +30,8 @@ export function ContactList({
   const [showPhoneEntry, setShowPhoneEntry] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [manualContactName, setManualContactName] = useState("");
+  const [showPinEntry, setShowPinEntry] = useState(false);
+  const [pinCode, setPinCode] = useState("");
 
   const contacts = [
     { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
@@ -78,17 +79,31 @@ export function ContactList({
 
   const handlePhoneNumberSubmit = () => {
     if (phoneNumber.length > 0) {
-      // Create a temporary contact for the manual phone number
+      setShowPinEntry(true);
+    }
+  };
+
+  const handlePinDigitInput = (digit: string) => {
+    if (pinCode.length < 4) {
+      setPinCode(prev => prev + digit);
+    }
+  };
+
+  const handlePinDeleteDigit = () => {
+    setPinCode(prev => prev.slice(0, -1));
+  };
+
+  const handlePinSubmit = () => {
+    if (pinCode.length === 4) {
       const manualContactId = `manual-${Date.now()}`;
       const displayName = manualContactName.trim() || `+${phoneNumber}`;
       
-      // Select this contact
       setSelectedContacts([manualContactId]);
       
-      // Return to contact list view before confirming
+      setShowPinEntry(false);
       setShowPhoneEntry(false);
+      setPinCode("");
       
-      // Wait a moment before confirming to show selection
       setTimeout(() => {
         if (onConfirm) {
           onConfirm();
@@ -263,11 +278,86 @@ export function ContactList({
     );
   };
 
+  const renderPinEntry = () => {
+    return (
+      <>
+        <div className="p-6 border-b border-tribbe-grey flex items-center">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setShowPinEntry(false)}
+            className="mr-2 text-gray-400 hover:text-white"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <h2 className="text-xl font-bold text-white">Enter PIN</h2>
+        </div>
+        
+        <div className="flex flex-col items-center px-6 py-12">
+          <div className="text-center mb-8">
+            <p className="text-white/70 text-sm">Enter your PIN to confirm the transaction</p>
+          </div>
+          
+          <div className="flex justify-center space-x-6 mb-12">
+            {[...Array(4)].map((_, index) => (
+              <div
+                key={index}
+                className={`w-6 h-6 rounded-full border-2 ${
+                  pinCode.length > index ? "bg-tribbe-lime border-tribbe-lime" : "border-tribbe-lime"
+                }`}
+              />
+            ))}
+          </div>
+          
+          <div className="grid grid-cols-3 gap-6 w-full mb-8">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+              <button
+                key={num}
+                onClick={() => handlePinDigitInput(num.toString())}
+                className="flex items-center justify-center h-14 text-2xl font-medium text-white hover:bg-tribbe-grey/30 rounded-md transition-colors"
+              >
+                {num}
+              </button>
+            ))}
+            <button className="flex items-center justify-center h-14 text-2xl font-medium text-white">
+              {/* Empty space */}
+            </button>
+            <button
+              onClick={() => handlePinDigitInput("0")}
+              className="flex items-center justify-center h-14 text-2xl font-medium text-white hover:bg-tribbe-grey/30 rounded-md transition-colors"
+            >
+              0
+            </button>
+            <button
+              onClick={handlePinDeleteDigit}
+              className="flex items-center justify-center h-14 text-2xl font-medium text-white hover:bg-tribbe-grey/30 rounded-md transition-colors"
+            >
+              <Delete className="h-6 w-6" />
+            </button>
+          </div>
+          
+          {pinCode.length === 4 && (
+            <Button
+              onClick={handlePinSubmit}
+              className="w-full max-w-xs bg-tribbe-lime hover:bg-tribbe-lime/90 text-black h-12 rounded-full"
+            >
+              <Check className="mr-2 h-5 w-5" />
+              Confirm
+            </Button>
+          )}
+        </div>
+      </>
+    );
+  };
+
   return (
     <Sheet open={showContactList} onOpenChange={setShowContactList}>
       <SheetContent className="w-full sm:max-w-md p-0">
-        {showPhoneEntry ? renderPhoneEntry() : renderContactList()}
+        {showPinEntry ? renderPinEntry() : 
+         showPhoneEntry ? renderPhoneEntry() : 
+         renderContactList()}
       </SheetContent>
     </Sheet>
   );
 }
+
