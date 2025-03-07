@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
@@ -130,6 +131,12 @@ const AuthPage = () => {
     setVerificationCode(prev => prev.slice(0, -1));
   };
 
+  const handleGoBack = () => {
+    setIsVerifying(false);
+    setVerificationCode("");
+    setIsPhoneFlow(true);
+  };
+
   return (
     <div className="min-h-screen bg-tribbe-grey flex flex-col px-4 sm:px-6">
       {isEmailFlow ? (
@@ -151,6 +158,7 @@ const AuthPage = () => {
           onDelete={handleDelete}
           onSubmit={handleVerificationSubmit}
           loading={loading}
+          onGoBack={handleGoBack}
         />
       ) : (
         <AuthOptions

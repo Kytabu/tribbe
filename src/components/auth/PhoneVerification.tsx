@@ -8,6 +8,7 @@ interface PhoneVerificationProps {
   onDelete: () => void;
   onSubmit: () => void;
   loading?: boolean;
+  onGoBack?: () => void;
 }
 
 export const PhoneVerification = ({
@@ -15,7 +16,8 @@ export const PhoneVerification = ({
   onNumberClick,
   onDelete,
   onSubmit,
-  loading = false
+  loading = false,
+  onGoBack
 }: PhoneVerificationProps) => {
   return (
     <div className="min-h-screen bg-tribbe-grey flex flex-col">
@@ -43,21 +45,56 @@ export const PhoneVerification = ({
           </div>
 
           <div className="grid grid-cols-3 gap-8 mb-8">
-            {[...Array(9)].map((_, i) => (
+            {[1, 2, 3].map((num) => (
               <button
-                key={i + 1}
-                onClick={() => onNumberClick((i + 1).toString())}
+                key={num}
+                onClick={() => onNumberClick(num.toString())}
                 className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
                 disabled={loading}
               >
-                {i + 1}
+                {num}
+              </button>
+            ))}
+            {[4, 5, 6].map((num) => (
+              <button
+                key={num}
+                onClick={() => onNumberClick(num.toString())}
+                className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
+                disabled={loading}
+              >
+                {num}
               </button>
             ))}
             <button
-              className="opacity-0"
-              disabled={true}
+              key={7}
+              onClick={() => onNumberClick("7")}
+              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
+              disabled={loading}
             >
-              &nbsp;
+              7
+            </button>
+            <button
+              key={8}
+              onClick={() => onNumberClick("8")}
+              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
+              disabled={loading}
+            >
+              8
+            </button>
+            <button
+              key={9}
+              onClick={() => onNumberClick("9")}
+              className="text-tribbe-lime text-3xl font-medium hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
+              disabled={loading}
+            >
+              9
+            </button>
+            <button
+              onClick={onGoBack}
+              className="text-tribbe-lime text-sm hover:opacity-80 transition-opacity w-16 h-16 flex items-center justify-center mx-auto"
+              disabled={loading}
+            >
+              Go back
             </button>
             <button
               onClick={() => onNumberClick("0")}
