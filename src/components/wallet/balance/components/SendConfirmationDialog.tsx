@@ -30,14 +30,14 @@ export function SendConfirmationDialog({
   // Update local amount when the amount prop changes or dialog opens
   useEffect(() => {
     if (open) {
-      setLocalAmount(amount);
+      setLocalAmount(amount === "0" ? "" : amount);
     }
   }, [amount, open]);
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, '');
     setLocalAmount(value);
-    setAmount(value);
+    setAmount(value || "0"); // Ensure we don't pass empty string to parent
   };
 
   return (
