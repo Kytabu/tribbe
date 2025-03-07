@@ -12,27 +12,27 @@ const Memory = () => {
   const memories = [
     {
       id: 1,
-      content: "Tonee works as a UI/UX designer at a tech startup in San Francisco. She has been with the company for 3 years and is passionate about creating intuitive user experiences.",
+      content: "Tonee has lent KES 5,000 to her friend Sarah from her Circle. The loan is expected to be repaid by the end of next month with a 5% interest rate agreed upon by both parties.",
     },
     {
       id: 2,
-      content: "Tonee enjoys hiking on weekends and has completed several trails in Yosemite National Park last month. She mentioned wanting to try the Half Dome hike next summer.",
+      content: "Tonee is saving for a down payment on an apartment in Nairobi. Her goal is to save KES 500,000 over the next 18 months. She has currently saved KES 150,000 in her Tribbe savings account.",
     },
     {
       id: 3,
-      content: "Tonee is planning to launch a side project, an app called 'TrailMates' that helps hikers find companions for group hikes. She's looking for a developer partner and considering using React Native for the mobile app.",
+      content: "Tonee participates in a weekly savings Circle with 5 friends where each contributes KES 2,000 weekly. She's scheduled to receive the collective pool of KES 60,000 in 3 weeks, which she plans to use for a web design course.",
     },
     {
       id: 4,
-      content: "Tonee has a rescue dog named Pixel, a 3-year-old Border Collie mix. She adopted him last year from a local shelter and often takes him along on her hiking trips.",
+      content: "Tonee borrowed KES 15,000 from her Circle last quarter to invest in cryptocurrency. She has repaid 60% of the loan ahead of schedule, which has positively impacted her Trust Score.",
     },
     {
       id: 5,
-      content: "Tonee is learning Spanish in preparation for a trip to Mexico City next spring. She practices daily using language apps and wants to be conversationally fluent before her trip.",
+      content: "Tonee has set up auto-lending for small amounts between KES 1,000 - 3,000 within her close Circle. She prefers a 3% interest rate for friends and 5% for extended network members.",
     },
     {
       id: 6,
-      content: "Tonee recently started exploring cryptocurrency investments. She's particularly interested in Ethereum and has asked for resources to understand blockchain technology better.",
+      content: "Tonee is considering starting a side business making handcrafted jewelry and has inquired about microfinancing options through the app. She estimates needing KES 25,000 initial capital.",
     }
   ];
 
