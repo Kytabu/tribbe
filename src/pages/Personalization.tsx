@@ -1,14 +1,13 @@
 
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, BookUser, Brain } from "lucide-react";
+import { ArrowLeft, Brain } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 
 const Personalization = () => {
   const navigate = useNavigate();
-  const [customizeEnabled, setCustomizeEnabled] = useState(true);
   const [memoryEnabled, setMemoryEnabled] = useState(true);
 
   return (
@@ -24,19 +23,6 @@ const Personalization = () => {
             <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
           </Button>
           <h1 className="text-xl font-semibold text-tribbe-lime">Personalization</h1>
-        </div>
-        
-        {/* Customize Flami Toggle */}
-        <div className="bg-tribbe-grey/50 rounded-lg overflow-hidden border border-tribbe-lime/20 px-4 py-3.5 mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <BookUser className="w-6 h-6 text-tribbe-lime" />
-            <span className="text-tribbe-white text-lg">Customize Flami</span>
-          </div>
-          <Switch 
-            checked={customizeEnabled}
-            onCheckedChange={setCustomizeEnabled}
-            className="data-[state=checked]:bg-tribbe-lime data-[state=checked]:border-tribbe-lime"
-          />
         </div>
         
         {/* Personalization Section */}
