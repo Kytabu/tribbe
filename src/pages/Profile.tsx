@@ -1,137 +1,43 @@
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { 
-  User,
-  Crown,
-  ChevronRight,
-  Mail,
-  Phone,
-  LogOut
-} from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { useState } from "react";
-import { toast } from "@/components/ui/use-toast";
-import { PageHeader } from "@/components/layout/PageHeader";
 
-interface ProfileData {
-  full_name: string;
-  email: string;
-  phone_number: string;
-  username: string;
-  national_id: string;
-  premium: {
-    status: string;
-    since: string;
-    benefits: string[];
-  };
-}
+// Import our setting section components
+import { AccountSection } from "@/components/settings/AccountSection";
+import { AppSection } from "@/components/settings/AppSection";
+import { SpeechSection } from "@/components/settings/SpeechSection";
+import { VoiceModeSection } from "@/components/settings/VoiceModeSection";
+import { SuggestionsSection } from "@/components/settings/SuggestionsSection";
+import { AboutSection } from "@/components/settings/AboutSection";
+import { LogoutButton } from "@/components/settings/LogoutButton";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [profile] = useState<ProfileData>({
-    full_name: "Tonee Ndungu",
-    email: "tonee@tribbe.io",
-    phone_number: "+254 721 583 605",
-    username: "@tonee",
-    national_id: "xxx xxx xxx xxx",
-    premium: {
-      status: "Free Account",
-      since: "",
-      benefits: [
-        "Send Reminders",
-        "More Circles",
-        "More Tribbes",
-        "Premium Access",
-        "Rewards and Offers"
-      ]
-    }
-  });
-
-  const handleSignOut = () => {
-    navigate("/auth");
-    toast({
-      description: "Signed out from demo account",
-    });
-  };
-
-  const handlePremiumClick = () => {
-    toast({
-      title: "Premium Features Available",
-      description: "Get premium love on Tribbe to unlock exclusive benefits and features",
-    });
-    navigate("/premium");
-  };
 
   return (
     <AppLayout>
-      <div className="container max-w-4xl mx-auto py-8">
-        <PageHeader title="Profile" titleClassName="text-2xl font-bold" />
-        
-        {/* Profile Summary */}
-        <div className="bg-card rounded-lg p-6 mb-6">
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
-              <img 
-                src="/lovable-uploads/4a593a53-ec2e-4ab3-a500-c2147809af06.png"
-                alt="Tonee Ndungu"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h2 className="text-xl font-semibold">{profile.full_name}</h2>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail className="w-4 h-4" />
-                <span>{profile.email}</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                <Phone className="w-4 h-4" />
-                <span>{profile.phone_number}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          {/* Personal Information Section */}
-          <div 
-            className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
-            onClick={() => navigate("/account")}
-          >
-            <div className="flex items-center gap-3">
-              <User className="w-5 h-5 text-primary" />
-              <div>
-                <h2 className="font-medium">Personal Information</h2>
-                <p className="text-sm text-muted-foreground">Profile details, phone number, ID verification</p>
-              </div>
-            </div>
-            <ChevronRight className="w-5 h-5" />
-          </div>
-
-          {/* Premium Features Section */}
-          <div 
-            className="bg-card rounded-lg p-4 flex items-center justify-between hover:bg-accent/50 transition-colors cursor-pointer"
-            onClick={handlePremiumClick}
-          >
-            <div className="flex items-center gap-3">
-              <Crown className="w-5 h-5 text-[#A9FF22]" />
-              <div>
-                <h2 className="font-medium">Premium Features</h2>
-                <p className="text-sm text-muted-foreground">Upgrade your account, exclusive benefits</p>
-              </div>
-            </div>
-            <ChevronRight className="w-5 h-5" />
-          </div>
-
-          {/* Sign Out Button */}
+      <div className="container max-w-md mx-auto py-6">
+        <div className="flex items-center mb-6">
           <Button
             variant="ghost"
-            className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
-            onClick={handleSignOut}
+            size="icon"
+            onClick={() => navigate(-1)}
+            className="mr-2"
           >
-            <LogOut className="w-5 h-5 mr-2" />
-            Sign Out
+            <ArrowLeft className="h-5 w-5 text-tribbe-lime" />
           </Button>
+          <h1 className="text-xl font-semibold text-tribbe-lime">Profile</h1>
         </div>
+        
+        <AccountSection />
+        <AppSection />
+        <SpeechSection />
+        <VoiceModeSection />
+        <SuggestionsSection />
+        <AboutSection />
+        <LogoutButton />
       </div>
     </AppLayout>
   );

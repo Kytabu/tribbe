@@ -9,7 +9,7 @@ import Onboarding from "@/pages/Onboarding";
 import PinSetup from "@/pages/PinSetup";
 import PinEntry from "@/pages/PinEntry";
 import NotFound from "@/pages/NotFound";
-import Setup from "@/pages/Setup";
+import Profile from "@/pages/Profile";
 import Personalization from "@/pages/Personalization";
 import Memory from "@/pages/Memory";
 import Flami from "@/pages/Flami";
@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/pin-setup" element={<PinSetup />} />
         <Route path="/pin-entry" element={<PinEntry />} />
-        <Route path="/setup" element={<Setup />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/personalization" element={<Personalization />} />
         <Route path="/memory" element={<Memory />} />
         <Route path="/flami" element={<Flami />} />

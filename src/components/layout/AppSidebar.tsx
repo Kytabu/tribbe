@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
-import { Settings } from "lucide-react";
 import { navigationItems } from "./sidebar/navigationConfig";
 import { getCurrentLevel } from "./sidebar/streetCredUtils";
 import { ProfileButton } from "./sidebar/ProfileButton";
@@ -26,11 +25,6 @@ export function AppSidebar() {
       icon: () => <ProfileButton currentLevel={currentLevel} />,
       label: "Tonee Ndungu",
       href: "/profile",
-    },
-    {
-      icon: Settings,
-      label: "Setup",
-      href: "/setup",
     },
   ];
 
