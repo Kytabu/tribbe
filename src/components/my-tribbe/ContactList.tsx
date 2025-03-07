@@ -1,8 +1,10 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, X, Check, Phone, ArrowLeft, ArrowRight, Delete } from "lucide-react";
+import { Search, X, Check, Phone, ArrowLeft, ArrowRight, Delete, ThumbsUp } from "lucide-react";
 import { useState } from "react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { toast } from "@/hooks/use-toast";
 
 interface Contact {
   id: string;
@@ -32,6 +34,7 @@ export function ContactList({
   const [manualContactName, setManualContactName] = useState("");
   const [showPinEntry, setShowPinEntry] = useState(false);
   const [pinCode, setPinCode] = useState("");
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   const contacts = [
     { id: "1", name: "Alice Smith", phone: "+254 712 345 678", image: "/lovable-uploads/a5a73b4a-8203-4833-8bd4-842288944144.png" },
@@ -102,13 +105,7 @@ export function ContactList({
       setShowPhoneEntry(false);
       setPinCode("");
       
-      setTimeout(() => {
-        if (onConfirm) {
-          onConfirm();
-        } else {
-          setShowContactList(false);
-        }
-      }, 300);
+      setShowSuccessDialog(true);
     }
   };
 
@@ -353,6 +350,51 @@ export function ContactList({
     );
   };
 
+  const renderSuccessDialog = () => {
+    return (
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="sm:max-w-md">
+          <div className="flex flex-col items-center justify-center py-6">
+            <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+              <ThumbsUp className="w-6 h-6 text-tribbe-lime" />
+            </div>
+            
+            <h2 className="text-xl font-bold mb-2">Transaction Complete</h2>
+            
+            <p className="text-center text-base font-medium mb-1">
+              Money sent successfully
+            </p>
+            <p className="text-center text-sm text-muted-foreground mb-6">
+              Your transaction has been processed and the funds have been transferred.
+            </p>
+            
+            <Button 
+              onClick={handleTransactionComplete}
+              className="w-full max-w-xs bg-tribbe-lime hover:bg-tribbe-lime/90 text-black h-12 rounded-full"
+            >
+              Done
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
+  const handleTransactionComplete = () => {
+    setShowSuccessDialog(false);
+    
+    toast({
+      title: "Transaction complete",
+      description: "Your money has been sent successfully",
+    });
+    
+    if (onConfirm) {
+      onConfirm();
+    } else {
+      setShowContactList(false);
+    }
+  };
+
   return (
     <Sheet open={showContactList} onOpenChange={setShowContactList}>
       <SheetContent className="w-full sm:max-w-md p-0">
@@ -360,6 +402,7 @@ export function ContactList({
          showPhoneEntry ? renderPhoneEntry() : 
          renderContactList()}
       </SheetContent>
+      {renderSuccessDialog()}
     </Sheet>
   );
 }
