@@ -38,6 +38,7 @@ export function SendActionButtons({
         label="To Others"
         info="Fast"
         onClick={onToOthersClick}
+        showProfileCircle={true}
       />
       <div className="w-full h-[60px] px-4 rounded-lg border bg-card text-card-foreground hover:bg-transparent group flex items-center">
         <div className="flex justify-between items-center w-full" onClick={onRequestsClick}>
