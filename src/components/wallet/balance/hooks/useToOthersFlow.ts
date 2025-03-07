@@ -13,6 +13,7 @@ type ToOthersFlowProps = {
   setSelectedContacts: (contacts: string[]) => void;
   recipientName: string;
   setRecipientName: (name: string) => void;
+  setShowToOthersSheet: (show: boolean) => void;
 };
 
 export function useToOthersFlow({
@@ -25,10 +26,16 @@ export function useToOthersFlow({
   selectedContacts,
   setSelectedContacts,
   recipientName,
-  setRecipientName
+  setRecipientName,
+  setShowToOthersSheet
 }: ToOthersFlowProps) {
   
   const handleToOthersClick = () => {
+    // Instead of validating amount here, just show the sheet
+    setShowToOthersSheet(true);
+  };
+
+  const handleToOthersSheetConfirm = () => {
     if (!amount || parseFloat(amount) <= 0) {
       toast({
         title: "Enter an amount",
@@ -36,7 +43,12 @@ export function useToOthersFlow({
       });
       return;
     }
-    setShowContacts(true);
+    setShowToOthersSheet(false);
+    
+    // Open contacts sheet after amount is entered
+    setTimeout(() => {
+      setShowContacts(true);
+    }, 300);
   };
 
   const handleContactSelection = () => {
@@ -99,6 +111,7 @@ export function useToOthersFlow({
 
   return {
     handleToOthersClick,
+    handleToOthersSheetConfirm,
     handleContactSelection,
     handleConfirmSend,
     handleCancelSend
