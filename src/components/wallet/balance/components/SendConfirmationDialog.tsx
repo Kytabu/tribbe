@@ -1,5 +1,5 @@
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
 
@@ -27,6 +27,9 @@ export function SendConfirmationDialog({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Confirm Transfer</DialogTitle>
+          <DialogDescription className="sr-only">
+            Confirm money transfer details
+          </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="flex items-center space-x-4">
@@ -43,17 +46,17 @@ export function SendConfirmationDialog({
             <p className="text-2xl font-bold">{currencySymbol}{amount}</p>
           </div>
         </div>
-        <DialogFooter className="flex space-x-2 sm:space-x-0">
+        <DialogFooter className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
           <Button 
             variant="outline" 
             onClick={onCancel}
-            className="flex-1 sm:flex-none"
+            className="w-full sm:w-auto"
           >
             Cancel
           </Button>
           <Button 
             onClick={onConfirm}
-            className="flex-1 sm:flex-none"
+            className="w-full sm:w-auto"
           >
             Confirm
           </Button>

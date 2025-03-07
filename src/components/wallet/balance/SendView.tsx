@@ -36,31 +36,33 @@ export function SendView({
 
   // Action handlers
   const handleToMyselfClick = () => {
-    if (amount && parseFloat(amount) > 0) {
-      setShowPaymentMethods(true);
-    } else {
+    if (!amount || parseFloat(amount) <= 0) {
       toast({
         title: "Enter an amount",
-        description: "Please enter a valid amount before proceeding",
+        description: "Please enter a valid amount before proceeding"
       });
+      return;
     }
+    setShowPaymentMethods(true);
   };
 
   const handleToOthersClick = () => {
-    if (amount && parseFloat(amount) > 0) {
-      setShowContacts(true);
-    } else {
+    if (!amount || parseFloat(amount) <= 0) {
       toast({
         title: "Enter an amount",
-        description: "Please enter a valid amount before proceeding",
+        description: "Please enter a valid amount before proceeding"
       });
+      return;
     }
+    setShowContacts(true);
   };
 
   const handlePaymentMethodSelect = (method: string) => {
     setSelectedPaymentMethod(method);
     setShowPaymentMethods(false);
-    setShowConfirmation(true);
+    setTimeout(() => {
+      setShowConfirmation(true);
+    }, 100); // Small delay to avoid UI conflicts
   };
 
   const handleConfirmationDone = () => {
@@ -73,6 +75,43 @@ export function SendView({
     setSelectedPaymentMethod(null);
   };
 
+  const handleContactSelection = () => {
+    if (selectedContacts.length === 0) {
+      toast({
+        title: "No contact selected",
+        description: "Please select a contact to send money",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    const contacts = [
+      { id: "1", name: "Alice Smith" },
+      { id: "2", name: "Bob Johnson" },
+      { id: "3", name: "Carol Williams" },
+      { id: "4", name: "David Brown" },
+      { id: "5", name: "Eva Davis" },
+      { id: "6", name: "Frank Miller" },
+      { id: "7", name: "Grace Taylor" },
+      { id: "8", name: "Henry Wilson" }
+    ];
+    
+    const selectedContact = contacts.find(contact => contact.id === selectedContacts[0]);
+    if (selectedContact) {
+      setRecipientName(selectedContact.name);
+      setShowContacts(false);
+      setTimeout(() => {
+        setShowSendConfirmation(true);
+      }, 100); // Small delay to ensure smooth transition
+    } else {
+      toast({
+        title: "Contact not found",
+        description: "Selected contact could not be found",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleConfirmSend = () => {
     toast({
       title: "Transaction complete",
@@ -81,40 +120,6 @@ export function SendView({
     setShowSendConfirmation(false);
     setAmount('');
     setSelectedContacts([]);
-  };
-
-  const handleContactSelection = () => {
-    if (selectedContacts.length > 0) {
-      const contacts = [
-        { id: "1", name: "Alice Smith" },
-        { id: "2", name: "Bob Johnson" },
-        { id: "3", name: "Carol Williams" },
-        { id: "4", name: "David Brown" },
-        { id: "5", name: "Eva Davis" },
-        { id: "6", name: "Frank Miller" },
-        { id: "7", name: "Grace Taylor" },
-        { id: "8", name: "Henry Wilson" }
-      ];
-      
-      const selectedContact = contacts.find(contact => contact.id === selectedContacts[0]);
-      if (selectedContact) {
-        setRecipientName(selectedContact.name);
-        setShowContacts(false);
-        setShowSendConfirmation(true);
-      } else {
-        toast({
-          title: "Contact not found",
-          description: "Selected contact could not be found",
-          variant: "destructive",
-        });
-      }
-    } else {
-      toast({
-        title: "No contact selected",
-        description: "Please select a contact to send money",
-        variant: "destructive",
-      });
-    }
   };
 
   return (
@@ -151,6 +156,15 @@ export function SendView({
         onDone={handleConfirmationDone}
       />
 
+      {/* Contact List for selecting recipients */}
+      <ContactList
+        showContactList={showContacts}
+        setShowContactList={setShowContacts}
+        selectedContacts={selectedContacts}
+        setSelectedContacts={setSelectedContacts}
+        onConfirm={handleContactSelection}
+      />
+
       {/* Confirmation Dialog for Sending to Others */}
       <SendConfirmationDialog
         open={showSendConfirmation}
@@ -160,15 +174,6 @@ export function SendView({
         currencySymbol={currencySymbols[selectedCurrency]}
         onCancel={() => setShowSendConfirmation(false)}
         onConfirm={handleConfirmSend}
-      />
-
-      {/* Contact List for selecting recipients */}
-      <ContactList
-        showContactList={showContacts}
-        setShowContactList={setShowContacts}
-        selectedContacts={selectedContacts}
-        setSelectedContacts={setSelectedContacts}
-        onConfirm={handleContactSelection}
       />
 
       {/* Money Requests Sheet */}
