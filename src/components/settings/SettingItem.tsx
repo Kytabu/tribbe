@@ -45,18 +45,8 @@ export const SettingItem = ({
       {value && (
         <div className="flex items-center">
           <span className="text-tribbe-white/70 text-sm mr-1">{value}</span>
-          {isClickable && <ChevronRight className="text-tribbe-lime" />}
         </div>
       )}
-      
-      {isClickable && !value && <ChevronRight className="text-tribbe-lime" />}
     </div>
   );
 };
-
-// Helper component for chevron right icon
-const ChevronRight = ({ className = "" }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`text-muted-foreground ${className}`}>
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-);
