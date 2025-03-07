@@ -1,5 +1,8 @@
-import { toast } from "@/hooks/use-toast";
+
 import { SupportedCurrency } from "@/features/wallet/constants";
+import { useToOthersActions } from "./useToOthersActions";
+import { useToOthersQR } from "./useToOthersQR";
+import { useToOthersTransfer } from "./useToOthersTransfer";
 
 type ToOthersFlowProps = {
   amount: string;
@@ -19,166 +22,51 @@ type ToOthersFlowProps = {
   setScannedQRData: (data: string | null) => void;
 };
 
-export function useToOthersFlow({
-  amount,
-  setAmount,
-  selectedCurrency,
-  currencySymbols,
-  setShowContacts,
-  setShowSendConfirmation,
-  selectedContacts,
-  setSelectedContacts,
-  recipientName,
-  setRecipientName,
-  setShowToOthersSheet,
-  setShowSendActionDialog,
-  setShowQRScanner,
-  scannedQRData,
-  setScannedQRData
-}: ToOthersFlowProps) {
+export function useToOthersFlow(props: ToOthersFlowProps) {
+  // Separate actions into focused hooks
+  const actions = useToOthersActions({
+    amount: props.amount,
+    setShowToOthersSheet: props.setShowToOthersSheet,
+    setShowSendActionDialog: props.setShowSendActionDialog,
+    setShowContacts: props.setShowContacts
+  });
   
-  const handleToOthersClick = () => {
-    // Changed to directly show the contacts list instead of the sheet
-    setShowContacts(true);
-  };
-
-  const handleToOthersSheetConfirm = () => {
-    if (!amount || parseFloat(amount) <= 0) {
-      toast({
-        title: "Enter an amount",
-        description: "Please enter a valid amount before proceeding"
-      });
-      return;
-    }
-    setShowToOthersSheet(false);
-    
-    // Open the action selection dialog instead of contacts directly
-    setTimeout(() => {
-      setShowSendActionDialog(true);
-    }, 300);
-  };
-
-  const handleTapToSend = () => {
-    setShowSendActionDialog(false);
-    
-    // Open QR scanner dialog
-    setTimeout(() => {
-      setShowQRScanner(true);
-    }, 300);
-  };
-
-  const handleQRScanComplete = (data: string) => {
-    console.log("QR code scanned:", data);
-    setScannedQRData(data);
-    setShowQRScanner(false);
-    
-    // Parse QR data (example format: "userID:amount:currency")
-    try {
-      const [userId, qrAmount, qrCurrency] = data.split(":");
-      // Set recipient based on scanned data
-      setRecipientName("QR Recipient");
-      
-      // Show send confirmation dialog
-      setTimeout(() => {
-        setShowSendConfirmation(true);
-      }, 300);
-    } catch (error) {
-      console.error("Error parsing QR data:", error);
-      toast({
-        title: "Invalid QR Code",
-        description: "The scanned QR code is not in the expected format",
-        variant: "destructive",
-      });
-      
-      // Show send action dialog again after error
-      setTimeout(() => {
-        setShowSendActionDialog(true);
-      }, 300);
-    }
-  };
-
-  const handleOpenContacts = () => {
-    setShowSendActionDialog(false);
-    
-    // Open contacts sheet
-    setTimeout(() => {
-      setShowContacts(true);
-    }, 300);
-  };
-
-  const handleContactSelection = () => {
-    if (selectedContacts.length === 0) {
-      toast({
-        title: "No contact selected",
-        description: "Please select at least one contact to send money",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    const contacts = [
-      { id: "1", name: "Alice Smith" },
-      { id: "2", name: "Bob Johnson" },
-      { id: "3", name: "Carol Williams" },
-      { id: "4", name: "David Brown" },
-      { id: "5", name: "Eva Davis" },
-      { id: "6", name: "Frank Miller" },
-      { id: "7", name: "Grace Taylor" },
-      { id: "8", name: "Henry Wilson" }
-    ];
-    
-    // Check if this is a manual contact (entered via phone)
-    const isManualContact = selectedContacts[0].startsWith('manual-');
-    
-    if (isManualContact) {
-      // For manual contacts, we can extract the phone number from the ID or use a generic name
-      setRecipientName(recipientName || "Phone Contact");
-    } else {
-      // For existing contacts, look up their name
-      const selectedContact = contacts.find(contact => contact.id === selectedContacts[0]);
-      if (selectedContact) {
-        setRecipientName(selectedContact.name);
-      } else {
-        setRecipientName("Contact");
-      }
-    }
-    
-    setShowContacts(false);
-    
-    // Use setTimeout to ensure smooth transition
-    setTimeout(() => {
-      setShowSendConfirmation(true);
-    }, 300);
-  };
-
-  const handleConfirmSend = () => {
-    setShowSendConfirmation(false);
-    
-    // Show toast notification
-    toast({
-      title: "Transaction complete",
-      description: `${currencySymbols[selectedCurrency]}${amount} has been sent to ${recipientName}`,
-    });
-    
-    // Reset form
-    setAmount('');
-    setSelectedContacts([]);
-    setRecipientName('');
-    setScannedQRData(null);
-  };
-
-  const handleCancelSend = () => {
-    setShowSendConfirmation(false);
-  };
-
+  const qrHandling = useToOthersQR({
+    setShowSendActionDialog: props.setShowSendActionDialog,
+    setShowQRScanner: props.setShowQRScanner,
+    setScannedQRData: props.setScannedQRData,
+    setRecipientName: props.setRecipientName,
+    setShowSendConfirmation: props.setShowSendConfirmation
+  });
+  
+  const transfer = useToOthersTransfer({
+    amount: props.amount,
+    setAmount: props.setAmount,
+    selectedCurrency: props.selectedCurrency,
+    currencySymbols: props.currencySymbols,
+    recipientName: props.recipientName,
+    setShowSendConfirmation: props.setShowSendConfirmation,
+    selectedContacts: props.selectedContacts,
+    setSelectedContacts: props.setSelectedContacts,
+    setRecipientName: props.setRecipientName,
+    setShowContacts: props.setShowContacts,
+    setScannedQRData: props.setScannedQRData
+  });
+  
+  // Return all handlers from the composed hooks
   return {
-    handleToOthersClick,
-    handleToOthersSheetConfirm,
-    handleTapToSend,
-    handleOpenContacts,
-    handleContactSelection,
-    handleConfirmSend,
-    handleCancelSend,
-    handleQRScanComplete
+    // From useToOthersActions
+    handleToOthersClick: actions.handleToOthersClick,
+    handleToOthersSheetConfirm: actions.handleToOthersSheetConfirm,
+    handleOpenContacts: actions.handleOpenContacts,
+    
+    // From useToOthersQR
+    handleTapToSend: qrHandling.handleTapToSend,
+    handleQRScanComplete: qrHandling.handleQRScanComplete,
+    
+    // From useToOthersTransfer
+    handleContactSelection: transfer.handleContactSelection,
+    handleConfirmSend: transfer.handleConfirmSend,
+    handleCancelSend: transfer.handleCancelSend
   };
 }
