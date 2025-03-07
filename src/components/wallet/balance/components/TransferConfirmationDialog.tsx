@@ -26,7 +26,6 @@ export function TransferConfirmationDialog({
       open={open}
       onOpenChange={onOpenChange}
       title="Transfer Complete"
-      description="Transfer confirmation details"
       icon={<ThumbsUp className="w-8 h-8 text-green-500" />}
       primaryActionLabel="Done"
       onPrimaryAction={onDone}

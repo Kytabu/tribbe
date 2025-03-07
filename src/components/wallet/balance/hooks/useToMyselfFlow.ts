@@ -75,6 +75,7 @@ export function useToMyselfFlow({
   return {
     handleToMyselfClick,
     handlePaymentMethodSelect,
-    handleConfirmationDone
+    handleConfirmationDone,
+    transferAmount
   };
 }

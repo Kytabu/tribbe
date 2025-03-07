@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { SendViewProps } from "./types";
 import { AmountInput } from "./components/AmountInput";
 import { useMoneyRequests } from "./hooks/useMoneyRequests";
