@@ -25,6 +25,9 @@ export function PhoneEntryView({
   onDigitClick,
   onDeleteClick
 }: PhoneEntryViewProps) {
+  // Get raw phone number for button validation
+  const rawPhoneNumber = unformatPhoneNumber(phoneNumber);
+  
   return (
     <>
       <div className="p-6 border-b border-tribbe-grey flex items-center">
@@ -70,7 +73,7 @@ export function PhoneEntryView({
         <div className="w-full px-4 mb-4">
           <Button
             onClick={onContinueClick}
-            disabled={unformatPhoneNumber(phoneNumber).length < 9} // Ensure at least 9 digits
+            disabled={rawPhoneNumber.length < 9} // Ensure at least 9 digits
             className="w-full bg-background border border-tribbe-grey/50 text-white hover:bg-tribbe-grey/30 py-6 rounded-full relative group"
           >
             <span className="mr-6">CONTINUE</span>
