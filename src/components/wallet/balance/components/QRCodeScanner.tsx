@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Camera } from "@capacitor/camera";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
+import { QrCode, X } from "lucide-react";
 
 interface QRCodeScannerProps {
   open: boolean;
@@ -105,7 +105,7 @@ export function QRCodeScanner({ open, onOpenChange, onScanComplete }: QRCodeScan
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md p-0 overflow-hidden">
         <DialogHeader className="p-4 relative">
-          <DialogTitle>Scan QR Code</DialogTitle>
+          <DialogTitle className="text-center">Scan QR Code</DialogTitle>
           <Button 
             variant="ghost" 
             className="absolute right-2 top-2 rounded-full p-2 h-8 w-8" 
@@ -119,8 +119,8 @@ export function QRCodeScanner({ open, onOpenChange, onScanComplete }: QRCodeScan
         <div className="relative aspect-square w-full bg-black">
           {hasPermission === false && (
             <div className="absolute inset-0 flex items-center justify-center bg-background p-4 text-center">
-              <div className="space-y-4">
-                <p>{errorMessage || "Camera permission denied"}</p>
+              <div className="max-w-[80%] space-y-4">
+                <p className="text-sm break-words">{errorMessage || "Camera permission denied"}</p>
                 <Button onClick={() => onOpenChange(false)}>Close</Button>
               </div>
             </div>
