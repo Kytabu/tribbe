@@ -6,6 +6,7 @@ import { ToMyselfPaymentMethodSheet } from "./ToMyselfPaymentMethodSheet";
 import { TransferConfirmationDialog } from "./TransferConfirmationDialog";
 import { SendActionDialog } from "./SendActionDialog";
 import { SendConfirmationDialog } from "./SendConfirmationDialog";
+import { SupportedCurrency } from "@/features/wallet/constants";
 
 interface SendDialogsProps {
   // UI states
@@ -27,7 +28,7 @@ interface SendDialogsProps {
   // Data
   amount: string;
   setAmount: (amount: string) => void;
-  selectedCurrency: string;
+  selectedCurrency: SupportedCurrency; // Updated type from string to SupportedCurrency
   currencySymbol: string;
   selectedPaymentMethod: string | null;
   recipientName: string;
