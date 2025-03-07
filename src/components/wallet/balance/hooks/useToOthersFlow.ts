@@ -1,4 +1,3 @@
-
 import { toast } from "@/hooks/use-toast";
 import { SupportedCurrency } from "@/features/wallet/constants";
 
@@ -39,8 +38,8 @@ export function useToOthersFlow({
 }: ToOthersFlowProps) {
   
   const handleToOthersClick = () => {
-    // Instead of validating amount here, just show the sheet
-    setShowToOthersSheet(true);
+    // Changed to directly show the contacts list instead of the sheet
+    setShowContacts(true);
   };
 
   const handleToOthersSheetConfirm = () => {
