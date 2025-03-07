@@ -6,6 +6,7 @@ import { useSendViewUI } from "./hooks/useSendViewUI";
 import { useToMyselfFlow } from "./hooks/useToMyselfFlow";
 import { useToOthersFlow } from "./hooks/useToOthersFlow";
 import { SendActions } from "./components/SendActions";
+import { ToMyselfSheet } from "./components/ToMyselfSheet";
 
 export function SendView({
   amount,
@@ -35,10 +36,7 @@ export function SendView({
     setAmount,
     selectedCurrency,
     currencySymbols,
-    setShowPaymentMethods: ui.setShowPaymentMethods,
-    setShowConfirmation: ui.setShowConfirmation,
-    selectedPaymentMethod: ui.selectedPaymentMethod,
-    setSelectedPaymentMethod: ui.setSelectedPaymentMethod
+    setShowToMyselfSheet: ui.setShowToMyselfSheet
   });
 
   // "To others" flow handlers
@@ -86,8 +84,8 @@ export function SendView({
         // Action handlers
         handleToMyselfClick={toMyselfFlow.handleToMyselfClick}
         handleToOthersClick={toOthersFlow.handleToOthersClick}
-        handlePaymentMethodSelect={toMyselfFlow.handlePaymentMethodSelect}
-        handleConfirmationDone={toMyselfFlow.handleConfirmationDone}
+        handlePaymentMethodSelect={() => {}}
+        handleConfirmationDone={() => {}}
         handleContactSelection={toOthersFlow.handleContactSelection}
         handleCancelSend={toOthersFlow.handleCancelSend}
         handleConfirmSend={toOthersFlow.handleConfirmSend}
@@ -104,6 +102,16 @@ export function SendView({
         error={error}
         retryFetchRequests={retryFetchRequests}
         isEmpty={isEmpty}
+      />
+
+      {/* To Myself Sheet - Step 1 */}
+      <ToMyselfSheet 
+        open={ui.showToMyselfSheet}
+        onOpenChange={ui.setShowToMyselfSheet}
+        amount={amount}
+        setAmount={setAmount}
+        selectedCurrency={selectedCurrency}
+        currencySymbol={currencySymbols[selectedCurrency]}
       />
     </div>
   );

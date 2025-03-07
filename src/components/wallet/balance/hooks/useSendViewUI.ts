@@ -8,6 +8,7 @@ export function useSendViewUI(amount: string) {
   const [showPaymentMethods, setShowPaymentMethods] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showSendConfirmation, setShowSendConfirmation] = useState(false);
+  const [showToMyselfSheet, setShowToMyselfSheet] = useState(false);
   
   // Data state
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
@@ -36,6 +37,8 @@ export function useSendViewUI(amount: string) {
     setShowConfirmation,
     showSendConfirmation,
     setShowSendConfirmation,
+    showToMyselfSheet,
+    setShowToMyselfSheet,
     
     // Data states
     selectedContacts,
