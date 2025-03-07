@@ -1,8 +1,9 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Camera } from "@capacitor/camera";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { QrCode, X } from "lucide-react";
+import { QrCode } from "lucide-react";
 
 interface QRCodeScannerProps {
   open: boolean;
@@ -93,17 +94,9 @@ export function QRCodeScanner({ open, onOpenChange, onScanComplete }: QRCodeScan
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden" closeButton={false}>
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden">
         <DialogHeader className="p-4 relative">
           <DialogTitle className="text-center">Scan QR Code</DialogTitle>
-          <Button 
-            variant="ghost" 
-            className="absolute right-2 top-2 rounded-full p-2 h-8 w-8" 
-            onClick={handleClose}
-          >
-            <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
-          </Button>
         </DialogHeader>
         
         <div className="relative aspect-square w-full bg-black">
