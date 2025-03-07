@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "@/hooks/use-toast";
 import { formatPhoneNumber, unformatPhoneNumber } from "./utils/phoneFormatter";
@@ -34,13 +33,13 @@ export function useContactList({
   const [showPinEntry, setShowPinEntry] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
-  const [showTransferConfirmation, setShowTransferConfirmation] = useState(false);
+  const [showSendConfirmation, setShowSendConfirmation] = useState(false);
   const [selectedContactDetails, setSelectedContactDetails] = useState<{name: string, phone: string} | null>(null);
 
-  // Effect to reset transfer confirmation when success dialog is shown
+  // Effect to reset send confirmation when success dialog is shown
   useEffect(() => {
     if (showSuccessDialog) {
-      setShowTransferConfirmation(false);
+      setShowSendConfirmation(false);
     }
   }, [showSuccessDialog]);
 
@@ -85,19 +84,19 @@ export function useContactList({
         });
       }
       
-      setShowTransferConfirmation(true);
+      setShowSendConfirmation(true);
     }
   };
 
   const handleConfirmTransfer = () => {
-    setShowTransferConfirmation(false);
+    setShowSendConfirmation(false);
     setTimeout(() => {
       setShowPinEntry(true);
     }, 300);
   };
 
   const handleCancelTransfer = () => {
-    setShowTransferConfirmation(false);
+    setShowSendConfirmation(false);
   };
 
   const handlePhoneNumberInput = (digit: string) => {
@@ -124,7 +123,7 @@ export function useContactList({
         name: manualContactName || "Phone Contact",
         phone: phoneNumber // Use the formatted phone number for display
       });
-      setShowTransferConfirmation(true);
+      setShowSendConfirmation(true);
     } else {
       toast({
         title: "Invalid phone number",
@@ -154,8 +153,8 @@ export function useContactList({
       setShowPinEntry(false);
       setShowPhoneEntry(false);
       setPinCode("");
-      // Make sure to clear the transfer confirmation state
-      setShowTransferConfirmation(false);
+      // Make sure to clear the send confirmation state
+      setShowSendConfirmation(false);
       // Show success dialog after completing pin entry
       setShowSuccessDialog(true);
     }
@@ -164,7 +163,7 @@ export function useContactList({
   const handleTransactionComplete = () => {
     // Reset all states to prevent dialogs from reappearing
     setShowSuccessDialog(false);
-    setShowTransferConfirmation(false);
+    setShowSendConfirmation(false);
     setShowPinEntry(false);
     setShowPhoneEntry(false);
     setPinCode("");
@@ -203,11 +202,9 @@ export function useContactList({
     setPinCode,
     showSuccessDialog,
     setShowSuccessDialog,
-    showTransferConfirmation,
-    setShowTransferConfirmation,
+    showSendConfirmation,
+    setShowSendConfirmation,
     selectedContactDetails,
-    amount,
-    currencySymbol,
     
     // Handlers
     toggleContactSelection,

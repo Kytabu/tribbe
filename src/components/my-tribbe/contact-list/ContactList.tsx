@@ -4,7 +4,7 @@ import { ContactListView } from "./ContactListView";
 import { PhoneEntryView } from "./PhoneEntryView";
 import { PinEntryView } from "./PinEntryView";
 import { SuccessDialog } from "./SuccessDialog";
-import { TransferConfirmationDialog } from "./TransferConfirmationDialog";
+import { SendConfirmationDialog } from "../../wallet/balance/components/SendConfirmationDialog";
 import { useContactList } from "./useContactList";
 
 interface ContactListProps {
@@ -44,8 +44,8 @@ export function ContactList({
     setPinCode,
     showSuccessDialog,
     setShowSuccessDialog,
-    showTransferConfirmation,
-    setShowTransferConfirmation,
+    showSendConfirmation,
+    setShowSendConfirmation,
     selectedContactDetails,
     
     // Handlers
@@ -102,7 +102,7 @@ export function ContactList({
       <ContactListView
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        contacts={filteredContacts}
+        filteredContacts={filteredContacts}
         selectedContacts={selectedContacts}
         toggleContactSelection={toggleContactSelection}
         onAddPhoneClick={() => setShowPhoneEntry(true)}
@@ -110,15 +110,15 @@ export function ContactList({
         onClose={() => setShowContactList(false)}
       />
       
-      {/* Transfer Confirmation Dialog */}
-      <TransferConfirmationDialog
-        open={showTransferConfirmation}
-        onOpenChange={setShowTransferConfirmation}
-        contactDetails={selectedContactDetails}
-        amount={amount}
-        currencySymbol={currencySymbol}
-        onConfirm={handleConfirmTransfer}
+      {/* Send Confirmation Dialog */}
+      <SendConfirmationDialog
+        open={showSendConfirmation}
+        onOpenChange={setShowSendConfirmation}
+        recipientName={selectedContactDetails?.name || ""}
+        amount={amount || "0"}
+        currencySymbol={currencySymbol || "KSh"}
         onCancel={handleCancelTransfer}
+        onConfirm={handleConfirmTransfer}
       />
       
       {/* Success Dialog */}
