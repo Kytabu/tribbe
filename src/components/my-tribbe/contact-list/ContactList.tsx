@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import { ContactListView } from "./ContactListView";
 import { PhoneEntryView } from "./PhoneEntryView";
 import { PinEntryView } from "./PinEntryView";
 import { SuccessDialog } from "./SuccessDialog";
 import { SendConfirmationDialog } from "../../wallet/balance/components/SendConfirmationDialog";
-import { useContactList } from "./useContactList";
+import { useContactList } from "./hooks/useContactList";
 
 interface ContactListProps {
   showContactList: boolean;
