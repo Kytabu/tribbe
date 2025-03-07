@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { formatPhoneNumber, unformatPhoneNumber } from "./utils/phoneFormatter";
 
 interface Contact {
   id: string;
@@ -89,22 +90,36 @@ export function useContactList({
   };
 
   const handlePhoneNumberInput = (digit: string) => {
-    if (phoneNumber.length < 12) {
-      setPhoneNumber(prev => prev + digit);
+    // Format the phone number as digits are added
+    const newRawValue = unformatPhoneNumber(phoneNumber) + digit;
+    if (newRawValue.length <= 12) { // Limit to 12 digits
+      setPhoneNumber(formatPhoneNumber(newRawValue));
     }
   };
 
   const handleDeleteDigit = () => {
-    setPhoneNumber(prev => prev.slice(0, -1));
+    // Remove the last digit and reformat
+    const rawValue = unformatPhoneNumber(phoneNumber);
+    if (rawValue.length > 0) {
+      const newRawValue = rawValue.slice(0, -1);
+      setPhoneNumber(formatPhoneNumber(newRawValue));
+    }
   };
 
   const handlePhoneNumberSubmit = () => {
-    if (phoneNumber.length > 0) {
+    const rawPhoneNumber = unformatPhoneNumber(phoneNumber);
+    if (rawPhoneNumber.length >= 9) { // Ensure at least 9 digits for a valid phone number
       setSelectedContactDetails({
         name: manualContactName || "Phone Contact",
-        phone: phoneNumber
+        phone: phoneNumber // Use the formatted phone number for display
       });
       setShowTransferConfirmation(true);
+    } else {
+      toast({
+        title: "Invalid phone number",
+        description: "Please enter a valid phone number",
+        variant: "destructive"
+      });
     }
   };
 
@@ -120,7 +135,7 @@ export function useContactList({
 
   const handlePinSubmit = () => {
     if (pinCode.length === 4) {
-      if (showPhoneEntry && phoneNumber.length > 0) {
+      if (showPhoneEntry && unformatPhoneNumber(phoneNumber).length > 0) {
         const manualContactId = `manual-${Date.now()}`;
         setSelectedContacts([manualContactId]);
       }

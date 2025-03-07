@@ -2,6 +2,7 @@
 import { ArrowLeft, ArrowRight, Delete } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { formatPhoneNumber, unformatPhoneNumber } from "./utils/phoneFormatter";
 
 interface PhoneEntryViewProps {
   phoneNumber: string;
@@ -44,7 +45,13 @@ export function PhoneEntryView({
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-tribbe-lime"></div>
             <Input
               value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
+              onChange={(e) => {
+                // Extract just the digits and apply formatting
+                const rawValue = unformatPhoneNumber(e.target.value);
+                if (rawValue.length <= 12) { // Limit to 12 digits max
+                  setPhoneNumber(formatPhoneNumber(rawValue));
+                }
+              }}
               className="bg-transparent border-0 text-xl text-white pl-4 focus-visible:ring-0 focus-visible:ring-offset-0"
               placeholder="Enter phone number"
               type="tel"
@@ -62,7 +69,7 @@ export function PhoneEntryView({
         <div className="w-full px-4 mb-4">
           <Button
             onClick={onContinueClick}
-            disabled={phoneNumber.length === 0}
+            disabled={unformatPhoneNumber(phoneNumber).length < 9} // Ensure at least 9 digits
             className="w-full bg-background border border-tribbe-grey/50 text-white hover:bg-tribbe-grey/30 py-6 rounded-full relative group"
           >
             <span className="mr-6">CONTINUE</span>
