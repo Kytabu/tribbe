@@ -82,8 +82,8 @@ export function ContactListView({
             className="flex items-center p-3 hover:bg-accent rounded-lg w-full"
             onClick={onAddPhoneClick}
           >
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-              <Phone className="w-5 h-5 text-accent-foreground" />
+            <div className="w-10 h-10 rounded-full bg-tribbe-lime flex items-center justify-center">
+              <Phone className="w-5 h-5 text-black" />
             </div>
             <span className="ml-3 font-medium">Enter phone number</span>
           </button>
