@@ -34,7 +34,7 @@ export function SendActionButtons({
         showProfileCircle={true}
       />
       <TribbeButton
-        imagePath="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png"
+        imagePath="/lovable-uploads/80c50d00-37a5-4839-9843-32be6f102269.png"
         label="To Others"
         info="Fast"
         onClick={onToOthersClick}
