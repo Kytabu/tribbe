@@ -2,7 +2,7 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, X, Check } from "lucide-react";
+import { Search, X, Check, Phone } from "lucide-react";
 import { useState } from "react";
 
 interface Contact {
@@ -69,7 +69,7 @@ export function ContactList({
       <SheetContent className="w-full sm:max-w-md p-0">
         <SheetHeader className="p-6 border-b border-tribbe-grey">
           <div className="flex items-center justify-between">
-            <SheetTitle className="text-xl font-bold text-white">Add Contacts</SheetTitle>
+            <SheetTitle className="text-xl font-bold text-white">Contacts</SheetTitle>
             <Button
               variant="ghost"
               size="icon"
@@ -89,7 +89,19 @@ export function ContactList({
             />
           </div>
         </SheetHeader>
-        <div className="overflow-y-auto h-[calc(100vh-8rem)]">
+        
+        <div className="px-4 py-3 border-b border-tribbe-grey">
+          <button
+            className="w-full flex items-center gap-4 py-2"
+          >
+            <div className="p-2 rounded-full bg-[#0EA5E9] flex items-center justify-center">
+              <Phone className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-white font-medium">Enter phone number</span>
+          </button>
+        </div>
+        
+        <div className="overflow-y-auto h-[calc(100vh-12rem)]">
           {filteredContacts.map((contact) => (
             <button
               key={contact.id}
