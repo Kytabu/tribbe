@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SendViewProps } from "./types";
 import { AmountInput } from "./components/AmountInput";
 import { toast } from "@/hooks/use-toast";
@@ -34,6 +34,17 @@ export function SendView({
   // Hook for managing money requests
   const { filteredRequests, slidingRequests, handleAction } = useMoneyRequests();
 
+  // Reset state when amount changes
+  useEffect(() => {
+    // Only reset if amount is empty and we were previously showing a confirmation dialog
+    if (!amount && (showConfirmation || showSendConfirmation)) {
+      setShowConfirmation(false);
+      setShowSendConfirmation(false);
+      setSelectedPaymentMethod(null);
+      setSelectedContacts([]);
+    }
+  }, [amount, showConfirmation, showSendConfirmation]);
+
   // Action handlers
   const handleToMyselfClick = () => {
     if (!amount || parseFloat(amount) <= 0) {
@@ -60,17 +71,22 @@ export function SendView({
   const handlePaymentMethodSelect = (method: string) => {
     setSelectedPaymentMethod(method);
     setShowPaymentMethods(false);
+    
+    // Use setTimeout to avoid UI conflicts
     setTimeout(() => {
       setShowConfirmation(true);
-    }, 100); // Small delay to avoid UI conflicts
+    }, 300);
   };
 
   const handleConfirmationDone = () => {
     setShowConfirmation(false);
+    
+    // Show toast and reset form
     toast({
       title: "Transfer complete",
       description: `${currencySymbols[selectedCurrency]}${amount} has been transferred to your ${selectedPaymentMethod === 'phone' ? 'phone' : 'card'}.`,
     });
+    
     setAmount('');
     setSelectedPaymentMethod(null);
   };
@@ -79,7 +95,7 @@ export function SendView({
     if (selectedContacts.length === 0) {
       toast({
         title: "No contact selected",
-        description: "Please select a contact to send money",
+        description: "Please select at least one contact to send money",
         variant: "destructive",
       });
       return;
@@ -100,9 +116,11 @@ export function SendView({
     if (selectedContact) {
       setRecipientName(selectedContact.name);
       setShowContacts(false);
+      
+      // Use setTimeout to ensure smooth transition
       setTimeout(() => {
         setShowSendConfirmation(true);
-      }, 100); // Small delay to ensure smooth transition
+      }, 300);
     } else {
       toast({
         title: "Contact not found",
@@ -113,13 +131,22 @@ export function SendView({
   };
 
   const handleConfirmSend = () => {
+    setShowSendConfirmation(false);
+    
+    // Show toast notification
     toast({
       title: "Transaction complete",
       description: `${currencySymbols[selectedCurrency]}${amount} has been sent to ${recipientName}`,
     });
-    setShowSendConfirmation(false);
+    
+    // Reset form
     setAmount('');
     setSelectedContacts([]);
+    setRecipientName('');
+  };
+
+  const handleCancelSend = () => {
+    setShowSendConfirmation(false);
   };
 
   return (
@@ -172,7 +199,7 @@ export function SendView({
         recipientName={recipientName}
         amount={amount}
         currencySymbol={currencySymbols[selectedCurrency]}
-        onCancel={() => setShowSendConfirmation(false)}
+        onCancel={handleCancelSend}
         onConfirm={handleConfirmSend}
       />
 

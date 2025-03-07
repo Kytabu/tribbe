@@ -27,7 +27,7 @@ export function SendConfirmationDialog({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Confirm Transfer</DialogTitle>
-          <DialogDescription className="sr-only">
+          <DialogDescription>
             Confirm money transfer details
           </DialogDescription>
         </DialogHeader>

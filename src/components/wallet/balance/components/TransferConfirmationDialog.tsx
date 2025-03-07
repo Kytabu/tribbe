@@ -25,7 +25,7 @@ export function TransferConfirmationDialog({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Transfer Complete</DialogTitle>
-          <DialogDescription className="sr-only">
+          <DialogDescription>
             Transfer confirmation details
           </DialogDescription>
         </DialogHeader>
