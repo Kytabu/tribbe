@@ -50,19 +50,19 @@ export const AppSection = () => {
             className="bg-tribbe-grey border border-tribbe-lime/20 text-tribbe-white min-w-[150px]"
           >
             <DropdownMenuItem 
-              className="hover:bg-tribbe-lime/10 cursor-pointer" 
+              className="hover:bg-tribbe-lime/10 cursor-pointer focus:bg-tribbe-lime/20 focus:text-tribbe-lime" 
               onClick={() => setLanguage("English")}
             >
               English
             </DropdownMenuItem>
             <DropdownMenuItem 
-              className="hover:bg-tribbe-lime/10 cursor-pointer" 
+              className="hover:bg-tribbe-lime/10 cursor-pointer focus:bg-tribbe-lime/20 focus:text-tribbe-lime" 
               onClick={() => setLanguage("Kiswahili")}
             >
               Kiswahili
             </DropdownMenuItem>
             <DropdownMenuItem 
-              className="hover:bg-tribbe-lime/10 cursor-pointer" 
+              className="hover:bg-tribbe-lime/10 cursor-pointer focus:bg-tribbe-lime/20 focus:text-tribbe-lime" 
               onClick={() => setLanguage("Sheng")}
             >
               Sheng
