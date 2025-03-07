@@ -54,6 +54,7 @@ export function SendView({
       return;
     }
     
+    console.log("Opening payment method selection");
     // Show payment method sheet when "To myself" is clicked
     setShowPaymentMethods(true);
   };
@@ -70,16 +71,19 @@ export function SendView({
   };
 
   const handlePaymentMethodSelect = (method: string) => {
+    console.log(`Selected payment method: ${method}`);
     setSelectedPaymentMethod(method);
     setShowPaymentMethods(false);
     
-    // Use setTimeout to avoid UI conflicts and ensure smooth transition
+    // Use setTimeout to ensure smooth transition
     setTimeout(() => {
+      console.log("Opening confirmation dialog");
       setShowConfirmation(true);
     }, 300);
   };
 
   const handleConfirmationDone = () => {
+    console.log("Confirmation done");
     setShowConfirmation(false);
     
     // Show toast and reset form
