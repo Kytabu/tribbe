@@ -2,6 +2,7 @@
 import { TribbeButton } from "./TribbeButton";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { MouseEvent } from "react";
 
 interface SendActionButtonsProps {
   autoTribbe: boolean;
@@ -18,6 +19,11 @@ export function SendActionButtons({
   onToOthersClick,
   onRequestsClick
 }: SendActionButtonsProps) {
+  // Handle automate toggle without triggering the parent click
+  const handleAutomateToggle = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
   return (
     <div className="space-y-2">
       <TribbeButton
@@ -28,7 +34,7 @@ export function SendActionButtons({
         showProfileCircle={true}
       />
       <TribbeButton
-        imagePath="/lovable-uploads/c8a61242-9472-4c27-a50d-adbc2e7a24b0.png"
+        imagePath="/lovable-uploads/c030b03f-f3e4-41d8-b7ce-74a1deb5feb4.png"
         label="To Others"
         info="Fast"
         onClick={onToOthersClick}
@@ -41,21 +47,19 @@ export function SendActionButtons({
               alt="Requests Icon"
               className="w-5 h-5 object-contain"
             />
-            <span className="text-tribbe-sage group-hover:text-tribbe-lime">Requests to me</span>
+            <span className="text-tribbe-sage group-hover:text-tribbe-lime">Requests</span>
+            <span className="font-medium group-hover:text-tribbe-lime">12</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="font-medium group-hover:text-tribbe-lime cursor-pointer" onClick={onRequestsClick}>12</span>
-            <div className="flex items-center gap-2 ml-4">
-              <Label htmlFor="auto-tribbe" className="text-tribbe-sage group-hover:text-tribbe-lime cursor-pointer">
-                Automate
-              </Label>
-              <Switch
-                id="auto-tribbe"
-                checked={autoTribbe}
-                onCheckedChange={setAutoTribbe}
-                className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border border-tribbe-lime"
-              />
-            </div>
+          <div className="flex items-center gap-2" onClick={handleAutomateToggle}>
+            <Label htmlFor="auto-tribbe" className="text-tribbe-sage group-hover:text-tribbe-lime cursor-pointer">
+              Automate
+            </Label>
+            <Switch
+              id="auto-tribbe"
+              checked={autoTribbe}
+              onCheckedChange={setAutoTribbe}
+              className="data-[state=unchecked]:bg-gray-700 data-[state=checked]:bg-tribbe-lime border border-tribbe-lime"
+            />
           </div>
         </div>
       </div>
