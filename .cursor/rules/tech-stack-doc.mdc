@@ -1,1 +1,36 @@
- 
+# Tribbe Tech Stack Documentation
+
+## Frontend
+- Framework: React with Vite
+- Language: TypeScript
+- UI Components: shadcn/ui
+- Styling: Tailwind CSS
+- State Management: React Query + React Hooks
+- Router: React Router DOM
+- Form Handling: React Hook Form + Zod
+- Date Handling: date-fns
+- Icons: Lucide React
+- Animations: Lottie React
+- Toast Notifications: React Hot Toast + Sonner
+- Charts: Recharts
+
+## Backend
+- Database: Supabase
+- Authentication: Supabase Auth
+- File Storage: Supabase Storage
+- API: Supabase Client
+- Security: bcryptjs for password hashing
+
+## Development Tools
+- Package Manager: npm
+- Type Checking: TypeScript
+- Linting: ESLint
+- Code Formatting: Prettier (via ESLint)
+- Version Control: Git
+- Error Tracking: [To be implemented]
+- Development Environment: Cursor IDE
+
+## Mobile Support
+- Capacitor for mobile deployment
+- Camera integration
+- Mobile-first design approach

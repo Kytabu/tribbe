@@ -1,4 +1,3 @@
-
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { FlamiHeader } from "@/components/flami/FlamiHeader";
 import { FlamiTabs } from "@/components/flami/FlamiTabs";
@@ -19,7 +18,8 @@ export default function Flami() {
     messages,
     setMessages,
     input: chatInput, 
-    isLoading,
+    isLoading: chatLoading,
+    error: chatError,
     handleInputChange: handleChatInputChange,
     handleSubmit: handleChatSubmit,
     handleSuggestionClick
@@ -29,6 +29,8 @@ export default function Flami() {
     messages: activityMessages,
     setMessages: setActivityMessages,
     input: activityInput,
+    isLoading: activityLoading,
+    error: activityError,
     handleInputChange: handleActivityInputChange,
     handleSubmit: handleActivitySubmit
   } = useChat();
@@ -50,7 +52,8 @@ export default function Flami() {
             activityMessages={activityMessages}
             chatInput={chatInput}
             activityInput={activityInput}
-            isLoading={isLoading}
+            isLoading={chatLoading || activityLoading}
+            error={chatError || activityError}
             onChatInputChange={handleChatInputChange}
             onActivityInputChange={handleActivityInputChange}
             onChatSubmit={handleChatSubmit}

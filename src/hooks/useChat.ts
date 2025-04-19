@@ -1,35 +1,37 @@
-
 import { useState } from "react";
 import { Message } from "@/types/chat";
-import { supabase } from "@/integrations/supabase/client";
+import { callDeepSeekAPI } from "@/integrations/deepseek/service";
 
 export function useChat(initialMessages: Message[] = []) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (value: string) => {
     setInput(value);
+    setError(null); // Clear any previous errors when user types
   };
 
   const sendMessageToAPI = async (allMessages: Message[]) => {
     setIsLoading(true);
+    setError(null);
+    
     try {
-      const { data, error } = await supabase.functions.invoke('chat', {
-        body: { messages: allMessages.map(m => ({ role: m.role, content: m.content })) }
-      });
-
-      if (error) throw error;
+      console.log('Preparing to send message to DeepSeek API...');
+      const response = await callDeepSeekAPI(allMessages);
+      console.log('Received response from DeepSeek API');
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: data.message,
+        content: response,
         role: "assistant",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
-      console.error('Error calling Mistral API:', error);
+      console.error('Error in useChat:', error);
+      setError('Sorry, I encountered an error. Please try again.');
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment. 🙏",
@@ -71,7 +73,6 @@ export function useChat(initialMessages: Message[] = []) {
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
     
-    // Send the message to the API after updating the UI
     await sendMessageToAPI(updatedMessages);
   };
 
@@ -80,6 +81,7 @@ export function useChat(initialMessages: Message[] = []) {
     setMessages,
     input,
     isLoading,
+    error,
     handleInputChange,
     handleSubmit,
     handleSuggestionClick

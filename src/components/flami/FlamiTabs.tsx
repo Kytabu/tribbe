@@ -1,10 +1,10 @@
-
 import { Message } from "@/types/chat";
 import { MessagesTab } from "./MessagesTab";
 import { Activity } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ChatInput } from "@/components/chat/ChatInput";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface FlamiTabsProps {
   messages: Message[];
@@ -12,6 +12,7 @@ interface FlamiTabsProps {
   chatInput: string;
   activityInput: string;
   isLoading: boolean;
+  error?: string | null;
   onChatInputChange: (value: string) => void;
   onActivityInputChange: (value: string) => void;
   onChatSubmit: (e: React.FormEvent) => void;
@@ -25,6 +26,7 @@ export function FlamiTabs({
   chatInput,
   activityInput,
   isLoading,
+  error,
   onChatInputChange,
   onActivityInputChange,
   onChatSubmit,
@@ -41,6 +43,11 @@ export function FlamiTabs({
 
   return (
     <div className="absolute inset-0 flex flex-col">
+      {error && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
       <div className="flex-1 flex flex-col relative">
         <MessagesTab 
           messages={messages}

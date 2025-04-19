@@ -1,1 +1,43 @@
- 
+# Tribbe File Structure Documentation
+
+## Directory Organization
+
+```
+src/
+├── assets/          # Static assets like images, fonts, etc.
+├── components/      # Reusable UI components
+│   ├── ui/         # Base UI components from shadcn
+│   └── flami/      # Flami-specific components
+├── features/        # Feature-specific code
+├── hooks/          # Custom React hooks
+├── integrations/   # Third-party integrations
+│   ├── deepseek/   # Deepseek AI integration
+│   └── mistral/    # Mistral AI integration
+├── lib/            # Utility functions and shared code
+├── pages/          # Route components/pages
+├── types/          # TypeScript type definitions
+└── main.tsx        # Application entry point
+
+.cursor/            # Cursor IDE configuration
+├── rules/          # Project rules and documentation
+    ├── tribbe.mdc           # Main project rules
+    ├── tech-stack-doc.mdc   # Tech stack documentation
+    └── file-structure.mdc   # This file structure doc
+
+public/            # Public static files
+```
+
+## File Naming Conventions
+- Components: PascalCase (e.g., `Button.tsx`, `FlamiTabs.tsx`)
+- Hooks: camelCase with 'use' prefix (e.g., `useChat.ts`)
+- Utilities: camelCase (e.g., `formatDate.ts`)
+- Types: PascalCase with type suffix (e.g., `ChatType.ts`)
+- Pages: PascalCase (e.g., `Flami.tsx`)
+
+## Code Organization Rules
+1. Keep components focused and single-responsibility
+2. Group related features in feature directories
+3. Share common utilities through lib/
+4. Keep pages lightweight, move logic to features/
+5. Use proper type definitions in types/
+6. Keep integrations isolated in their directories
