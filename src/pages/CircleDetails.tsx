@@ -1,11 +1,14 @@
-
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, CalendarDays, Target, MapPin, ListTodo } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate, useParams } from "react-router-dom";
 
-const CircleDetails = () => {
+interface CircleDetailsProps {
+  isNew?: boolean;
+}
+
+const CircleDetails = ({ isNew }: CircleDetailsProps) => {
   const navigate = useNavigate();
   const { id } = useParams();
 

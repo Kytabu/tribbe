@@ -16,6 +16,9 @@ export default {
     extend: {
       fontFamily: {
         righteous: ['Righteous', 'cursive'],
+        inter: ['Inter', 'sans-serif'],
+        'space-grotesk': ['Space Grotesk', 'sans-serif'],
+        'dm-sans': ['DM Sans', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
