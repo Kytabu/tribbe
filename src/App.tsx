@@ -20,6 +20,7 @@ import SnapToPay from "@/pages/SnapToPay";
 import StreetCred from "@/pages/StreetCred";
 import Notifications from "@/pages/Notifications";
 import DataControls from "@/pages/DataControls";
+import CircleDetails from "@/pages/CircleDetails";
 
 const App = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -39,6 +40,8 @@ const App = () => {
         <Route path="/flami" element={<Flami />} />
         <Route path="/wallet" element={<Wallet />} />
         <Route path="/circles" element={<Circles />} />
+        <Route path="/circles/:circleId" element={<CircleDetails />} />
+        <Route path="/circles/new" element={<CircleDetails isNew />} />
         <Route path="/my-tribbe" element={<MyTribbe />} />
         <Route path="/snap-to-pay" element={<SnapToPay />} />
         <Route path="/street-cred" element={<StreetCred />} />

@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -163,7 +164,7 @@ function CirclesContent() {
               <Button 
                 variant="ghost" 
                 size="icon"
-                onClick={() => console.log("Create new circle")}
+                onClick={() => navigate("/circles/new")}
                 className="hover:bg-tribbe-lime/20"
               >
                 <CirclePlus className="h-5 w-5 text-tribbe-lime" />
