@@ -2,6 +2,8 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 
+const OPENAI_API_KEY = "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";
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -32,14 +34,16 @@ serve(async (req) => {
       );
     }
 
-    const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
+    console.log("Sending request to OpenAI API");
+    
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${Deno.env.get('MISTRAL_API_KEY')}`,
+        'Authorization': `Bearer ${OPENAI_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'mistral-tiny',
+        model: 'gpt-4o-mini',
         messages: [
           {
             role: 'system',
@@ -81,7 +85,7 @@ Remember: Keep it short, keep it helpful, and always use first-person pronouns.`
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Mistral API error:', errorText);
+      console.error('OpenAI API error:', errorText);
       
       if (response.status === 429) {
         return new Response(
@@ -95,10 +99,12 @@ Remember: Keep it short, keep it helpful, and always use first-person pronouns.`
         );
       }
       
-      throw new Error(`Mistral API error: ${response.statusText}`);
+      throw new Error(`OpenAI API error: ${response.statusText}`);
     }
 
     const data = await response.json();
+    console.log("Received response from OpenAI API");
+    
     return new Response(JSON.stringify({ 
       message: data.choices[0].message.content 
     }), {
