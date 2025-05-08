@@ -8,6 +8,7 @@ import { useChat } from "@/hooks/useChat";
 import { getCurrentLevel } from "@/features/creditScore/utils";
 import { getWelcomeMessages } from "@/features/flami/welcomeMessages";
 import { AppLayout } from "@/components/layout/AppLayout";
+import { Message } from "@/types/chat";
 
 export default function Flami() {
   // Credit score is hard-coded for now, in a real app would come from an API
@@ -33,12 +34,56 @@ export default function Flami() {
     handleSubmit: handleActivitySubmit
   } = useChat();
 
-  // Set welcome messages on initial load
+  // Load messages from localStorage on initial load
   useEffect(() => {
+    const savedChatMessages = localStorage.getItem('flami-chat-messages');
+    const savedActivityMessages = localStorage.getItem('flami-activity-messages');
+    
     const { chat: chatWelcomeMessage, activity: activityWelcomeMessage } = getWelcomeMessages();
-    setMessages([chatWelcomeMessage]);
-    setActivityMessages([activityWelcomeMessage]);
+    
+    if (savedChatMessages) {
+      try {
+        const parsedMessages = JSON.parse(savedChatMessages).map((msg: any) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp)
+        }));
+        setMessages(parsedMessages);
+      } catch (error) {
+        console.error("Error parsing saved chat messages:", error);
+        setMessages([chatWelcomeMessage]);
+      }
+    } else {
+      setMessages([chatWelcomeMessage]);
+    }
+
+    if (savedActivityMessages) {
+      try {
+        const parsedMessages = JSON.parse(savedActivityMessages).map((msg: any) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp)
+        }));
+        setActivityMessages(parsedMessages);
+      } catch (error) {
+        console.error("Error parsing saved activity messages:", error);
+        setActivityMessages([activityWelcomeMessage]);
+      }
+    } else {
+      setActivityMessages([activityWelcomeMessage]);
+    }
   }, [setMessages, setActivityMessages]);
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem('flami-chat-messages', JSON.stringify(messages));
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    if (activityMessages.length > 0) {
+      localStorage.setItem('flami-activity-messages', JSON.stringify(activityMessages));
+    }
+  }, [activityMessages]);
 
   return (
     <AppLayout>
