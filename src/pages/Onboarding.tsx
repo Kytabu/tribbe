@@ -70,7 +70,7 @@ const Onboarding = () => {
   const content = getScreenContent(currentScreen);
 
   return (
-    <div className="min-h-screen bg-tribbe-grey flex flex-col items-center justify-between p-6 relative">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-between p-6 relative">
       {/* Skip button - Updated styling */}
       <Button
         variant="secondary"
