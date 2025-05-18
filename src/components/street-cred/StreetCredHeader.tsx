@@ -24,7 +24,7 @@ export function StreetCredHeader() {
       className="hover:bg-background/80"
     >
       <div 
-        className="p-[0.25px] rounded-full"
+        className="p-[0.25px] rounded-full transition-transform duration-200 hover:scale-105"
         style={{ backgroundColor: borderColor }}
       >
         <img 
@@ -38,9 +38,9 @@ export function StreetCredHeader() {
 
   return (
     <PageHeader 
-      title="My Street Cred"
+      title="Street Cred"
       rightIcon={ProfileButton}
-      titleClassName="text-lg"
+      titleClassName="text-lg font-medium"
     />
   );
 }
