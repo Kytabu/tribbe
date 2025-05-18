@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { MoreHorizontal, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, UserPlus } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface NetworkGridProps {
   networkMembers: Array<{
@@ -49,7 +50,7 @@ export function NetworkGrid({
       <Card className="bg-tribbe-grey/50">
         <div className="p-4">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-medium text-white">Your Network</h2>
+            <h2 className="text-lg font-medium text-white">My Tribbe</h2>
             <Button 
               variant="ghost" 
               size="sm"
@@ -67,18 +68,19 @@ export function NetworkGrid({
           {!isExpanded && (
             <div className="relative">
               <div 
-                className="flex gap-3 overflow-x-auto scrollbar-hide scroll-smooth"
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
                 ref={scrollContainerRef}
                 onScroll={onScroll}
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {networkMembers.map((member) => (
-                  <img
-                    key={member.id}
-                    src={member.image}
-                    alt={member.name}
-                    className="w-8 h-8 flex-shrink-0 rounded-full"
-                  />
+                  <div key={member.id} className="flex flex-col items-center gap-2 min-w-[60px]">
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src={member.image} alt={member.name} />
+                      <AvatarFallback>{member.name[0]}</AvatarFallback>
+                    </Avatar>
+                    <span className="text-xs text-center text-gray-300 whitespace-nowrap">{member.name}</span>
+                  </div>
                 ))}
               </div>
               {canScrollLeft && (
@@ -105,15 +107,14 @@ export function NetworkGrid({
           )}
 
           {isExpanded && (
-            <div className="grid grid-cols-6 gap-3">
+            <div className="grid grid-cols-4 sm:grid-cols-6 gap-4">
               {networkMembers.map((member) => (
                 <div key={member.id} className="flex flex-col items-center gap-2">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-8 h-8 rounded-full"
-                  />
-                  <span className="text-xs text-gray-400">{member.name}</span>
+                  <Avatar className="w-12 h-12">
+                    <AvatarImage src={member.image} alt={member.name} />
+                    <AvatarFallback>{member.name[0]}</AvatarFallback>
+                  </Avatar>
+                  <span className="text-xs text-center text-gray-300">{member.name}</span>
                 </div>
               ))}
             </div>
