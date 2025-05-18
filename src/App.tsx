@@ -16,7 +16,7 @@ import Flami from "@/pages/Flami";
 import Wallet from "@/pages/Wallet";
 import Circles from "@/pages/Circles";
 import MyTribbe from "@/pages/MyTribbe";
-import SnapToPay from "@/pages/SnapToPay";
+import Boondi from "@/pages/Boondi";
 import StreetCred from "@/pages/StreetCred";
 import Notifications from "@/pages/Notifications";
 import DataControls from "@/pages/DataControls";
@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/circles/:circleId" element={<CircleDetails />} />
         <Route path="/circles/new" element={<CircleDetails isNew />} />
         <Route path="/my-tribbe" element={<MyTribbe />} />
-        <Route path="/snap-to-pay" element={<SnapToPay />} />
+        <Route path="/snap-to-pay" element={<Boondi />} />
         <Route path="/street-cred" element={<StreetCred />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/data-controls" element={<DataControls />} />
