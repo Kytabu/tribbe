@@ -39,7 +39,7 @@ export const navigationItems: NavigationItem[] = [
   {
     icon: Hand,
     label: "Boondi",
-    href: "/snap-to-pay",
+    href: "/boondi",
   },
   {
     icon: Wallet,

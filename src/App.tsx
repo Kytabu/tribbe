@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/circles/:circleId" element={<CircleDetails />} />
         <Route path="/circles/new" element={<CircleDetails isNew />} />
         <Route path="/my-tribbe" element={<MyTribbe />} />
-        <Route path="/snap-to-pay" element={<Boondi />} />
+        <Route path="/boondi" element={<Boondi />} />
         <Route path="/street-cred" element={<StreetCred />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/data-controls" element={<DataControls />} />
