@@ -34,7 +34,7 @@ export function FlamiHeader({ currentLevelColor }: FlamiHeaderProps) {
     <PageHeader 
       title="Flami"
       rightIcon={ProfileButton}
-      titleClassName="text-xl"
+      titleClassName="text-xl font-semibold"
     />
   );
 }

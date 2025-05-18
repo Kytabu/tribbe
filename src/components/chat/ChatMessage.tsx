@@ -80,38 +80,23 @@ export function ChatMessage({ message, variant = 'chat' }: ChatMessageProps) {
 
   return (
     <div className={cn(
-      "flex w-full", 
+      "flex w-full mb-4", 
       message.role === "user" ? "justify-end" : "justify-start"
     )}>
       <div className={cn(
-        "flex items-start gap-2 max-w-[80%]",
+        "max-w-[80%] animate-fade-in",
         message.role === "user" ? "flex-row-reverse" : "flex-row"
       )}>
-        {message.role === "assistant" ? (
-          <div className="w-6 h-6 mt-1 flex-shrink-0">
-            <img 
-              src="/lovable-uploads/4e7c9f9a-2fe1-4401-b9bb-211ead12e8bf.png" 
-              alt="Assistant" 
-              className="w-full h-full object-contain"
-            />
-          </div>
-        ) : (
-          <img 
-            src="/lovable-uploads/b7e2919d-1215-4769-aecc-09f8d0d1e7ca.png" 
-            alt="User" 
-            className="h-6 w-6 rounded-full mt-1 flex-shrink-0 object-cover"
-          />
-        )}
         <div
           className={cn(
-            "text-sm break-words px-4 py-2 rounded-lg",
+            "text-sm break-words px-4 py-3 rounded-[20px]",
             variant === 'activity' 
               ? message.role === "assistant"
-                ? "bg-muted/80 border border-muted" 
-                : "bg-tribbe-lime/90 text-black"
+                ? "bg-muted/80 border border-tribbe-lime/10" 
+                : "bg-muted/40 text-foreground"
               : message.role === "assistant"
-              ? "bg-muted/50"
-              : "bg-tribbe-lime text-black"
+              ? "bg-background border border-tribbe-lime/20"
+              : "bg-muted/40 text-foreground hover:bg-muted/50 transition-colors"
           )}
         >
           {formatContent(message.content)}

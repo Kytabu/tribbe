@@ -31,7 +31,7 @@ export function MessagesTab({
     <>
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-2xl mx-auto px-4 flex flex-col min-h-full">
-          <div className="mt-auto py-4 space-y-4">
+          <div className="mt-auto py-4 space-y-1">
             {messages.map((message) => (
               <ChatMessage 
                 key={message.id} 
@@ -43,7 +43,7 @@ export function MessagesTab({
         </div>
       </div>
 
-      <div className="border-t bg-background/95 backdrop-blur p-2">
+      <div className="backdrop-blur p-2">
         <div className="max-w-2xl mx-auto">
           <div className="relative flex flex-col h-full">
             {showSuggestions && (
@@ -60,6 +60,9 @@ export function MessagesTab({
               onSubmit={onSubmit}
               placeholder={placeholder}
             />
+            <p className="text-[10px] text-muted-foreground/70 text-center mt-1 italic">
+              Flami can make mistakes, so double-check it
+            </p>
           </div>
         </div>
       </div>
