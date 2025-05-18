@@ -5,7 +5,6 @@ import { UserPlus } from "lucide-react";
 import { useState, useRef } from "react";
 import { ContactList } from "@/components/my-tribbe/ContactList";
 import { NetworkGrid } from "@/components/my-tribbe/NetworkGrid";
-import { StatsCard } from "@/components/my-tribbe/StatsCard";
 import { StatisticsGrid } from "@/components/my-tribbe/StatisticsGrid";
 import { PageHeader } from "@/components/layout/PageHeader";
 
@@ -59,10 +58,6 @@ function TribbeContent() {
       />
 
       <div className="px-4 space-y-[15px]">
-        <div className="pt-[15px]">
-          <StatsCard stats={stats} />
-        </div>
-
         <div>
           <NetworkGrid
             networkMembers={networkMembers}

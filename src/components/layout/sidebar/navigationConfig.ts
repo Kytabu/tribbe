@@ -1,5 +1,5 @@
 
-import { LucideIcon, MessageCircle, Wallet, Users, Circle, Star, Settings, Camera } from "lucide-react";
+import { LucideIcon, MessageCircle, Wallet, Users, Circle, Star, Settings, Hand } from "lucide-react";
 
 export interface NavigationItem {
   icon: LucideIcon;
@@ -37,8 +37,8 @@ export const navigationItems: NavigationItem[] = [
     href: "/street-cred",
   },
   {
-    icon: Camera,
-    label: "Boombi",
+    icon: Hand,
+    label: "Boondi",
     href: "/snap-to-pay",
   },
   {

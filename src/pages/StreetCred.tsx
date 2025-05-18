@@ -7,6 +7,7 @@ import { CreditScoreCard } from "@/components/street-cred/CreditScoreCard";
 import { CreditLevels } from "@/components/street-cred/CreditLevels";
 import { CreditFactors } from "@/components/street-cred/CreditFactors";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { StatsCard } from "@/components/my-tribbe/StatsCard";
 
 interface StreetCredLevel {
   name: string;
@@ -36,6 +37,14 @@ export default function StreetCred() {
 
   const currentLevel = getCurrentLevel(creditScore);
   const progressPercentage = ((creditScore - minScore) / (maxScore - minScore)) * 100;
+
+  const stats = {
+    networkSize: 12,
+    activeCircles: 3,
+    totalLent: 15000,
+    creditScore: 720,
+    trustScore: 85
+  };
 
   const creditFactors = [
     {
@@ -118,6 +127,8 @@ export default function StreetCred() {
       <div className="flex flex-col min-h-screen">
         <PageHeader title="Street Cred" />
         <div className="container max-w-4xl mx-auto p-4 space-y-6">
+          <StatsCard stats={stats} />
+          
           <CreditScoreCard
             creditScore={creditScore}
             currentLevel={currentLevel}
