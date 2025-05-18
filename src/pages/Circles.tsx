@@ -3,11 +3,12 @@ import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { CirclePlus, Search, ChevronRight, MenuIcon } from "lucide-react";
+import { CirclePlus, Search, ChevronRight, MenuIcon, Eye, EyeOff, ArrowRight, Plus } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSidebar } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 
 interface CircleType {
   id: string;
@@ -36,7 +37,7 @@ const circles: CircleType[] = [
     daysLeft: 70,
     amount: 500000,
     progress: 80,
-    image: "https://images.unsplash.com/photo-1501286353178-1ec881214838",
+    image: "https://images.unsplash.com/photo-1501286353178-1ec871214838",
   },
   {
     id: "3",
@@ -107,6 +108,7 @@ function CirclesContent() {
   const navigate = useNavigate();
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
+  const [showBalance, setShowBalance] = useState(true);
 
   const handleMenuClick = () => {
     if (isMobile) {
@@ -116,8 +118,14 @@ function CirclesContent() {
     }
   };
 
+  // Calculate total value across all circles
+  const totalCircleValue = circles.reduce((sum, circle) => {
+    const amount = typeof circle.amount === 'number' ? circle.amount : 0;
+    return sum + amount;
+  }, 0);
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full border-b">
         <div className="max-w-3xl mx-auto w-full px-4">
           <div className="flex h-14 items-center justify-between">
@@ -174,10 +182,58 @@ function CirclesContent() {
         </div>
       </div>
 
-      <div className="px-4 space-y-3">
-        {circles.map((circle) => (
-          <CircleItem key={circle.id} circle={circle} />
-        ))}
+      <div className="px-4">
+        {/* Circle Portfolio Summary */}
+        <div className="mb-4 py-4 px-5 bg-tribbe-grey/40 rounded-lg">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-gray-400">Total Circle Value</p>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="p-1 h-auto hover:bg-transparent"
+              onClick={() => setShowBalance(!showBalance)}
+            >
+              {showBalance ? 
+                <Eye className="w-4 h-4 text-tribbe-lime" /> : 
+                <EyeOff className="w-4 h-4 text-tribbe-lime" />
+              }
+            </Button>
+          </div>
+          <h2 className={cn(
+            "text-2xl font-semibold text-white transition-all duration-300",
+            !showBalance && "blur-sm select-none"
+          )}>
+            KES {totalCircleValue.toLocaleString()}
+          </h2>
+        </div>
+        
+        {/* Create New Circle CTA */}
+        <Button 
+          variant="outline" 
+          className="w-full mb-4 py-6 flex justify-between items-center border-tribbe-lime/30 hover:bg-tribbe-lime/10"
+          onClick={() => navigate("/circles/new")}
+        >
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-tribbe-lime/20 flex items-center justify-center">
+              <Plus className="h-5 w-5 text-tribbe-lime" />
+            </div>
+            <span className="text-white text-lg">Create a New Circle</span>
+          </div>
+          <ArrowRight className="h-5 w-5 text-tribbe-lime" />
+        </Button>
+        
+        {/* Circles List */}
+        <div className="mb-4">
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-medium text-white">Your Circles</h3>
+          </div>
+          
+          <div className="space-y-3">
+            {circles.map((circle) => (
+              <CircleItem key={circle.id} circle={circle} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
