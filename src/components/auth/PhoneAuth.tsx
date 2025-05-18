@@ -19,7 +19,7 @@ export const PhoneAuth = ({ onBack, onSubmit, loading }: PhoneAuthProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-tribbe-grey flex flex-col items-center px-4 sm:px-6">
+    <div className="min-h-screen bg-black flex flex-col items-center px-4 sm:px-6">
       <div className="flex items-center justify-between w-full pt-4">
         <Button
           variant="ghost"

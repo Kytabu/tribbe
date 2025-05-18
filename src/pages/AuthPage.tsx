@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
@@ -138,7 +137,7 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-tribbe-grey flex flex-col px-4 sm:px-6">
+    <div className="min-h-screen bg-black flex flex-col px-4 sm:px-6">
       {isEmailFlow ? (
         <EmailAuth
           onBack={() => setIsEmailFlow(false)}

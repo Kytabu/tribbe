@@ -20,7 +20,7 @@ export const PhoneVerification = ({
   onGoBack
 }: PhoneVerificationProps) => {
   return (
-    <div className="min-h-screen bg-tribbe-grey flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col">
       <img 
         src="/lovable-uploads/2e96dadf-c241-4700-b74e-72f155818e87.png" 
         alt="Tribbe Logo" 
