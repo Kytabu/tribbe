@@ -13,6 +13,26 @@ export const SubCategoryPieChart: React.FC<SubCategoryPieChartProps> = ({
 }) => {
   const { name, color, subCategories } = category;
 
+  // Function to get abbreviated category name
+  const getAbbreviation = (categoryName: string): string => {
+    switch (categoryName) {
+      case 'Utilities':
+        return 'U';
+      case 'Housing & Rent':
+        return 'H&R';
+      case 'Food & Groceries':
+        return 'F&G';
+      case 'Transport & Mobility':
+        return 'T&M';
+      case 'Entertainment & Subscriptions':
+        return 'E&S';
+      case 'Debts & Payments':
+        return 'D&P';
+      default:
+        return '';
+    }
+  };
+
   // Generate shades of the category color for sub-categories
   const getColorShades = (baseColor: string, count: number) => {
     // Simple function to lighten and darken colors
@@ -45,7 +65,7 @@ export const SubCategoryPieChart: React.FC<SubCategoryPieChartProps> = ({
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-background border border-border p-2 rounded-lg shadow-md">
+        <div className="bg-zinc-900 border border-zinc-800 p-2 rounded-lg shadow-xl">
           <p className="text-sm font-medium">{payload[0].name}</p>
           <p className="text-xs">KES {payload[0].value.toLocaleString()}</p>
         </div>
@@ -56,35 +76,51 @@ export const SubCategoryPieChart: React.FC<SubCategoryPieChartProps> = ({
 
   return (
     <Card className="overflow-hidden bg-black border-zinc-800">
-      <CardHeader className="p-3">
-        <CardTitle className="text-sm font-medium">
-          <span className="w-3 h-3 inline-block rounded-full mr-2" style={{ backgroundColor: color }}></span>
-          {name}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-0">
+      <CardContent className="p-2">
         <div className="h-24">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
+              <defs>
+                <filter id={`shadow-${name}`} x="-10%" y="-10%" width="120%" height="120%">
+                  <feDropShadow
+                    dx="0"
+                    dy="0"
+                    stdDeviation="1"
+                    floodColor="#000"
+                    floodOpacity="0.5"
+                  />
+                </filter>
+              </defs>
               <Pie
                 data={chartData}
                 cx="50%"
                 cy="50%"
                 innerRadius={15}
                 outerRadius={35}
-                fill="#8884d8"
+                paddingAngle={2}
                 dataKey="value"
+                stroke="#000"
+                strokeWidth={0.5}
                 animationDuration={750}
                 animationBegin={200}
                 animationEasing="ease-out"
+                filter={`url(#shadow-${name})`}
               >
                 {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={colorShades[index % colorShades.length]} />
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={colorShades[index % colorShades.length]} 
+                    style={{ filter: `drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.2))` }}
+                  />
                 ))}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
             </PieChart>
           </ResponsiveContainer>
+        </div>
+        <div className="text-center pt-1">
+          <span className="w-2 h-2 inline-block rounded-full mr-1" style={{ backgroundColor: color }}></span>
+          <span className="text-xs font-medium">{getAbbreviation(name)}</span>
         </div>
       </CardContent>
     </Card>

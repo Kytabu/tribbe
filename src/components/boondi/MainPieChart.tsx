@@ -1,6 +1,6 @@
 
 import React from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, Label } from "recharts";
 import { CategoryData } from "@/types/boondi";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,8 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
   const chartData = data.map(category => ({
     name: category.name,
     value: category.amount,
-    color: category.color
+    color: category.color,
+    abbreviation: getAbbreviation(category.name)
   }));
 
   const formatCurrency = (value: number) => {
@@ -32,7 +33,7 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-background border border-border p-2 rounded-lg shadow-md">
+        <div className="bg-zinc-900 border border-zinc-800 p-3 rounded-lg shadow-xl">
           <p className="font-medium">{data.name}</p>
           <p className="text-sm">{formatCurrency(data.value)}</p>
           <p className="text-xs text-muted-foreground">
@@ -51,9 +52,10 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
     innerRadius,
     outerRadius,
     percent,
+    index,
   }: any) => {
     const RADIAN = Math.PI / 180;
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const radius = outerRadius + 20;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -64,12 +66,32 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
         fill="white"
         textAnchor={x > cx ? "start" : "end"}
         dominantBaseline="central"
-        className="text-[10px] font-medium"
+        className="text-xs font-medium"
       >
         {`${(percent * 100).toFixed(0)}%`}
       </text>
     ) : null;
   };
+
+  // Function to create abbreviations for category names
+  function getAbbreviation(categoryName: string): string {
+    switch (categoryName) {
+      case 'Utilities':
+        return 'U';
+      case 'Housing & Rent':
+        return 'H&R';
+      case 'Food & Groceries':
+        return 'F&G';
+      case 'Transport & Mobility':
+        return 'T&M';
+      case 'Entertainment & Subscriptions':
+        return 'E&S';
+      case 'Debts & Payments':
+        return 'D&P';
+      default:
+        return '';
+    }
+  }
 
   return (
     <Card className={cn("overflow-hidden bg-black border-zinc-800", className)}>
@@ -83,21 +105,49 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
+              <defs>
+                {chartData.map((entry, index) => (
+                  <filter
+                    key={`shadow-${index}`}
+                    id={`shadow-${index}`}
+                    x="-10%"
+                    y="-10%"
+                    width="120%"
+                    height="120%"
+                  >
+                    <feDropShadow
+                      dx="0"
+                      dy="0"
+                      stdDeviation="2"
+                      floodColor="#000"
+                      floodOpacity="0.5"
+                    />
+                  </filter>
+                ))}
+              </defs>
               <Pie
                 data={chartData}
                 cx="50%"
                 cy="50%"
-                labelLine={false}
+                labelLine={true}
                 label={renderCustomizedLabel}
                 outerRadius={80}
-                fill="#8884d8"
+                innerRadius={30}
+                paddingAngle={2}
                 dataKey="value"
                 animationDuration={750}
                 animationBegin={0}
                 animationEasing="ease-out"
+                stroke="#000"
+                strokeWidth={1}
+                filter="url(#shadow-0)"
               >
                 {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={entry.color} 
+                    style={{ filter: `drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25))` }}
+                  />
                 ))}
               </Pie>
               <Tooltip content={<CustomTooltip />} />
@@ -106,7 +156,7 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
                 verticalAlign="bottom"
                 align="center"
                 wrapperStyle={{ paddingTop: 20 }}
-                formatter={(value) => (
+                formatter={(value, entry: any) => (
                   <span className="text-xs text-white">{value}</span>
                 )}
               />

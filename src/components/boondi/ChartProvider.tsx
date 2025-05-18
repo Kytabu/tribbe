@@ -2,7 +2,6 @@
 import React from "react";
 import { ChartContainer } from "@/components/ui/chart";
 import { CategoryData } from "@/types/boondi";
-import { categoryColors } from "./data/sampleData";
 
 interface ChartProviderProps {
   data: CategoryData[];
