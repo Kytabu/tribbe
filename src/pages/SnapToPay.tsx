@@ -1,3 +1,4 @@
+
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +9,7 @@ export default function SnapToPay() {
   return (
     <AppLayout>
       <div className="max-w-4xl mx-auto">
-        <PageHeader title="Snap to Pay" />
+        <PageHeader title="Boombi" />
         <div className="p-4 space-y-6">
           <div className="grid grid-cols-2 gap-2">
             <Card className="group border-0 hover:bg-tribbe-lime/5 transition-colors duration-200">

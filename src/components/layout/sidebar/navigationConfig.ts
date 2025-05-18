@@ -21,29 +21,29 @@ export const navigationItems: NavigationItem[] = [
     href: "/flami",
   },
   {
-    icon: Wallet,
-    label: "Wallet",
-    href: "/wallet",
-  },
-  {
-    icon: Circle,
-    label: "My Circles",
-    href: "/circles",
-  },
-  {
     icon: Users,
-    label: "My Tribbe",
+    label: "Tribbe",
     href: "/my-tribbe",
     activeRoutes: ['/my-tribbe', '/tribbe-requests'],
   },
   {
-    icon: Camera,
-    label: "Snap to Pay",
-    href: "/snap-to-pay",
+    icon: Circle,
+    label: "Circles",
+    href: "/circles",
   },
   {
     icon: Star,
     label: "Street Cred",
     href: "/street-cred",
+  },
+  {
+    icon: Camera,
+    label: "Boombi",
+    href: "/snap-to-pay",
+  },
+  {
+    icon: Wallet,
+    label: "Wallet",
+    href: "/wallet",
   },
 ];
