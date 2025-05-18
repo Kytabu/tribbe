@@ -5,7 +5,7 @@ import { CategoryData } from "@/types/boondi";
 
 interface ChartProviderProps {
   data: CategoryData[];
-  children: React.ReactNode;
+  children: React.ReactElement; // Changed from ReactNode to ReactElement
 }
 
 export const ChartProvider: React.FC<ChartProviderProps> = ({
