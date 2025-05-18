@@ -12,7 +12,19 @@ const getColorForScore = (score: number): string => {
 };
 
 export function StreetCredHeader() {
-  const navigate = useNavigate();
+  // Safely handle navigation
+  const handleNavigation = () => {
+    try {
+      // Try to use React Router navigation
+      const navigate = useNavigate();
+      navigate("/flami");
+    } catch (error) {
+      console.error("Navigation error:", error);
+      // Fallback to standard redirection if needed
+      window.location.href = "/flami";
+    }
+  };
+  
   const score = 720;
   const borderColor = getColorForScore(score);
   
@@ -20,7 +32,7 @@ export function StreetCredHeader() {
     <Button 
       variant="ghost" 
       size="icon"
-      onClick={() => navigate("/flami")}
+      onClick={handleNavigation}
       className="hover:bg-background/80"
     >
       <div 

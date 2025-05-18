@@ -19,6 +19,7 @@ interface StreetCredLevel {
 }
 
 export default function StreetCred() {
+  // Define navigate inside the component function to ensure it's in the Router context
   const navigate = useNavigate();
   const [creditScore] = useState(720);
   const maxScore = 850;
@@ -112,6 +113,17 @@ export default function StreetCred() {
     }
   ];
 
+  // Safe navigation function that can be used in any context
+  const handleNavigate = (path: string) => {
+    try {
+      navigate(path);
+    } catch (error) {
+      console.error("Navigation error:", error);
+      // Fallback to standard redirection
+      window.location.href = path;
+    }
+  };
+
   return (
     <AppLayout>
       <div className="flex flex-col min-h-screen">
@@ -164,7 +176,7 @@ export default function StreetCred() {
                 variant="ghost" 
                 size="icon" 
                 className="h-6 w-6 rounded-full hover:bg-white/10"
-                onClick={() => navigate("/learn-more/improve-score")}
+                onClick={() => handleNavigate("/learn-more/improve-score")}
               >
                 <InfoIcon className="h-4 w-4 text-tribbe-lime" />
               </Button>
