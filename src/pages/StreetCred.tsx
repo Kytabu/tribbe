@@ -84,7 +84,7 @@ export default function StreetCred() {
 
   const creditTips = [
     {
-      title: "Use Snap to Pay",
+      title: "Add Boondi",
       score: 90,
       description: "Regular M-Pesa payments boost your reliability score",
       icon: "CreditCard",
@@ -110,6 +110,20 @@ export default function StreetCred() {
       description: "Timely repayments strengthen your credit history",
       icon: "Shield",
       color: "text-purple-400"
+    },
+    {
+      title: "Group Participation",
+      score: 87,
+      description: "Regular activity in your circles builds credibility",
+      icon: "Users",
+      color: "text-pink-400"
+    },
+    {
+      title: "Network Growth",
+      score: 84,
+      description: "Expanding your trusted network improves your standing",
+      icon: "Network",
+      color: "text-indigo-400"
     }
   ];
 

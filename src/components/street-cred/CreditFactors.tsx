@@ -1,7 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
-import { BadgeCheck, CreditCard, ChartLine, Shield, User } from "lucide-react";
+import { BadgeCheck, CreditCard, ChartLine, Shield, User, Users, Network } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface CreditFactor {
@@ -25,6 +25,8 @@ export function CreditFactors({ factors, onLearnMore }: CreditFactorsProps) {
       case 'ChartLine': return ChartLine;
       case 'Shield': return Shield;
       case 'User': return User;
+      case 'Users': return Users;
+      case 'Network': return Network;
       default: return BadgeCheck;
     }
   };
