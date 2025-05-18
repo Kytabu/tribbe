@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { SupportedCurrency } from "../constants";
 import { useEffect } from "react";
+import { Database } from "@/integrations/supabase/types";
 
 export function useWalletData(userId: string | null, selectedCurrency: SupportedCurrency) {
   const queryClient = useQueryClient();
@@ -32,7 +33,7 @@ export function useWalletData(userId: string | null, selectedCurrency: Supported
         });
       
       if (error) throw error;
-      return data[0] || { total_lent: 0, total_expected_interest: 0 };
+      return data && data[0] ? data[0] : { total_lent: 0, total_expected_interest: 0 };
     },
     enabled: !!userId
   });
