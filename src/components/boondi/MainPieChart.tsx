@@ -4,7 +4,6 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, Label } from
 import { CategoryData } from "@/types/boondi";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { totalSpending } from "./data/sampleData";
 
 interface MainPieChartProps {
   data: CategoryData[];
@@ -24,6 +23,9 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
     color: category.color,
     abbreviation: getAbbreviation(category.name)
   }));
+
+  // Calculate total spending
+  const totalSpending = data.reduce((total, category) => total + category.amount, 0);
 
   const formatCurrency = (value: number) => {
     return `KES ${value.toLocaleString()}`;
@@ -55,7 +57,7 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
     index,
   }: any) => {
     const RADIAN = Math.PI / 180;
-    const radius = outerRadius + 20;
+    const radius = outerRadius + 25; // Increased from 20 to provide more spacing
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -94,15 +96,15 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
   }
 
   return (
-    <Card className={cn("overflow-hidden bg-black border-zinc-800", className)}>
+    <Card className={cn("overflow-hidden bg-zinc-900/80 border-zinc-800 shadow-lg", className)}>
       <CardHeader className="p-4">
         <CardTitle className="text-lg font-semibold text-center">{title}</CardTitle>
         <div className="text-center text-sm text-muted-foreground">
           Total: {formatCurrency(totalSpending)}
         </div>
       </CardHeader>
-      <CardContent className="p-0 pt-2">
-        <div className="h-64">
+      <CardContent className="p-0 pt-4 pb-6">
+        <div className="h-72"> {/* Increased height to allow more space for labels */}
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <defs>
@@ -138,7 +140,7 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
                 animationDuration={750}
                 animationBegin={0}
                 animationEasing="ease-out"
-                stroke="#000"
+                stroke="#1E1E1E"
                 strokeWidth={1}
                 filter="url(#shadow-0)"
               >
@@ -155,7 +157,7 @@ export const MainPieChart: React.FC<MainPieChartProps> = ({
                 layout="horizontal"
                 verticalAlign="bottom"
                 align="center"
-                wrapperStyle={{ paddingTop: 20 }}
+                wrapperStyle={{ paddingTop: 30 }} // Increased padding for better spacing
                 formatter={(value, entry: any) => (
                   <span className="text-xs text-white">{value}</span>
                 )}

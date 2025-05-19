@@ -2,7 +2,7 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { CategoryData } from "@/types/boondi";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface SubCategoryPieChartProps {
   category: CategoryData;
@@ -75,7 +75,7 @@ export const SubCategoryPieChart: React.FC<SubCategoryPieChartProps> = ({
   };
 
   return (
-    <Card className="overflow-hidden bg-black border-zinc-800">
+    <Card className="overflow-hidden bg-zinc-900/80 border-zinc-800 shadow-lg">
       <CardContent className="p-2">
         <div className="h-24">
           <ResponsiveContainer width="100%" height="100%">
@@ -99,7 +99,7 @@ export const SubCategoryPieChart: React.FC<SubCategoryPieChartProps> = ({
                 outerRadius={35}
                 paddingAngle={2}
                 dataKey="value"
-                stroke="#000"
+                stroke="#1E1E1E"
                 strokeWidth={0.5}
                 animationDuration={750}
                 animationBegin={200}
