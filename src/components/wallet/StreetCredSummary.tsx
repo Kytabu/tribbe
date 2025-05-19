@@ -41,8 +41,8 @@ export function StreetCredSummary() {
             </div>
             <Progress
               value={percentageScore}
-              className="h-2 bg-zinc-800"
-              indicatorClassName="bg-gradient-to-r from-tribbe-lime to-tribbe-aqua"
+              className="h-2 bg-tribbe-lime/30"
+              indicatorClassName="bg-tribbe-lilac"
             />
             <p className="text-xs text-zinc-400 mt-1">Innovator Level</p>
           </div>

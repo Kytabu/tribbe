@@ -78,7 +78,7 @@ export function CreditScoreCard({
         </div>
 
         <div className="relative">
-          <div className="flex w-full h-2 rounded-full overflow-hidden">
+          <div className="flex w-full h-2 rounded-full overflow-hidden bg-tribbe-lime/30">
             {streetCredLevels.map((level, index) => {
               const width = index === streetCredLevels.length - 1
                 ? (maxScore - level.minScore) / (maxScore - 300) * 100
