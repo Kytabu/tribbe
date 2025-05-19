@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { SupportedCurrency } from "@/features/wallet/constants";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -32,8 +33,19 @@ export function WalletOverview({
   // Mock data for demo
   const totalCircleDeposits = 5000;
   const totalCircleValue = lendingStats.total_lent + lendingStats.total_expected_interest;
+  const formattedTotalCircleValue = formatScientificNotation(totalCircleValue);
   const circleDepositDue = 1200;
   const circleDepositOverdue = 800;
+  
+  // Function to format numbers in scientific notation (e.g., 625 × 10³)
+  function formatScientificNotation(value: number): string {
+    if (value < 1000) return value.toString();
+    
+    const exponent = Math.floor(Math.log10(value) / 3) * 3;
+    const coefficient = Math.round(value / Math.pow(10, exponent) * 1000) / 1000;
+    
+    return `${coefficient} × 10${exponent.toString().sup()}`;
+  }
   
   return (
     <Card className="bg-tribbe-grey/80 border-zinc-800">
@@ -60,21 +72,21 @@ export function WalletOverview({
           <div>
             <h3 className="text-sm font-medium text-zinc-400 mb-1">Total Circle Value</h3>
             <p className="text-lg font-medium text-tribbe-lime">
-              {currencySymbols[selectedCurrency]} {totalCircleValue.toLocaleString()}
+              {currencySymbols[selectedCurrency]} {formattedTotalCircleValue}
             </p>
           </div>
         </div>
         
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <h3 className="text-sm font-medium text-zinc-400 mb-1">Circle Deposit Due</h3>
+            <h3 className="text-sm font-medium text-zinc-400 mb-1">Deposits Due</h3>
             <p className="text-sm font-medium text-tribbe-yellow">
               {currencySymbols[selectedCurrency]} {circleDepositDue.toLocaleString()}
             </p>
           </div>
           
           <div>
-            <h3 className="text-sm font-medium text-zinc-400 mb-1">Circle Deposit Overdue</h3>
+            <h3 className="text-sm font-medium text-zinc-400 mb-1">Deposit Overdue</h3>
             <p className="text-sm font-medium text-[#ea384c]">
               {currencySymbols[selectedCurrency]} {circleDepositOverdue.toLocaleString()}
             </p>

@@ -9,15 +9,14 @@ import { WalletNetWorth } from "@/components/wallet/WalletNetWorth";
 import { FinancialPositionTabs } from "@/components/wallet/FinancialPositionTabs";
 import { WalletOverview } from "@/components/wallet/WalletOverview";
 import { CirclesSummary } from "@/components/wallet/CirclesSummary";
-import { BoondiSnapshot } from "@/components/wallet/BoondiSnapshot";
-import { StreetCredSummary } from "@/components/wallet/StreetCredSummary";
+import { CircleDepositsAutomation } from "@/components/wallet/CircleDepositsAutomation";
 import { WalletConnections } from "@/components/wallet/WalletConnections";
 import { TransactionHistory } from "@/components/wallet/TransactionHistory";
-import { CurrencyTabs } from "@/components/wallet/CurrencyTabs";
-import { CircleDepositsAutomation } from "@/components/wallet/CircleDepositsAutomation";
+import { PageHeader } from "@/components/wallet/PageHeader";
 
 function WalletContent() {
-  const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>('KES');
+  // Set KES as the only currency
+  const selectedCurrency: SupportedCurrency = 'KES';
   const [userId, setUserId] = useState<string | null>(null);
   const [autoCircleDeposits, setAutoCircleDeposits] = useState(false);
   const [transactionFilter, setTransactionFilter] = useState<string>("all");
@@ -42,16 +41,9 @@ function WalletContent() {
 
   return (
     <div className="min-h-screen">
-      {/* Currency Tabs - Sticky at top */}
-      <div className="sticky top-0 z-10 bg-background pb-2 pt-2">
-        <div className="container max-w-lg mx-auto px-4">
-          <CurrencyTabs
-            selectedCurrency={selectedCurrency}
-            onCurrencyChange={setSelectedCurrency}
-          />
-        </div>
-      </div>
-
+      {/* Page Header */}
+      <PageHeader />
+      
       <div className="container max-w-lg mx-auto px-4 py-4 space-y-5">
         {/* Net Worth Banner */}
         <WalletNetWorth 
@@ -85,12 +77,6 @@ function WalletContent() {
 
         {/* Circles Summary Widget */}
         <CirclesSummary />
-
-        {/* Boondi Snapshot */}
-        <BoondiSnapshot />
-
-        {/* Street Cred Summary */}
-        <StreetCredSummary />
 
         {/* M-Pesa & Cards Connections */}
         <WalletConnections selectedCurrency={selectedCurrency} />

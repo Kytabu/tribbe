@@ -30,24 +30,27 @@ export function FinancialPositionTabs({
   const [activeTab, setActiveTab] = useState("principal");
   
   // Mock data for demo - in a real app, this would come from API
+  // Updated to include Work Circle in all tabs
   const mockCircleBreakdowns: Record<string, CircleBreakdown[]> = {
     principal: [
-      { id: 1, name: "Family Circle", amount: 25000, percentage: 50 },
+      { id: 1, name: "Family Circle", amount: 25000, percentage: 45 },
       { id: 2, name: "Friends Circle", amount: 15000, percentage: 30 },
-      { id: 3, name: "Work Circle", amount: 10000, percentage: 20 },
+      { id: 3, name: "Work Circle", amount: 10000, percentage: 25 },
     ],
     interest: [
-      { id: 1, name: "Family Circle", amount: 2500, percentage: 55 },
+      { id: 1, name: "Family Circle", amount: 2500, percentage: 50 },
       { id: 2, name: "Friends Circle", amount: 1200, percentage: 25 },
-      { id: 3, name: "Work Circle", amount: 950, percentage: 20 },
+      { id: 3, name: "Work Circle", amount: 1300, percentage: 25 },
     ],
     shares: [
-      { id: 1, name: "Family Circle", amount: 15000, percentage: 60 },
-      { id: 2, name: "Friends Circle", amount: 10000, percentage: 40 },
+      { id: 1, name: "Family Circle", amount: 15000, percentage: 40 },
+      { id: 2, name: "Friends Circle", amount: 10000, percentage: 30 },
+      { id: 3, name: "Work Circle", amount: 12000, percentage: 30 },
     ],
     returns: [
-      { id: 1, name: "Family Circle", amount: 3500, percentage: 70 },
-      { id: 2, name: "Friends Circle", amount: 1500, percentage: 30 },
+      { id: 1, name: "Family Circle", amount: 3500, percentage: 40 },
+      { id: 2, name: "Friends Circle", amount: 2500, percentage: 30 },
+      { id: 3, name: "Work Circle", amount: 2000, percentage: 30 },
     ],
   };
 
@@ -64,12 +67,12 @@ export function FinancialPositionTabs({
     },
     shares: {
       title: "Shares",
-      total: 25000, // Mock data
+      total: 37000, // Updated mock data
       breakdown: mockCircleBreakdowns.shares,
     },
     returns: {
       title: "Returns",
-      total: 5000, // Mock data
+      total: 8000, // Updated mock data
       breakdown: mockCircleBreakdowns.returns,
     },
   };

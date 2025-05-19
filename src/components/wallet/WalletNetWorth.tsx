@@ -19,7 +19,8 @@ export function WalletNetWorth({
   currencySymbols,
   isLoading
 }: WalletNetWorthProps) {
-  const [isValueHidden, setIsValueHidden] = useState(false);
+  // Set isValueHidden to true by default
+  const [isValueHidden, setIsValueHidden] = useState(true);
 
   const formattedBalance = () => {
     if (isValueHidden) {
