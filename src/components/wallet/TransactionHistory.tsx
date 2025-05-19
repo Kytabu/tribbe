@@ -22,32 +22,58 @@ export function TransactionHistory({
   filter,
   onFilterChange
 }: TransactionHistoryProps) {
-  // Filter types - removed Boondi filter
+  // Updated filter types
   const filters = [
     { id: "all", label: "All" },
-    { id: "lending", label: "Lending" },
-    { id: "repayments", label: "Repayments" },
-    { id: "circles", label: "Circles" }
+    { id: "deposits", label: "Deposits" },
+    { id: "withdrawals", label: "Withdrawals" },
+    { id: "requests", label: "Requests" }
   ];
 
-  // Filter transactions - in a real app we'd have proper categorization
-  const filteredTransactions = transactions.filter(tx => {
-    if (filter === "all") return true;
+  // Mock transaction data for the new categories
+  const mockTransactions = [
+    {
+      amount: 2000,
+      running_balance: 7000,
+      created_at: new Date().toISOString(),
+      description: "Deposited to Friends Circle"
+    },
+    {
+      amount: -1000,
+      running_balance: 5000,
+      created_at: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
+      description: "Withdrew from Family Circle"
+    },
+    {
+      amount: 500,
+      running_balance: 6000,
+      created_at: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
+      description: "Requested from Work Circle"
+    }
+  ];
+
+  // Filter transactions based on category
+  const getFilteredTransactions = () => {
+    if (filter === "all") return mockTransactions;
     
-    // Mock filtering logic based on transaction description
-    const desc = tx.description?.toLowerCase() || '';
+    const desc = filter.toLowerCase();
     
     switch (filter) {
-      case "lending":
-        return desc.includes('lent') || desc.includes('loan');
-      case "repayments":
-        return desc.includes('repayment') || desc.includes('paid back');
-      case "circles":
-        return desc.includes('circle') || desc.includes('contribution');
+      case "deposits":
+        return mockTransactions.filter(tx => 
+          tx.amount > 0 && tx.description?.toLowerCase().includes('deposit'));
+      case "withdrawals":
+        return mockTransactions.filter(tx => 
+          tx.amount < 0 && tx.description?.toLowerCase().includes('withdrew'));
+      case "requests":
+        return mockTransactions.filter(tx => 
+          tx.description?.toLowerCase().includes('request'));
       default:
-        return true;
+        return mockTransactions;
     }
-  });
+  };
+
+  const filteredTransactions = getFilteredTransactions();
   
   return (
     <Card className="bg-tribbe-grey/80 border-zinc-800">
@@ -79,9 +105,9 @@ export function TransactionHistory({
           </div>
         ) : (
           <div className="space-y-3">
-            {filteredTransactions.map((tx) => (
+            {filteredTransactions.map((tx, index) => (
               <div 
-                key={tx.created_at.toString()} 
+                key={index} 
                 className="p-3 rounded-lg bg-zinc-900/80 transition-all duration-300 hover:bg-zinc-900 border border-zinc-800"
               >
                 <div className="flex justify-between items-center">
@@ -99,7 +125,7 @@ export function TransactionHistory({
                     </div>
                   </div>
                   <span className={`font-medium ${tx.amount >= 0 ? 'text-tribbe-lime' : 'text-[#FF6B6B]'}`}>
-                    {tx.amount >= 0 ? '+' : ''}{currencySymbols[selectedCurrency]} {Math.abs(Number(tx.amount)).toFixed(0)}
+                    {tx.amount >= 0 ? '+' : ''}{Math.abs(Number(tx.amount)).toLocaleString()}
                   </span>
                 </div>
               </div>

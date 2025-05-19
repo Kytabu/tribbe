@@ -30,22 +30,11 @@ export function WalletOverview({
   const [isRequestOpen, setIsRequestOpen] = useState(false);
   const [isSendOpen, setIsSendOpen] = useState(false);
 
-  // Mock data for demo
+  // Updated data for demo
   const totalCircleDeposits = 5000;
-  const totalCircleValue = lendingStats.total_lent + lendingStats.total_expected_interest;
-  const formattedTotalCircleValue = formatScientificNotation(totalCircleValue);
+  const totalCircleValue = 130000;
   const circleDepositDue = 1200;
   const circleDepositOverdue = 800;
-  
-  // Function to format numbers in scientific notation (e.g., 625 × 10³)
-  function formatScientificNotation(value: number): string {
-    if (value < 1000) return value.toString();
-    
-    const exponent = Math.floor(Math.log10(value) / 3) * 3;
-    const coefficient = Math.round(value / Math.pow(10, exponent) * 1000) / 1000;
-    
-    return `${coefficient} × 10${exponent.toString().sup()}`;
-  }
   
   return (
     <Card className="bg-tribbe-grey/80 border-zinc-800">
@@ -56,7 +45,7 @@ export function WalletOverview({
             <Skeleton className="h-7 w-1/2 bg-zinc-800" />
           ) : (
             <p className="text-2xl font-bold text-white">
-              {currencySymbols[selectedCurrency]} {availableBalance.toLocaleString()}
+              {availableBalance.toLocaleString()}
             </p>
           )}
         </div>
@@ -65,14 +54,14 @@ export function WalletOverview({
           <div>
             <h3 className="text-sm font-medium text-zinc-400 mb-1">Total Circle Deposits</h3>
             <p className="text-lg font-medium text-white">
-              {currencySymbols[selectedCurrency]} {totalCircleDeposits.toLocaleString()}
+              {totalCircleDeposits.toLocaleString()}
             </p>
           </div>
           
           <div>
             <h3 className="text-sm font-medium text-zinc-400 mb-1">Total Circle Value</h3>
             <p className="text-lg font-medium text-tribbe-lime">
-              {currencySymbols[selectedCurrency]} {formattedTotalCircleValue}
+              {totalCircleValue.toLocaleString()}
             </p>
           </div>
         </div>
@@ -80,15 +69,15 @@ export function WalletOverview({
         <div className="grid grid-cols-2 gap-3">
           <div>
             <h3 className="text-sm font-medium text-zinc-400 mb-1">Deposits Due</h3>
-            <p className="text-sm font-medium text-tribbe-yellow">
-              {currencySymbols[selectedCurrency]} {circleDepositDue.toLocaleString()}
+            <p className="text-lg font-medium text-tribbe-yellow">
+              {circleDepositDue.toLocaleString()}
             </p>
           </div>
           
           <div>
             <h3 className="text-sm font-medium text-zinc-400 mb-1">Deposit Overdue</h3>
-            <p className="text-sm font-medium text-[#ea384c]">
-              {currencySymbols[selectedCurrency]} {circleDepositOverdue.toLocaleString()}
+            <p className="text-lg font-medium text-[#ea384c]">
+              {circleDepositOverdue.toLocaleString()}
             </p>
           </div>
         </div>

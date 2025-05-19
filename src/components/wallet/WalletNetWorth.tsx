@@ -26,7 +26,7 @@ export function WalletNetWorth({
     if (isValueHidden) {
       return "••••••";
     }
-    return `${currencySymbols[selectedCurrency]} ${currentBalance.toLocaleString(undefined, {
+    return `${currentBalance.toLocaleString(undefined, {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     })}`;

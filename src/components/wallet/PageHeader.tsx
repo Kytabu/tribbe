@@ -1,11 +1,14 @@
 
-import { MenuIcon, User } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useSidebar } from "@/components/ui/sidebar";
+import { useNavigate } from "react-router-dom";
+import { ProfileButton } from "@/components/layout/sidebar/ProfileButton";
 
 export function PageHeader() {
   const { openMobile, setOpenMobile, isMobile, open, setOpen } = useSidebar();
+  const navigate = useNavigate();
 
   const handleMenuClick = () => {
     if (isMobile) {
@@ -13,6 +16,10 @@ export function PageHeader() {
     } else {
       setOpen(!open);
     }
+  };
+
+  const handleProfileClick = () => {
+    navigate("/profile");
   };
 
   return (
@@ -27,13 +34,16 @@ export function PageHeader() {
             <MenuIcon className="h-5 w-5" />
           </Button>
           
-          <h1 className="text-lg font-medium text-tribbe-lime">My Wallet</h1>
+          <h1 className="text-lg font-medium text-tribbe-lime">My Wallet (KSh)</h1>
           
-          <Avatar className="h-8 w-8 border border-zinc-700">
-            <AvatarFallback className="bg-zinc-800 text-zinc-400">
-              <User className="h-5 w-5" />
-            </AvatarFallback>
-          </Avatar>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="p-0"
+            onClick={handleProfileClick}
+          >
+            <ProfileButton currentLevel={{ color: "#A9FF22" }} />
+          </Button>
         </div>
       </div>
     </div>
