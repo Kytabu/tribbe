@@ -1,7 +1,6 @@
 
 import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useNavigate } from "react-router-dom";
 import { ProfileButton } from "@/components/layout/sidebar/ProfileButton";
@@ -34,7 +33,7 @@ export function PageHeader() {
             <MenuIcon className="h-5 w-5" />
           </Button>
           
-          <h1 className="text-lg font-medium text-tribbe-lime">My Wallet (KSh)</h1>
+          <h1 className="text-lg font-medium">My Wallet</h1>
           
           <Button
             variant="ghost"
@@ -42,7 +41,7 @@ export function PageHeader() {
             className="p-0"
             onClick={handleProfileClick}
           >
-            <ProfileButton currentLevel={{ color: "#A9FF22" }} />
+            <ProfileButton currentLevel={{ name: "Beginner", color: "#A9FF22", minScore: 0 }} />
           </Button>
         </div>
       </div>

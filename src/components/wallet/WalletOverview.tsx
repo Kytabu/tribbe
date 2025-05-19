@@ -35,17 +35,18 @@ export function WalletOverview({
   const totalCircleValue = 130000;
   const circleDepositDue = 1200;
   const circleDepositOverdue = 800;
+  const myMoneyValue = 18800; // Added the requested value
   
   return (
     <Card className="bg-tribbe-grey/80 border-zinc-800">
       <CardContent className="p-4 space-y-4">
         <div>
-          <h2 className="text-sm font-medium text-zinc-400 mb-1">My Wallet</h2>
+          <h2 className="text-sm font-medium text-zinc-400 mb-1">My Money</h2>
           {isLoading ? (
             <Skeleton className="h-7 w-1/2 bg-zinc-800" />
           ) : (
             <p className="text-2xl font-bold text-white">
-              {availableBalance.toLocaleString()}
+              {myMoneyValue.toLocaleString()}
             </p>
           )}
         </div>
@@ -86,7 +87,7 @@ export function WalletOverview({
           <div className="grid grid-cols-2 gap-2">
             <Button 
               variant="outline" 
-              className="flex flex-col items-center justify-center h-auto py-2"
+              className="flex flex-col items-center justify-center h-auto py-2 px-0"
               onClick={() => setIsAddFundsOpen(true)}
             >
               <ArrowUpCircle className="h-5 w-5 mb-1" />
@@ -95,7 +96,7 @@ export function WalletOverview({
             
             <Button 
               variant="outline"
-              className="flex flex-col items-center justify-center h-auto py-2"
+              className="flex flex-col items-center justify-center h-auto py-2 px-0"
               onClick={() => setIsWithdrawOpen(true)}
             >
               <ArrowDownCircle className="h-5 w-5 mb-1" />
@@ -106,7 +107,7 @@ export function WalletOverview({
           <div className="grid grid-cols-2 gap-2">
             <Button 
               variant="outline"
-              className="flex flex-col items-center justify-center h-auto py-2"
+              className="flex flex-col items-center justify-center h-auto py-2 px-0"
               onClick={() => setIsRequestOpen(true)}
             >
               <Hand className="h-5 w-5 mb-1" />
@@ -115,7 +116,7 @@ export function WalletOverview({
             
             <Button
               variant="default"
-              className="flex flex-col items-center justify-center h-auto py-2 bg-tribbe-lime text-black hover:bg-tribbe-lime/90"
+              className="flex flex-col items-center justify-center h-auto py-2 px-0 bg-tribbe-lime text-black hover:bg-tribbe-lime/90"
               onClick={() => setIsSendOpen(true)}
             >
               <SendHorizonal className="h-5 w-5 mb-1" />
