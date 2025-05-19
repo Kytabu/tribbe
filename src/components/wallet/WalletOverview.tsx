@@ -1,9 +1,8 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { SupportedCurrency } from "@/features/wallet/constants";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { ArrowUpCircle, ArrowDownCircle, Palm, SendHorizonal } from "lucide-react";
+import { ArrowUpCircle, ArrowDownCircle, Hand, SendHorizonal } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
@@ -109,7 +108,7 @@ export function WalletOverview({
               className="flex flex-col items-center justify-center h-auto py-2"
               onClick={() => setIsRequestOpen(true)}
             >
-              <Palm className="h-5 w-5 mb-1" />
+              <Hand className="h-5 w-5 mb-1" />
               <span className="text-xs">Request</span>
             </Button>
             
