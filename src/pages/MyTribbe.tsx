@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { UserPlus, ChevronRight, MessageSquare, Bell, BarChart3, Wallet } from "lucide-react";
@@ -10,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { NetworkMembers } from "@/components/my-tribbe/NetworkMembers";
 
 const networkMembers = [
   { id: 1, name: "Sarah", image: "/lovable-uploads/237ca64a-021e-4578-9f08-b9fb2245f01e.png" },
@@ -41,6 +43,7 @@ function TribbeContent() {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [showContactList, setShowContactList] = useState(false);
   const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
+  const [showAllMembers, setShowAllMembers] = useState(false);
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -104,7 +107,11 @@ function TribbeContent() {
               </div>
               {networkMembers.length > 8 && (
                 <div className="mt-3 text-center">
-                  <Badge variant="outline" className="text-xs bg-transparent border-gray-600 text-gray-400">
+                  <Badge 
+                    variant="outline" 
+                    className="text-xs bg-transparent border-gray-600 text-gray-400 cursor-pointer hover:bg-tribbe-grey"
+                    onClick={() => setShowAllMembers(true)}
+                  >
                     +{networkMembers.length - 8} more
                   </Badge>
                 </div>
@@ -204,6 +211,12 @@ function TribbeContent() {
           setShowContactList={setShowContactList}
           selectedContacts={selectedContacts}
           setSelectedContacts={setSelectedContacts}
+        />
+
+        <NetworkMembers 
+          showAllMembers={showAllMembers} 
+          setShowAllMembers={setShowAllMembers} 
+          networkMembers={networkMembers}
         />
       </div>
     </div>

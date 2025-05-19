@@ -2,6 +2,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface NetworkMembersProps {
   showAllMembers: boolean;
@@ -20,10 +21,10 @@ export function NetworkMembers({
 }: NetworkMembersProps) {
   return (
     <Dialog open={showAllMembers} onOpenChange={setShowAllMembers}>
-      <DialogContent className="bg-tribbe-grey/95 border-tribbe-grey max-w-3xl">
+      <DialogContent className="bg-tribbe-grey/95 border-tribbe-grey max-w-md sm:max-w-xl">
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-xl font-bold text-white">Network Members</DialogTitle>
+            <DialogTitle className="text-xl font-bold text-white">All Tribbe Members</DialogTitle>
             <Button
               variant="ghost"
               size="icon"
@@ -34,27 +35,14 @@ export function NetworkMembers({
             </Button>
           </div>
         </DialogHeader>
-        <div className="grid grid-cols-6 gap-4 p-4">
-          {networkMembers.slice(0, 6).map((member) => (
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 p-4 max-h-[60vh] overflow-y-auto">
+          {networkMembers.map((member) => (
             <div key={member.id} className="flex flex-col items-center space-y-2">
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-16 h-16"
-              />
-              <p className="text-sm text-gray-300">{member.name}</p>
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-6 gap-4 p-4">
-          {networkMembers.slice(6).map((member) => (
-            <div key={member.id} className="flex flex-col items-center space-y-2">
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-16 h-16"
-              />
-              <p className="text-sm text-gray-300">{member.name}</p>
+              <Avatar className="h-16 w-16">
+                <AvatarImage src={member.image} alt={member.name} />
+                <AvatarFallback>{member.name[0]}</AvatarFallback>
+              </Avatar>
+              <p className="text-sm text-gray-300 text-center">{member.name}</p>
             </div>
           ))}
         </div>
