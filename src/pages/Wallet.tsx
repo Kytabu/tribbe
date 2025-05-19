@@ -11,17 +11,15 @@ import { WalletOverview } from "@/components/wallet/WalletOverview";
 import { CirclesSummary } from "@/components/wallet/CirclesSummary";
 import { BoondiSnapshot } from "@/components/wallet/BoondiSnapshot";
 import { StreetCredSummary } from "@/components/wallet/StreetCredSummary";
-import { AutomationSwitches } from "@/features/wallet/components/AutomationSwitches";
 import { WalletConnections } from "@/components/wallet/WalletConnections";
 import { TransactionHistory } from "@/components/wallet/TransactionHistory";
 import { CurrencyTabs } from "@/components/wallet/CurrencyTabs";
+import { CircleDepositsAutomation } from "@/components/wallet/CircleDepositsAutomation";
 
 function WalletContent() {
   const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>('KES');
   const [userId, setUserId] = useState<string | null>(null);
-  const [autoLend, setAutoLend] = useState(false);
-  const [autoBorrow, setAutoBorrow] = useState(false);
-  const [autoInterest, setAutoInterest] = useState(false);
+  const [autoCircleDeposits, setAutoCircleDeposits] = useState(false);
   const [transactionFilter, setTransactionFilter] = useState<string>("all");
 
   useEffect(() => {
@@ -79,6 +77,12 @@ function WalletContent() {
           lendingStats={lendingStats}
         />
 
+        {/* Circle Deposits Automation */}
+        <CircleDepositsAutomation 
+          autoCircleDeposits={autoCircleDeposits}
+          setAutoCircleDeposits={setAutoCircleDeposits}
+        />
+
         {/* Circles Summary Widget */}
         <CirclesSummary />
 
@@ -87,16 +91,6 @@ function WalletContent() {
 
         {/* Street Cred Summary */}
         <StreetCredSummary />
-
-        {/* Smart Financial Automation */}
-        <AutomationSwitches
-          autoLend={autoLend}
-          setAutoLend={setAutoLend}
-          autoBorrow={autoBorrow}
-          setAutoBorrow={setAutoBorrow}
-          autoInterest={autoInterest}
-          setAutoInterest={setAutoInterest}
-        />
 
         {/* M-Pesa & Cards Connections */}
         <WalletConnections selectedCurrency={selectedCurrency} />

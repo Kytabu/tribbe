@@ -22,13 +22,12 @@ export function TransactionHistory({
   filter,
   onFilterChange
 }: TransactionHistoryProps) {
-  // Filter types
+  // Filter types - removed Boondi filter
   const filters = [
     { id: "all", label: "All" },
     { id: "lending", label: "Lending" },
     { id: "repayments", label: "Repayments" },
-    { id: "circles", label: "Circles" },
-    { id: "boondi", label: "Boondi" }
+    { id: "circles", label: "Circles" }
   ];
 
   // Filter transactions - in a real app we'd have proper categorization
@@ -45,8 +44,6 @@ export function TransactionHistory({
         return desc.includes('repayment') || desc.includes('paid back');
       case "circles":
         return desc.includes('circle') || desc.includes('contribution');
-      case "boondi":
-        return desc.includes('boondi') || desc.includes('purchase');
       default:
         return true;
     }

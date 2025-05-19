@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SupportedCurrency } from "@/features/wallet/constants";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { ArrowUpCircle, ArrowDownCircle, CreditCard, SendHorizonal } from "lucide-react";
+import { ArrowUpCircle, ArrowDownCircle, Palm, SendHorizonal } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
@@ -31,14 +31,16 @@ export function WalletOverview({
   const [isSendOpen, setIsSendOpen] = useState(false);
 
   // Mock data for demo
-  const youOwe = 5000;
-  const owedToYou = lendingStats.total_lent + lendingStats.total_expected_interest;
+  const totalCircleDeposits = 5000;
+  const totalCircleValue = lendingStats.total_lent + lendingStats.total_expected_interest;
+  const circleDepositDue = 1200;
+  const circleDepositOverdue = 800;
   
   return (
     <Card className="bg-tribbe-grey/80 border-zinc-800">
       <CardContent className="p-4 space-y-4">
         <div>
-          <h2 className="text-sm font-medium text-zinc-400 mb-1">Available to Spend</h2>
+          <h2 className="text-sm font-medium text-zinc-400 mb-1">My Wallet</h2>
           {isLoading ? (
             <Skeleton className="h-7 w-1/2 bg-zinc-800" />
           ) : (
@@ -50,16 +52,32 @@ export function WalletOverview({
         
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <h3 className="text-sm font-medium text-zinc-400 mb-1">You Owe</h3>
-            <p className="text-lg font-medium text-[#FF6B6B]">
-              {currencySymbols[selectedCurrency]} {youOwe.toLocaleString()}
+            <h3 className="text-sm font-medium text-zinc-400 mb-1">Total Circle Deposits</h3>
+            <p className="text-lg font-medium text-white">
+              {currencySymbols[selectedCurrency]} {totalCircleDeposits.toLocaleString()}
             </p>
           </div>
           
           <div>
-            <h3 className="text-sm font-medium text-zinc-400 mb-1">Owed to You</h3>
+            <h3 className="text-sm font-medium text-zinc-400 mb-1">Total Circle Value</h3>
             <p className="text-lg font-medium text-tribbe-lime">
-              {currencySymbols[selectedCurrency]} {owedToYou.toLocaleString()}
+              {currencySymbols[selectedCurrency]} {totalCircleValue.toLocaleString()}
+            </p>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <h3 className="text-sm font-medium text-zinc-400 mb-1">Circle Deposit Due</h3>
+            <p className="text-sm font-medium text-tribbe-yellow">
+              {currencySymbols[selectedCurrency]} {circleDepositDue.toLocaleString()}
+            </p>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-medium text-zinc-400 mb-1">Circle Deposit Overdue</h3>
+            <p className="text-sm font-medium text-[#ea384c]">
+              {currencySymbols[selectedCurrency]} {circleDepositOverdue.toLocaleString()}
             </p>
           </div>
         </div>
@@ -69,19 +87,19 @@ export function WalletOverview({
             <Button 
               variant="outline" 
               className="flex flex-col items-center justify-center h-auto py-2"
-              onClick={() => setIsWithdrawOpen(true)}
+              onClick={() => setIsAddFundsOpen(true)}
             >
               <ArrowUpCircle className="h-5 w-5 mb-1" />
-              <span className="text-xs">Withdraw</span>
+              <span className="text-xs">Deposit</span>
             </Button>
             
             <Button 
               variant="outline"
               className="flex flex-col items-center justify-center h-auto py-2"
-              onClick={() => setIsAddFundsOpen(true)}
+              onClick={() => setIsWithdrawOpen(true)}
             >
               <ArrowDownCircle className="h-5 w-5 mb-1" />
-              <span className="text-xs">Add Funds</span>
+              <span className="text-xs">Withdraw</span>
             </Button>
           </div>
           
@@ -91,7 +109,7 @@ export function WalletOverview({
               className="flex flex-col items-center justify-center h-auto py-2"
               onClick={() => setIsRequestOpen(true)}
             >
-              <CreditCard className="h-5 w-5 mb-1" />
+              <Palm className="h-5 w-5 mb-1" />
               <span className="text-xs">Request</span>
             </Button>
             
