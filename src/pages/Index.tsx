@@ -72,7 +72,11 @@ const Index = () => {
           <h2 className="text-xl sm:text-3xl font-righteous font-normal text-primary">
             the new way to do money
           </h2>
-          <Progress value={progress} className="w-64 sm:w-[27rem] mx-auto h-1.5 sm:h-2" />
+          <Progress 
+            value={progress} 
+            className="w-64 sm:w-[27rem] mx-auto h-1.5 sm:h-2 bg-tribbe-lime/30" 
+            indicatorClassName="bg-tribbe-lilac"
+          />
         </div>
       </div>
     </div>

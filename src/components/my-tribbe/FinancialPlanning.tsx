@@ -13,7 +13,7 @@ export const FinancialPlanning: React.FC = () => {
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-full bg-black/20 text-purple-400">
+                <div className="p-2 rounded-full bg-black/20 text-tribbe-lilac">
                   <Wallet className="w-5 h-5" />
                 </div>
                 <div>
@@ -23,7 +23,11 @@ export const FinancialPlanning: React.FC = () => {
               </div>
               <span className="text-lg font-medium text-tribbe-lime">80%</span>
             </div>
-            <Progress value={80} className="h-1.5" />
+            <Progress 
+              value={80} 
+              className="h-1.5 bg-tribbe-lime/30" 
+              indicatorClassName="bg-tribbe-lilac"
+            />
             <div className="flex justify-between text-xs text-gray-400">
               <span>KES 40,000 saved</span>
               <span>KES 50,000 goal</span>
