@@ -1,16 +1,20 @@
-import { AppLayout } from "@/components/layout/AppLayout";
-import { Card } from "@/components/ui/card";
+
 import { useState, useEffect } from "react";
+import { AppLayout } from "@/components/layout/AppLayout";
 import { supabase } from "@/integrations/supabase/client";
-import { CurrencyTabs } from "@/components/wallet/CurrencyTabs";
-import { BalanceDisplay } from "@/components/wallet/BalanceDisplay";
-import { WalletActions } from "@/components/wallet/WalletActions";
-import { TransactionHistory } from "@/components/wallet/TransactionHistory";
 import { SupportedCurrency } from "@/features/wallet/constants";
 import { useWalletData } from "@/features/wallet/hooks/useWalletData";
-import { AutomationSwitches } from "@/features/wallet/components/AutomationSwitches";
 import { currencySymbols } from "@/features/wallet/constants";
-import { PageHeader } from "@/components/layout/PageHeader";
+import { WalletNetWorth } from "@/components/wallet/WalletNetWorth";
+import { FinancialPositionTabs } from "@/components/wallet/FinancialPositionTabs";
+import { WalletOverview } from "@/components/wallet/WalletOverview";
+import { CirclesSummary } from "@/components/wallet/CirclesSummary";
+import { BoondiSnapshot } from "@/components/wallet/BoondiSnapshot";
+import { StreetCredSummary } from "@/components/wallet/StreetCredSummary";
+import { AutomationSwitches } from "@/features/wallet/components/AutomationSwitches";
+import { WalletConnections } from "@/components/wallet/WalletConnections";
+import { TransactionHistory } from "@/components/wallet/TransactionHistory";
+import { CurrencyTabs } from "@/components/wallet/CurrencyTabs";
 
 function WalletContent() {
   const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>('KES');
@@ -18,6 +22,7 @@ function WalletContent() {
   const [autoLend, setAutoLend] = useState(false);
   const [autoBorrow, setAutoBorrow] = useState(false);
   const [autoInterest, setAutoInterest] = useState(false);
+  const [transactionFilter, setTransactionFilter] = useState<string>("all");
 
   useEffect(() => {
     const getCurrentUser = async () => {
@@ -38,37 +43,52 @@ function WalletContent() {
   } = useWalletData(userId, selectedCurrency);
 
   return (
-    <>
-      <PageHeader 
-        title="My Wallet"
-        titleClassName="bg-clip-text text-transparent bg-gradient-to-r from-[#A9FF22] to-[#79CFFF]"
-      />
-      <div className="container px-4 mx-auto space-y-6 py-6">
-        <Card className="p-3 bg-gradient-to-br from-background to-muted shadow-lg hover:shadow-xl transition-all duration-300">
-          <div className="space-y-3">
-            <div className="flex flex-col space-y-3">
-              <div className="w-full overflow-x-auto -mx-2 px-2">
-                <CurrencyTabs
-                  selectedCurrency={selectedCurrency}
-                  onCurrencyChange={setSelectedCurrency}
-                />
-              </div>
-            </div>
+    <div className="min-h-screen">
+      {/* Currency Tabs - Sticky at top */}
+      <div className="sticky top-0 z-10 bg-background pb-2 pt-2">
+        <div className="container max-w-lg mx-auto px-4">
+          <CurrencyTabs
+            selectedCurrency={selectedCurrency}
+            onCurrencyChange={setSelectedCurrency}
+          />
+        </div>
+      </div>
 
-            <div className="w-full">
-              <BalanceDisplay
-                isLoading={isLoading}
-                currentBalance={currentBalance}
-                selectedCurrency={selectedCurrency}
-                currencySymbols={currencySymbols}
-                availableBalance={availableBalance}
-                lendingStats={lendingStats}
-                transactionHistory={transactionHistory}
-              />
-            </div>
-          </div>
-        </Card>
+      <div className="container max-w-lg mx-auto px-4 py-4 space-y-5">
+        {/* Net Worth Banner */}
+        <WalletNetWorth 
+          currentBalance={currentBalance} 
+          selectedCurrency={selectedCurrency}
+          currencySymbols={currencySymbols}
+          isLoading={isLoading} 
+        />
 
+        {/* Financial Position Tabs */}
+        <FinancialPositionTabs 
+          lendingStats={lendingStats}
+          selectedCurrency={selectedCurrency}
+          currencySymbols={currencySymbols}
+        />
+
+        {/* Wallet Overview */}
+        <WalletOverview
+          availableBalance={availableBalance}
+          selectedCurrency={selectedCurrency}
+          currencySymbols={currencySymbols}
+          isLoading={isLoading}
+          lendingStats={lendingStats}
+        />
+
+        {/* Circles Summary Widget */}
+        <CirclesSummary />
+
+        {/* Boondi Snapshot */}
+        <BoondiSnapshot />
+
+        {/* Street Cred Summary */}
+        <StreetCredSummary />
+
+        {/* Smart Financial Automation */}
         <AutomationSwitches
           autoLend={autoLend}
           setAutoLend={setAutoLend}
@@ -78,16 +98,19 @@ function WalletContent() {
           setAutoInterest={setAutoInterest}
         />
 
-        <div className="space-y-3">
-          <WalletActions selectedCurrency={selectedCurrency} />
-          <TransactionHistory
-            transactions={transactionHistory}
-            selectedCurrency={selectedCurrency}
-            currencySymbols={currencySymbols}
-          />
-        </div>
+        {/* M-Pesa & Cards Connections */}
+        <WalletConnections selectedCurrency={selectedCurrency} />
+
+        {/* Recent Transactions */}
+        <TransactionHistory
+          transactions={transactionHistory}
+          selectedCurrency={selectedCurrency}
+          currencySymbols={currencySymbols}
+          filter={transactionFilter}
+          onFilterChange={setTransactionFilter}
+        />
       </div>
-    </>
+    </div>
   );
 }
 

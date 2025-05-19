@@ -1,0 +1,148 @@
+
+import { Card, CardContent } from "@/components/ui/card";
+import { SupportedCurrency } from "@/features/wallet/constants";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { ArrowUpCircle, ArrowDownCircle, CreditCard, SendHorizonal } from "lucide-react";
+import { useState } from "react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+
+interface WalletOverviewProps {
+  availableBalance: number;
+  selectedCurrency: SupportedCurrency;
+  currencySymbols: Record<SupportedCurrency, string>;
+  isLoading: boolean;
+  lendingStats: {
+    total_lent: number;
+    total_expected_interest: number;
+  };
+}
+
+export function WalletOverview({
+  availableBalance,
+  selectedCurrency,
+  currencySymbols,
+  isLoading,
+  lendingStats
+}: WalletOverviewProps) {
+  const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+  const [isAddFundsOpen, setIsAddFundsOpen] = useState(false);
+  const [isRequestOpen, setIsRequestOpen] = useState(false);
+  const [isSendOpen, setIsSendOpen] = useState(false);
+
+  // Mock data for demo
+  const youOwe = 5000;
+  const owedToYou = lendingStats.total_lent + lendingStats.total_expected_interest;
+  
+  return (
+    <Card className="bg-tribbe-grey/80 border-zinc-800">
+      <CardContent className="p-4 space-y-4">
+        <div>
+          <h2 className="text-sm font-medium text-zinc-400 mb-1">Available to Spend</h2>
+          {isLoading ? (
+            <Skeleton className="h-7 w-1/2 bg-zinc-800" />
+          ) : (
+            <p className="text-2xl font-bold text-white">
+              {currencySymbols[selectedCurrency]} {availableBalance.toLocaleString()}
+            </p>
+          )}
+        </div>
+        
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <h3 className="text-sm font-medium text-zinc-400 mb-1">You Owe</h3>
+            <p className="text-lg font-medium text-[#FF6B6B]">
+              {currencySymbols[selectedCurrency]} {youOwe.toLocaleString()}
+            </p>
+          </div>
+          
+          <div>
+            <h3 className="text-sm font-medium text-zinc-400 mb-1">Owed to You</h3>
+            <p className="text-lg font-medium text-tribbe-lime">
+              {currencySymbols[selectedCurrency]} {owedToYou.toLocaleString()}
+            </p>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2">
+            <Button 
+              variant="outline" 
+              className="flex flex-col items-center justify-center h-auto py-2"
+              onClick={() => setIsWithdrawOpen(true)}
+            >
+              <ArrowUpCircle className="h-5 w-5 mb-1" />
+              <span className="text-xs">Withdraw</span>
+            </Button>
+            
+            <Button 
+              variant="outline"
+              className="flex flex-col items-center justify-center h-auto py-2"
+              onClick={() => setIsAddFundsOpen(true)}
+            >
+              <ArrowDownCircle className="h-5 w-5 mb-1" />
+              <span className="text-xs">Add Funds</span>
+            </Button>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-2">
+            <Button 
+              variant="outline"
+              className="flex flex-col items-center justify-center h-auto py-2"
+              onClick={() => setIsRequestOpen(true)}
+            >
+              <CreditCard className="h-5 w-5 mb-1" />
+              <span className="text-xs">Request</span>
+            </Button>
+            
+            <Button
+              variant="default"
+              className="flex flex-col items-center justify-center h-auto py-2 bg-tribbe-lime text-black hover:bg-tribbe-lime/90"
+              onClick={() => setIsSendOpen(true)}
+            >
+              <SendHorizonal className="h-5 w-5 mb-1" />
+              <span className="text-xs">Send</span>
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+      
+      {/* Sheets for actions - simplified placeholders */}
+      <Sheet open={isWithdrawOpen} onOpenChange={setIsWithdrawOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Withdraw Funds</SheetTitle>
+          </SheetHeader>
+          <div className="py-6">Withdraw functionality would go here</div>
+        </SheetContent>
+      </Sheet>
+      
+      <Sheet open={isAddFundsOpen} onOpenChange={setIsAddFundsOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Add Funds</SheetTitle>
+          </SheetHeader>
+          <div className="py-6">Add funds functionality would go here</div>
+        </SheetContent>
+      </Sheet>
+      
+      <Sheet open={isRequestOpen} onOpenChange={setIsRequestOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Request Money</SheetTitle>
+          </SheetHeader>
+          <div className="py-6">Request money functionality would go here</div>
+        </SheetContent>
+      </Sheet>
+      
+      <Sheet open={isSendOpen} onOpenChange={setIsSendOpen}>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Send Money</SheetTitle>
+          </SheetHeader>
+          <div className="py-6">Send money functionality would go here</div>
+        </SheetContent>
+      </Sheet>
+    </Card>
+  );
+}
